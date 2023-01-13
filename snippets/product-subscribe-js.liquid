@@ -1,0 +1,899 @@
+{%- assign yumove_plus_m = all_products["yumove-plus-for-dogs"] -%}
+{%- assign yumove_plus_skus = '' -%}
+{%- for variant in yumove_plus_m.variants -%}
+  {%- assign yumove_plus_skus = yumove_plus_skus | append: variant.sku -%}
+  {%- unless forloop.last -%}
+    {%- assign yumove_plus_skus = yumove_plus_skus | append: ',' -%}
+  {%- endunless -%}
+  {%- if variant.sku == 'YMP60' -%}
+    {%- assign ymp60_price = variant.price -%}
+    {%- assign ymp60_m_id = variant.id -%}
+    {%- assign ymp60_m_id_ar = variant.metafields.subscriptions.discount_variant_id -%}
+  {%- elsif variant.sku == 'YMP120' -%}
+    {%- assign ymp120_price = variant.price -%}
+    {%- assign ymp120_m_id = variant.id -%}
+    {%- assign ymp120_m_id_ar = variant.metafields.subscriptions.discount_variant_id -%}
+  {%- elsif variant.sku == 'YMP300' -%}
+    {%- assign ymp300_price = variant.price -%}
+    {%- assign ymp300_m_id = variant.id -%}
+    {%- assign ymp300_m_id_ar = variant.metafields.subscriptions.discount_variant_id -%}
+  {%- endif -%}
+{%- endfor -%}
+{%- assign yumove_plus_d = all_products["yumove-plus-for-dogs-d"] -%}
+{%- for variant in yumove_plus_d.variants -%}
+  {%- if variant.sku == 'YMP60' -%}
+    {%- assign ymp60_d_id = variant.id -%}
+    {%- assign ymp60_d_id_ar = variant.metafields.subscriptions.discount_variant_id -%}
+  {%- elsif variant.sku == 'YMP120' -%}
+    {%- assign ymp120_d_id = variant.id -%}
+    {%- assign ymp120_d_id_ar = variant.metafields.subscriptions.discount_variant_id -%}
+  {%- endif -%}
+{%- endfor -%}
+{%- assign young_and_active_m = all_products['yumove-active-dog'] -%}
+{%- assign young_and_active_skus = '' -%}
+{%- for variant in young_and_active_m.variants -%}
+  {%- assign young_and_active_skus = young_and_active_skus | append: variant.sku -%}
+  {%- unless forloop.last -%}
+    {%- assign young_and_active_skus = young_and_active_skus | append: ',' -%}
+  {%- endunless -%}
+  {%- if variant.sku == 'YMACT60' -%}
+    {%- assign ymact60_price = variant.price -%}
+    {%- assign ymact60_m_id = variant.id -%}
+    {%- assign ymact60_m_id_ar = variant.metafields.subscriptions.discount_variant_id -%}
+  {%- elsif variant.sku == 'YMACT240' -%}
+    {%- assign ymact240_price = variant.price -%}
+    {%- assign ymact240_m_id = variant.id -%}
+    {%- assign ymact240_m_id_ar = variant.metafields.subscriptions.discount_variant_id -%}
+  {%- endif -%}
+{%- endfor -%}
+{%- assign young_and_active_d = all_products['yumove-young-active-d'] -%}
+{%- for variant in young_and_active_d.variants -%}
+  {%- if variant.sku == 'YMACT60' -%}
+    {%- assign ymact60_d_id = variant.id -%}
+    {%- assign ymact60_d_id_ar = variant.metafields.subscriptions.discount_variant_id -%}
+  {%- elsif variant.sku == 'YMACT240' -%}
+    {%- assign ymact240_d_id = variant.id -%}
+    {%- assign ymact240_d_id_ar = variant.metafields.subscriptions.discount_variant_id -%}
+  {%- endif -%}
+{%- endfor -%}
+{%- assign yumove_dog_m = all_products['yumove-dog'] -%}
+{%- assign yumove_dog_skus = '' -%}
+{%- for variant in yumove_dog_m.variants -%}
+  {%- assign yumove_dog_skus = yumove_dog_skus | append: variant.sku -%}
+  {%- unless forloop.last -%}
+    {%- assign yumove_dog_skus = yumove_dog_skus | append: ',' -%}
+  {%- endunless -%}
+  {%- if variant.sku == 'YM60' -%}
+    {%- assign ym60_price = variant.price -%}
+    {%- assign ym60_m_id = variant.id -%}
+    {%- assign ym60_m_id_ar = variant.metafields.subscriptions.discount_variant_id -%}
+  {%- elsif variant.sku == 'YM120' -%}
+    {%- assign ym120_price = variant.price -%}
+    {%- assign ym120_m_id = variant.id -%}
+    {%- assign ym120_m_id_ar = variant.metafields.subscriptions.discount_variant_id -%}
+  {%- elsif variant.sku == 'YM300' -%}
+    {%- assign ym300_price = variant.price -%}
+    {%- assign ym300_m_id = variant.id -%}
+    {%- assign ym300_m_id_ar = variant.metafields.subscriptions.discount_variant_id -%}
+  {%- endif -%}
+{%- endfor -%}
+{%- assign yumove_dog_d = all_products['yumove-dog-d'] -%}
+{%- for variant in yumove_dog_d.variants -%}
+  {%- if variant.sku == 'YM60' -%}
+    {%- assign ym60_d_id = variant.id -%}
+    {%- assign ym60_d_id_ar = variant.metafields.subscriptions.discount_variant_id -%}
+  {%- elsif variant.sku == 'YM120' -%}
+    {%- assign ym120_d_id = variant.id -%}
+    {%- assign ym120_d_id_ar = variant.metafields.subscriptions.discount_variant_id -%}
+  {%- endif -%}
+{%- endfor -%}
+{%- assign working_dog_m = all_products['yumove-working-dog'] -%}
+{%- assign working_dog_skus = '' -%}
+{%- for variant in working_dog_m.variants -%}
+  {%- assign working_dog_skus = working_dog_skus | append: variant.sku -%}
+  {%- unless forloop.last -%}
+    {%- assign working_dog_skus = working_dog_skus | append: ',' -%}
+  {%- endunless -%}
+  {%- if variant.sku == 'YMWD-480' -%}
+    {%- assign ymwd_price = variant.price -%}
+    {%- assign ymwd_480_m_id = variant.id -%}
+    {%- assign ymwd_480_m_id_ar = variant.metafields.subscriptions.discount_variant_id -%}
+  {%- endif -%}
+{%- endfor -%}
+{%- assign working_dog_d = all_products['yumove-working-dog-d'] -%}
+{%- for variant in working_dog_d.variants -%}
+  {%- if variant.sku == 'YMWD-480' -%}
+    {%- assign ymwd_480_d_id = variant.id -%}
+    {%- assign ymwd_480_d_id_ar = variant.metafields.subscriptions.discount_variant_id -%}
+  {%- endif -%}
+{%- endfor -%}
+
+
+
+
+<script> 
+$(document).ready(function() {
+  /***********************************
+ * Mini Flow test click events
+ ***********************************/
+   $('#create-plan-btn, #create-plan-btn-test').on('click', function (e) {
+    $('.product-modal-background').css('display', 'block');
+     
+    DY.API( 'event',{name: 'miniflow_open', properties:{miniflow: open}});
+  });
+  
+  $('.product-modal-background').on('click', function(event) {
+    if(event.target == event.currentTarget) {
+     $('.product-modal-background').css('display', 'none');
+    } 
+  });
+  
+  $('.subscribe_modal_close').on('click', function (e) {
+    $('.product-modal-background').css('display', 'none');
+  }); 
+  
+  $('#step-details-btn').on('click', function(e) {
+    var name = $('input[name=name]').val();
+    var first_time = $('input[name=new]:checked', '.list-radios--small').val();
+    
+    if ((first_time != undefined) && (name != '')) {
+      $('.modal-step-name').addClass('hidden');
+      $('.modal-step-weight').removeClass('hidden');
+      $('.nav-details-text').addClass('nav-clickable');
+      $('.nav-details').addClass('done small');
+      $('.nav-details').removeClass('current');
+      $('.nav-weight').addClass('current');
+      $('.nav-weight').removeClass('small', 'not-clickable');
+      $('.nav-weight').removeClass('not-clickable');
+      $('.subscribe__nav').addClass('next-step');
+      $('.modal-error').addClass('hidden');
+      $('#dogs-name').removeClass('missing-info');
+    } else {
+      
+      if ((first_time == undefined) && (name == '')) {
+       $('.modal-error').removeClass('hidden');
+       $('#dogs-name').addClass('missing-info');
+      } else if (name == '') {
+       $('#dogs-name').addClass('missing-info');
+      } else if (first_time == undefined) {
+       $('.modal-error').removeClass('hidden');
+      }
+    }
+    
+  });
+  
+  $('#step-weight-btn').on('click', function(e) {
+    $('.modal-step-weight').addClass('hidden');
+    $('.modal-step-plan').removeClass('hidden');
+    $('.nav-weigth-text').addClass('nav-clickable');
+    $('.nav-weight').addClass('done small');
+    $('.nav-weight').removeClass('current');
+    $('.nav-plan').addClass('current');
+    $('.nav-plan').removeClass('small', 'not-clickable');
+    $('.nav-plan').removeClass('not-clickable');
+    $('.nav-plan-text').addClass('nav-clickable');
+  });
+  
+  $('#edit-plan-btn').on('click', function(e) {
+    $('.modal-step-plan').addClass('hidden');
+    $('.modal-step-edit').removeClass('hidden');    
+    $('.nav-plan').addClass('done');
+    $('.product-modal').addClass('edit-modal');
+  });
+  
+  
+  $('#cancel-edit-btn').on('click', function(e) {
+    $('.modal-step-edit').addClass('hidden');
+    $('.modal-step-plan').removeClass('hidden');
+    $('.product-modal').removeClass('edit-modal');
+  });
+  
+  $('.nav-details').on('click', function(e) {
+    $('.modal-step-name').removeClass('hidden');                        
+    $('.modal-step-weight, .modal-step-edit, .modal-step-plan').addClass('hidden');
+    $('.nav-weigth-text').addClass('nav-clickable');
+    $('.nav-weight').addClass('done small');
+    $(this).addClass('current');
+    $(this).removeClass('small');
+    $('.nav-plan, .nav-weight').removeClass('current');
+    $('.nav-plan, .nav-weight').addClass('small');
+  });
+  
+  $('.nav-weight').on('click', function(e) {
+    $('.modal-step-name, .modal-step-edit, .modal-step-plan').addClass('hidden');                        
+    $('.modal-step-weight').removeClass('hidden');
+    $(this).addClass('current');
+    $(this).removeClass('small');
+    $('.nav-details, .nav-plan').removeClass('current');
+    $('.nav-details, .nav-plan').addClass('small');
+  });
+  
+  $('.nav-plan').on('click', function(e) {
+    $('.modal-step-name, .modal-step-weight, .modal-step-edit').addClass('hidden');                        
+    $('.modal-step-plan').removeClass('hidden');
+    $('.nav-plan-text').addClass('nav-clickable');
+    $(this).addClass('current');
+    $(this).removeClass('small');
+    $('.nav-details, .nav-weight').removeClass('current');
+    $('.nav-details, .nav-weight').addClass('small');
+  });
+});
+Shopify.queue = [];  
+    $('#amount-select').select2();
+    $('#frequency-select').select2();  
+    
+    $('#amount-select').on('select2:select', function (e) {
+      var weight = $('input[name=weight]:checked', '.list-radios--weight').val();
+      var productAmount = $(this).val();
+	  $('#product-amount-container').val(productAmount).trigger('change');
+      $('.productAmountText').html(productAmount);
+      $("#frequency-select").empty();
+      $('#frequency-select').select2();
+      
+      switch (productAmount) {
+        case '60':
+          $("#frequency-select").append(new Option("60 days", "60"));
+          $("#frequency-select").append(new Option("30 days", "30"));
+          $("#frequency-select").append(new Option("20 days", "20"));
+          $("#frequency-select").append(new Option("15 days", "15"));
+          break;
+        case '120':
+          $("#frequency-select").append(new Option("120 days", "120"));
+          $("#frequency-select").append(new Option("60 days", "60"));
+          $("#frequency-select").append(new Option("40 days", "40"));
+          $("#frequency-select").append(new Option("30 days", "30"));
+          break;
+        case '300':
+          $("#frequency-select").append(new Option("300 days", "300"));
+          $("#frequency-select").append(new Option("150 days", "150"));
+          $("#frequency-select").append(new Option("100 days", "100"));
+          $("#frequency-select").append(new Option("75 days", "75"));
+          break;
+        case '240':
+          $("#frequency-select").append(new Option("240 days", "240"));
+          $("#frequency-select").append(new Option("120 days", "120"));
+          $("#frequency-select").append(new Option("80 days", "80"));
+          $("#frequency-select").append(new Option("60 days", "60"));
+          break;
+        default:
+          $("#frequency-select").addClass('hidden');
+      }
+            
+      if (weight === 'Up to 15kg') {
+        switch (productAmount) {
+            case '60':
+              $('#frequency-select option:contains("60")').text('60 - Recommended');
+              $('#frequency-select').val('60');
+              break;
+            case '120':
+              $('#frequency-select option:contains("120")').text('120 - Recommended');
+              $('#frequency-select').val('120');
+              break;
+            case '300':
+              $('#frequency-select option:contains("300")').text('300 - Recommended');
+              $('#frequency-select').val('300');
+              break;
+            case '240':
+              $('#frequency-select option:contains("240")').text('240 - Recommended');
+              $('#frequency-select').val('240');
+              break;
+            default:
+              $("#frequency-select").addClass('hidden');
+          } 
+        } else if (weight === '16-30kg'){
+          switch (productAmount) {
+            case '60':
+              $('#frequency-select option:contains("30")').text('30 - Recommended');
+              $('#frequency-select').val('30');
+              break;
+            case '120':
+              $('#frequency-select option:contains("60")').text('60 - Recommended');
+              $('#frequency-select').val('60');
+              break;
+            case '300':
+              $('#frequency-select option:contains("150")').text('150 - Recommended');
+              $('#frequency-select').val('150');
+              break;
+            case '240':
+              $('#frequency-select option:contains("130")').text('130 - Recommended');
+              $('#frequency-select').val('130');
+              break;
+            default:
+              $("#frequency-select").addClass('hidden');
+          } 
+        } else if (weight === '31-45kg'){
+          switch (productAmount) {
+            case '60':
+              $('#frequency-select option:contains("20")').text('20 - Recommended');
+              $('#frequency-select').val('20');
+              break;
+            case '120':
+              $('#frequency-select option:contains("40")').text('40 - Recommended');
+              $('#frequency-select').val('40');
+              break;
+            case '300':
+              $('#frequency-select option:contains("100")').text('100 - Recommended');
+              $('#frequency-select').val('100');
+              break;
+            case '240':
+              $('#frequency-select option:contains("80")').text('80 - Recommended');
+              $('#frequency-select').val('80');
+              break;
+            default:
+              $("#frequency-select").addClass('hidden');
+          } 
+        }  else {
+          switch (productAmount) {
+            case '60':
+              $('#frequency-select option:contains("15")').text('15 - Recommended');
+              $('#frequency-select').val('15');
+              break;
+            case '120':
+              $('#frequency-select option:contains("30")').text('30 - Recommended');
+              $('#frequency-select').val('30');
+              break;
+            case '300':
+              $('#frequency-select option:contains("75")').text('75 - Recommended');
+              $('#frequency-select').val('75');
+              break;
+            case '240':
+              $('#frequency-select option:contains("60")').text('60 - Recommended');
+              $('#frequency-select').val('60');
+              break;
+            default:
+              $("#frequency-select").addClass('hidden');
+          } 
+      }
+      
+      $('#frequency-select').select2();
+      $('#frequency-select').trigger('change');
+      
+      var productAmount = $('#frequency-select').val();
+	  $('#product-frequency-container').val(productAmount).trigger('change');
+      
+      $(".modal-select-frequency").removeClass('select-unclickable');
+    });
+  
+    $('input:radio[name="weight"]').change(function(){
+      $('#amount-select').val(null).trigger('change');
+      $("#frequency-select").empty();
+      $(".modal-select-frequency").addClass('select-unclickable');
+      $('.edit-full-price, .edit-total-price, .edit-frequency').text('');
+    });
+                           
+    $('#frequency-select').on('select2:select', function (e) {
+      var productAmount = $(this).val();
+	  $('#product-frequency-container').val(productAmount).trigger('change');
+    });
+   
+   
+$(function () {
+    var ymp60LoadingId = 31285413609527;
+    var ymp120LoadingId = 31285413642295;
+    var ymwd480LoadingId = 31285343780919;
+    var ymact60LoadingId = 31285404008503;
+    var ymact240LoadingId = 31285404041271;
+    var ym60LoadingId = 31285396209719;
+    var ym120LoadingId = 31285396242487;
+  
+    var first_time = 'No';
+    var product, variantId, autoRenewVariantId, loadingVariantId, dosage, frequency, unitType, rulesetId, loadingQuantity, firstTime, prodQuantity, full_60_price, full_120_price, full_300_price, subscribe_300_price, full_240_price, full_480_price, subscribe_240_price, subscribe_60_price, subscribe_120_price, subscribe_480_price, subscribe_240_price, name, weight, origionalDosage, origionalFreq;
+   
+    
+    
+    $('#step-weight-btn').on('click', function(e) {
+    Shopify.queue.splice(0, Shopify.queue.length)
+    weight = $('input[name=weight]:checked', '.list-radios--weight').val();
+    product = $('.product__title').text();
+    name = $('input[name=name]').val();
+    first_time = $('input[name=new]:checked', '.list-radios--small').val();
+   
+      
+    if(product === 'YuMOVE PLUS for Dogs') {
+      if(weight === 'Up to 15kg'){
+        product = {{ yumove_plus_m | json }};
+        variantId = '{{ ymp60_m_id }}';
+        autoRenewVariantId = '{{ ymp60_m_id_ar }}';
+        dosage = 60;
+        frequency = 58;
+        unitType = 'days';
+        prodQuantity = 1;
+        rulesetId = 223467;
+        loadingVariantId = ymp60LoadingId;
+      } else if (weight === '16-30kg') {
+        product = {{ yumove_plus_m | json }};
+        variantId = '{{ ymp60_m_id }}';
+        autoRenewVariantId = '{{ ymp60_m_id_ar }}';
+        dosage = 60;
+        frequency = 28;
+        unitType = 'days';
+        prodQuantity = 1;
+        rulesetId = 223467;
+        loadingVariantId = ymp60LoadingId;
+      } else if (weight === '31-45kg') {     
+        product = {{ yumove_plus_d | json }};
+        variantId = '{{ ymp120_d_id }}';
+        autoRenewVariantId = '{{ ymp120_d_id_ar }}';
+        dosage = 120;
+        frequency = 38;
+        unitType = 'days';
+        prodQuantity = 1;
+        rulesetId = 223467;
+        loadingVariantId = ymp120LoadingId;
+      } else {
+        product = {{ yumove_plus_m | json }};
+        variantId = '{{ ymp120_m_id }}';
+        autoRenewVariantId = '{{ ymp120_m_id_ar }}';
+        dosage = 120;
+        frequency = 28;
+        unitType = 'days';
+        prodQuantity = 1;
+        rulesetId = 223467;
+        loadingVariantId = ymp120LoadingId;         
+      }   
+        loadingQuantity = 1;
+        if(first_time === 'Yes'){
+          firstTime = 'Yes';
+        } 
+        full_60_price = '{{ ymp60_price | money_without_currency }}';
+        full_120_price = '{{ ymp120_price | money_without_currency }}';
+        full_300_price = '{{ ymp300_price | money_without_currency }}';
+        subscribe_60_price = {{ ymp60_price | divided_by: 100.0 | times: 70.0 | round: 4 | money_without_currency }};
+        subscribe_120_price = {{ ymp120_price | divided_by: 100.0 | times: 70.0 | round: 4 | money_without_currency }};
+        subscribe_300_price = {{ ymp300_price | divided_by: 100.0 | times: 70.0 | round: 4 | money_without_currency }};
+        
+    } else if (product === 'YuMOVE Dog') {
+      if(weight === 'Up to 15kg'){
+        product = {{ yumove_dog_m | json }};
+        variantId = '{{ ym60_m_id }}';
+        autoRenewVariantId = '{{ ym60_m_id_ar }}';
+        dosage = 60;
+        frequency = 58;
+        unitType = 'days';
+        prodQuantity = 1;
+        rulesetId = 223467;
+        loadingVariantId = ym60LoadingId;
+        
+      } else if (weight === '16-30kg') {
+        product = {{ yumove_dog_m | json }};
+        variantId = '{{ ym60_m_id }}';
+        autoRenewVariantId = '{{ ym60_m_id_ar }}';
+        dosage = 60;
+        frequency = 28;
+        unitType = 'days';
+        prodQuantity = 1;
+        rulesetId = 223467;
+        loadingVariantId = ym60LoadingId;
+          
+      } else if (weight === '31-45kg') {     
+        product = {{ yumove_dog_d | json }};
+        variantId = '{{ ym120_d_id }}';
+        autoRenewVariantId = '{{ ym120_d_id_ar }}';
+        dosage = 120;
+        frequency = 38;
+        unitType = 'days';
+        prodQuantity = 1;
+        rulesetId = 223467;
+        loadingVariantId = ym120LoadingId;
+        
+      } else {
+        product = {{ yumove_dog_m | json }};
+        variantId = '{{ ym120_m_id }}';
+        autoRenewVariantId = '{{ ym120_m_id_ar }}';
+        dosage = 120;
+        frequency = 28;
+        unitType = 'days';
+        prodQuantity = 1;
+        rulesetId = 223467;
+        loadingVariantId = ym120LoadingId;
+      }
+        loadingQuantity = 1;
+        if(first_time === 'Yes'){
+          firstTime = 'Yes';
+        }
+        full_60_price = '{{ ym60_price  | money_without_currency }}';
+        full_120_price = '{{ ym120_price  | money_without_currency }}';
+        full_300_price = '{{ ym300_price | money_without_currency }}';
+        subscribe_60_price = {{ ym60_price | divided_by: 100.0 | times: 70.0 | round: 4 | money_without_currency }};
+        subscribe_120_price = {{ ym120_price | divided_by: 100.0 | times: 70.0 | round: 4 | money_without_currency }};
+        subscribe_300_price = {{ ym300_price | divided_by: 100.0 | times: 70.0 | round: 4 | money_without_currency }};
+        
+    } else if (product === 'YuMOVE Young & Active') {
+      if(weight === 'Up to 15kg'){
+        product = {{ young_and_active_m | json }};
+        variantId = '{{ ymact60_m_id }}';
+        autoRenewVariantId = '{{ ymact60_m_id_ar }}';
+        dosage = 60;
+        frequency = 58;
+        unitType = 'days';
+        prodQuantity = 1;
+        rulesetId = 223467;
+        loadingVariantId = ymact60LoadingId;
+        loadingQuantity = 1; 
+      } else if (weight === '16-30kg') {
+        product = {{ young_and_active_m | json }};
+        variantId = '{{ ymact60_m_id }}';
+        autoRenewVariantId = '{{ ymact60_m_id_ar }}';
+        dosage = 60;
+        frequency = 28;
+        unitType = 'days';
+        prodQuantity = 1;
+        rulesetId = 223467;
+        loadingVariantId = ymact60LoadingId;
+        loadingQuantity = 1; 
+      } else if (weight === '31-45kg') {     
+        product = {{ young_and_active_d | json }};
+        variantId = '{{ ymact60_d_id }}';
+        autoRenewVariantId = '{{ ymact60_d_id_ar }}';
+        dosage = 120;
+        frequency = 38;
+        unitType = 'days';
+        prodQuantity = 2;
+        rulesetId = 223467;
+        loadingVariantId = ymact60LoadingId;
+        loadingQuantity = 2; 
+      } else {
+        product = {{ young_and_active_m | json }};
+        variantId = '{{ ymact60_m_id }}';
+        autoRenewVariantId = '{{ ymact60_m_id_ar }}';
+        dosage = 120;
+        frequency = 28;
+        unitType = 'days';
+        prodQuantity = 2;
+        rulesetId = 223467;
+        loadingVariantId = ymact60LoadingId;
+        loadingQuantity = 2;  
+      }
+        if(first_time === 'Yes'){
+          firstTime = 'Yes';
+        } 
+       full_60_price = '{{ ymact60_price | money_without_currency }}';
+       full_120_price = '{{ ymact60_price | times: 2.0 | money_without_currency }}';
+       full_240_price = '{{ ymact240_price | money_without_currency }}';
+       subscribe_60_price = {{ ymact60_price | divided_by: 100.0 | times: 70.0 | round: 4 | money_without_currency }};
+       subscribe_120_price = {{ ymact60_price | divided_by: 100.0 | times: 70.0 | round: 4 | money_without_currency |times: 2 }};
+       subscribe_240_price = {{ ymact240_price | divided_by: 100.0 | times: 70.0 | round: 4 | money_without_currency }};
+       
+    } else if (product === 'YuMOVE Working Dog') {
+      if(weight === 'Up to 15kg'){
+        product = {{ working_dog_m | json }};
+        variantId = '{{ ymwd_480_m_id }}';
+        autoRenewVariantId = '{{ ymwd_480_m_id_ar }}';
+        dosage = 480;
+        frequency = 16;
+        unitType = 'months';
+        prodQuantity = 1;
+        rulesetId = 220170;
+      } else if (weight === '16-30kg') {
+        product = {{ working_dog_m | json }};
+        variantId = '{{ ymwd_480_m_id }}';
+        autoRenewVariantId = '{{ ymwd_480_m_id_ar }}';
+        dosage = 480;
+        frequency = 8;
+        unitType = 'months';
+        prodQuantity = 1;
+        rulesetId = 220170;  
+      } else if (weight === '31-45kg') {     
+        product = {{ working_dog_d | json }};
+        variantId = '{{ ymwd_480_d_id }}';
+        autoRenewVariantId = '{{ ymwd_480_d_id_ar }}';
+        dosage = 480;
+        frequency = 160;
+        unitType = 'days';
+        prodQuantity = 1;
+        rulesetId = 223467;
+      } else {
+         product = {{ working_dog_m | json }};
+        variantId = '{{ ymwd_480_m_id }}';
+        autoRenewVariantId = '{{ ymwd_480_m_id_ar }}';
+        dosage = 480;
+        frequency = 4;
+        unitType = 'months';
+        prodQuantity = 1;
+        rulesetId = 220170;     
+      }
+      loadingVariantId = '';
+      loadingQuantity = 0;
+      full_480_price = '{{ ymwd_price | money_without_currency }}';
+      subscribe_480_price = {{ ymwd_price | divided_by: 100.0 | times: 70.0 | round: 4 | money_without_currency }};
+    }   
+      
+    origionalDosage = dosage;
+    origionalFreq = frequency;
+  
+      
+     if (first_time != undefined) {
+//         $('.product-modal-background').css('display', 'none');
+       
+        if (firstTime == 'Yes') {
+         $('.dosage-first-month').removeClass('hidden');
+        } else {
+         $('.dosage-first-month').addClass('hidden'); 
+        }
+        
+        if (dosage === 60) {
+          if (frequency === 58) {            
+            $('.product_each_month').html('60');
+            $('.per-month').html('Price per every two months');
+            $('.full-price').html('£' + (full_60_price));
+//          $('.product_first_month').html('120');
+            $('.product_subscription_price').html('£' +subscribe_60_price);
+            $('.product__head .money').html('£' + subscribe_60_price);           
+          } else {
+            $('.product_each_month').html('60');
+            $('.per-month').html('Price per every month');
+            $('.full-price').html('£' + full_60_price);
+//           $('.product_first_month').html('120');
+            $('.product_subscription_price').html('£' +subscribe_60_price);
+            $('.product__head .money').html('£' + subscribe_60_price);
+          }
+          
+        } else if (dosage === 120) {
+          if (frequency === 38) {
+            $('.product_each_month').html('120');
+            $('.full-price').html('£' + full_120_price);
+//          $('.product_first_month').html('240');
+            $('.per-month').html('Price per 40 days');
+            $('.product_subscription_price').html('£' +subscribe_120_price);
+            $('.product__head .money').html('£' + subscribe_120_price);
+          } else {
+            $('.product_each_month').html('120');
+            $('.full-price').html('£' + full_120_price);
+//          $('.product_first_month').html('240');
+            $('.per-month').html('Price per every month');
+            $('.product_subscription_price').html('£' +subscribe_120_price);
+            $('.product__head .money').html('£' + subscribe_120_price);
+          }
+          
+        } else {
+          $('.product_each_month').html('480');
+          $('.full-price').html('£' + full_480_price);
+//           $('.product_first_month').html('240');
+          $('.product_subscription_price').html('£' +subscribe_480_price);
+          $('.product__head .money').html('£' + subscribe_480_price);                          
+        }
+        
+       if (dosage === 480) {
+         if (weight === 'Up to 15kg') {
+            $('.subscription-month').html('every 16 months');
+            $('.per-month').html('Price per every 16 months');
+         } else if (weight === '16-30kg') {
+            $('.subscription-month').html('every 8 months');
+            $('.per-month').html('Price per every 8 months');
+         } else if (weight === '31-45kg') {
+            $('.subscription-month').html('every 160 days');
+            $('.per-month').html('Price per 160 days');
+         } else {
+            $('.subscription-month').html('every 4 months');
+            $('.per-month').html('Price per every 4 months');
+         }
+       } else if (dosage === 60) {
+         if (frequency === 58) {
+           $('.subscription-month').html('every two months');
+         } else {
+           $('.subscription-month').html('every month'); 
+         }
+       } else {
+         if (weight === '31-45kg') {
+           $('.subscription-month').html('every 40 Days');
+//           $('.subscription-first-month').html('first 40 Days');
+         } else {
+           $('.subscription-month').html('every month'); 
+         }
+       }
+//         $('#dogs-name').removeClass('missing-info');
+          
+      } else {
+        $('.modal-error').removeClass('hidden');
+        
+        if (name === '') {
+          $('#dogs-name').addClass('missing-info');
+        }
+      }
+      
+     
+  });
+    
+  
+     
+   
+  
+  $( "#product-amount-container").change(function() {
+   
+    var productQuantity = $('#product-amount-container').val();
+    
+    if (productQuantity == 60) {
+      $('.edit-full-price').html('£' +full_60_price);
+      $('.edit-total-price').html('£' +subscribe_60_price);
+    } else if (productQuantity == 120) {
+      $('.edit-full-price').html('£' +full_120_price);
+      $('.edit-total-price').html('£' +subscribe_120_price);
+    } else if (productQuantity == 300) {
+      $('.edit-full-price').html('£' +full_300_price);
+      $('.edit-total-price').html('£' +subscribe_300_price);
+    } else if (productQuantity == 240) {
+      $('.edit-full-price').html('£' +full_240_price);
+      $('.edit-total-price').html('£' +subscribe_240_price);
+    }		
+  });
+  
+  
+  $("#product-frequency-container").change(function() {
+    var productFrequency = $('#product-frequency-container').val();
+    
+    $('.edit-frequency').html('price per ' + productFrequency + ' days');
+    
+  });
+  
+  $('#update-plan-btn').on('click', function(e) {
+    var productQuantity = $('#product-amount-container').val();
+    product = $('.product__title').text();
+   
+    if(product === 'YuMOVE PLUS for Dogs') {
+      if (productQuantity == 60) {
+         variantId = '{{ ymp60_m_id }}';
+         autoRenewVariantId = '{{ ymp60_m_id_ar }}';
+         dosage = 60;
+      } else if (productQuantity == 120) {
+         variantId = '{{ ymp120_m_id }}';
+         autoRenewVariantId = '{{ ymp120_m_id_ar }}';
+         dosage = 120;
+      } else if (productQuantity == 300) {
+         variantId = '{{ ymp300_m_id }}';
+         autoRenewVariantId = '{{ ymp300_m_id_ar }}';
+         dosage = 300;
+      }
+    } else if (product === 'YuMOVE Dog') {
+      if (productQuantity == 60) {
+         variantId = '{{ ym60_m_id }}';
+         autoRenewVariantId = '{{ ym60_m_id_ar }}';
+         dosage = 60;
+      } else if (productQuantity == 120) {
+         variantId = '{{ ym120_m_id }}';
+         autoRenewVariantId = '{{ ym120_m_id_ar }}';
+         dosage = 120;
+      } else if (productQuantity == 300) {
+         variantId = '{{ ym300_m_id }}';
+         autoRenewVariantId = '{{ ym300_m_id_ar }}';
+         dosage = 300;
+      } 
+    } else if (product === 'YuMOVE Young & Active') {
+       if (productQuantity == 60) {
+         variantId = '{{ ymact60_m_id }}';
+         autoRenewVariantId = '{{ ymact60_m_id_ar }}';
+         dosage = 60;
+       } else  if (productQuantity == 240){
+         variantId = '{{ ymact240_m_id }}';
+         autoRenewVariantId = '{{ ymact240_m_id_ar }}';
+         dosage = 300;
+       }
+    }
+    
+    frequency = $('#product-frequency-container').val();
+    unitType = 'days';
+    rulesetId = 223467;
+    prodQuantity = 1;
+  });
+  
+  $('#calculate-plan-btn, #update-plan-btn').on('click', function(e) {
+    var connectedLoadingId = '';
+    if (firstTime == 'Yes' && loadingVariantId != '') {
+      connectedLoadingId = Math.floor((Math.random() * 100) + 1);
+    }
+    
+    var freqNum = parseInt(frequency);
+    
+    if ((origionalDosage === dosage) && ((origionalFreq + 2) === freqNum)) {
+      Shopify.queue.push({
+        variantId: autoRenewVariantId,
+        quantity: prodQuantity,
+        props: {
+          shipping_interval_frequency: frequency,
+          shipping_interval_unitType: unitType,
+          subscription_id: rulesetId,
+          loadingProduct: false,
+          connectedLoadingId: connectedLoadingId,
+          petFirstTimeUser: firstTime,
+          petName: name,
+          petWeight: weight
+        }
+      });
+    } else {
+      Shopify.queue.push({
+        variantId: autoRenewVariantId,
+        quantity: prodQuantity,
+        props: {
+          shipping_interval_frequency: frequency,
+          shipping_interval_unitType: unitType,
+          subscription_id: rulesetId,
+          loadingProduct: false,
+          connectedLoadingId: connectedLoadingId,
+          petFirstTimeUser: firstTime,
+          petName: name,
+          petWeight: weight,
+          miniflow_edited: 'Yes'
+        }
+      });
+    }
+    
+    
+      
+    if (firstTime == 'Yes' && loadingVariantId != '') {
+      Shopify.queue.push({
+        variantId: loadingVariantId,
+        quantity: loadingQuantity,
+        props: {
+          loadingProduct: true,
+          connectedLoadingId: connectedLoadingId
+        }
+      });
+    }
+    
+    console.log(Shopify.queue);
+    
+    Shopify.processProduct();
+  });
+    
+  $('.edit-details').on('click', function(e) {   
+    Shopify.queue.splice(0, Shopify.queue.length)
+    $('.product-modal-background').css('display', 'block');
+  
+     console.log(Shopify.queue);  
+  });
+      
+  
+Shopify.processProduct = function() { 
+     var $radios = $('input:radio[name=product_subscribe]');
+      $radios.filter('[id=one_time]').prop('checked', true);
+    
+      $('.product .one_time').removeClass('hidden');
+      $('.subscription-product').addClass('hidden');
+      $('.subscription-checkout-btn').addClass('hidden');
+      $('.subscription-details').addClass('hidden');
+    
+      Shopify.queue.reverse();
+    
+      Shopify.moveAlong(); 
+}    
+  
+  
+Shopify.moveAlong = function() {
+
+    if (Shopify.queue.length) {   
+      var request = Shopify.queue.shift();
+      console.log('request');
+      $.ajax('/cart/add.js', {
+        type: 'post',
+        data: {             
+          quantity: request.quantity,
+          id: request.variantId,
+          properties: request.props
+        },
+        dataType: 'json',
+        success: function (data, status, xhr) {
+          if (Shopify.queue.length > 0) {
+            Shopify.moveAlong();    
+          } else {
+            window.location.href = "https://yumove.co.uk/cart";
+          }                
+        },
+        error: function (jqXhr, textStatus, errorMessage) {
+          console.log('ERROR: ' + $.parseJSON(jqXhr.status));
+          Shopify.moveAlong();
+        },
+      });                  
+    }
+    else {
+      Shopify.queue = []; 
+      reChargeProcessCart();
+    }
+   
+  }   
+
+
+ 
+});  
+  
+
+  
+</script>

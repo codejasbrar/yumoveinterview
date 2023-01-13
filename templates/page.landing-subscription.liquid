@@ -1,0 +1,19 @@
+{% include 'shogun-products', content: page %}
+{%- section 'landing-sub-intro' -%}
+{%- section 'landing-sub-products' -%}
+{%- section 'landing-sub-info' -%}
+{%- section 'landing-sub-key-feature' -%}
+{%- section 'landing-sub-works' -%}
+{%- section 'landing-sub-banner' -%}
+{%- section 'landing-sub-features' -%}
+{%- section 'landing-sub-testimonials' -%}
+{%- section 'landing-sub-faq' -%}
+{%- include 'section-logos' -%}
+{%- section 'landing-sub-callout' -%}
+<script>
+  $( ".trigger-pp-popup" ).each(function(index) {
+      $(this).on("click", function(){
+          $('#perks-popup').removeClass( "perks-popup-hidden" );
+      });
+  });
+</script>

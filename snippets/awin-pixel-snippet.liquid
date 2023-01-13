@@ -1,0 +1,53 @@
+{%- assign c_group_name = "GUEST_CUSTOMER" -%}
+{%- assign sample_product = false -%}
+{%- assign line_item_size = checkout.line_items.size -%}
+
+{%-for line_item in checkout.line_items-%}
+  {%- if line_item.product.title contains 'Sample' -%}
+  	{%- assign sample_product = true -%}
+  {%- endif -%}
+{%-endfor-%}
+
+{% if customer %}
+  {% if customer.orders_count == 1 and order.total_price < 1000 %}
+	{%- assign c_group_name = "SAMPLE_CUSTOMER" -%}
+  {% elsif customer.orders_count == 1 %}
+	{%- assign c_group_name = "NEW_CUSTOMER" -%}
+  {% elsif customer.orders_count > 1 %}
+	{%- assign c_group_name = "EXISTING_CUSTOMER" -%}
+  {% endif %}
+{% else %}
+  {%- assign c_group_name = "GUEST_CUSTOMER" -%}
+{% endif %}
+
+<!-- Image Pixel Tracking - Mandatory -->
+<img src="https://www.awin1.com/sread.img?tt=ns&tv=2&merchant=17141&amount={{ order.total_price | money_without_currency }}&ch=aw&cr={{shop.currency}}&ref={{checkout.order_number}}&parts={{c_group_name}}:{{ order.total_price | money_without_currency }}&vc={{checkout.discounts.first.code}}&testmode=0" border="0" height="0" width="0" style="display: none;">
+
+<!-- JavaScript Tracking - Mandatory -->
+<script type="text/javascript">
+//<![CDATA[
+/ Do not change /
+
+    var AWIN = {};
+    AWIN.Tracking = {};
+    AWIN.Tracking.Sale = {};
+/ Set your transaction parameters /
+
+    AWIN.Tracking.Sale.amount = "{{order.total_price|money_without_currency}}";
+    AWIN.Tracking.Sale.channel = "aw";
+    AWIN.Tracking.Sale.currency = "{{shop.currency}}";
+    AWIN.Tracking.Sale.orderRef = "{{order.order_number}}";
+    AWIN.Tracking.Sale.parts = "{{c_group_name}}:{{ order.total_price | money_without_currency }}";
+    AWIN.Tracking.Sale.voucher = "{{checkout.discounts.first.code}}";
+    AWIN.Tracking.Sale.test = 0;
+//]]>
+</script>
+
+<!-- Product Level Tracking - Optional -->
+
+<form style=“display: none;” name=“aw_basket_form”>
+<textarea wrap=“physical” id=“aw_basket”>
+{%for line_item in line_items%}AW:P|17141|{{order_number}}|{{line_item.product.id}}|{{line_item.title}}|{{line_item.price|minus:discount.amount|money_without_currency}}|{{line_item.quantity}}|{{line_item.sku}}|DEFAULT|
+{%endfor%}
+</textarea>
+</form>

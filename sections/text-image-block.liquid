@@ -1,0 +1,57 @@
+{%- assign _section = section.settings -%}
+{%- assign section_title = _section.title -%}
+{%- assign section_content = _section.content -%}
+{%- assign section_background = _section.background-colour -%}
+{%- assign _image = _section.image -%}
+
+<section class="section">
+  <div class="shell">
+    <div class="text-block-image">
+      {%- include 'text-block' -%}
+      {%- include 'image-block' -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Text & Image Block",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "html",
+      "id": "content",
+      "label": "Content"
+    },
+	{
+      "type": "select",
+      "id": "background-colour",
+      "label": "Text Block Background Colour",
+      "options": [
+          {
+            "value": "text-block--grey",
+            "label": "Grey"
+          },
+          {
+            "value": "text-block--green",
+            "label": "Green"
+          },
+          {
+            "value": "text-block--white",
+            "label": "White"
+          }
+        ],
+        "default": "text-block--green"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image Block"
+    }
+  ]
+}
+{% endschema %}

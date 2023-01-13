@@ -1,0 +1,48 @@
+{%- if _product != empty -%}
+	<div class="product {{_size}} text-center flex {% unless _product.available %}product--sold-out{% endunless %}">
+		{%- if _product.featured_image -%}
+			<div class="product__media">
+				<a href="{{ _product.url | within: collection }}" class="product__link">
+					<img src="{{ _featured_img | img_url: '500x' }}" alt="{{ _img_alt }}">
+				</a>
+			</div><!-- /.product__media -->
+		{%- else -%}
+			<a href="{{ _product.url | within: collection }}">
+				{{ 'image' | placeholder_svg_tag }}
+			</a>
+		{%- endif -%}
+
+		<div class="product__content flex flex-column align-center">
+			<h4 class="product__title">
+				<a href="{{ _product.url | within: collection }}">
+					{{- _product.title -}}
+				</a>
+			</h4><!-- /.product__title -->
+
+			{%- if _subtitle != blank -%}
+				<h5 class="product__subtitle">{{_subtitle | newline_to_br | remove: '<p>' | remove: '</p>'}}</h5><!-- /.product__subtitle -->
+			{%- endif -%}
+
+			<p class="product__info">
+				{%- if _description != blank -%}
+					{{_description | newline_to_br | remove: '<p>' | remove: '</p>'}}
+				{%- else -%}
+					{{- _product.content | strip_html | truncate: 35 -}}
+				{%- endif -%}
+			</p><!-- /.product__info -->
+
+			<h5 class="product__min-price">
+				{{ 'products.product.from' | t }} {{ _product.price_min | money }}
+			</h5>
+
+
+				<div class="product__rate flex align-center justify-center">{% include 'trustbox-widget-product-mini-landing' %}</div><!-- /.product__rate flex align-center justify-center -->
+
+
+			<a href="{{ _product.url | within: collection }}" class="btn">
+				{{ 'products.product.buy_now' | t }}
+			</a>
+		</div>
+	</div><!-- /.product__item -->
+{%- endif -%}
+{%- assign _product = '' -%}

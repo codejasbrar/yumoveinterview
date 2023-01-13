@@ -1,0 +1,23 @@
+<div class="product__media">
+  {%- assign _images = '' -%}
+
+  {%- for image in product.images -%}
+    {%- capture _images -%}
+      {{ _images }}
+
+      {%- assign image_variants = image.variants | map: 'id' -%}
+
+      {%- if image.alt contains 'youtube' or image.alt contains 'vimeo' -%}
+        <div style="transform: translateY(45%);">
+          {{ image.alt }}
+        </div>
+      {%- else -%}      
+        <img src="{{- image | img_url: '1160x' -}}" alt="{{- image.alt -}}" data-variants="{{- image_variants | join: ',' -}}" {% if image_variants contains _product.id %}class="current"{% endif %}>
+      {%- endif -%}
+    {%- endcapture -%}
+  {%- endfor -%}
+
+  <div class="product__slider">
+    {{ _images }}
+  </div><!-- /.product__slider -->
+</div><!-- /.product__media -->

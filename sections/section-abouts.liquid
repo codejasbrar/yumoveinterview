@@ -1,0 +1,65 @@
+{%- assign _section = section.settings -%}
+{%- assign section_label = _section.label -%}
+{%- assign section_url = _section.url -%}
+
+<section class="section section-products section--gray">
+  <div class="shell">
+    <div class="section__body">
+      <div class="products cols">
+        {%- for block in section.blocks -%}
+          {%- assign _block = block.settings -%}
+          {%- assign block_product = _block.product -%}
+          {%- assign _product = all_products[block_product] -%}
+
+          {%- include 'featured-product-item' with _product -%}
+        {%- endfor -%}
+      </div><!-- /.products cols -->
+    </div><!-- /.section__body -->
+
+    {%- if section_label != blank and section_url != blank -%}
+      <footer class="section__foot">
+        <a href="{{section_url}}" class="btn">{{section_label}}</a>
+      </footer><!-- /.section__foot -->
+    {%- endif -%}
+  </div><!-- /.shell -->
+</section><!-- /.section section-products -->
+
+{% schema %}
+{
+  "name": "Featured Products",
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Button Label"
+    },
+    {
+      "type": "url",
+      "id": "url",
+      "label": "Button Link"
+    }
+  ],
+  "max_blocks": 3,
+  "blocks": [
+    {
+      "type": "product",
+      "name": "Product",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured Products",
+      "category": "Grid"
+    }
+  ]
+}
+{% endschema %}
+
+

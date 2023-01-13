@@ -1,0 +1,34 @@
+{%- assign _section = section.settings -%}
+{%- assign section_title = _section.title -%}
+{%- assign section_reviews_html = _section.reviews_html -%}
+
+{%- if section_title != blank or reviews_html != blank -%}
+  <section class="section section-reviews section--green">
+    <div class="shell shell--extrasmall">
+      {%- if section_title != blank -%}
+        <header class="section__head">
+          <h2 class="section__title">{{section_title}}</h2><!-- /.section__title -->
+        </header><!-- /.section__head -->
+      {%- endif -%}
+
+        <div class="section__body">
+          <div class="section__content">
+            {% include 'trustbox-widget-product-reviews-seo' %}
+          </div><!-- /.section__content -->
+        </div><!-- /.section__body -->
+    </div><!-- /.shell shell--extrasmall -->
+  </section><!-- /.section section-reviews section-/-green -->
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Reviews",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,53 @@
+<div id="product-bundle" class="section--gray hidden">
+  <div class="shell">
+    <div class="bundle-container">
+    {% if product.handle == 'yumove-plus-for-dogs' or product.handle == 'imove' %}
+      <div class="bundle-products">
+        <div class="bundle-content">
+          <div class="bundle-images">
+            <img src="{{ 'bundle-plus.png' | file_url }}">
+            <p>+</p>
+            <img src="{{ 'bundle-imove.png' | file_url }}">
+          </div><!--- /.bundle-images --->
+          <div class="bundle-info">
+            <h4>Black Friday Bundle</h4>
+            <p>Buy 120 YuMOVE Plus and 90 IMOVE together and save <span class="bundle-discount">50%</span></p>
+          </div><!--- /.bundle-info --->
+        </div><!--- /.bundle-content --->
+        <div class="bundle-actions">
+          <div class="bundle-price">
+            <h4>£28.97</h4>
+            <p>£57.95 </p>
+          </div><!--- /.bundle-price --->
+          <div class="bundle-button">
+            <a href="https://yumove-uk.myshopify.com/a/bundles/checkout/happy-dog-=-happy-owner-13pw" class="btn">Buy bundle</a>
+          </div><!--- /.bundle-button --->
+        </div><!--- /.bundle-actions --->
+      </div><!--- /.bundle-products --->
+    {% elsif product.handle == 'yuderm-moulting-dog' or product.handle == 'yudigest-for-dogs' %}
+      <div class="bundle-products">
+        <div class="bundle-content">
+          <div class="bundle-images">
+            <img src="{{ 'bundle-yudigest.png' | file_url }}">
+            <p>+</p>
+            <img src="{{ 'bundle-yuderm.png' | file_url }}">
+          </div><!--- /.bundle-images --->
+          <div class="bundle-info">
+            <h4>Black Friday Bundle</h4>
+            <p>Buy 120 YuDIGEST and 250ml YuDERM Moulting Dog together and save <span class="bundle-discount">50%</span></p>
+          </div><!--- /.bundle-info --->
+        </div><!--- /.bundle-content --->
+        <div class="bundle-actions">
+          <div class="bundle-price">
+            <h4>£22.64</h4>
+            <p>£45.30</p>
+          </div><!--- /.bundle-price --->
+          <div class="bundle-button">
+            <a href="https://yumove-uk.myshopify.com/a/bundles/checkout/yudigest-+-yuderm-18au" class="btn">Buy bundle</a>
+          </div><!--- /.bundle-button --->
+        </div><!--- /.bundle-actions --->
+      </div><!--- /.bundle-products --->
+    {% endif %}
+  </div><!--- /.bundle-container --->
+  </div><!--- /.shell --->
+</div><!--- /#product-bundle --->

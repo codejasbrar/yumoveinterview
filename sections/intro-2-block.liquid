@@ -1,0 +1,321 @@
+{%- assign _section = section.settings -%}
+{%- assign section_image = _section.image -%}
+{%- assign section_mobile_image = _section.mobile_image -%}
+{%- assign section_content_image = _section.content_image -%}
+{%- assign section_title = _section.title -%}
+{%- assign section_content = _section.content -%}
+{%- assign section_text_color = _section.text_color -%}
+{%- assign section_label = _section.label -%}
+{%- assign section_url = _section.url -%}
+{%- assign section_content_position = _section.content_position -%}
+{%- assign section_image_2 = _section.image_2 -%}
+{%- assign section_mobile_image_2 = _section.mobile_image_2 -%}
+{%- assign section_content_image_2 = _section.content_image_2 -%}
+{%- assign section_title_2 = _section.title_2 -%}
+{%- assign section_content_2 = _section.content_2 -%}
+{%- assign section_text_color_2 = _section.text_color_2 -%}
+{%- assign section_label_2 = _section.label_2 -%}
+{%- assign section_url_2 = _section.url_2 -%}
+{%- assign section_content_position_2 = _section.content_position_2 -%}
+{%- assign section_card_text_color = _section.card_text_color -%}
+{%- assign section_card_title_color = _section.card_title_color -%}
+{%- assign section_card_color = _section.card_background -%}
+
+<div class="intro">
+  <div class="intro-2-blocks-container">
+    <div class="intro-block">
+      {%- if section_image != blank -%}
+        <div class="intro__media-1{% if section_mobile_image != blank %} hidden-xs{% endif %}" style="background-image: url({{ section_image | img_url: '1600x' }});"></div><!-- /.intro__media hidden-xs -->
+      {%- endif -%}
+
+      {%- if section_mobile_image != blank -%}
+        <div class="intro__media intro__media--mobile hidden-lg hidden-md hidden-sm" style="background-image: url({{ section_mobile_image | img_url: '1600x' }});"></div><!-- /.intro__media intro__media-/-mobile visible-xs -->
+      {%- endif -%}
+      
+      <div class="flex {{section_content_position}} content-container">
+        <div class="intro__content">
+          {%- if section_content_image != blank -%}
+            <img src="{{section_content_image | img_url: '800x'}}" alt="" class="content-image hidden-xs">
+          {%- endif -%}
+          {%- if section_title != blank -%}
+            <h1 class="intro__title collection-title" style="color:{{section_text_color}};">{{section_title}}</h1><!-- /.intro__title -->
+          {%- endif -%}
+
+          {%- if section_content != blank -%}
+            <h4  style="color:{{section_text_color}};">{{section_content | newline_to_br | remove: '<p>' | remove: '</p>'}}</h4>
+          {%- endif -%}
+
+          {%- if section_label != blank and section_url != blank -%}
+            <a href="{{section_url}}" class="btn">
+              {{section_label}} <img src="{{ 'noun_Paw_76186.png' | file_img_url: '20x' }}" alt="Paw silhouette">
+            </a>
+          {%- endif -%}
+          <div class="intro-mobile-card hidden-lg hidden-md hidden-sm" {% if section_card_color != blank %}style="background-color: {{ section_card_color }}"{% endif %}>
+            <a href="{{section_url_2}}" class="card-link">
+              {%- if section_content_image_2 != blank -%}
+                <div class="card-image">
+                  <img src="{{section_content_image_2 | img_url: '800x'}}" alt="">
+                </div><!-- /.card-image -->
+              {%- endif -%}
+              <div class="card-text{% if section_content_image_2 == blank %} text-no-image{% endif %}">
+                {%- if section_title != blank -%}
+                  <h5 class="intro__title collection-title" style="color:{{section_card_title_color}};">{{section_title_2}}</h5><!-- /.intro__title -->
+                {%- endif -%}
+                {%- if section_content_2 != blank -%}
+                  <p style="color:{{section_card_text_color}};">{{section_content_2 | newline_to_br | remove: '<p>' | remove: '</p>'}}</p>
+                {%- endif -%}
+              </div><!-- /.card-text -->
+              <div class="chevron-container">
+                <img src="{{ 'arrow1.png' | asset_url }}">
+              </div>
+            </a>
+          </div><!-- /.intro-mobile-card -->
+        </div><!-- /.intro__content -->
+      </div><!-- /.flex -->
+    </div><!-- /.intro-block -->
+    <div class="intro-block hidden-xs">
+      {%- if section_image_2 != blank -%}
+        <div class="intro__media-2{% if section_mobile_image_2 != blank %} hidden-xs{% endif %}" style="background-image: url({{ section_image_2 | img_url: '1600x' }});"></div><!-- /.intro__media hidden-xs -->
+      {%- endif -%}
+
+      {%- if section_mobile_image_2 != blank -%}
+        <div class="intro__media intro__media--mobile hidden-lg hidden-md hidden-sm" style="background-image: url({{ section_mobile_image_2 | img_url: '1600x' }});"></div><!-- /.intro__media intro__media-/-mobile visible-xs -->
+      {%- endif -%}
+
+      <div class="flex {{section_content_position_2}} content-container">
+        <div class="intro__content">
+          {%- if section_content_image_2 != blank -%}
+            <img src="{{section_content_image_2 | img_url: '800x'}}" alt="" class="content-image hidden-xs">
+          {%- endif -%}
+          {%- if section_title != blank -%}
+            <h1 class="intro__title collection-title" style="color:{{section_text_color_2}};">{{section_title_2}}</h1><!-- /.intro__title -->
+          {%- endif -%}
+
+          {%- if section_content_2 != blank -%}
+            <h4  style="color:{{section_text_color_2}};">{{section_content_2 | newline_to_br | remove: '<p>' | remove: '</p>'}}</h4>
+          {%- endif -%}
+
+          {%- if section_label_2 != blank and section_url_2 != blank -%}
+            <a href="{{section_url_2}}" class="btn">
+              {{section_label_2}} <img src="{{ 'noun_Paw_76186.png' | file_img_url: '20x' }}" alt="Paw silhouette">
+            </a>
+          {%- endif -%}
+        </div><!-- /.intro__content -->
+      </div><!-- /.flex -->
+    </div><!-- /.intro-block -->
+  </div><!-- /.shell -->
+</div><!-- /.intro -->
+
+{% schema %}
+{
+  "name": "Intro",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Media"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Background Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_image",
+      "label": "Background Image (Mobile)"
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "image_picker",
+      "id": "content_image",
+      "label": "Content Image"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "text",
+      "id": "content",
+      "label": "Content"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Colour",
+      "default": "#ffffff"
+    },
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Button Label"
+    },
+    {
+      "type": "url",
+      "id": "url",
+      "label": "Button Link"
+    },
+    {
+      "type": "select",
+      "id": "content_position",
+      "label": "Content Position",
+      "options": [
+        {
+          "value": "align-start justify-start",
+          "label": "Top Left"
+        },
+        {
+          "value": "align-start justify-center text-center",
+          "label": "Top Center"
+        },
+        {
+          "value": "align-start justify-end text-right",
+          "label": "Top Right"
+        },
+        {
+          "value": "align-center justify-start",
+          "label": "Center Left"
+        },
+        {
+          "value": "align-center justify-center text-center",
+          "label": "Center Center"
+        },
+        {
+          "value": "align-center justify-end text-right",
+          "label": "Center Right"
+        },
+        {
+          "value": "align-end justify-start",
+          "label": "Bottom Left"
+        },
+        {
+          "value": "align-end justify-center text-center",
+          "label": "Bottom Center"
+        },
+        {
+          "value": "align-end justify-end text-right",
+          "label": "Bottom Right"
+        }
+      ],
+      "default": "align-start justify-center text-center"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_2",
+      "label": "Background Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_image_2",
+      "label": "Background Image (Mobile)"
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "image_picker",
+      "id": "content_image_2",
+      "label": "Content Image"
+    },
+    {
+      "type": "text",
+      "id": "title_2",
+      "label": "Title"
+    },
+    {
+      "type": "text",
+      "id": "content_2",
+      "label": "Content"
+    },
+    {
+      "type": "color",
+      "id": "text_color_2",
+      "label": "Text Colour 2",
+      "default": "#ffffff"
+    },
+    {
+      "type": "text",
+      "id": "label_2",
+      "label": "Button Label"
+    },
+    {
+      "type": "url",
+      "id": "url_2",
+      "label": "Button Link"
+    },
+    {
+      "type": "select",
+      "id": "content_position_2",
+      "label": "Content Position",
+      "options": [
+        {
+          "value": "align-start justify-start",
+          "label": "Top Left"
+        },
+        {
+          "value": "align-start justify-center text-center",
+          "label": "Top Center"
+        },
+        {
+          "value": "align-start justify-end text-right",
+          "label": "Top Right"
+        },
+        {
+          "value": "align-center justify-start",
+          "label": "Center Left"
+        },
+        {
+          "value": "align-center justify-center text-center",
+          "label": "Center Center"
+        },
+        {
+          "value": "align-center justify-end text-right",
+          "label": "Center Right"
+        },
+        {
+          "value": "align-end justify-start",
+          "label": "Bottom Left"
+        },
+        {
+          "value": "align-end justify-center text-center",
+          "label": "Bottom Center"
+        },
+        {
+          "value": "align-end justify-end text-right",
+          "label": "Bottom Right"
+        }
+      ],
+      "default": "align-start justify-center text-center"
+    },
+    {
+      "type": "color",
+      "id": "card_background",
+      "label": "Card Background Colour",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "card_title_color",
+      "label": "Card Title Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "card_text_color",
+      "label": "Card Text Color",
+      "default": "#000000"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Intro 2 Blocks",
+      "category": "Homepage"
+    }
+  ]
+}
+{% endschema %}

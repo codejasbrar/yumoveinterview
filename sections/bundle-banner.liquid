@@ -1,0 +1,19 @@
+<div class="landing-sub-banner">
+  <div class="shell">
+    <h2 class="sub-banner-text">{{ section.settings.banner_text }}</h2>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "landing Banner",
+    "settings": [
+      {
+        "type": "text",
+        "id": "banner_text",
+        "label": "Banner Text"
+      }
+    ]
+  }
+{% endschema %}
+

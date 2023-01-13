@@ -1,0 +1,36 @@
+<div class="sponsor-bar" style="background-color: {{ section.settings.background-color }}">
+    <h2 class="sponsor-bar-text" style="color: {{ section.settings.text-color }}; font-size: {{ section.settings.font_size }}px;">{{ section.settings.text }}</h2>
+</div>
+
+{% schema %}
+  {
+    "name": "sponsor",
+    "settings": [
+    {
+      "type": "text",
+     "id": "text",
+      "label": "Text"
+    },
+    {
+      "type": "range",
+      "id": "font_size",
+      "min": 12,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "label": "Font size",
+      "default": 40
+    },
+    {
+      "type": "color",
+      "id": "background-color",
+      "label": "Background Color"
+    },
+    {
+      "type": "color",
+      "id": "text-color",
+      "label": "Text Color"
+    }
+  ]
+  }
+{% endschema %}

@@ -1,0 +1,93 @@
+
+<section class="section">
+  <div class="shell">
+  <h3 class="section__title text-center">{{section.settings.title}}</h3>
+  <div class="current-vacancies">
+    {%- for block in section.blocks -%}
+      <div class="slide">
+        <div class="slide-content">
+        <p class="category">{{block.settings.category}}</p>
+        <p class="title">{{block.settings.title}}</p>
+        <p class="content">{{block.settings.content}}</p>
+        </div>
+      </div>
+   {%- endfor -%}
+  </div>
+  </div>
+</section>
+<script>
+  $(document).ready(function(){
+    $('.current-vacancies').slick({
+      dots: true,
+      infinite: false,
+      speed: 300,
+      slidesToShow: 3,
+      slidesToScroll: 1,
+  	  arrows: false,
+      responsive: [
+        {
+          breakpoint: 1024,
+          settings: {
+            slidesToShow: 3,
+            slidesToScroll: 1,
+            infinite: true,
+            dots: true
+          }
+        },
+        {
+          breakpoint: 600,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 1
+          }
+        },
+        {
+          breakpoint: 480,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1
+          }
+        }
+        // You can unslick at a given breakpoint now by adding:
+        // settings: "unslick"
+        // instead of a settings object
+      ]
+    });
+
+  })
+</script>
+{% schema %}
+{
+  "name": "Jobs Landing Slider 1",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "text",
+          "id": "category",
+          "label": "Category"
+        },
+        {
+          "type": "textarea",
+          "id": "content",
+          "label": "Content"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

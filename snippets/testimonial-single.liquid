@@ -1,0 +1,23 @@
+<div class="testimonial testimonial--single flex justify-between align-center">
+  <div class="testimonial__rate flex justify-between align-center">
+    {{ settings.product_testimonial_reviews_html_2 }}
+  </div><!-- /.testimonial__rate -->
+
+  <div class="testimonial__media">
+    {%- if _image != blank -%}
+      <img src="{{ _image | img_url: '300x' }}" alt="">
+    {%- endif -%}
+  </div><!-- /.testimonial__media -->
+
+  <div class="testimonial__content">
+    {%- if _testimonial != blank -%}
+      <blockquote>
+        {{_testimonial}}
+      </blockquote>
+    {%- endif -%}
+
+    {%- if _title != blank -%}
+      <div class="testimonial__author">{{_title}}</div><!-- /.testimonial__author -->
+    {%- endif -%}
+  </div><!-- /.testimonial__content -->
+</div><!-- /.testimonial -->

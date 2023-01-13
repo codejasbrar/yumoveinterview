@@ -1,0 +1,98 @@
+
+
+<div class="form__step" id="extras">
+	<div class="form__step-head">
+      <h2 class="form__step-title section__title">Would you be interested in any other supplements for <span class="dog-name"></span>?</h2><!-- /.section__title -->
+	</div><!-- /.form__step-head -->
+
+	<div class="form__step-body">
+      <div class="form__row"> 
+          {%- if _settings.extras_text1 != '' -%}
+            {{ _settings.extras_text1 }}
+          {%- endif -%}
+      </div><!-- /.form__row -->
+      
+    <div class="product">
+      <div class="cols">
+        <div class="col .col--1of2">
+          <div id="calming-item" class="extras-item">
+            <div class="extras-checkbox calming-checkbox">
+               <input type="radio" id="calming" name="calming" class="checkmark-input">
+                <span class="checkmark"></span>
+            </div>
+            <div class="extras-content">
+              <img src="{{ yucalm_dog.featured_image | img_url }}">
+              <p>Calming Range</p>
+            </div>
+            <input id="klaviyo_calming" class="extras-klaviyo interest-input" type="hidden" name="calming interest" value="">
+          </div>
+          <div id="skin-item" class="extras-item">
+            <div class="extras-checkbox skin-checkbox">
+              <input type="radio" id="skin" name="skin" class="checkmark-input">
+              <span class="checkmark"></span>
+            </div>
+            <div class="extras-content">
+              <img src="{{ yuderm_moulting_dog.featured_image | img_url }}">
+              <p>Skin and Coat Range</p>
+            </div>
+            <input id="klaviyo_skin" class="extras-klaviyo interest-input" type="hidden" name="skin & coat interest" value="">
+          </div>
+          <div id="human-item" class="extras-item">
+            <div class="extras-checkbox human-checkbox">
+              <input type="radio" id="human" name="human" class="checkmark-input">
+              <span class="checkmark"></span>
+            </div>
+            <div class="extras-content">
+              <img src="{{ imove.featured_image | img_url }}">
+              <p>Human Joint Range</p>
+            </div>
+            <input id="klaviyo_human" class="extras-klaviyo interest-input" type="hidden" name="human interest" value="">
+          </div>
+        </div><!-- /.col col-/-size1 -->
+        <div class="col .col--1of2">
+          <div id="digestive-item" class="extras-item">
+            <div class="extras-checkbox digestive-checkbox">
+              <input type="radio" id="digestive" name="digestive" class="checkmark-input">
+              <span class="checkmark"></span>
+            </div>
+            <div class="extras-content">
+              <img src="{{ yudigest_for_dogs.featured_image | img_url }}">
+              <p>Digestive Range</p>
+            </div>
+            <input id="klaviyo_digestion" class="extras-klaviyo interest-input" type="hidden" name="digestion interest" value="">
+          </div>
+          <div id="dental-item" class="extras-item">
+           <div class="extras-checkbox dental-checkbox">
+              <input type="radio" id="dental" name="dental" class="checkmark-input">
+              <span class="checkmark"></span>
+            </div>
+            <div class="extras-content">
+              <img src="{{ yucare_tooth_cleaner.featured_image | img_url }}">
+              <p>Dental Range</p>
+            </div>
+            <input id="klaviyo_dental" class="extras-klaviyo interest-input" type="hidden" name="dental interest" value="">
+          </div>
+          <div id="none-item" class="extras-item">
+            <div class="extras-checkbox none-checkbox">
+              <input type="radio" id="none" name="none" class="checkmark-input">
+              <span class="checkmark"></span>
+            </div>
+            <div class="extras-content">
+              <p>No thank you</p>
+            </div>
+          </div>
+          
+        </div><!-- /.col col-/-size2 -->
+        <div class="extras-discount-text">
+          <p>Get 40% off when you have 2 or more subscriptions</p>
+        </div>
+      </div><!-- /.cols -->
+      <div class="form__step-actions">
+        <a href="#extras2" class="btn btn--small btn--green btn--next extras-btn--next">Next</a>  
+        <a href="#subscription-plan" class="btn btn--small btn--next btn--skip">Skip</a>  
+	  </div><!-- /.form__step-actions -->
+    </div><!-- /.product -->
+  </div><!-- /.form__step-body -->
+
+	
+</div><!-- /.form__step -->

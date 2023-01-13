@@ -1,0 +1,81 @@
+<section class="section-landing-ingredients landing-pawsquad-about"> 
+  <div class="shell">
+    <div class="section-title">
+      {{ section.settings.main_title }}
+       <p class="section-sub-title">{{ section.settings.sub_title }}</p>
+    </div>
+    
+    <div class="ingredient-content">
+      <div class="section-content">
+        <p> {{ section.settings.main_text }}</p>
+    </div>
+    <div class="section-content">
+      {% for block in section.blocks %}
+      <p></p>
+        <div class="info-block">  
+          <div class="about-tick">
+          </div>
+          <div class="block-text-container"> 
+            <div class="block-text">
+              <p>{{ block.settings.content }}</p>
+            </div>
+          </div>    
+        </div>
+      {% endfor%}
+    </div>
+    </div>
+    <div class="sub-info-btn">
+      <a href="{{ section.settings.url}}" class="sub-intro-btn btn">
+            {{section.settings.label}} 
+          </a>
+    </div>       
+  </div><!-- /.shell -->
+</section>
+
+
+{% schema %}
+  {
+    "name": "Pawsquad About",
+    "settings": [
+      {
+        "type": "text",
+        "id": "main_title",
+        "label": "Info Title"
+      },
+      {
+        "type": "text",
+        "id": "sub_title",
+        "label": "Info Sub Title"
+      },
+      {
+        "type": "richtext",
+        "id": "main_text",
+        "label": "Main Text"
+      },
+      {
+        "type": "text",
+        "id": "label",
+        "label": "Button Label"
+      },
+      {
+        "type": "url",
+        "id": "url",
+        "label": "Button Link"
+      }
+    ],
+    "blocks": [
+    {
+      "type": "Feature",
+      "name": "Features",
+      "settings": [
+        {
+          "type": "text",
+          "id": "content",
+          "label": "Feature Content"
+        }
+      ]
+    }
+  ]
+  }
+{% endschema %}
+

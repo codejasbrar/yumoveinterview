@@ -1,0 +1,70 @@
+<div class="product__content">
+  <div class="product__head flex align-center justify-between">
+    <h1 class="product__title" itemprop="name">{{- product.title -}}</h1>
+
+    <h4 class="product__price price">
+      {%- include 'price' with _product -%}
+    </h4><!-- /.product__price price -->
+  </div><!-- /.product__head -->
+
+    <div class="product__rate flex align-center">
+      <div class="trustbox_widget_mini">{% include 'trustbox-widget-product-mini' %}</div>
+      <img src="//cdn.shopify.com/s/files/1/0103/3784/5303/files/ico-trustpilot_200x.png?4399" alt="Trustpilot logo">
+    </div><!-- /.product__rate flex align-center -->
+
+  {%- if _content_parts_size > 1 -%}
+    <div class="product__entry">
+      {{_content_parts[0]}}
+    </div><!-- /.product__entry -->
+  {%- endif -%}
+{%- if product.title contains 'YuMOVE PLUS for Dogs' or 'YuMOVE Dog' or 'YuMOVE Young & Active' or 'YuMOVE Working Dog' or 'YuMOVE One-A-Day' -%} 
+  <div class="product-subscribe-radio">
+    <label class="subscribe-radio">One-Time Purchase:  <span class="product__price">{%- include 'price' with _product -%}</span>
+         <input type="radio" id="one_time" name="product_subscribe" checked="checked">
+         <span class="checkmark"></span>
+      </label>
+    <label class="subscribe-radio">Subscribe & Save 30% <span class="subscription-radio-price">from {{ product.first_available_variant.price | divided_by: 100.0 | times: 70.0 | money }}</span>
+         <input type="radio" id="subscribe" name="product_subscribe">
+         <span class="checkmark"></span>
+      </label>    
+  </div>
+ <div class="subscribe-tooltip">
+  <div class="rc_popup initial-popup">			
+	<div class="rc_popup__hover product-subscribe-info">	
+        <p>About your subscription</p>
+          <img src="{{ widget_icon }}" height="21" width="18" alt="ReCharge Subscription services icon" class="rc_popup__icon">
+          <span class="tooltip-text">Orders will be automatically created on the date you choose, and delivered to your door soon after. If you ever want to change or cancel your furry friends subscription, it can be easily modified by logging into your account.</span>       
+    </div>
+  </div>
+ </div>
+ 
+  
+{%- endif -%}
+</div><!-- /.product__content -->
+
+{%- if product.title contains 'YuMOVE PLUS for Dogs' or 'YuMOVE Dog' or 'YuMOVE Young & Active' or 'YuMOVE Working Dog' or 'YuMOVE One-A-Day' -%} 
+<div class="subscription-details hidden">
+    <div class="product-subscribe-details">
+      <div class="subscribe-tooltip">
+      <div class="rc_popup">			
+	    <div class="rc_popup__hover product-subscribe-info">	
+          <p class="subscription-plan-info">Your Subscription Plan</p>
+		  <img src="{{ widget_icon }}" height="21" width="18" alt="ReCharge Subscription services icon" class="rc_popup__icon">
+           <span class="tooltip-text">Orders will be automatically created on the date you choose, and delivered to your door soon after. If you ever want to change or cancel your furry friends subscription, it can be easily modified by logging into your account.</span>       
+        </div>
+      </div>
+     </div> 
+      <p class="edit-details">Edit <span class="details-text">Details<span></p>
+    </div> 
+    <div class="product-subscribe-plan">
+      <div class="dosage-details">
+        <p class="dosage-amount"><span class="product_each_month">60</span> tablets <span class="subscription-month"> each month</span></p>
+<!--         <p class="dosage-amount dosage-first-month hidden"><span class="product_first_month">120</span> in the <span class="subscription-first-month"> first month</span></p> -->
+      </div>
+      <div class="product-subscription-price">
+        <h4 class="price">£<span class="product_subscription_price">Price</span></h4>
+        <p class="per-month">Price per month</p>
+      </div>
+    </div>
+  </div>
+{%- endif -%}

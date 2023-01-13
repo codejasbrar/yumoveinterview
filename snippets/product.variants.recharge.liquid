@@ -1,0 +1,124 @@
+{%- include 'variant-script' define_variables: true, _product: product -%}
+
+{%- capture _options -%}
+  {% section 'product-options-setup' %}
+{%- endcapture -%}
+
+{{ _options }}
+
+{%- assign options_string = _options | split: '<p class="hidden">' | last | split: '</p><!-- /.hidden -->' | first -%}
+
+{%- assign current_variant = product.selected_or_first_available_variant -%}
+
+{%- comment -%}
+  Here use the same markup
+  You can modified but don't and remove or modified logic `for` attributes, `id` attributes and all classes start which with `js-`.
+{%- endcomment -%}
+
+{% form 'product', product, data-productid: product.id, class: 'form-product js-product-form', data-index: '0' %}
+  {%- include 'product.content.recharge' -%}
+
+  {%- assign current_variant = product.selected_or_first_available_variant -%}
+
+  <select name="id" id="product-select" class="product-single__variants hidden js-product-select" data-productid="{{product.id}}">
+    {% for variant in product.variants %}
+      {%- include 'price' with variant, echo: false -%}
+
+      {% capture data_fields %}{% for option in product.options %}data-{{- forloop.index0 -}}="{{ variant.options[forloop.index0] | downcase | handleize }}" {% endfor %}{% endcapture %}
+
+      <option
+         value="{{- variant.id -}}"
+         data-price="{{- output -}}"
+
+        {% if current_variant.id == variant.id %}
+          selected
+        {% endif %}
+
+        {% unless variant.available %}
+          disabled
+        {% endunless %}
+
+        {{data_fields}}
+      >
+        {{- variant.title -}}
+      </option>
+    {% endfor %}
+  </select>
+
+  {%- unless product.has_only_default_variant -%}
+    {%- for option in product.options_with_values -%}
+      {%- assign option_name_handle = option.name | handle -%}
+      {%- assign separator = option_name_handle | append: ':' -%}
+
+      {%- assign _type = 'checkboxes' -%}
+
+      {%- if options_string contains separator -%}
+        {%- assign _type = options_string | split: separator | last | split: '|||' | first -%}
+      {%- endif -%}
+
+      <div class="one_time form__row js-row-holder {% if option_name_handle == 'color' %}js-row-colors{% endif %}" data-type="{{- option_name_handle -}}">
+        <label {% if _type == 'select' %} for="field-{{- _name | handle -}}-{{- product.id -}}-{{- idx -}}-prime" {% endif %} class="form__label">{{ _name }}</label>
+
+        <div class="form__controls">
+          <div class="option-unselect-container">
+            <div class="value-container">
+              <p class="per-value">Please select an amount</p>
+            </div>
+            {%- include 'option-print-unselected' with type: _type, _name: option.name, _values: option.values, _product: product -%}
+          </div> 
+        </div><!-- /.form__controls -->
+      </div><!-- /.form__row -->
+    {%- endfor -%}
+  {%- endunless -%}
+
+  {%- if product.handle contains 'yucalm-cat' or product.handle contains 'yumove-plus-for-horses' -%}
+    {%- include 'default-price-per' -%}
+  {%- endif -%}
+
+  <div class="one_time form__row">
+    <div class="form__controls product__qty">
+      <button type="button" class="btn-qty btn-minus{% if line_item.quantity == 1 %} disabled{% endif %}" data-handle="{{line_item.product.handle}}" data-step="-1"><i class="ico-minus"></i></button>
+
+      <input type="text" class="field field--quantity btn btn--white" name="updates[]" id="quantity_{{- line_item.id -}}" value="1" min="1" placeholder="">
+
+      <button type="button" class="btn-qty btn-plus" data-handle="{{line_item.product.handle}}" data-step="1"><i class="ico-plus"></i></button>
+    </div><!-- /.form__controls -->
+
+    {% assign nosale = false %}
+    {% for tag in product.tags %}
+      {% if tag == "nosale" %}
+    	{% assign nosale = true%}
+      {% endif %}
+    {% endfor %}
+    
+    {% if nosale == true %}
+    	<a href="https://www.lintbells.com/apps/store-locator" class="btn form__btn js-form-btn" style="visibility: visible;" >FIND NEAREST STORE</a>
+    {% else %}
+    	
+    	<button type="submit" name="add" id="add-to-basket" class="btn form__btn js-form-btn{% unless current_variant.available %} disabled{% endunless %}">
+          {% if current_variant.available != true %}
+            {{- 'products.product.out_of_stock' | t -}}
+          {% else %}
+            {{- 'products.product.add_to_cart' | t -}}
+          {% endif %}
+        </button>  
+     
+    {% endif %}
+    
+  
+  </div><!-- /.form__row -->
+   <div class="new-product-free-container">
+      <div class="new-free-shipping">
+        <span class="product-shipping-icon">{% include 'delivery-icon-svg' %}</span>
+        <p>{{ settings.product_free_shipping }}</p>      
+      </div>
+      {% if product.tags contains 'letterbox' %}
+      <div class="product-letterbox">
+        <span class="product-shipping-icon letter-icon">{% include 'postage-icon-svg' %}</span>
+        <p>
+          Packs of up to 120 tablets suitable for letterbox delivery
+        </p>     
+      </div>
+      {% endif %}
+    </div>
+{% endform %}

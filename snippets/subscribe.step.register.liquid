@@ -1,0 +1,56 @@
+<div class="form__step current" id="register">
+	<div class="form__step-head">
+		<h1 class="form__step-title section__title collection-title">{{ _settings.register_title }}</h1><!-- /.section__title -->
+	</div><!-- /.form__step-head -->
+
+	<div class="form__step-body">
+		<div class="form__cols">
+			<div class="form__col">
+				<div class="form__row">
+					<label for="first-name" class="form__label">First Name</label>
+
+					<div class="form__controls">
+						<input type="text" class="field js-required js-get-data" name="First_Name" id="first-name" value="" placeholder="Your first name">
+					</div><!-- /.form__controls -->
+				</div><!-- /.form__row -->
+			</div><!-- /.form__col -->
+
+			<div class="form__col">
+				<div class="form__row">
+					<label for="last-name" class="form__label">Last Name</label>
+
+					<div class="form__controls">
+						<input type="text" class="field js-required js-get-data" name="Last_Name" id="last-name" value="" placeholder="Your last name">
+					</div><!-- /.form__controls -->
+				</div><!-- /.form__row -->
+			</div><!-- /.form__col -->
+		</div><!-- /.form__cols -->
+
+		<div class="form__row">
+			<label for="email" class="form__label">Email</label>
+
+			<div class="form__controls">
+				<input type="text" class="field js-required js-get-data js-email" name="email" id="email" value="" placeholder="Enter your email address">
+			</div><!-- /.form__controls -->
+		</div><!-- /.form__row -->
+
+		<div class="form__row">
+			<ul class="list-checkboxes">
+				<li>
+					<div class="checkbox">
+						<input type="checkbox" name="$consent" id="accept-terms-and-policy" class="js-checkbox js-new-data">
+
+						<label for="accept-terms-and-policy">{{ _settings.opt_in_text }}</label>
+					</div><!-- /.checkbox -->
+				</li>
+			</ul><!-- /.list-checkboxes -->
+		</div><!-- /.form__row -->
+	</div><!-- /.form__step-body -->
+
+	<div class="form__step-actions">
+		<a id="btn--add-firstname" href="#details" class="btn btn--small btn--green btn--next btn--add-firstname">Next</a>
+        <div class="form__step-error">Please complete all parts of this step</div><!-- /.form__step-error -->
+	</div><!-- /.form__step-actions -->
+
+	
+</div><!-- /.form__step -->

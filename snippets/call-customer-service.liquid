@@ -1,0 +1,76 @@
+{%- include 'variant-script' define_variables: true, _product: product -%}
+
+{%- capture _options -%}
+  {% section 'product-options-setup' %}
+{%- endcapture -%}
+
+{{ _options }}
+
+{%- assign options_string = _options | split: '<p class="hidden">' | last | split: '</p><!-- /.hidden -->' | first -%}
+
+{%- assign current_variant = product.selected_or_first_available_variant -%}
+
+{%- comment -%}
+  Here use the same markup
+  You can modified but don't and remove or modified logic `for` attributes, `id` attributes and all classes start which with `js-`.
+{%- endcomment -%}
+
+{% form 'product', product, class: 'form-product js-product-form' %}
+  {%- include 'product.content.call.customer.service' -%}
+
+  {%- assign current_variant = product.selected_or_first_available_variant -%}
+
+  <select name="id" id="product-select" class="product-single__variants hidden js-product-select" data-productid="{{product.id}}">
+    {% for variant in product.variants %}
+      {%- include 'price' with variant, echo: false -%}
+
+      {% capture data_fields %}{% for option in product.options %}data-{{- forloop.index0 -}}="{{ variant.options[forloop.index0] | downcase | handleize }}" {% endfor %}{% endcapture %}
+
+      <option
+         value="{{- variant.id -}}"
+         data-price="{{- output -}}"
+
+        {% if current_variant.id == variant.id %}
+          selected
+        {% endif %}
+
+        data-available="{{variant.available}}"
+
+        {% unless variant.available %}
+          disabled
+        {% endunless %}
+
+        {{data_fields}}
+      >
+        {{- variant.title -}}
+      </option>
+    {% endfor %}
+  </select>
+
+  {%- unless product.has_only_default_variant -%}
+    {%- for option in product.options_with_values -%}
+      {%- assign option_name_handle = option.name | handle -%}
+      {%- assign separator = option_name_handle | append: ':' -%}
+
+      {%- assign _type = 'checkboxes' -%}
+
+      {%- if options_string contains separator -%}
+        {%- assign _type = options_string | split: separator | last | split: '|||' | first -%}
+      {%- endif -%}
+
+      <div class="form__row js-row-holder {% if option_name_handle == 'color' %}js-row-colors{% endif %}" data-type="{{- option_name_handle -}}">
+        <label {% if _type == 'select' %} for="field-{{- _name | handle -}}-{{- product.id -}}-{{- idx -}}-prime" {% endif %} class="form__label">{{ _name }}</label>
+
+        <div class="form__controls">
+          {%- include 'option-print' with type: _type, _name: option.name, _values: option.values, _product: product -%}
+        </div><!-- /.form__controls -->
+      </div><!-- /.form__row -->
+    {%- endfor -%}
+  {%- endunless -%}
+
+  <div class="form__row">
+   
+    	<a href="tel:01462416866" class="btn call-btn">Call Customer Service</a>
+    
+  </div><!-- /.form__row -->
+{% endform %}

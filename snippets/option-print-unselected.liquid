@@ -1,0 +1,229 @@
+{%- assign index0 = forloop.index0 -%}
+{%- assign index = forloop.index -%}
+{%- assign idx = index -%}
+
+{%- if product -%}
+  {%- assign idx = forloop.index | append: '-prime' -%}
+{%- endif -%}
+
+{%- assign name_handle = _name | handle -%}
+
+{%- case type -%}
+  {%- when 'select' -%}
+    <div class="select">
+      <select name="field-{{- _name | handle -}}-{{- _product.id -}}-{{- idx -}}" id="field-{{- _name | handle -}}-{{- _product.id -}}-{{- forloop.index -}}" data-option="{{- index -}}">
+        {%- for value in _values -%}
+          <option value="{{- value | handle -}}">{{ value }}</option>
+        {%- endfor -%}
+      </select>
+    </div><!-- /.select -->
+  {%- when 'checkboxes' -%}
+    <ul class="list-radios flex list-checkboxes radios-unselected">
+      {%- for value in  _values -%}
+        <li>
+          <div class="radio">
+            <input type="radio" name="field-{{- _name | handle -}}-{{- _product.id -}}-{{- idx -}}" id="field-{{- _name | handle -}}-{{- _product.id -}}-{{- idx -}}-{{- value | handle -}}" class="klaviyo-{{- _product.id -}}" value="{{- value | handle -}}" data-option="{{- index -}}" />
+
+            <label for="field-{{- _name | handle -}}-{{- _product.id -}}-{{- idx -}}-{{- value | handle -}}" {% if name_handle == 'color' -%} data-handle-name="{{- value | handle -}}" {% endif %}>
+              <div class="form__label-inner">
+                <span>
+                  {{ value }}
+                </span>
+              </div><!-- /.form__label-inner -->
+            </label>
+          </div><!-- /.radio -->
+        </li>
+      {%- endfor -%}
+    </ul><!-- /.list-radios -->
+{%- endcase -%}
+  
+<script>
+$(document).ready(function () {
+  
+  
+  switch('{{product.title}}') {
+  case 'YuMOVE Plus One-A-Day':  
+      console.log('{{product.title}}');
+      $('.list-radios label').eq(0).on('click',function(){
+      	$('.slick-dots button').eq(0).trigger('click');
+      });
+      $('.list-radios label').eq(1).on('click',function(){
+        $('.slick-dots button').eq(3).trigger('click');
+      });
+      $('.list-radios label').eq(2).on('click',function(){
+        $('.slick-dots button').eq(4).trigger('click');
+      }); 
+    break;
+
+  case 'YuMOVE One-A-Day':
+      	console.log('{{product.title}}');
+        $('.list-radios label').eq(0).on('click',function(){
+          $('.slick-dots button').eq(0).trigger('click');
+        });
+       $('.list-radios label').eq(1).on('click',function(){
+        $('.slick-dots button').eq(3).trigger('click');
+      });
+       $('.list-radios label').eq(2).on('click',function(){
+        $('.slick-dots button').eq(5).trigger('click');
+      });
+    break;
+  case 'YuCALM One-A-Day':  // if (x === 'value2')
+    	console.log('{{product.title}}');
+       	$('.list-radios label').eq(0).on('click',function(){
+          $('.slick-dots button').eq(0).trigger('click');
+        });
+        $('.list-radios label').eq(1).on('click',function(){
+        	$('.slick-dots button').eq(2).trigger('click');
+      	});
+        $('.list-radios label').eq(2).on('click',function(){
+        	$('.slick-dots button').eq(4).trigger('click');
+      	});
+    break;
+  default:
+  	console.log('not One-A-Day');
+    break;
+}
+  
+  
+  
+  
+  $('.rc_block .rc_label').on('click', function(e) {
+    var selectedVariant = $('.radios-unselected .radio input:checked');
+    pricePerFunction(selectedVariant);
+  }); 
+    
+  $('.radios-unselected .radio input[type=radio]').on('click', function(e) {
+    var selectedVariant = $(this);
+    pricePerFunction(selectedVariant);
+  });
+  
+  $('.subscribe-radio input').on('click', function (e) { 
+     var id = $(this).attr('id');
+     var full_price = $('.product-subscribe-radio .money').text();
+     
+     
+     if(id === 'subscribe') {
+       var subscriptionPrice = $('.subscription-radio-price').text();
+       $('.product .one_time .list-radios').addClass('hidden');
+       $('.product .buy-btn-container').addClass('hidden');
+       $('.subscription-product').removeClass('hidden');
+       $('.subscription-checkout-btn').addClass('hidden');
+       $('.subscription-details').addClass('hidden');
+       $('.price .money').text(subscriptionPrice);
+       var lastVariant = $('.list-radios li:last-of-type input').val().replace('-tablets', '');
+       var lastVariantPrice = $('.variant-prices input:last-of-type').val().replace('£', '');
+       var perPriceUnrounded = ((((lastVariantPrice / 100) * 70) * 100) / lastVariant);
+       var perPrice = Math.round(perPriceUnrounded); 
+    
+       if(perPrice < 100) {
+         $('.per-value').html('<p style="color: #319b42;">from ' + perPrice + 'p per tablet</p>');
+       } else {
+         var decimalPrice = ( perPrice / 100 ).toFixed(2);
+         $('.per-value').html('<p style="color: #319b42;">from £' + decimalPrice + ' per tablet</p>');
+       }
+     } else {
+       $('.product .one_time .list-radios').removeClass('hidden');
+       $('.product .buy-btn-container').removeClass('hidden');
+       $('.subscription-product').addClass('hidden');
+       $('.subscription-checkout-btn').addClass('hidden');
+       $('.subscription-details').addClass('hidden');
+       $('.product__head .money').text( full_price );
+       var selectedVariant = $('.radios-unselected .radio input:checked');
+       console.log(selectedVariant.val());
+       if(selectedVariant.val() === undefined) {
+         $('.per-value').html('PLEASE SELECT AN AMOUNT');
+       } else {
+         pricePerFunction(selectedVariant);
+       }
+     }
+   });
+    
+  function pricePerFunction(selectedVariant) {
+    var variant = selectedVariant.val();
+    var productAmount = ""
+    var productUnit = ""
+    
+    if(variant.indexOf('tablets') > 0) {
+      var productAmount = variant.replace('-tablets', '');
+      var productUnit = 'tablet';
+      
+      if(productAmount.indexOf('-') > 0) {
+        var tabletSplit = productAmount.split('-');
+        var productAmount = tabletSplit[0] * tabletSplit[1];
+      }
+      
+    } else if(variant.indexOf('ml') > 0 ) {
+      var productMls = variant.replace('ml', '');
+      var productUnit = '50ml';
+      
+      if(productMls.indexOf('-') > 0) {
+        var mlsSplit = productMls.split('-');
+        var mlsTotal = mlsSplit[0] * mlsSplit[1];
+        var productAmount = mlsTotal / 50;
+      } else {
+        var productAmount = productMls / 50;
+      }
+    } else if(variant.indexOf('bites') > 0) {
+      var variantSplit = variant.split('-');
+      if(variantSplit[0] === 'small' || variantSplit[0] === 'medium' || variantSplit[0] === 'large') {
+        var productAmount = variantSplit[1];
+      } else {
+        var productAmount = variantSplit[0];
+      } 
+      var productUnit = 'bite';
+    } else if(variant.indexOf('chews') > 0) {
+      var variantSplit = variant.split('-');
+      var productAmount = variantSplit[0];
+      var productUnit = 'chew';
+    } else if(variant.indexOf('capsules') > 0) {
+      var variantSplit = variant.split('-');
+      var productAmount = variantSplit[0];
+      var productUnit = 'capsules';
+    } else if(variant.indexOf('kg') > 0) {
+      var productKgs = variant.replace('kg', '');
+      var productAmount = productKgs.replace('-', '.');
+      var productUnit = 'kg';
+    } else if(variant.indexOf('month') > 0) {
+      if(variant.indexOf('months') > 0) {
+        var monthsAmount = variant.replace('-months', '');
+        var productAmount = monthsAmount * 90;
+      } else {
+        var productAmount = 90;
+      }
+      var productUnit = 'tablets';
+    } else if(variant.indexOf('sachets') > 0) {
+      var productAmount = variant.replace('-sachets', '');
+      var productUnit = 'sachet';
+    } else if(variant.indexOf('scoop') > 0 || variant.indexOf('scps') > 0) {
+      if(variant.indexOf('scoop') > 0) {
+        var productAmount = variant.replace('-scoops', '');
+      } else if (variant.indexOf('scps') > 0) {
+        var variantSplit = variant.split('-');
+        var productAmount = variantSplit[0] * variantSplit[2];
+      }   
+      var productUnit = 'scoop';
+    }
+      
+    setTimeout(function() {
+      calculatePer(productAmount, productUnit);
+    },100); 
+  }
+  
+  function calculatePer(productAmount, productUnit) {
+    var fullPriceUntrimmed = $('.product__head .product__price').text();
+    var fullPriceTrimmed = $.trim(fullPriceUntrimmed).substring(1);
+    var perPriceUnrounded = ((fullPriceTrimmed * 100) / productAmount);
+    var perPrice = Math.round(perPriceUnrounded); 
+    
+    if(perPrice < 100) {
+      $('.per-value').html('<p style="color: #319b42;">only ' + perPrice + 'p per ' + productUnit + '</p>');
+    } else {
+      var decimalPrice = ( perPrice / 100 ).toFixed(2);
+      
+      $('.per-value').html('<p style="color: #319b42;">only £' + decimalPrice + ' per ' + productUnit + '</p>');
+    }
+    
+  };
+
+});
+</script>

@@ -1,0 +1,106 @@
+{%- assign _section = section.settings -%}
+{%- assign section_title = _section.title -%}
+{%- assign section_label = _section.label -%}
+{%- assign section_url = _section.url -%}
+
+<section class="section section-features" style="padding-bottom: 30px;">
+  <div class="shell">
+    {%- if section_title != blank -%}
+      <header class="section__head">
+        <h3 class="section__title">{{section_title}}</h3><!-- /.section__title -->
+      </header><!-- /.section__head -->
+    {%- endif -%}
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="section__body">
+        <div class="features cols">
+          {%- for block in section.blocks -%}
+            {%- assign _block = block.settings -%}
+            {%- assign block_image = _block.image -%}
+            {%- assign block_alt = _block.image_alt -%}
+            {%- assign block_title = _block.title -%}
+            {%- assign block_content = _block.content -%}
+
+            <div class="feature text-center col col--1of3">
+              <div class="feature__image flex align-center justify-center">
+                <img src="{{ block_image | img_url: 'x150' }}" alt="{{ block_alt }}" loading="lazy">
+              </div><!-- /.feature__image flex align-center justify-center -->
+
+              <div class="feature__content">
+                {%- if block_title != blank -%}
+                  <h4 class="feature__title">{{block_title}}</h4>
+                {%- endif -%}
+
+                {{block_content}}
+              </div><!-- /.feature__content -->
+            </div><!-- /.feature -->
+          {%- endfor -%}
+        </div><!-- /.features -->
+      </div><!-- /.section__body -->
+    {%- endif -%}
+
+    {%- if section_label != blank and section_url != blank -%}
+      <footer class="section__foot">
+        <a href="{{section_url}}" class="btn">{{section_label}}</a>
+      </footer><!-- /.section__foot -->
+    {%- endif -%}
+  </div><!-- /.shell -->
+</section><!-- /.section section-features -->
+
+{% schema %}
+{
+  "name": "Plan Features",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Button Label"
+    },
+    {
+      "type": "url",
+      "id": "url",
+      "label": "Button Link"
+    }
+  ],
+  "max_blocks": 3,
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+         {
+          "type": "text",
+          "id": "image_alt",
+          "label": "Image Alt Text"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Content"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Steps",
+      "category": "Homepage"
+    }
+  ]
+}
+{% endschema %}

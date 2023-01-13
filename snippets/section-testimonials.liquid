@@ -1,0 +1,27 @@
+{%- if section_title != blank or section_content != blank -%}
+  <header class="section__head text-center">
+    <h2 class="section__title">{{section_title}}</h2><!-- /.section__title -->
+
+    {{section_content}}
+  </header><!-- /.section__head -->
+{%- endif -%}
+
+<div class="section__body">
+  <div class="slider-testimonials">
+  <div class="slider__clip">
+      <div class="slider__slides">
+        {%- for block in section.blocks -%}
+          {%- assign _block = block.settings -%}
+          {%- assign _image = _block.image -%}
+          {%- assign _alt = _block.image_alt -%}
+          {%- assign _title = _block.title -%}
+          {%- assign _testimonial = _block.testimonial -%}
+
+          <div class="slider__slide">
+            {%- include 'testimonial' -%}
+          </div><!-- /.slider__slide -->
+        {%- endfor -%}
+      </div><!-- /.slider__slides -->
+    </div><!-- /.slider__clip -->
+  </div><!-- /.slider-testimonials -->
+</div><!-- /.section__body -->

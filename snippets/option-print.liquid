@@ -1,0 +1,38 @@
+{%- assign index0 = forloop.index0 -%}
+{%- assign index = forloop.index -%}
+{%- assign idx = index -%}
+
+{%- if product -%}
+  {%- assign idx = forloop.index | append: '-prime' -%}
+{%- endif -%}
+
+{%- assign name_handle = _name | handle -%}
+
+{%- case type -%}
+  {%- when 'select' -%}
+    <div class="select">
+      <select name="field-{{- _name | handle -}}-{{- _product.id -}}-{{- idx -}}" id="field-{{- _name | handle -}}-{{- _product.id -}}-{{- forloop.index -}}" data-option="{{- index -}}">
+        {%- for value in _values -%}
+          <option value="{{- value | handle -}}" {% if current_variant.options[index0] == value %} selected {% endif %}>{{ value }}</option>
+        {%- endfor -%}
+      </select>
+    </div><!-- /.select -->
+  {%- when 'checkboxes' -%}
+    <ul class="list-radios flex list-checkboxes">
+      {%- for value in  _values -%}
+        <li>
+          <div class="radio">
+            <input type="radio" name="field-{{- _name | handle -}}-{{- _product.id -}}-{{- idx -}}" id="field-{{- _name | handle -}}-{{- _product.id -}}-{{- idx -}}-{{- value | handle -}}" class="klaviyo-{{- _product.id -}}" value="{{- value | handle -}}" {% if current_variant.options[index0] == value %} checked {% endif %} data-option="{{- index -}}" />
+
+            <label for="field-{{- _name | handle -}}-{{- _product.id -}}-{{- idx -}}-{{- value | handle -}}" {% if name_handle == 'color' -%} data-handle-name="{{- value | handle -}}" {% endif %}>
+              <div class="form__label-inner">
+                <span>
+                  {{ value }}
+                </span>
+              </div><!-- /.form__label-inner -->
+            </label>
+          </div><!-- /.radio -->
+        </li>
+      {%- endfor -%}
+    </ul><!-- /.list-radios -->
+{%- endcase -%}

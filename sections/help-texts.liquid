@@ -1,0 +1,54 @@
+<div class="can-you-help"> 
+  <div class="shell">
+   <h2 class="title">
+     {{section.settings.title}}
+    </h2>
+  {%- for block in section.blocks -%}
+	<div class="help-item-wrap">
+        <span>{{ forloop.index }}</span>
+        <div class="help-item">
+          <h4 class="help-title">
+            {{block.settings.help_title}}
+          </h4>
+          <p class="help-subtitle">
+            {{block.settings.help_content}}
+          </p>
+        </div>
+      </div>
+  {%- endfor -%}
+	</div>
+</div>
+{% schema %}
+  {
+    "name": "Help Text",
+    "settings": [{
+		"type": "text",
+		"id": "title",
+		"label": "Title"
+	}],
+  	"blocks": [
+      {
+        "type": "help",
+        "name": "Help",
+        "settings": [
+          {
+            "type": "text",
+            "id": "help_title",
+            "label": "Help Title"
+          },
+          {
+            "type": "text",
+            "id": "help_content",
+            "label": "Content"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

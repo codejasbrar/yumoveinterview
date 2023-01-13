@@ -1,0 +1,39 @@
+{%- assign _section = section.settings -%}
+{%- assign section_title = _section.title -%}
+{%- assign section_content = _section.content -%}
+{%- assign _image = _section.image -%}
+
+<section class="section section--location anamate">
+  <div class="shell">
+    <div class="banner banner--with-text">
+      <img src="{{ _image | img_url: '1320x' }}"/>
+      <div class="banner__text">
+        <h2>{{section_title}}</h2>
+		{{section_content}}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Location banner and text",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "html",
+      "id": "content",
+      "label": "Content"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Background Image"
+    }
+  ]
+}
+{% endschema %}

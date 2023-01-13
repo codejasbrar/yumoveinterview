@@ -1,0 +1,35 @@
+@font-face {
+  font-family: 'Foco';
+  src: url("{{ 'Foco-Regular.woff' | asset_url }}") format("woff"), url("{{ 'Foco-Regular.woff2' | asset_url }}") format("woff2");
+  font-style: normal;
+  font-weight: normal; }
+@font-face {
+  font-family: 'Foco';
+  src: url("{{ 'Foco-Bold.woff' | asset_url }}") format("woff"), url("{{ 'Foco-Bold.woff2' | asset_url }}") format("woff2");
+  font-style: normal;
+  font-weight: 700; }
+@font-face {
+  font-family: 'Verveine';
+  src: url("{{ 'Verveine.woff' | asset_url }}") format("woff"), url("{{ 'Verveine.woff2' | asset_url }}") format("woff2");
+  font-style: normal;
+  font-weight: normal; }
+@font-face {
+  font-family: 'Fontawesome';
+  src: url("{{ 'fontawesome-webfont.eot' | asset_url }}");
+  src: url("../fonts/fontawesome-webfont.eot?#iefix") format("embedded-opentype"), url("{{ 'fontawesome-webfont.woff' | asset_url }}") format("woff"), url("{{ 'fontawesome-webfont.ttf' | asset_url }}") format("truetype"), url("../images/fontawesome-webfont.svg#Fontawesome") format("svg");
+  font-style: normal;
+  font-weight: normal; }
+
+#container {
+  font-family: "Foco", Arial, Helvetica, sans-serif !important;
+}
+
+#container h3 {
+  color: #319b42;
+  font-weight: 700;
+}
+
+.submit-container button {
+  border-radius: 30px;
+  height: 60px;
+}

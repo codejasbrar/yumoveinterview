@@ -1,0 +1,57 @@
+<section id="yuderm-itching-ingredients" class="section-landing-ingredients section-landing-ingredients--yuderm-itching"> 
+  <div class="shell">
+    <div class="section-title">
+      {{ section.settings.main_title }}
+    </div>
+    <div class="ingredient-content">
+      <div class="section-image">
+      <img src="{{ 'yuderm-itching-ingredients-v2.jpg' | asset_img_url: '1000x' }}" class="ingredient-image">
+    </div>
+    <div class="section-content">
+      {% for block in section.blocks %}
+        <div class="content-block">
+          <div class="block-title">
+            <h4>{{ block.settings.heading }}</h4>
+          </div>
+          <div class="block-text">
+            <p>{{ block.settings.content }}</p>
+          </div>
+        </div>
+      {% endfor%}
+    </div>
+    </div>
+  </div><!-- /.shell -->
+</section>
+
+
+{% schema %}
+  {
+    "name": "YuDERM Ingredients 2",
+    "settings": [
+      {
+        "type": "text",
+        "id": "main_title",
+        "label": "Ingredient Title"
+      }
+    ],
+    "blocks": [
+    {
+      "type": "Ingredients",
+      "name": "Ingredients",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Ingredient Title"
+        },
+        {
+          "type": "text",
+          "id": "content",
+          "label": "Ingredient Content"
+        }
+      ]
+    }
+  ]
+  }
+{% endschema %}
+

@@ -1,0 +1,97 @@
+<div class="form__step form__step--confirm" id="confirm">
+	<div class="form__step-head">
+		<h2 class="form__step-title section__title">{{ _settings.confirm_title }}</h2><!-- /.section__title -->
+	</div><!-- /.form__step-head -->
+
+	<div class="form__step-body">
+    <div class="form__row">
+      <p>
+        {%- if _settings.confirm_text != '' -%}
+          {{ _settings.confirm_text }}
+        {%- else -%}
+          This is where the magic happens: we’ve taken all the information you gave us about <span class="dog-name"></span>, and we’ve designed this proven triple-action joint supplement plan just for them.
+        {%- endif -%}
+      </p>
+
+      <div class="form__step-results">
+        <div class="table table--results">
+          <table>
+            <tr class="name" data-field="name">
+              <td>Name:</td>
+
+              <td class="result"></td>
+
+              <td>
+                <a href="#details" class="link-edit">Edit</a>
+              </td>
+            </tr>
+
+            <tr class="breed" data-field="breed">
+              <td>Breed:</td>
+
+              <td class="result"></td>
+
+              <td>
+                <a href="#details" class="link-edit">Edit</a>
+              </td>
+            </tr>
+
+            <tr class="age" data-field="age">
+              <td>Age:</td>
+
+              <td class="result"></td>
+
+              <td>
+                <a href="#details" class="link-edit">Edit</a>
+              </td>
+            </tr>
+
+            <tr class="weight" data-field="weight">
+              <td>Weight:</td>
+
+              <td class="result"></td>
+
+              <td>
+                <a href="#weight" class="link-edit">Edit</a>
+              </td>
+            </tr>
+
+            <tr class="activity" data-field="activity">
+              <td>Activity:</td>
+
+              <td class="result"></td>
+
+              <td>
+                <a href="#activity" class="link-edit">Edit</a>
+              </td>
+            </tr>
+
+            <tr class="eating-plan" data-field="eating-plan">
+              <td>Eating style:</td>
+
+              <td class="result"></td>
+
+              <td>
+                <a href="#eating" class="link-edit">Edit</a>
+              </td>
+            </tr>
+
+            <tr class="new" data-field="new">
+              <td>New to YuMOVE:</td>
+
+              <td class="result"></td>
+
+              <td>
+                <a href="#new-to-yumove" class="link-edit">Edit</a>
+              </td>
+            </tr>
+          </table>
+        </div><!-- /.table -->
+      </div><!-- /.form__step-results -->
+    </div><!-- /.form__row -->
+  </div><!-- /.form__step-body -->
+
+	<div class="form__step-actions">
+		<a href="#recommendation" class="btn btn--small btn--green btn--next btn--confirm">Go</a>
+	</div><!-- /.form__step-actions -->
+</div><!-- /.form__step -->

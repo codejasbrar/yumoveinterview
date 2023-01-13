@@ -1,0 +1,14 @@
+<div class="article__aside-item">
+  <a href="{{- _article.url -}}">
+    <figure>
+      <span
+        role="img"
+        aria-label="{{- _article.image.alt -}}"
+        style="background-image: url('{{- _article.image | img_url: '200x' -}}');"
+      ></span>
+    </figure>
+
+    <div class="article-item__content--lg">{{- _article.excerpt_or_content | strip_html | truncate: 120 -}}</div>
+    <div class="article-item__content--sm">{{- _article.excerpt_or_content | strip_html | truncate: 40 -}}</div>
+  </a>
+</div><!-- /.article__aside-item -->

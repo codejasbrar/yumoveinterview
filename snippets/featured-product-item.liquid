@@ -1,0 +1,32 @@
+{%- if _product != empty -%}
+	<div class="product col col--1of3 text-center {% unless _product.available %}product--sold-out{% endunless %}">
+		{%- if _product.featured_image -%}
+			<div class="product__media">
+				<a href="{{ _product.url | within: collection }}" class="product__link">
+					<img src="{{ _product.featured_image | img_url: '500x' }}" alt="" loading="lazy">
+				</a>
+			</div><!-- /.product__media -->
+		{%- else -%}
+			<a href="{{ _product.url | within: collection }}">
+				{{ 'image' | placeholder_svg_tag }}
+			</a>
+		{%- endif -%}
+
+		<div class="product__content">
+			<h3 class="product__title">
+				<a href="{{ _product.url | within: collection }}">
+					{{- _product.title -}}
+				</a>
+			</h3><!-- /.product__title -->
+
+			<p class="product__info">
+				{{- _product.content | strip_html | truncate: 35 -}}
+			</p><!-- /.product__info -->
+
+
+				<div class="product__rate flex align-center justify-center">{% include 'trustbox-widget-product-mini-featured-products' %}</div><!-- /.product__rate flex align-center justify-center -->
+
+		</div>
+	</div><!-- /.product__item -->
+{%- endif -%}
+{%- assign _product = '' -%}

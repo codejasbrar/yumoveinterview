@@ -1,0 +1,43 @@
+<section id="brand-cta" class="section-landing-ingredients landing-sub-info"> 
+  <div class="shell">
+    <div class="section-title anamate">
+      {{ section.settings.main_title }}
+       <p class="section-sub-title">{{ section.settings.sub_title }}</p>
+    </div>
+    <div class="sub-info-btn anamate">
+        <a href="{{ section.settings.url}}" class="sub-intro-btn btn">
+            {{section.settings.label}} 
+        </a>
+    </div>       
+  </div><!-- /.shell -->
+</section>
+
+
+{% schema %}
+  {
+    "name": "CTA Button",
+    "settings": [
+      {
+        "type": "text",
+        "id": "main_title",
+        "label": "Info Title"
+      },
+      {
+        "type": "text",
+        "id": "sub_title",
+        "label": "Info Sub Title"
+      },
+      {
+        "type": "text",
+        "id": "label",
+        "label": "Button Label"
+      },
+      {
+        "type": "url",
+        "id": "url",
+        "label": "Button Link"
+      }
+    ]
+  }
+{% endschema %}
+

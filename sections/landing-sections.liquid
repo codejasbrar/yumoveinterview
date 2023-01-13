@@ -1,0 +1,204 @@
+{%- for block in section.blocks -%}
+  {%- assign _block = block.settings -%}
+
+	<section class="section section-about">
+	  {%- case block.type -%}
+	    {%- when 'columns' -%}
+	      {%- assign block_image = _block.image -%}
+	      {%- assign block_video_url = _block.video_url -%}
+	      {%- assign block_media_title = _block.media_title -%}
+	      {%- assign block_media_title_position = _block.media_title_position -%}
+	      {%- assign block_media_subtitle = _block.media_subtitle -%}
+	      {%- assign block_title = _block.title -%}
+	      {%- assign block_content = _block.content -%}
+	      {%- assign block_label = _block.label -%}
+	      {%- assign block_url = _block.url -%}
+	      {%- assign block_add_video_popup = _block.add_video_popup -%}
+	      {%- assign block_add_play_icon = _block.add_play_icon -%}
+	      {%- assign block_reverse = _block.reverse -%}
+
+	    	<div class="shell">
+	    		<div class="cols {% if block_reverse %} flex-reverse flex-column-reverse-xs{% else %} flex-column-xs{% endif %}">
+	    			{%- if block_title != blank or block_content != blank -%}
+	    				<div class="col col--1of2 flex">
+	    					<div class="section__content flex align-center">
+	    						<div class="section__content-inner">
+	    							{%- if block_title != blank -%}
+	    								<h2 class="section__title">{{block_title}}</h2><!-- /.section__title -->
+	    							{%- endif -%}
+
+	    							{{block_content}}
+
+	    							{% comment %}{%- if block_url != blank and block_label != blank -%}
+	    								<a href="{{block_url}}" class="btn btn--green{% if block_add_play_icon %} btn--icon{% endif %}{% if block_add_video_popup %} btn--play{% endif %}">
+	    									{{block_label}}
+
+	    									{%- if block_add_play_icon -%}
+	    										<svg xmlns="http://www.w3.org/2000/svg" width="14" height="16.001" viewBox="0 0 14 16.001">
+	    										  <path id="Path_314" data-name="Path 314" d="M13.262-7.291l-11-6.5A1.492,1.492,0,0,0,0-12.5V.5A1.5,1.5,0,0,0,2.263,1.791l11-6.5A1.5,1.5,0,0,0,13.262-7.291Z" transform="translate(0 13.999)" fill="#fff"/>
+	    										</svg>
+	    									{%- endif -%}
+	    								</a>
+	    							{%- endif -%}{% endcomment %}
+	    						</div><!-- /.section__content-inner -->
+	    					</div><!-- /.section__content -->
+	    				</div><!-- /.col col-/-1of2 -->
+	    			{%- endif -%}
+
+	    			{%- if block_image != blank or block_video_url != blank -%}
+	    				<div class="col col--1of2 flex">
+	    					<div class="section__media"{% if block_image != blank and block_video_url == blank %} style="background-image: url({{ block_image | img_url: '1000x' }});"{% endif %}>
+	    						{% comment %}Option to add video{% endcomment %}
+	    						{%- if block_video_url != blank -%}
+	    							<video playsinline autoplay muted loop>
+	    							  <source src="{{block_video_url}}" type="video/mp4">
+	    							</video>
+	    						{%- endif -%}
+
+	    						{%- if block_media_title != blank -%}
+	    							<h1 class="{{block_media_title_position}}{% if block_media_subtitle != blank %} extra-space{% endif %}">
+	    								{{block_media_title | newline_to_br | remove: '<p>' | remove: '</p>'}}
+	    							</h1>
+	    						{%- endif -%}
+
+	    						{%- if block_media_subtitle != blank -%}
+	    							<p class="text-right">{{ block_media_subtitle }}</p>
+	    						{%- endif -%}
+	    					</div><!-- /.section__media -->
+	    				</div><!-- /.col col-/-1of2 -->
+	    			{%- endif -%}
+	    		</div><!-- /.cols -->
+	    	</div><!-- /.shell -->
+
+	    {%- when 'row' -%}
+	      {%- assign block_title = _block.title -%}
+	      {%- assign block_content = _block.content -%}
+
+	      <div class="shell">
+	      	<div class="section__body flex justify-center text-center">
+	      		<div class="section__inner">
+	      			{%- if block_title != blank -%}
+	      				<h2 class="section__title">{{block_title}}</h2><!-- /.section__title -->
+	      			{%- endif -%}
+
+	      			{{block_content}}
+	      		</div><!-- /.section__inner -->
+	      	</div><!-- /.section__body -->
+	      </div><!-- /.shell -->
+
+	    {%- when 'image' -%}
+	      {%- assign block_image = _block.image -%}
+	      {%- assign block_mobile_image = _block.mobile_image -%}
+
+	      <div class="section__media section__media--secondary">
+	      	{%- if block_image != blank -%}
+	      		<img src="{{ block_image | img_url: '1600x' }}" alt="{{block_image.alt}}" {% if block_mobile_image != blank %} class="hidden-xs"{% endif %}>
+	      	{%- endif -%}
+
+	      	{%- if block_mobile_image != blank -%}
+	      		<img src="{{ block_mobile_image | img_url: '1000x' }}" alt="{{block_image.alt}}" class="hidden-lg hidden-md hidden-sm ">
+	      	{%- endif -%}
+	      </div><!-- /.section__media -->
+	  {%- endcase -%}
+  </section><!-- /.section section-about -->
+{%- endfor -%}
+
+{% schema %}
+{
+	"name": "Image and Content",
+	"blocks": [
+		{
+			"type": "columns",
+			"name": "Image & Content",
+			"settings": [
+				{
+					"type": "header",
+					"content": "Media"
+				},
+				{
+				  "type": "image_picker",
+				  "id": "image",
+				  "label": "Image"
+				},
+				{
+					"type": "url",
+					"id": "video_url",
+					"label": "Video URL"
+				},
+				{
+				  "type": "richtext",
+				  "id": "media_title",
+				  "label": "Overlay Title"
+				},
+				{
+					"type": "radio",
+					"id": "media_title_position",
+					"label": "Title Position",
+					"options": [
+						{ "value": "top", "label": "Top" },
+						{ "value": "bottom", "label": "Bottom" }
+					],
+					"default": "bottom"
+				},
+				{
+					"type": "text",
+					"id": "media_subtitle",
+					"label": "Oberlay Subtitle"
+				},
+				{
+					"type": "header",
+					"content": "Content"
+				},
+				{
+				  "type": "text",
+				  "id": "title",
+				  "label": "Title"
+				},
+				{
+				  "type": "richtext",
+				  "id": "content",
+				  "label": "Content"
+				},
+				{
+					"type": "checkbox",
+					"id": "reverse",
+					"label": "Reverse content and image",
+					"default": false
+				}
+			]
+		},
+		{
+			"type": "row",
+			"name": "Content",
+			"settings": [
+				{
+				  "type": "text",
+				  "id": "title",
+				  "label": "Title"
+				},
+				{
+				  "type": "richtext",
+				  "id": "content",
+				  "label": "Content"
+				}
+			]
+		},
+		{
+			"type": "image",
+			"name": "Fullwidth Image",
+			"settings": [
+				{
+				  "type": "image_picker",
+				  "id": "image",
+				  "label": "Image"
+				},
+				{
+				  "type": "image_picker",
+				  "id": "mobile_image",
+				  "label": "Mobile Image"
+				}
+			]
+		}
+	]
+}
+{% endschema %}

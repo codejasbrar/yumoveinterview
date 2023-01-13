@@ -1,0 +1,112 @@
+<div class="blog">
+	{%- if blog.articles.size > 0 -%}
+		<header class="blog__head">
+          {% assign first_article_tag = 'Featured' %}
+          {% if current_tags != blank %}
+            {% assign current_filtered_tag = current_tags | first %}
+
+          	{% assign first_article_tag = current_filtered_tag %}
+          {% endif %}
+          <div class="shell">
+            {%- assign article_timestamps = '' -%}
+
+            {%- capture article_timestamps -%}
+              {%- for article in blog.articles -%}
+                {%- for tag in article.tags -%}
+                  {%- if tag == first_article_tag -%}
+                  ||{{- article.handle -}}|@@|{{- article.created_at | date: '%s' -}}
+                  {%- endif -%}
+                {%- endfor -%}
+              {%- endfor -%}
+            {%- endcapture -%}
+            
+            {%- assign article_timestamps_arr = article_timestamps | remove_first: '||' | split: '||' -%}
+            {%- assign newest_article = '' -%}
+            {%- assign newest_timestamp = 0 -%}
+
+            {%- for item in article_timestamps_arr -%}
+            {%- assign timestamp = item | split: '|@@|' | last | plus: 0 -%}
+            {%- assign handle = item | split: '|@@|' | first -%}
+
+            {%- if timestamp >= newest_timestamp -%}
+            {%- assign newest_article = articles[handle] -%}
+            {%- endif -%}
+
+            {%- assign newest_timestamp = timestamp | plus: 0 -%}
+            {%- endfor -%}
+
+            {%- if newest_article != '' and newest_article.image != blank -%}
+            <div class="blog__head-image" style="background-image: url({{- newest_article.image | img_url: '2800x' -}});" role="img" aria-label="{{- newest_article.image.alt | escape -}}"></div><!-- /.blog__head-image -->
+            {%- endif -%}
+
+            <div class="blog__head-content">
+              <h1>{{- newest_article.title -}}</h1>
+
+              {%- if newest_article.excerpt != blank -%}
+              {{- newest_article.excerpt | truncatewords: 16 -}}
+              {%- endif -%}
+
+              <div class="blog__head-actions">
+                <a href="{{- newest_article.url -}}" class="btn btn--green">{{- 'blogs.article.read_more' | t -}}</a>
+              </div><!-- /.blog__head-actions -->
+            </div><!-- /.blog__head-content -->
+          </div><!-- /.shell -->
+		</header><!-- /.blog__head -->
+
+		<div class="blog__body">
+			<div class="shell blog__shell">
+				<header class="blog__body-head">
+					<h2>{{- blog.title -}}</h2>
+
+					<div class="select blog__filter js-sticky">
+						{%- assign filter_tag = blog.tags | first | handle -%}
+						<select class="js-filter-select">
+							<option value="{{- blog.url -}}">{{- 'blogs.blog_all_category' | t -}}</option>
+
+							{%- for tag in blog.all_tags -%}
+								{%- assign tag_handle = tag | handle -%}
+                          		{% assign current_tag = current_tags | handle %}
+                                  {% if tag_handle contains 'filter-' %}
+								    <option value="{{- blog.url -}}/tagged/{{- tag_handle -}}"{% if tag_handle == current_tag %} selected="selected"{% endif %}>{{- tag | remove: 'filter-' -}}</option>
+                                  {% endif %}	
+                          {%- endfor -%}
+						</select>
+					</div><!-- /.select blog__filter -->
+				</header><!-- /.blog__body-head -->
+
+				{%- paginate blog.articles by 9 -%}
+					<div class="articles-items js-sticky-offset blog__articles">
+						{%- for article in blog.articles -%}
+							<div class="article-item blog__article">
+								<div class="article__inner">
+									{%- if article.image != blank -%}
+										<a href="{{- article.url -}}" class="article__image" style="background-image: url({{- article.image | img_url: '400x' -}});" role="img" aria-label="{{- article.image.alt | escape -}}"></a><!-- /.article__image -->
+									{%- endif -%}
+
+									<div class="article__body">
+										<h3>
+											<a href="{{- article.url -}}">{{- article.title -}}</a>
+										</h3>
+
+										{%- if article.excerpt != blank -%}
+											{{- article.excerpt | truncatewords: 8 | append: '</p>' -}}
+										{%- endif -%}
+
+										<a href="{{- article.url -}}" class="btn btn--green article__btn">{{- 'blogs.article.read_more' | t -}}</a>
+									</div><!-- /.article__body -->
+								</div><!-- /.article__inner -->
+							</div><!-- /.article-item blog__article -->
+						{%- endfor -%}
+					</div><!-- /.articles-items blog__articles -->
+					{%- include 'pagination' class: 'paging-blog paging paging--default' -%}
+				{%- endpaginate -%}
+			</div><!-- /.shell blog__shell -->
+		</div><!-- /.blog__body -->
+	{%- else -%}
+		<div class="blog__head">
+			<div class="shell">
+				<h1 class="page-title">{{- 'blogs.blog_empty' | t -}}</h1>
+			</div><!-- /.shell -->
+		</div><!-- /.blog__head -->
+	{%- endif -%}
+</div><!-- /.blog -->

@@ -1,0 +1,53 @@
+<section class="section section--gray">
+  <div class="shell">
+    <div class="section__body">
+      <div class="section__head text-center">
+        <h2 class="section__title">{{section.settings.title}}</h2><!-- /.section__title -->
+      </div>
+      <div class="articles-items blog__articles">
+        {%- for block in section.blocks -%}
+        {% assign article = articles[block.settings.article] %}
+        
+        <div class="article-item blog__article">
+          <div class="article__inner">
+            <a href="/blogs/{{article.handle}}" class="article__image" style="background-image: url({{article.image.src | img_url: '500x500'}});" role="img" aria-label="{{article.title}}"></a><!-- /.article__image -->
+            <div class="article__body">
+              <h3>
+                <a href="/blogs/{{article.handle}}">{{article.title}}</a>
+              </h3>
+              <a href="/blogs/{{article.handle}}" class="btn btn--green article__btn">Read more</a>
+            </div><!-- /.article__body -->
+          </div><!-- /.article__inner -->
+        </div><!-- /.article-item blog__article -->
+        {%- endfor -%}
+      </div>
+	</div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Blogs",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    }
+  ],
+  "max_blocks": 3,
+  "blocks": [
+    {
+      "type": "blog",
+      "name": "Blog",
+      "settings": [
+        {
+          "type": "article",
+          "id": "article",
+          "label": "Article"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

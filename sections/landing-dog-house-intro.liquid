@@ -1,0 +1,86 @@
+{%- assign section_image = section.settings.image -%}
+{%- assign section_mobile_image = section.settings.mobile_image -%}
+
+<div class="dog-intro">
+  <div class="shell">
+    <div class="content">
+      <div class="overlay">
+        <p class="introducing">
+          Introducing...
+        </p>
+        <p>
+          The World's<br>
+          <i>best</i><br>
+          Dog House
+        </p>
+      </div>
+    </div>	
+  </div>
+</div>
+<style>
+  
+.dog-intro {
+    min-height: calc(100vh - 150px);
+    width: 100%;
+    display: flex;
+    background-size: cover;
+}
+.dog-intro .shell{  	
+    width: 100%;
+}
+.dog-intro .content {
+	position: relative;
+}
+.dog-intro .content .overlay{
+	
+    width: 400px;
+    padding: 70px 50px;
+    background: rgba(79, 87, 79, 0.8);
+    color: white;
+    font-size: 30px;
+}
+#shopify-section-landing-dog-about .section__media{
+	
+    max-width: 400px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin: 0 auto;
+}
+#shopify-section-landing-dog-about .section__content{
+	background-color: transparent;
+  	border-radius: 0;
+  	padding: 0;
+}
+{%- if section_image != blank -%}
+	.dog-intro {
+    	background-image: url({{ section_image | img_url: '1600x' }});
+    }
+{%- endif -%}
+@media (max-width: 768px) {
+    {%- if section_mobile_image != blank -%}
+        .dog-intro {
+            background-image: url({{ section_mobile_image | img_url: '800x' }});
+        }
+	{%- endif -%}
+}
+</style>
+{% schema %}
+  {
+    "name": "Hero",
+    "settings": [{
+        "type": "header",
+        "content": "Media"
+      },
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Background Image"
+      },
+      {
+        "type": "image_picker",
+        "id": "mobile_image",
+        "label": "Background Image (Mobile)"
+      }
+	]
+  }
+{% endschema %}

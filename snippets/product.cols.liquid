@@ -1,0 +1,37 @@
+<section class="section section-product section-product--content">
+  <div class="shell">
+    <div class="product product--single">
+      <div class="product__entry">
+        {%- if _content_parts_size == 1 -%}
+          <div class="cols">
+            <div class="col">
+              {{_content_parts[0]}}
+            </div><!-- /.col -->
+          </div><!-- /.cols -->
+        {%- else -%}
+          <div class="cols justify-between">
+            {%- for i in (1..2) -%}
+              <div class="col col--size{{forloop.index()}}">
+                {{_content_parts[i]}}
+              </div><!-- /.col -->
+            {%- endfor -%}
+          </div><!-- /.cols -->
+        {%- endif -%}
+      </div><!-- /.product__entry -->
+    </div><!-- /.product -->
+  </div><!-- /.shell -->
+</section><!-- /.section section-product -->
+
+{%- if _content_parts[3] != blank -%}
+  <div class="hidden">
+    <div class="popup popup-ingredients" id="full-list">
+      <a href="#" class="popup-close">
+        <i class="ico-circle ico-close"></i>
+      </a>
+
+      <div class="popup__content">
+        {{_content_parts[3]}}
+      </div><!-- /.popup__content -->
+    </div><!-- /.popup popup-ingredients -->
+  </div><!-- /.hidden -->
+{%- endif -%}

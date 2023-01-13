@@ -1,0 +1,83 @@
+{%- assign _section = section.settings -%}
+{%- assign section_title = _section.title -%}
+{%- assign section_footer_title = _section.footer_title -%}
+{%- assign section_label_1 = _section.label_1 -%}
+{%- assign section_url_1 = _section.url_1 -%}
+{%- assign section_label_2 = _section.label_2 -%}
+{%- assign section_url_2 = _section.url_2 -%}
+
+<section class="section section-instagram">
+  <div class="shell">
+    {%- if section_title != blank -%}
+      <header class="section__head">
+        <h2 class="section__title">{{section_title}}</h2><!-- /.section__title -->
+      </header><!-- /.section__head -->
+    {%- endif -%}
+
+    <div class="section__body">
+      <div id="insta-feed"></div>
+    </div><!-- /.section__body -->
+
+    <footer class="section__foot">
+      {%- if section_footer_title != blank -%}
+        <h3>{{section_footer_title}}</h3>
+      {%- endif -%}
+
+      {%- if section_label_1 != blank and section_url_1 != blank -%}
+        <a href="{{section_url_1}}" class="btn btn--green">{{section_label_1}}</a>
+      {%- endif -%}
+
+      {%- if section_label_2 != blank and section_url_2 != blank -%}
+        <a href="{{section_url_2}}" class="btn btn--lightgreen">{{section_label_2}}</a>
+      {%- endif -%}
+    </footer><!-- /.section__foot -->
+  </div><!-- /.shell -->
+</section><!-- /.section section-instagram -->
+
+{% schema %}
+{
+  "name": "Instagram",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "header",
+      "content": "Bottom"
+    },
+    {
+      "type": "text",
+      "id": "footer_title",
+      "label": "Title"
+    },
+    {
+      "type": "text",
+      "id": "label_1",
+      "label": "Button Label 1"
+    },
+    {
+      "type": "url",
+      "id": "url_1",
+      "label": "Button Link 1"
+    },
+    {
+      "type": "text",
+      "id": "label_2",
+      "label": "Button Label 2"
+    },
+    {
+      "type": "url",
+      "id": "url_2",
+      "label": "Button Link 2"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Instagram",
+      "category": "Homepage"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,79 @@
+{%- if collection.image -%}
+	{%- capture _image -%}
+		style="background-image: url({{ collection.image | img_url: '2048x' }})"
+	{%- endcapture -%}
+
+	{%- assign image_class = 'collection__head--image' -%}
+{%- endif -%}
+
+{%- assign _collection = collection -%}
+{% comment %}
+{%- if current_tags == null -%}
+	{%- assign _collection = collections['_c-dog'] -%}
+{%- endif -%}{% endcomment %}
+
+<section class="section section-collection section--gray">
+	<div class="shell">
+		<div class="flex align-start">
+			<header class="section__head hidden-lg hidden-md hidden-sm">
+			  <h1 class="section__title collection-title">{{- collection.title -}}</h1><!-- /.section__title -->
+
+			  {{- collection.description -}}
+			</header><!-- /.section__head -->
+
+			{%- if settings.pt_temporary_disable == false -%}
+				<aside class="section__aside sticky-js{% if settings.pt_float_filters == true %} section__aside--fullwidth{% endif %}">
+					<div class="section__aside-inner">
+                      <div class="hidden-lg hidden-md hidden-sm">
+                        {% section 'collection-nav' %}
+                      </div>
+
+						{% include 'filter-menu' %}
+
+						<a href="#" class="btn btn--green btn--apply hidden-lg hidden-md hidden-sm">{{ 'collections.general.apply' | t }}</a>
+					</div><!-- /.section__aside-inner -->
+				</aside><!-- /.section__aside -->
+			{%- endif -%}
+
+			<div class="section__content text-center">
+				<header class="section__head hidden-xs">
+				  <h1 class="section__title collection-title">{{- collection.title -}}</h1><!-- /.section__title -->
+
+				  {{- collection.description -}}
+                  <div class="hidden-xs">
+                    {% section 'collection-nav' %}
+                  </div>                    
+				</header><!-- /.section__head -->
+
+				<div class="section__body">
+                  	{% section 'collection-banner' %}
+					{%- paginate _collection.products by settings.items_per_page -%}
+						{% comment %}{%- include 'collection-sorting'  -%}{% endcomment %}
+
+						<div class="collection__items products cols">
+							{%- for _product in _collection.products -%}
+                          		{% unless _product.price == 0 %}
+								<div class="col col--1of3">
+									{%- include 'product-item' with _product -%}
+								</div><!-- /.col col-/-1of3 -->
+                          		{% endunless %}
+							{%- else -%}
+								<div class="product__item product__item--no-items">
+									<p>
+										<em>
+											{{- 'collections.general.no_matches' | t -}}
+										</em>
+									</p>
+								</div><!-- /.product__item -->
+							{%- endfor -%}
+						</div><!-- /.collection__items -->
+
+						{%- include 'pagination', class: 'paging', _size: settings.items_per_page, label: true, _items: _collection.products, all_items: _collection.all_products_count -%}
+					{%- endpaginate -%}
+				</div><!-- /.section__body -->
+			</div><!-- /.section__content -->
+		</div><!-- /.flex -->
+	</div><!-- /.shell -->
+</section><!-- /.section section-collection -->
+
+{%- section 'section-about' -%}

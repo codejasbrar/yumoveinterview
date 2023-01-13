@@ -1,0 +1,36 @@
+{%- assign _article = article-item -%}
+
+<article class="article-item--default">
+	{%- if _article.image -%}
+		<a href="{{- _article.url -}}" class="article-item__image" style="background-image: url({{- _article.image | img_url: '2048x'  -}})"></a>
+	{%- endif -%}
+
+	<div class="article-item__content">
+		<header class="article-item__head">
+			<h3 class="article-item__title">
+				<a href="{{- _article.url -}}">
+					{{- _article.title -}}
+				</a>
+			</h3><!-- /.article-item__title -->
+
+			<div class="article-item__meta">
+				{%- assign date_format = 'date_formats.short' | t -%}
+				{%- assign published_at = _article.published_at | date: date_format -%}
+
+				{{- 'blogs._article.posted_on_date' | t: date: published_at -}}
+			</div><!-- /.article_-meta -->
+		</header><!-- /.article-item__head -->
+
+		<div class="article-item__body">
+			<p>{{- _article.excerpt_or_content | strip_html | truncatewords: 35 -}}</p>
+		</div><!-- /.article-item__body -->
+
+		<div class="article-item__foot">
+			<a href="{{ _article.url }}" class="btn btn--inverse btn--more">
+				{{- 'blogs.article.read_more' | t -}}
+			</a>
+		</div><!-- /.article-item__foot -->
+	</div><!-- /.article-item__content -->
+</article><!-- /.article -->
+
+{%- assign _article = '' -%}

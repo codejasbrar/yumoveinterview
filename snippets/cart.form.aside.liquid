@@ -1,0 +1,32 @@
+<div class="form__aside{% if template.name == cart %} sticky-js{% endif %}">
+	<h4 class="form__aside-title">{{- 'cart.general.order_summary' | t -}}</h4>
+
+	<h4 class="flex align-center justify-between form__aside-total">
+		{{- 'cart.general.total' | t -}}
+
+		<span class="price">{{- cart.total_price | money -}}</span>
+	</h4>
+
+	<p>{{- 'cart.general.shipping_at_checkout' | t -}}</p>
+
+	<button type="submit" name="checkout" class="form__btn btn btn--checkout">
+		{{- 'cart.general.checkout' | t -}}
+	</button>
+
+	<div class="form__aside-payments hidden-cart hidden-xs hidden-sm">
+		<p>{{- 'cart.general.cards_hint' | t -}}</p>
+
+		{%- include 'cards-icons', class: 'flex align-center justify-center' -%}
+	</div><!-- /.form__aside-payments -->
+    {% include 'trustbox-widget-mini' %} 
+</div><!-- /.form__aside -->
+<style>
+  .cart-expanded .form__aside .trustpilot-widget {
+  	display: none;
+  }
+@media screen and (max-width: 1023px) {
+  .trustpilot-widget {
+  	margin-top: 20px;
+  }
+}
+</style>

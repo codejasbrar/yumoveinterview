@@ -1,0 +1,204 @@
+{%- assign _section = section.settings -%}
+{%- assign section_product = _section.product -%}
+{%- assign section_product_2 = _section.product_2 -%}
+{%- assign _product = all_products[section_product] -%}
+{%- assign _product_2 = all_products[section_product_2] -%}
+
+<div id="yuderm-range" class="section-landing-subscription section-landing-subscription--yuderm">
+    <div class="shell">
+       <div class="section-body">
+         <div class="sl-product">
+              <div class="sl-product-image">
+                <a href="{{ _product_2.url | within: collection }}" class="product__link">
+					<img src="{{ section.settings.product_image_2 | img_url: '800x' }}" alt="">
+				</a>
+              </div> 
+              <div class="sl-product-form">
+                 <div class="sl-product-info">
+                    <h1 class="sl-product-title sl-title">{{ _product_2.title }}</h1>
+                    <p class="sl-product-pretext">{{ section.settings.description_2 }}</p>
+        
+                    <div class="sl-trustbox">
+                      <!-- TrustBox widget - Product Mini --> 
+                      <div class="trustpilot-widget" data-locale="en-GB" data-template-id="54d39695764ea907c0f34825" data-businessunit-id="5e4e87b71f96930001914d27" data-style-height="24px" data-style-width="100%" data-theme="light" data-sku="{% for variant in _product_2.variants  %}{{ variant.sku }},{% endfor %}"> 
+                        <a href="https://uk.trustpilot.com/review/lintbells.com" target="_blank" rel="noopener">Trustpilot</a> 
+                      </div> <!-- End TrustBox widget -->
+          		    </div><!-- /.product__rate flex align-center justify-center -->
+                   
+                 </div> <!-- sl-product-title -->
+                 <div class="sl-product-links">
+                     <div class="sl-link">
+                        <h5 class="sl-link-title sl-title">Get 30% off YuDERM Itching Dog</h5>
+                       <p class="sl-link-price"><span class="for-price">From</span>&nbsp;<span class="striked">£22.25</span>&nbsp;<span class="sale-price">£15.58</span></p>
+                        <p class="sl-link-discount-code">Using discount code: <br/><span class="discount-code">YUDERM30*</span></p>
+                        <p class="sl-link-text">* Offer only available on one 250ml YuDERM Itching Dog bottle and one 250ml YuDERM Moulting Dog bottle per customer</p>
+                       
+                       	<form method="post" action="/cart/add">
+                          <input name="id" value="30288817946679" type="hidden" />
+                          <input class="sl-link-btn btn--orange btn" name="add" value="{{ section.settings.buy_button_2 }}" type="submit" />
+                       </form>  
+                     </div><!-- sl-link -->
+                 </div><!-- sl-product-links -->
+              </div><!-- sl-product-form -->
+         </div><!-- sl-product -->
+         <hr class="sl-border">
+         <div class="sl-product">
+              <div class="sl-product-image">
+                <a href="{{ _product.url | within: collection }}" class="product__link">
+					<img src="{{ section.settings.product_image | img_url: '800x' }}" alt="">
+				</a>
+              </div> 
+              <div class="sl-product-form">
+                 <div class="sl-product-info">
+                    <h1 class="sl-product-title sl-title">{{ _product.title }}</h1>
+                    <p class="sl-product-pretext">{{ section.settings.description }}</p>
+        
+                    <div class="sl-trustbox">
+                      <!-- TrustBox widget - Product Mini --> 
+                      <div class="trustpilot-widget" data-locale="en-GB" data-template-id="54d39695764ea907c0f34825" data-businessunit-id="5e4e87b71f96930001914d27" data-style-height="24px" data-style-width="100%" data-theme="light" data-sku="{% for variant in _product.variants  %}{{ variant.sku }},{% endfor %}"> 
+                        <a href="https://uk.trustpilot.com/review/lintbells.com" target="_blank" rel="noopener">Trustpilot</a> 
+                      </div> <!-- End TrustBox widget -->
+          		    </div><!-- /.product__rate flex align-center justify-center -->
+                   
+                 </div> <!-- sl-product-title -->
+                 <div class="sl-product-links">
+                     <div class="sl-link">
+                        <h5 class="sl-link-title sl-title">Get 30% off YuDERM Moulting Dog</h5>
+                       <p class="sl-link-price"><span class="for-price">From</span>&nbsp;<span class="striked">£15.95</span>&nbsp;<span class="sale-price">£11.17</span></p>
+                        <p class="sl-link-discount-code">Using discount code: <br/><span class="discount-code">YUDERM30*</span></p>
+                        <p class="sl-link-text">* Offer only available on one 250ml YuDERM Itching Dog bottle and one 250ml YuDERM Moulting Dog bottle per customer</p>
+                       
+                       	<form method="post" action="/cart/add">
+                          <input name="id" value="30288818864183" type="hidden" />
+                          <input class="sl-link-btn btn--orange btn" name="add" value="{{ section.settings.buy_button }}" type="submit" />
+                       </form>  
+                                    
+                     </div><!-- sl-link -->
+                 </div><!-- sl-product-links -->
+              </div><!-- sl-product-form -->
+         </div><!-- sl-product -->
+         
+         
+         <hr class="sl-border">
+         
+          <div class="sl-info">
+             <h2 class="sl-info-title sl-title">{{ section.settings.info_title}}</h2>
+             <p class="sl-info-pretext">{{ section.settings.info_text }}</p>
+             <div class="sl-info-items">
+                 <div class="sl-item">
+                     <img src="{{ section.settings.icon_1 | img_url: '500x' }}" alt="" class="sl-icon">
+                     <p class="sl-item-text">{{ section.settings.icon_text_1 }}</p>
+                 </div><!-- sl-item -->
+                 <div class="sl-item">
+                     <img src="{{ section.settings.icon_2 | img_url: '500x' }}" alt="" class="sl-icon">
+                     <p class="sl-item-text">{{ section.settings.icon_text_2 }}</p>
+                 </div><!-- sl-item -->
+                 <div class="sl-item">
+                     <img src="{{ section.settings.icon_3 | img_url: '500x' }}" alt="" class="sl-icon">
+                     <p class="sl-item-text">{{ section.settings.icon_text_3 }}</p>
+                 </div><!-- sl-item -->
+             </div><!--sl-info-items-->
+          </div><!-- sl-info -->
+       </div><!-- section-body -->
+    </div>
+</div><!-- section-landing-subscription -->
+
+
+
+{% schema %}
+{
+  "name": "Landing Subscription",
+  "settings": [
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Product"
+    },
+    {
+      "type": "image_picker",
+      "id": "product_image",
+      "label": "Product Image"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Product Subtext"
+    },
+	{
+      "type": "text",
+      "id": "buy_button",
+      "label": "Buy Button"
+    },
+    {
+      "type": "url",
+      "id": "buy_link",
+      "label": "Button Link"
+    },
+    {
+      "type": "product",
+      "id": "product_2",
+      "label": "Product 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "product_image_2",
+      "label": "Product Image 2"
+    },
+    {
+      "type": "richtext",
+      "id": "description_2",
+      "label": "Product Subtext 2"
+    },
+	{
+      "type": "text",
+      "id": "buy_button_2",
+      "label": "Buy Button 2"
+    },
+    {
+      "type": "url",
+      "id": "buy_link_2",
+      "label": "Button Link 2"
+    },
+    {
+      "type": "text",
+      "id": "info_title",
+      "label": "Information Title"
+    },
+    {
+      "type": "text",
+      "id": "info_text",
+      "label": "Information Text"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_1",
+      "label": "Icon 1"
+    },
+    {
+      "type": "text",
+      "id": "icon_text_1",
+      "label": "Icon 1 Text"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_2",
+      "label": "Icon 2"
+    },
+    {
+      "type": "text",
+      "id": "icon_text_2",
+      "label": "Icon 2 Text"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_3",
+      "label": "Icon 3"
+    },
+    {
+      "type": "text",
+      "id": "icon_text_3",
+      "label": "Icon 3 Text"
+    }
+  ]
+}
+{% endschema %}

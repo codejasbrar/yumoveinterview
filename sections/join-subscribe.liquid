@@ -1,0 +1,1210 @@
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<style>
+  .ui-dialog .ui-dialog-titlebar-close {
+      outline: 0;
+      border: 0;
+      background: white;
+      border-radius: 100%;
+      margin-top: 0px;
+      cursor: pointer;
+      z-index: 9;
+  }
+  .ui-dialog .ui-dialog-titlebar {
+      background: transparent;
+      border: 0;
+  }
+  .ui-dialog.ui-widget.ui-widget-content {
+    border: none;
+    background: #319b42;
+    border: solid white 2px;
+    border-radius: 10px;
+    width: 90%!important;
+    max-width: 400px;
+  }
+  .ui-dialog.ui-widget.ui-widget-content.error {
+    background: #e14504;
+  }
+  .ui-dialog .ui-dialog-content {
+      color: #fff;
+      display: flex;
+      align-items: center;
+  }
+  .ui-dialog .ui-dialog-content p {
+      font-size: 18px;
+  }
+  .ui-dialog .ui-dialog-title {
+      display: none;
+  }
+  .bg-overlay {
+      position: fixed;
+      width: 100vw;
+      height: 100vh;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: black;
+      opacity: 0.2;
+      z-index: 1;
+  }
+</style>
+{{ 'klaviyo-subscribe.scss.css' | asset_url | stylesheet_tag }}
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<div class="section padding" style="background-color: rgba(209, 208, 206, 0.4);">
+  <div class="shell contact_container">
+      <div class="page--default">
+        <div class="section__head">
+        </div><!-- /.section__head -->
+        <div class="page__content">
+          <div class="max__rte">
+            {{- page.content -}}
+          </div><!-- /.max__rte -->
+        </div><!-- /.page__content -->          
+        <div class="subscribe-container">
+          <h2 class="text-center section__title margin_bottom margin_top">First, let’s get your information.</h2>
+      
+          <div class="form__cols">
+            <div class="form__col">
+              <div class="form__row">
+                <div class="form__controls">
+                    <input type="text" class="field js-required js-get-data" name="first" placeholder="First name*">
+                </div><!-- /.form__controls -->
+              </div><!-- /.form__row -->
+			</div>
+            <div class="form__col">
+              <div class="form__row">
+                <div class="form__controls">
+                    <input type="text" class="field js-required js-get-data" name="last" placeholder="Last name">
+                </div><!-- /.form__controls -->
+              </div><!-- /.form__row -->
+			</div>
+            <div class="form__row" style="width: 100%">
+              <div class="form__controls">
+                  <input type="email" class="field js-required js-get-data" name="email" placeholder="Enter your email address*">
+              </div><!-- /.form__controls -->
+            </div><!-- /.form__row -->
+            <div class="form__col">
+              <div class="form__row">
+                <div class="form__controls">
+                    <input type="text" class="field js-required js-get-data" name="code" placeholder="Postal code">
+                </div><!-- /.form__controls -->
+              </div><!-- /.form__row -->
+			</div>
+            <div class="form__col">
+              <div class="form__row">
+                <div class="form__controls">
+                  <select class="field js-required js-get-data" name="age">
+                    <option value="">Age</option>
+                    <option value="18-24">18-24</option>
+                    <option value="25-34">25-34</option>
+                    <option value="35-44">35-44</option>
+                    <option value="45-54">45-54</option>
+                    <option value="55-64">55-64</option>
+                    <option value="65+">65+</option>
+                  </select>
+                </div><!-- /.form__controls -->
+              </div><!-- /.form__row -->
+			</div>
+          </div>
+          
+          
+          <h2 class="text-center section__title margin_bottom">Tell us about your pets.</h2>
+          
+          <div class="text-center">
+            <div class="nav-tags">
+              <input type="radio" name="category" value="dog" checked />
+              <label class="custom_radio">Dog</label>
+
+              <input type="radio" name="category" value="cat" />
+              <label class="custom_radio">Cat</label>
+
+              <input type="radio" name="category" value="horse" />
+              <label class="custom_radio">Horse</label>
+
+              <input type="radio" name="category" value="human" />
+              <label class="custom_radio">Human</label>
+            </div>
+            <button class="btn add-pet-btn btn--green btn--small">Add</button>
+          </div>
+          
+          <div class="pets-list"></div>
+          <div class="text-center">
+          	<div class="btn btn--green btn--medium sign-up">Sign Up</div>
+          </div>
+          
+          <p class="privacy-notice">We use email and targeted online advertising to send you product and services updates, promotional offers and other marketing communications based on the information we collect about you, such as your email address, general location, and purchase and website browsing history. <br> We will treat your data with respect and you can find details in our <a href="https://yumove.co.uk/pages/privacy-policy-cookies">Privacy Policy</a>. You may withdraw your consent or manage your preferences at any time by clicking the unsubscribe link at the bottom of any of our marketing emails, or by emailing us at <a href="mailto:hello@yumove.com" target="_top">hello@yumove.com</a></p>
+        </div>
+        
+        <div id="dialog" title="Error" style="display: none;">
+          <p> </p>
+        </div>
+      </div>
+  </div><!-- /.shell -->
+</div><!-- /.section -->
+
+<script>
+  $(document).ready(function() {
+    $('.subscribe-container .custom_radio').on('click', function() {
+      $(this).prev().prop('checked', true)
+    });
+    
+    $( "#dialog" ).dialog({
+      autoOpen: false
+    });
+
+    var dogsBreed = ["Affenpinscher"
+    ,"Afghan Hound"
+    ,"Afghan Shepherd"
+    ,"Aidi"
+    ,"Airedale Terrier"
+    ,"Akbash"
+    ,"Akita"
+    ,"Alano Español"
+    ,"Alaskan husky"
+    ,"Alaskan Klee Kai"
+    ,"Alaskan Malamute"
+    ,"Alaunt"
+    ,"Alopekis"
+    ,"Alpine Dachsbracke"
+    ,"Alpine Mastiff"
+    ,"Alpine Spaniel"
+    ,"American Akita"
+    ,"American Bully"
+    ,"American Bulldog"
+    ,"American Cocker Spaniel"
+    ,"American English Coonhound"
+    ,"American Eskimo Dog"
+    ,"American Foxhound"
+    ,"American Hairless Terrier"
+    ,"American Pit Bull Terrier"
+    ,"American Staffordshire Terrier"
+    ,"American Water Spaniel"
+    ,"Anatolian Shepherd Dog"
+    ,"Andalusian Hound"
+    ,"Anglo-Français de Petite Vénerie"
+    ,"Appenzeller Sennenhund"
+    ,"Argentine Polar Dog"
+    ,"Ariegeois"
+    ,"Armant"
+    ,"Armenian Gampr dog"
+    ,"Artois Hound"
+    ,"Australian Cattle Dog"
+    ,"Australian Kelpie"
+    ,"Australian Shepherd"
+    ,"Australian Stumpy Tail Cattle Dog[10]"
+    ,"Australian Terrier"
+    ,"Austrian Black and Tan Hound"
+    ,"Austrian Pinscher"
+    ,"Azawakh"
+    ,"Bakharwal dog"
+    ,"Barbado da Terceira"
+    ,"Barbet"
+    ,"Basenji"
+    ,"Basque Shepherd Dog"
+    ,"Basset Artésien Normand"
+    ,"Basset Bleu de Gascogne"
+    ,"Basset Fauve de Bretagne"
+    ,"Basset Hound"
+    ,"Bavarian Mountain Hound"
+    ,"Beagle"
+    ,"Beagle-Harrier"
+    ,"Bearded Collie"
+    ,"Beauceron"
+    ,"Bedlington Terrier"
+    ,"Belgian Shepherd Dog (Groenendael)"
+    ,"Belgian Shepherd Dog (Laekenois)"
+    ,"Belgian Shepherd Dog (Malinois)"
+    ,"Belgian Shepherd Dog (Tervuren)"
+    ,"Bergamasco Shepherd"
+    ,"Berger Blanc Suisse"
+    ,"Berger Picard"
+    ,"Bernese Mountain Dog"
+    ,"Bichon Frisé"
+    ,"Billy"
+    ,"Black and Tan Coonhound"
+    ,"Black and Tan Virginia Foxhound"
+    ,"Black Norwegian Elkhound"
+    ,"Black Russian Terrier"
+    ,"Black Mouth Cur"
+    ,"Bloodhound"
+    ,"Blue Heeler"
+    ,"Blue Lacy"
+    ,"Blue Paul Terrier"
+    ,"Blue Picardy Spaniel"
+    ,"Bluetick Coonhound"
+    ,"Boerboel"
+    ,"Bohemian Shepherd"
+    ,"Bolognese"
+    ,"Border Collie"
+    ,"Border Terrier"
+    ,"Borzoi"
+    ,"Bosnian Coarse-haired Hound"
+    ,"Boston Terrier"
+    ,"Bouvier des Ardennes"
+    ,"Bouvier des Flandres"
+    ,"Boxer"
+    ,"Boykin Spaniel"
+    ,"Bracco Italiano"
+    ,"Braque d'Auvergne"
+    ,"Braque de l'Ariege"
+    ,"Braque du Bourbonnais"
+    ,"Braque du Puy"
+    ,"Braque Francais"
+    ,"Braque Saint-Germain"
+    ,"Brazilian Dogo"
+    ,"Brazilian Terrier"
+    ,"Briard"
+    ,"Briquet Griffon Vendéen"
+    ,"Brittany"
+    ,"Broholmer"
+    ,"Bruno Jura Hound"
+    ,"Brussels Griffon"
+    ,"Bucovina Shepherd Dog"
+    ,"Bull and Terrier"
+    ,"Bull Terrier"
+    ,"Bulldog"
+    ,"Bullenbeisser"
+    ,"Bullmastiff"
+    ,"Bully Kutta"
+    ,"Burgos Pointer"
+    ,"Cairn Terrier"
+    ,"Canaan Dog"
+    ,"Canadian Eskimo Dog"
+    ,"Cane Corso"
+    ,"Cantabrian Water Dog"
+    ,"Cão da Serra de Aires"
+    ,"Cão de Castro Laboreiro"
+    ,"Cão de Gado Transmontano"
+    ,"Cão Fila de São Miguel"
+    ,"Carolina Dog"
+    ,"Carpathian Shepherd Dog"
+    ,"Catalan Sheepdog"
+    ,"Caucasian Shepherd Dog"
+    ,"Cavalier King Charles Spaniel"
+    ,"Central Asian Shepherd Dog"
+    ,"Cesky Fousek"
+    ,"Cesky Terrier"
+    ,"Chesapeake Bay Retriever"
+    ,"Chien Français Blanc et Noir"
+    ,"Chien Français Blanc et Orange"
+    ,"Chien Français Tricolore"
+    ,"Chien-gris"
+    ,"Chihuahua"
+    ,"Chilean Terrier"
+    ,"Chinese Chongqing Dog"
+    ,"Chinese Crested Dog"
+    ,"Chinese Imperial Dog"
+    ,"Chinook"
+    ,"Chippiparai"
+    ,"Chiribaya Dog"
+    ,"Chow Chow"
+    ,"Cierny Sery"
+    ,"Cirneco dell'Etna"
+    ,"Clumber Spaniel"
+    ,"Collie, Rough"
+    ,"Collie, Smooth"
+    ,"Combai"
+    ,"Cordoba Fighting Dog"
+    ,"Coton de Tulear"
+    ,"Cretan Hound"
+    ,"Croatian Sheepdog"
+    ,"Cumberland Sheepdog"
+    ,"Curly-Coated Retriever"
+    ,"Cursinu"
+    ,"Czechoslovakian Wolfdog"
+    ,"Dachshund"
+    ,"Dalbo dog"
+    ,"Dalmatian"
+    ,"Dandie Dinmont Terrier"
+    ,"Danish-Swedish Farmdog"
+    ,"Deutsche Bracke"
+    ,"Doberman Pinscher"
+    ,"Dogo Argentino"
+    ,"Dogo Cubano"
+    ,"Dogue de Bordeaux"
+    ,"Drentse Patrijshond"
+    ,"Drever"
+    ,"Dunker"
+    ,"Dutch Shepherd"
+    ,"Dutch Smoushond"
+    ,"East Siberian Laika"
+    ,"East European Shepherd"
+    ,"Elo"
+    ,"English Cocker Spaniel"
+    ,"English Foxhound"
+    ,"English Mastiff"
+    ,"English Pointer"
+    ,"English Setter"
+    ,"English Shepherd"
+    ,"English Springer Spaniel"
+    ,"English Toy Terrier (Black & Tan)"
+    ,"English Water Spaniel"
+    ,"English White Terrier"
+    ,"Entlebucher Mountain Dog"
+    ,"Estonian Hound"
+    ,"Estrela Mountain Dog"
+    ,"Eurasier"
+    ,"Eurohound"
+    ,"Field Spaniel"
+    ,"Fila Brasileiro"
+    ,"Finnish Hound"
+    ,"Finnish Lapphund"
+    ,"Finnish Spitz"
+    ,"Flat-Coated Retriever"
+    ,"Fox Terrier, Smooth"
+    ,"Fox Terrier, Wire"
+    ,"French Brittany"
+    ,"French Bulldog"
+    ,"French Spaniel"
+    ,"Gaddi Kutta"
+    ,"Galgo Español"
+    ,"Galician Shepherd Dog"
+    ,"Garafian Shepherd"
+    ,"Gascon Saintongeois"
+    ,"Georgian Shepherd"
+    ,"German Longhaired Pointer"
+    ,"German Pinscher"
+    ,"German Roughhaired Pointer"
+    ,"German Shepherd Dog"
+    ,"German Shorthaired Pointer"
+    ,"German Spaniel"
+    ,"German Spitz"
+    ,"German Wirehaired Pointer"
+    ,"Giant Schnauzer"
+    ,"Glen of Imaal Terrier"
+    ,"Golden Retriever"
+    ,"Gordon Setter"
+    ,"Gran Mastín de Borínquen"
+    ,"Grand Anglo-Français Blanc et Noir"
+    ,"Grand Anglo-Français Blanc et Orange"
+    ,"Grand Anglo-Français Tricolore"
+    ,"Grand Basset Griffon Vendéen"
+    ,"Grand Bleu de Gascogne"
+    ,"Grand Griffon Vendéen"
+    ,"Great Dane"
+    ,"Great Pyrenees"
+    ,"Greater Swiss Mountain Dog"
+    ,"Greek Harehound"
+    ,"Greek Shepherd"
+    ,"Greenland Dog"
+    ,"Greyhound"
+    ,"Griffon Bleu de Gascogne"
+    ,"Griffon Fauve de Bretagne"
+    ,"Griffon Nivernais"
+    ,"Guatemalan Dogo"
+    ,"Gull Terrier"
+    ,"Hamiltonstövare"
+    ,"Hanover Hound"
+    ,"Hare Indian Dog"
+    ,"Harrier"
+    ,"Havanese"
+    ,"Hawaiian Poi Dog"
+    ,"Himalayan Sheepdog"
+    ,"Hokkaido"
+    ,"Hortaya borzaya"
+    ,"Hovawart"
+    ,"Huntaway"
+    ,"Hygen Hound"
+    ,"Ibizan Hound"
+    ,"Icelandic Sheepdog"
+    ,"Indian pariah dog"
+    ,"Indian Spitz"
+    ,"Irish Red and White Setter"
+    ,"Irish Setter"
+    ,"Irish Terrier"
+    ,"Irish Water Spaniel"
+    ,"Irish Wolfhound"
+    ,"Istrian Coarse-haired Hound"
+    ,"Istrian Short-haired Hound"
+    ,"Italian Greyhound"
+    ,"Jack Russell Terrier"
+    ,"Jagdterrier"
+    ,"Swedish Elkhound"
+    ,"Japanese Chin"
+    ,"Japanese Spitz"
+    ,"Japanese Terrier"
+    ,"Jindo"
+    ,"Jonangi"
+    ,"Kaikadi dog"
+    ,"Kai Ken"
+    ,"Kangal Shepherd Dog"
+    ,"Kanni"
+    ,"Karakachan dog"
+    ,"Karelian Bear Dog"
+    ,"Karst Shepherd"
+    ,"Keeshond"
+    ,"Kerry Beagle"
+    ,"Kerry Blue Terrier"
+    ,"King Charles Spaniel"
+    ,"King Shepherd"
+    ,"Kintamani"
+    ,"Kishu Ken"
+    ,"Komondor"
+    ,"Koolie"
+    ,"Koyun dog"
+    ,"Kromfohrländer"
+    ,"Kumaon Mastiff"
+    ,"Kunming Wolfdog"
+    ,"Kurī"
+    ,"Kuvasz"
+    ,"Kyi-Leo"
+    ,"Labrador Husky"
+    ,"Labrador Retriever"
+    ,"Lagotto Romagnolo"
+    ,"Lakeland Terrier"
+    ,"Lancashire Heeler"
+    ,"Landseer"
+    ,"Lapponian Herder"
+    ,"Lapponian Shepherd"
+    ,"Leonberger"
+    ,"Lhasa Apso"
+    ,"Lithuanian Hound"
+    ,"Louisiana Catahoula Leopard Dog"
+    ,"Löwchen"
+    ,"Mackenzie River husky"
+    ,"Magyar agár"
+    ,"Mahratta Greyhound"
+    ,"Maltese"
+    ,"Manchester Terrier"
+    ,"Maremma Sheepdog"
+    ,"Marquesan Dog"
+    ,"McNab dog"
+    ,"Miniature American Shepherd"
+    ,"Miniature Bull Terrier"
+    ,"Miniature Fox Terrier"
+    ,"Miniature Pinscher"
+    ,"Miniature Schnauzer"
+    ,"Miniature Shar Pei"
+    ,"Molossus"
+    ,"Molossus of Epirus"
+    ,"Montenegrin Mountain Hound"
+    ,"Moscow Watchdog"
+    ,"Moscow Water Dog"
+    ,"Mountain Cur"
+    ,"Mucuchies"
+    ,"Mudhol Hound"
+    ,"Mudi"
+    ,"Münsterländer, Large"
+    ,"Münsterländer, Small"
+    ,"Neapolitan Mastiff"
+    ,"Nederlandse Kooikerhondje"
+    ,"Newfoundland"
+    ,"New Zealand Heading Dog"
+    ,"Norfolk Spaniel"
+    ,"Norfolk Terrier"
+    ,"Norrbottenspets"
+    ,"North Country Beagle"
+    ,"Northern Inuit Dog"
+    ,"Norwegian Buhund"
+    ,"Norwegian Elkhound"
+    ,"Norwegian Lundehund"
+    ,"Norwich Terrier"
+    ,"Nova Scotia Duck Tolling Retriever"
+    ,"Old Croatian Sighthound"
+    ,"Old Danish Pointer"
+    ,"Old English Bulldog"
+    ,"Old English Sheepdog"
+    ,"Old English Terrier"
+    ,"Old German Shepherd Dog"
+    ,"Old Spanish Pointer"
+    ,"Old Time Farm Shepherd"
+    ,"Olde English Bulldogge"
+    ,"Otterhound"
+    ,"Pachon Navarro"
+    ,"Pandikona"
+    ,"Paisley Terrier"
+    ,"Papillon"
+    ,"Parson Russell Terrier"
+    ,"Pastore della Lessinia e del Lagorai"
+    ,"Patterdale Terrier"
+    ,"Pekingese"
+    ,"Perro de Pastor Mallorquin"
+    ,"Perro de Presa Canario"
+    ,"Perro de Presa Mallorquin"
+    ,"Peruvian Inca Orchid"
+    ,"Petit Basset Griffon Vendéen"
+    ,"Petit Bleu de Gascogne"
+    ,"Phalène"
+    ,"Pharaoh Hound"
+    ,"Phu Quoc Ridgeback"
+    ,"Picardy Spaniel"
+    ,"Plummer Terrier"
+    ,"Plott Hound"
+    ,"Podenco Canario"
+    ,"Poitevin"
+    ,"Polish Greyhound"
+    ,"Polish Hound"
+    ,"Polish Hunting Dog"
+    ,"Polish Lowland Sheepdog"
+    ,"Polish Tatra Sheepdog"
+    ,"Pomeranian"
+    ,"Pont-Audemer Spaniel"
+    ,"Poodle"
+    ,"Porcelaine"
+    ,"Portuguese Podengo"
+    ,"Portuguese Pointer"
+    ,"Portuguese Water Dog"
+    ,"Posavac Hound"
+    ,"Potsdam Greyhound"
+    ,"Pražský Krysařík"
+    ,"Pudelpointer"
+    ,"Pug"
+    ,"Puli"
+    ,"Pumi"
+    ,"Pungsan dog"
+    ,"Pyrenean Mastiff"
+    ,"Pyrenean Shepherd"
+    ,"Rafeiro do Alentejo"
+    ,"Rajapalayam"
+    ,"Rampur Greyhound"
+    ,"Rastreador Brasileiro"
+    ,"Rat Terrier"
+    ,"Ratonero Bodeguero Andaluz"
+    ,"Ratonero Mallorquin"
+    ,"Ratonero Murciano de Huerta"
+    ,"Ratonero Valenciano"
+    ,"Redbone Coonhound"
+    ,"Rhodesian Ridgeback"
+    ,"Romanian Mioritic Shepherd Dog"
+    ,"Romanian Raven Shepherd Dog"
+    ,"Rottweiler"
+    ,"Russian Salon Dog"
+    ,"Russian Spaniel"
+    ,"Russian Toy"
+    ,"Russian Tracker"
+    ,"Russo-European Laika"
+    ,"Russell Terrier"
+    ,"Saarloos Wolfdog"
+    ,"Sabueso Español"
+    ,"Sabueso fino Colombiano"
+    ,"Saint Bernard"
+    ,"Saint John's water dog"
+    ,"Saint-Usuge Spaniel"
+    ,"Sakhalin Husky"
+    ,"Salish Wool Dog"
+    ,"Saluki"
+    ,"Samoyed"
+    ,"Sapsali"
+    ,"Šarplaninac"
+    ,"Schapendoes"
+    ,"Schillerstövare"
+    ,"Schipperke"
+    ,"Schweizer Laufhund"
+    ,"Schweizerischer Niederlaufhund"
+    ,"Scotch Collie"
+    ,"Scottish Deerhound"
+    ,"Scottish Terrier"
+    ,"Sealyham Terrier"
+    ,"Segugio Italiano"
+    ,"Seppala Siberian Sleddog"
+    ,"Serbian Hound"
+    ,"Serbian Tricolour Hound"
+    ,"Seskar Seal Dog"
+    ,"Shar Pei"
+    ,"Shetland Sheepdog"
+    ,"Shiba Inu"
+    ,"Shih Tzu"
+    ,"Shikoku"
+    ,"Shiloh Shepherd"
+    ,"Siberian Husky"
+    ,"Silken Windhound"
+    ,"Silky Terrier"
+    ,"Sinhala Hound"
+    ,"Skye Terrier"
+    ,"Sloughi"
+    ,"Slovak Cuvac"
+    ,"Slovakian Wirehaired Pointer"
+    ,"Slovenský kopov"
+    ,"Smålandsstövare"
+    ,"Small Greek Domestic Dog"
+    ,"Soft-Coated Wheaten Terrier"
+    ,"South Russian Ovcharka"
+    ,"Southern Hound"
+    ,"Spanish Mastiff"
+    ,"Spanish Water Dog"
+    ,"Spinone Italiano"
+    ,"Sporting Lucas Terrier"
+    ,"Stabyhoun"
+    ,"Staffordshire Bull Terrier"
+    ,"Standard Schnauzer"
+    ,"Stephens Cur"
+    ,"Styrian Coarse-haired Hound"
+    ,"Sussex Spaniel"
+    ,"Swedish Lapphund"
+    ,"Swedish Vallhund"
+    ,"Tahitian Dog"
+    ,"Tahltan Bear Dog"
+    ,"Taigan"
+    ,"Taiwan Dog"
+    ,"Talbot Hound"
+    ,"Tamaskan Dog"
+    ,"Teddy Roosevelt Terrier"
+    ,"Telomian"
+    ,"Tenterfield Terrier"
+    ,"Terceira Mastiff"
+    ,"Thai Bangkaew Dog"
+    ,"Thai Ridgeback"
+    ,"Tibetan Mastiff"
+    ,"Tibetan Spaniel"
+    ,"Tibetan Terrier"
+    ,"Tornjak"
+    ,"Tosa"
+    ,"Toy Bulldog"
+    ,"Toy Fox Terrier"
+    ,"Toy Manchester Terrier"
+    ,"Toy Trawler Spaniel"
+    ,"Transylvanian Hound"
+    ,"Treeing Cur"
+    ,"Treeing Tennessee Brindle"
+    ,"Treeing Walker Coonhound"
+    ,"Trigg Hound"
+    ,"Tweed Water Spaniel"
+    ,"Tyrolean Hound"
+    ,"Cimarrón Uruguayo"
+    ,"Vanjari Hound"
+    ,"Villano de Las Encartaciones"
+    ,"Villanuco de Las Encartaciones"
+    ,"Vizsla"
+    ,"Volpino Italiano"
+    ,"Weimaraner"
+    ,"Welsh Corgi, Cardigan"
+    ,"Welsh Corgi, Pembroke"
+    ,"Welsh Sheepdog"
+    ,"Welsh Springer Spaniel"
+    ,"Welsh Terrier"
+    ,"West Highland White Terrier"
+    ,"West Siberian Laika"
+    ,"Westphalian Dachsbracke"
+    ,"Wetterhoun"
+    ,"Whippet"
+    ,"White Shepherd"
+    ,"Wirehaired Pointing Griffon"
+    ,"Wirehaired Vizsla"
+    ,"Xiasi Dog"
+    ,"Xoloitzcuintli"
+    ,"Yakutian Laika"
+    ,"Yorkshire Terrier"];
+
+
+    var catsBreed = ["Abyssinian"
+    ,"American Bobtail (unspecified)"
+    ,"American Bobtail, Long-Haired"
+    ,"American Bobtail, Short-Haired"
+    ,"American Curl"
+    ,"American Ringtail"
+    ,"American Short Hair"
+    ,"American Wire Hair"
+    ,"Anatolian"
+    ,"Angora"
+    ,"Asian"
+    ,"Australian Mist (unspecified)"
+    ,"Australian Mist, Non-spotted"
+    ,"Australian Mist, Spotted"
+    ,"Balinese"
+    ,"Bengal"
+    ,"Birman"
+    ,"Bombay"
+    ,"Brazilian Long Hair"
+    ,"Brazilian Short Hair"
+    ,"British Black Tipped"
+    ,"British Blue"
+    ,"British Long Hair"
+    ,"British Red Spot"
+    ,"British Short Hair"
+    ,"Burmese"
+    ,"Burmilla"
+    ,"Calico"
+    ,"California Spangled"
+    ,"Chantilly (Tiffany)"
+    ,"Chartreux"
+    ,"Chausie"
+    ,"Chinchilla"
+    ,"Cornish Rex"
+    ,"Cross Breed"
+    ,"Cymric"
+    ,"Devon Rex"
+    ,"Domestic cat (hair length unspecified)"
+    ,"Domestic Leopard Cat"
+    ,"Domestic Long Hair"
+    ,"Domestic Medium Hair"
+    ,"Domestic Short Hair"
+    ,"Don Hairless"
+    ,"Don Sphynx"
+    ,"Egyptian Black"
+    ,"Egyptian Mau"
+    ,"European Short Hair"
+    ,"Exotic (unspecified)"
+    ,"Exotic Long Hair"
+    ,"Exotic Short Hair"
+    ,"Foreign White"
+    ,"German Rex"
+    ,"Havana Brown"
+    ,"Highland Fold"
+    ,"Himalayan"
+    ,"Japanese Bobtail"
+    ,"Javanese"
+    ,"Khao Manee"
+    ,"Korat"
+    ,"Kurilean Bobtail, Long-Haired"
+    ,"Kurilean Bobtail, Short-Haired"
+    ,"LaPerm (unspecified)"
+    ,"LaPerm, Long-Haired"
+    ,"LaPerm, Short-Haired"
+    ,"Maine Coon"
+    ,"Maltese"
+    ,"Manx (unspecified)"
+    ,"Manx, Long-Haired"
+    ,"Manx, Short-Haired"
+    ,"Manxamese"
+    ,"Minskin"
+    ,"Munchkin (Munchk) (unspecified)"
+    ,"Munchkin (Munchk), Long-Haired"
+    ,"Munchkin (Munchk), Short-Haired"
+    ,"Nebelung"
+    ,"Neva Masquerade (Colourpoint Siberian Forest Cat)"
+    ,"Norwegian Forest"
+    ,"Ocicat"
+    ,"Ojos Azules"
+    ,"Oregon Rex"
+    ,"Oriental (unspecified)"
+    ,"Oriental Long Hair"
+    ,"Oriental Short Hair"
+    ,"Persian"
+    ,"Persian (unspecified)"
+    ,"Persian, Blue"
+    ,"Persian, Colourpoint"
+    ,"Persian, Smoke"
+    ,"Persian, Tabby"
+    ,"Peterbald"
+    ,"PixieBob"
+    ,"Ragamuffin"
+    ,"Ragdoll"
+    ,"Rex (unspecified)"
+    ,"Rex, Unknown"
+    ,"Russian"
+    ,"Russian (unspecified)"
+    ,"Russian Black"
+    ,"Russian Blue"
+    ,"Russian Tabby"
+    ,"Russian White"
+    ,"Savannah"
+    ,"Scottish Fold (unspecified)"
+    ,"Scottish Fold, Long-Haired"
+    ,"Scottish Fold, Short-Haired"
+    ,"Scottish Wildcat"
+    ,"Selkirk Rex"
+    ,"Serengeti"
+    ,"Seychellois Long Hair"
+    ,"Seychellois Short Hair"
+    ,"Siamese"
+    ,"Siberian"
+    ,"Siberian Forest Cat"
+    ,"Singapura"
+    ,"Snowshoe"
+    ,"Sokoke (African Short Hair)"
+    ,"Somali"
+    ,"Somali (unspecified)"
+    ,"Somali Long Hair"
+    ,"Somali Short Hair"
+    ,"Sphynx"
+    ,"Thai"
+    ,"Tonkinese"
+    ,"Toyger"
+    ,"Turkish Angora"
+    ,"Turkish Van"
+    ,"Turkish Vankedisi (Van Kedisi)"
+    ,"York Chocolate"
+    ];
+    
+    $('.add-pet-btn').on('click', function() {
+      var val = $('[name="category"]:checked').val();
+      var captalized_val = val.charAt(0).toUpperCase() + val.slice(1);
+      if (val == '') return;
+      var html = '';
+      var availableTags = [];
+      var count = $('.pet-line').length;
+      var existName = true;
+      var breed = true;
+      var weight = true;
+      if( val == "horse" ) {
+        breed = false;
+      } else if( val == "human" ) {
+        breed = false;
+        existName = false;
+        weight = false;
+      }
+      html = '<div class="pet-line clearfix" data-pet="' + val + '">';
+      
+      if( existName ) {
+        html += '<div class="col col--1of4"><input type="text" class="field js-required js-get-data" name="petName" placeholder="' + 
+        captalized_val + '\'s name"></div>'
+      }
+      html += '<div class="col col--1of4">'; 
+      html += '<select name="petAge" class="field js-required js-get-data">';
+      html += '<option value="">' + captalized_val + ' age</option>';
+      if( val == "human" ) {
+        html += '<option value="up to 18">Up to 18</option>';
+        html += '<option value="19-35">19-35</option>';
+        html += '<option value="36-45">36-45</option>';
+        html += '<option value="46-65">46-65</option>';
+        html += '<option value="66-85">66-85</option>';
+        html += '<option value="85+">85+</option>';
+      } else if( val == "dog" ) { 
+        html += '<option value="0-12 months">0-12 months</option>';
+        html += '<option value="1">1</option>';
+        html += '<option value="2">2</option>';
+        html += '<option value="3">3</option>';
+        html += '<option value="4">4</option>';
+        html += '<option value="5">5</option>';
+        html += '<option value="6">6</option>';
+        html += '<option value="7">7</option>';
+        html += '<option value="8">8</option>';
+        html += '<option value="9">9</option>';
+        html += '<option value="10">10</option>';
+        html += '<option value="11">11</option>';
+        html += '<option value="12">12</option>';
+        html += '<option value="13">13</option>';
+        html += '<option value="14">14</option>';
+        html += '<option value="15">15</option>';
+        html += '<option value="16">16</option>';
+        html += '<option value="17">17</option>';
+        html += '<option value="18">18</option>';
+        html += '<option value="19">19</option>';
+        html += '<option value="20">20</option>';
+      } else if( val == "horse" ) {
+        html += '<option value="0-12 months">0-12 months</option>';
+        html += '<option value="1">1</option>';
+        html += '<option value="2">2</option>';
+        html += '<option value="3">3</option>';
+        html += '<option value="4">4</option>';
+        html += '<option value="5">5</option>';
+        html += '<option value="6">6</option>';
+        html += '<option value="7">7</option>';
+        html += '<option value="8">8</option>';
+        html += '<option value="9">9</option>';
+        html += '<option value="10">10</option>';
+        html += '<option value="11">11</option>';
+        html += '<option value="12">12</option>';
+        html += '<option value="13">13</option>';
+        html += '<option value="14">14</option>';
+        html += '<option value="15">15</option>';
+        html += '<option value="16">16</option>';
+        html += '<option value="17">17</option>';
+        html += '<option value="18">18</option>';
+        html += '<option value="19">19</option>';
+        html += '<option value="20">20</option>';
+        html += '<option value="21">21</option>';
+        html += '<option value="22">22</option>';
+        html += '<option value="23">23</option>';
+        html += '<option value="24">24</option>';
+        html += '<option value="25">25</option>';
+        html += '<option value="26">26</option>';
+        html += '<option value="27">27</option>';
+        html += '<option value="28">28</option>';
+        html += '<option value="29">29</option>';
+        html += '<option value="30">30</option>';
+        html += '<option value="31">31</option>';
+        html += '<option value="32">32</option>';
+        html += '<option value="33">33</option>';
+        html += '<option value="34">34</option>';
+        html += '<option value="35">35</option>';
+      } else {
+        html += '<option value="0-12 months">0-12 months</option>';
+        html += '<option value="1">1</option>';
+        html += '<option value="2">2</option>';
+        html += '<option value="3">3</option>';
+        html += '<option value="4">4</option>';
+        html += '<option value="5">5</option>';
+        html += '<option value="6">6</option>';
+        html += '<option value="7">7</option>';
+        html += '<option value="8">8</option>';
+        html += '<option value="9">9</option>';
+        html += '<option value="10">10</option>';
+        html += '<option value="11">11</option>';
+        html += '<option value="12">12</option>';
+        html += '<option value="13">13</option>';
+        html += '<option value="14">14</option>';
+        html += '<option value="15">15</option>';
+        html += '<option value="16">16</option>';
+        html += '<option value="17">17</option>';
+        html += '<option value="18">18</option>';
+        html += '<option value="19">19</option>';
+        html += '<option value="20">20</option>';
+        html += '<option value="21">21</option>';
+        html += '<option value="22">22</option>';
+        html += '<option value="23">23</option>';
+        html += '<option value="24">24</option>';
+        html += '<option value="25">25</option>';
+        html += '<option value="26">26</option>';
+        html += '<option value="27">27</option>';
+        html += '<option value="28">28</option>';
+        html += '<option value="29">29</option>';
+        html += '<option value="30">30</option>';
+      }
+      html += '</select>';
+      html += '</div>';
+
+      html += '<div class="col col--1of4"><input type="text" class="field js-required js-get-data" name="petBirth" placeholder="' + captalized_val + '\'s birthday" readonly></div>';
+
+      if( breed ) {
+        html += '<div class="col col--1of4"><input type="text" class="field js-required js-get-data" name="petBreed" placeholder="' + 
+        captalized_val + '\'s breed"></div>';
+      }
+      if( weight ) {
+        html += '<div class="col col--1of4">'; 
+        html += '<select name="petWeight" class="field js-required js-get-data">';
+        if( val == "cat" ) {
+          html += '<option value="">Cat weight</option>';
+          html += '<option value="less than 5kg">< 5kg</option>';
+          html += '<option value="bigger than 5kg">> 5kg</option>';
+          availableTags = catsBreed;
+        } else if(val == "dog") {
+          html += '<option value="">Dog weight</option>';
+          html += '<option value="small">0-15kg</option>';
+          html += '<option value="medium">16-30kg</option>';
+          html += '<option value="large">31-45kg</option>';
+          html += '<option value="very large">Over 45kg</option>';
+          availableTags = dogsBreed;
+        } else if(val == "horse") {
+          html += '<option value="">Horse weight</option>';
+          html += '<option value="pony">Pony = 250kg</option>';
+          html += '<option value="horse">Horse = 500kg</option>';
+        }
+        html += '</select>';
+        html += '</div>';
+      }
+      html += '<i class="ico-circle ico-close close-pet"></i>';
+      html += '</div>';
+      html += '<hr />';
+      $('.pets-list').append(html);
+      $('.close-pet').off('click');
+      $('.close-pet').on('click', function() {
+        var parent = $(this).closest('.pet-line');
+        var hr = parent.next();
+        parent.remove();
+        hr.remove();
+      });
+      $('.pet-line:last [name="petBreed"]').autocomplete({
+        source: availableTags
+      });
+
+      var yearRange = "-35:+0";
+      if(val == "human") yearRange = "-100:+0";
+      var now = new Date();
+      var end = new Date(now.getFullYear() + "-12-31");
+      var diff = end - now;
+      diff = Math.floor(diff / 3600 / 1000 / 24);
+
+      $('.pet-line:last [name="petBirth"]').datepicker(
+        {   
+            maxDate: "+" + diff + "D",
+            dateFormat: "mm/yy",
+            changeMonth: true,
+            changeYear: true,
+            showButtonPanel: true,
+            yearRange: yearRange,
+            onClose: function(dateText, inst) {
+
+                function isDonePressed(){
+                    return ($('#ui-datepicker-div').html().indexOf('ui-datepicker-close ui-state-default ui-priority-primary ui-corner-all ui-state-hover') > -1);
+                }
+
+                if (isDonePressed()){
+                    var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
+                    var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+                    $(this).datepicker('setDate', new Date(year, month, 1)).trigger('change');
+
+                    $(inst.input[0]).focusout()//Added to remove focus from datepicker input box on selecting date
+                }
+            },
+            beforeShow : function(input, inst) {
+
+                inst.dpDiv.addClass('month_year_datepicker')
+
+                if ((datestr = $(this).val()).length > 0) {
+                    year = datestr.substring(datestr.length-4, datestr.length);
+                    month = datestr.substring(0, 2);
+                    $(this).datepicker('option', 'defaultDate', new Date(year, month-1, 1));
+                    $(this).datepicker('setDate', new Date(year, month-1, 1));
+                    $(".ui-datepicker-calendar").hide();
+                }
+            }
+      });
+
+      // $('.pet-line:last [name="petBreed"]').flexselect();
+    });
+    
+    $('.next').on('click', function() {
+      var email = $('[name="email"]').val().trim();
+      var firstName = $('[name="first"]').val().trim();
+      var lastName = $('[name="last"]').val().trim();
+      var code = $('[name="code"]').val().trim();
+      var filledAll = true;
+      if(email == '' || firstName == '') {
+        $('#dialog').parent().addClass("error");
+        $('#dialog p').text('Please complete email and first name!');
+        $('body').prepend('<div class="bg-overlay"></div>');
+        $('#dialog').dialog("open");
+        return;
+      }
+      $('.your-details').hide();
+      $('.pet-details').show();
+    });
+    $('.back').on('click', function() {
+      $('.pet-details').hide();
+      $('.your-details').show();
+    });
+    $('.sign-up').on('click', function() {
+      var email = $('[name="email"]').val().trim();
+      var firstName = $('[name="first"]').val().trim();
+      var lastName = $('[name="last"]').val().trim();
+      var code = $('[name="code"]').val().trim();
+      var age = $('[name="age"]').val().trim();
+      var filledAll = true;
+      
+      $(".ui-dialog-titlebar-close").click(function() {
+        if ( $( ".bg-overlay" ).length ) {
+          $( ".bg-overlay" ).remove();
+        }
+        if ($('.ui-widget.ui-widget-content.error').length) {
+        	$('.ui-widget.ui-widget-content.error').removeClass("error");
+        }
+        $('#dialog').dialog("close");
+      });
+      
+      if(email == '' || firstName == '') {
+        $('#dialog').parent().addClass("error");
+        $('#dialog p').text('Please complete email and first name!');
+        $('body').prepend('<div class="bg-overlay"></div>');
+        $('#dialog').dialog("open");
+        return;
+      }
+      if($('.pet-line').length == 0) {
+        $('#dialog').parent().addClass("error");
+        $('#dialog p').text('Please add at least one pet details!');
+        $('body').prepend('<div class="bg-overlay"></div>');
+        $('#dialog').dialog("open");
+        return;
+      }
+
+      $('.pet-line').each(function() {
+        if($(this).find('[name="petName"]').length > 0 && $(this).find('[name="petName"]').val().trim() == '') {
+          filledAll = false;
+          return;
+        }
+        if($(this).find('[name="petBreed"]').length > 0 && $(this).find('[name="petBreed"]').val().trim() == '') {
+          filledAll = false;
+          return;
+        }
+
+//         if($(this).find('[name="petBirth"]').length > 0 && $(this).find('[name="petBirth"]').val().trim() == '') {
+//           filledAll = false;
+//           return;
+//         }
+
+        if($(this).find('[name="petAge"]').length > 0 && $(this).find('[name="petAge"]').val().trim() == '') {
+          filledAll = false;
+          return;
+        }
+        if($(this).find('[name="petWeight"]').length > 0 && $(this).find('[name="petWeight"]').val().trim() == '') {
+          filledAll = false;
+          return;
+        }
+      });
+      if(filledAll) {
+        console.log('Ok');
+    //     _learnq.push(['identify', {
+    //       '$email' : email,
+    //       '$first_name' : firstName,
+    //       '$last_name' : lastName,
+    //       '$zip': code,
+    //       '$phone_number': phone
+    //     }]);
+    //     _learnq.push(['identify', {
+    //       'numberOfDogs' : $('[data-pet="dog"]').length,
+    //       'numberOfCats' : $('[data-pet="cat"]').length,
+    //       'numberOfHorses' : $('[data-pet="horse"]').length
+    //     }]);
+        var d = new Date();
+        var petDetails = {};
+        petDetails['shop'] = location.host;
+        petDetails['list_id'] = 'N9Sgk5';
+        petDetails['email'] = email;
+        petDetails['$first_name'] = firstName;
+        petDetails['$last_name'] = lastName;
+        petDetails['$zip'] = code;
+        petDetails['age'] = age;
+//         petDetails['numberOfDogs'] = $('[data-pet="dog"]').length;
+//         petDetails['numberOfCats'] = $('[data-pet="cat"]').length;
+//         petDetails['numberOfHorses'] = $('[data-pet="horse"]').length;
+//         petDetails['LastUpdateDate'] = d;
+        $('.pet-line').each(function(index) {
+          index = index+1;
+          petDetails['pettype' + index] = $(this).data('pet');
+          petDetails['petname' + index] = '';
+          petDetails['petage' + index] = $(this).find('[name="petAge"]').val();
+          petDetails['petbreed' + index] = '';
+          petDetails['petweight' + index] = '';
+          petDetails['petbirth' + index] = $(this).find('[name="petBirth"]').val();
+          petDetails['petbirthmonth' + index] = petDetails['petbirth' + index].split("/")[0]
+          petDetails['petbirthyear' + index] = petDetails['petbirth' + index].split("/")[1]
+          if($(this).find('[name="petName"]').length > 0) petDetails['petname' + index] = $(this).find('[name="petName"]').val().trim();
+          if($(this).find('[name="petBreed"]').length > 0) petDetails['petbreed' + index] = $(this).find('[name="petBreed"]').val().trim();
+          if($(this).find('[name="petWeight"]').length > 0) petDetails['petweight' + index] = $(this).find('[name="petWeight"]').val().trim();
+        }); 
+    //     _learnq.push(['identify', petDetails]);
+
+        var api_url = "https://lintbells.herokuapp.com/klaviyo-signup"; 
+        $('body').prepend('<div class="bg-overlay"></div>');
+        $.ajax({
+          method: "GET",
+          url: api_url,
+          data: petDetails,
+          success: function() {
+            $('#dialog p').html('<strong style="font-size: 20px;">Your discount code is CLUB25</strong><br/> <br/>Thank you for signing up to our pet loving community! <br/><br/> Please check your email (junk too!) to confirm your account.');
+            $('#dialog').dialog('option', 'title', 'Success');
+            $('#dialog').dialog("open");
+            
+            DY.API( 'event',{name: 'clubSignup', properties:{signup: true}});
+          }
+        })
+        .done(function( msg ) {
+          console.log(msg);
+        });
+      } else {
+        $('#dialog').parent().addClass("error");
+        $('#dialog p').text('Please complete all pets details!');
+        $('#dialog').dialog('option', 'title', 'Error');
+        $('#dialog').dialog("open");
+      }
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Pet Types",
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "content",
+      "label": "Content"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "pet-type",
+      "name": "Pet Type",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

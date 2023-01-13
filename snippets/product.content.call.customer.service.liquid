@@ -1,0 +1,16 @@
+<div class="product__content">
+  <div class="product__head flex align-center justify-between">
+    <h1 class="product__title" itemprop="name">{{- product.title -}}</h1>
+
+   
+  </div><!-- /.product__head -->
+
+
+  {%- if _content_parts_size > 1 -%}
+    <div class="product__entry">
+      {{_content_parts[0]}}
+    </div><!-- /.product__entry -->
+  {%- endif -%}
+
+  {% if product.available %}{% include 'subscription-product' %}{% endif %}
+</div><!-- /.product__content -->

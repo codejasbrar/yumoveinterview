@@ -1,0 +1,57 @@
+<div class="form__step" id="new-to-yumove">
+	<div class="form__step-head">
+		<h2 class="form__step-title section__title">
+      {%- if _settings.first_time_title != '' -%}
+        {{ _settings.first_time_title }}
+      {%- else -%}
+        <span class="dog-name"></span>’s first time taking YuMOVE?
+      {%- endif -%}
+    </h2><!-- /.section__title -->
+	</div><!-- /.form__step-head -->
+
+	<div class="form__step-body">
+    <div class="form__row">
+      <p>{{ _settings.first_time_text1 }}</p>
+
+      <div class="form__controls">
+        
+        <input id="klaviyo_new" type="hidden" name="petnew1" value="">
+        
+        <ul class="list-radios list-radios--small flex align-end js-radio-required" data-name="new">
+           <li>
+             <div class="radio">
+               <input type="radio" name="new" id="yes" value="Yes" class="js-radio">
+
+               <label for="yes">
+                <div class="form__label-inner">
+                  <span>Yes</span>
+                </div>
+               </label>
+             </div><!-- /.radio -->
+           </li>
+
+           <li>
+             <div class="radio">
+               <input type="radio" name="new" id="no" value="No" class="js-radio">
+
+               <label for="no">
+                <div class="form__label-inner">
+                  <span>No</span>
+                </div>
+               </label>
+             </div><!-- /.radio -->
+           </li>
+         </ul><!-- /.list-radios -->
+      </div><!-- /.form__controls -->
+    </div><!-- /.form__row -->
+
+   
+  </div><!-- /.form__step-body -->
+
+	<div class="form__step-actions">
+		<a id="btn--add" href="#confirm" class="btn btn--small btn--green btn--next btn--add">Next</a>
+        <div class="form__step-error">Please complete all parts of this step</div><!-- /.form__step-error -->
+	</div><!-- /.form__step-actions -->
+
+ 
+</div><!-- /.form__step -->

@@ -1,0 +1,65 @@
+{%- assign _section = section.settings -%}
+{%- assign section_title = _section.title -%}
+
+<section class="section section-products section--gray">
+  <div class="shell">
+    {%- if section_title != blank -%}
+      <header class="section__head">
+        <h2 class="section__title">{{section_title}}</h2><!-- /.section__title -->
+      </header><!-- /.section__head -->
+    {%- endif -%}
+
+    <div class="section__body">
+      <div class="products products--featured cols">
+        {%- for block in section.blocks -%}
+          {%- assign _block = block.settings -%}
+          {%- assign block_product = _block.product -%}
+          {%- assign _product = all_products[block_product] -%}
+          {%- assign _subtitle = _block.subtitle -%}
+          {%- assign _description = _block.description -%}
+
+          {%- include 'featured-product-item--large' with _product, _size: 'col col--1of3 flex-column ' -%}
+        {%- endfor -%}
+      </div><!-- /.products cols -->
+    </div><!-- /.section__body -->
+  </div><!-- /.shell -->
+</section><!-- /.section section-products -->
+
+{% schema %}
+{
+  "name": "Products",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    }
+  ],
+  "max_blocks": 3,
+  "blocks": [
+    {
+      "type": "product",
+      "name": "Product",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product"
+        },
+        {
+          "type": "richtext",
+          "id": "subtitle",
+          "label": "Subtitle"
+        },
+        {
+          "type": "richtext",
+          "id": "description",
+          "label": "Description"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+

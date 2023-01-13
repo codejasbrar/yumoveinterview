@@ -1,0 +1,137 @@
+.subscribe-container {
+  hr {
+    margin-top: 10px;
+  	margin-bottom: 15px;
+  }
+  
+  .nav-tags {
+  	display: inline-flex;
+    align-items: center;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 900px;
+    cursor: pointer;
+    margin-bottom: 15px;
+    
+    [type="radio"] {
+      display: none
+    }
+    label {
+      &:first-of-type {
+        border-radius: 5px 0 0 5px;
+      }
+      &:last-of-type {
+        border-radius: 0 5px 5px 0;
+      }
+    }
+  }
+  
+  .custom_radio {
+  	font-size: 20px;
+    line-height: 1.6;
+    display: block;
+    text-decoration: none;
+    background-color: #fff;
+    border: 1px solid rgba(29, 29, 29, 0.6);
+    padding: 13px 10px;
+    margin-left: -1px;
+    margin-bottom: -1px;
+    font-weight: 400 !important;
+    width: 25%;
+    color: #000;
+    cursor: pointer;
+  }
+  [type="radio"]:checked + .custom_radio, .custom_radio:hover {
+  	background-color: #319b42;
+    color: #fff;
+  }
+  
+  .privacy-notice {
+	font-size: 10px;
+    margin-top: 50px;
+    margin-bottom: 15px;
+    text-align: left;
+    display: inline-block;
+  }
+  
+  .pets-list {
+  	margin-top: 30px;
+  }
+  
+  .pet-line {
+  	position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-flow: row wrap;
+    flex-flow: row wrap;
+    margin: -15px !important;
+    
+    select, input {
+      width: 100%
+    }
+  }
+  .close-pet {
+  	width: 30px;
+    height: 30px;
+    background-color: #fff;
+    position: absolute;
+    right: -30px;
+    top: 30px;
+    cursor: pointer;
+  }
+  .sign-up {
+  	background-color: #f28b00;
+    margin: 0 auto;
+  }
+  @media only screen and (max-width: 460px) {
+    .sign-up {
+      display: block;
+    }
+  }
+}
+
+.ui-widget.ui-widget-content {
+  font-size: 14px !important;
+  max-width: 300px;
+  max-height: 300px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.ui-datepicker table {
+  font-size: 14px !important;
+}
+
+.margin_bottom {
+  margin-bottom: 30px !important;
+}
+.padding {
+  padding: 0px !important;
+}
+
+.margin_top {
+  padding-top: 30px !important;
+}
+.section_klaviyo {
+  padding-top: 58px !important;
+}
+
+@media only screen and (max-width: 767px) {
+  .pet-line {
+    padding-bottom: 15px;
+  }
+  
+  .subscribe-container .close-pet {
+    position: relative;
+    top: 0;
+    right: -48%;
+  }
+}
+
+@media only screen and (max-width: 434px) {
+  .subscribe-container .close-pet {
+    right: -46%;
+  }
+}

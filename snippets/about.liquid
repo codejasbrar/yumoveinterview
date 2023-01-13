@@ -1,0 +1,50 @@
+<section class="section section-about">
+  <div class="shell">
+    <div class="cols {% if section_reverse %} flex-reverse flex-column-reverse-xs{% else %} flex-column-xs{% endif %}">
+      {%- if section_title != blank or section_content != blank -%}
+        <div class="col col--1of2 flex">
+          <div class="section__content flex align-center">
+            <div class="section__content-inner">
+              {%- if section_title != blank -%}
+                <h2 class="section__title">{{section_title}}</h2><!-- /.section__title -->
+              {%- endif -%}
+
+              {{section_content}}
+
+              {%- if section_url != blank and section_label != blank -%}
+                <a href="{{section_url}}" class="btn btn--green{% if section_add_play_icon %} btn--icon{% endif %}{% if section_add_video_popup %} btn--play{% endif %}">
+                  {{section_label}}
+
+                  {%- if section_add_play_icon -%}
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="16.001" viewBox="0 0 14 16.001">
+                      <path id="Path_314" data-name="Path 314" d="M13.262-7.291l-11-6.5A1.492,1.492,0,0,0,0-12.5V.5A1.5,1.5,0,0,0,2.263,1.791l11-6.5A1.5,1.5,0,0,0,13.262-7.291Z" transform="translate(0 13.999)" fill="#fff"/>
+                    </svg>
+                  {%- endif -%}
+                </a>
+              {%- endif -%}
+            </div><!-- /.section__content-inner -->
+          </div><!-- /.section__content -->
+        </div><!-- /.col col-/-1of2 -->
+      {%- endif -%}
+
+      {%- if section_image != blank or section_video_url != blank -%}
+        <div class="col col--1of2 flex">
+          <div class="section__media"{% if section_image != blank and section_video_url == blank %} style="background-image: url({{ section_image | img_url: '1000x' }});"{% endif %}>
+            {% comment %}Option to add video{% endcomment %}
+            {%- if section_video_url != blank -%}
+              <video playsinline autoplay muted loop>
+                <source src="{{section_video_url}}" type="video/mp4">
+              </video>
+            {%- endif -%}
+
+            {%- if section_media_title != blank -%}
+              <h5 class="{{section_media_title_position}}">
+                {{section_media_title | newline_to_br | remove: '<p>' | remove: '</p>'}}
+              </h5>
+            {%- endif -%}
+          </div><!-- /.section__media -->
+        </div><!-- /.col col-/-1of2 -->
+      {%- endif -%}
+    </div><!-- /.cols -->
+  </div><!-- /.shell -->
+</section><!-- /.section section-about -->

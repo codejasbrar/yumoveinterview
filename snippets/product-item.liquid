@@ -1,0 +1,52 @@
+{%- assign _product = product-item -%}
+
+{%- if _product != empty -%}
+	<div class="product product--white product__item {% unless product.available %}product--sold-out{% endunless %}">
+		{%- if _product.featured_image -%}
+			<div class="product__media">
+				<a href="{{ _product.url }}" class="product__link">
+					<img src="{{ _product.featured_image | img_url: '500x' }}" alt="{{- _product.featured_image.alt -}}" loading="lazy">
+				</a>
+			</div><!-- /.product__media -->
+		{%- else -%}
+			<a href="{{ _product.url }}">
+				{{ 'image' | placeholder_svg_tag }}
+			</a>
+		{%- endif -%}
+
+		<div class="product__content">
+			<h2 class="product__title">
+				<a href="{{ _product.url }}">
+					{{- _product.title -}}
+				</a>
+			</h2><!-- /.product__title -->
+
+			<p class="product__info">
+				{{- _product.content | strip_html | truncate: 50 -}}
+			</p><!-- /.product__info -->
+              
+             {%- if _product.title != 'YuMOVE ADVANCE 360 for Dogs' -%}
+              <span class="price__amount collection-price">
+                <p>From
+                  <span class="money collection-money">
+					 {{ _product.price | money }}
+				  </span><!-- /.money --> 
+                </p>
+             
+				
+			  </span>
+          
+				{% if _product.title contains 'Horse' %}
+                  <div class="product__rate flex align-center justify-center horse-trustbox">
+                    {% include 'trustbox-widget-product-mini-collection-horse' %}
+          		  </div><!-- /.product__rate flex align-center justify-center -->
+                {% else %}
+				  <div class="product__rate flex align-center justify-center">
+                    {% include 'trustbox-widget-product-mini-collection' %}
+          		  </div><!-- /.product__rate flex align-center justify-center -->
+                {% endif %}
+             {%- endif -%}
+		</div>
+	</div><!-- /.product__item -->
+{%- endif -%}
+{%- assign _product = '' -%}

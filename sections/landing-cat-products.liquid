@@ -1,0 +1,499 @@
+<style>
+.sticky {
+	position: fixed;
+  	top: calc(50vh - 150px);
+  	left: 0;
+    height: 300px;
+  	opacity: 0;
+  	transition: opacity 300ms ease-in;
+}
+.sticky span {
+  transform: rotate( -90deg);
+  transform-origin: top left;
+  width: 300px;
+  font-size: 25px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  display: block;
+  margin-top: 300px;
+  transition: background 300ms ease;
+}
+</style>
+{%- assign _section = section.settings -%}
+<div id="cat-range">
+  <div class="sticky">
+    <span class="product-label product-label-side product-label--green"><a href="https://yumove.co.uk/collections/cat/products/yumove-cat" class="no-underline">{{section.blocks[0].settings.brand_cat}}</a></span>
+  </div>
+	
+    {% for block in section.blocks %}
+        {%- assign section_product = block.settings.product -%}
+        {%- assign _product = all_products[section_product] -%}
+        {%- assign brand_colour = block.settings.brand_colour -%}
+
+        {% if brand_colour == "blue" %}
+          {%- assign wrapperClassName = "section section--blue" -%}
+          {%- assign btnClassName = "sl-link-btn btn--blue btn" -%}
+          {%- assign formClassName = "sl-product-form sl-product-form--blue" -%}
+        {% elsif brand_colour == "green" %}
+          {%- assign wrapperClassName = "section section--green-to-gray" -%}
+          {%- assign btnClassName = "sl-link-btn btn--green btn" -%}
+          {%- assign formClassName = "sl-product-form sl-product-form--green" -%}
+        {% elsif brand_colour == "purple" %}
+          {%- assign wrapperClassName = "section section--gray-to-blue" -%}
+          {%- assign btnClassName = "sl-link-btn btn--purple btn" -%}
+          {%- assign formClassName = "sl-product-form sl-product-form--purple" -%}
+        {% endif %}
+
+        <div class="{{wrapperClassName}}" data-cat-id="{{block.settings.brand_cat}}">
+			
+            <div class="shell" style="position: relative;">
+              	{% if forloop.last == true %}
+                	<div id="end-sticky" style="height: 1px; position: absolute; bottom: 500px;"></div>
+             	{% elsif forloop.first == true %}
+              		<div id="start-sticky" style="height: 1px; position: absolute;"></div>
+                {% endif %}
+               <div class="section-body">
+                  <div class="sl-product">
+                      <div class="sl-product-image anamate">
+                        <a href="{{ _product.url | within: collection }}" class="product__link">
+                            <img src="{{ block.settings.product_image | img_url: '500x' }}" alt="">
+                        </a>
+                      </div> 
+                      <div class="{{formClassName}}">
+                         <div class="sl-product-info">
+                           <div class="anamate">
+                            <h2 class="sl-product-title sl-title">{{ _product.title }}</h2>
+                            <p class="sl-product-pretext">{{ block.settings.description }}</p>
+                           </div>
+                           {%- if block.settings.icon_1_text != "" or block.settings.icon_2_text != "" or block.settings.icon_3_text != "" -%}
+                            <div class="flex sl-icon-container">
+                              <div class="sl-icon flex-col anamate">
+                              	<img src="{{ block.settings.icon_1 | img_url: '100x'}}" />
+                                <p>{{ block.settings.icon_1_text }}</p>
+                              </div>
+                              <div class="sl-icon flex-col anamate">
+                              	<img src="{{ block.settings.icon_2 | img_url: '100x'}}" />
+                                <p>{{ block.settings.icon_2_text }}</p>
+                              </div>
+                              <div class="sl-icon flex-col anamate">
+                              	<img src="{{ block.settings.icon_3 | img_url: '100x'}}" />
+                                <p>{{ block.settings.icon_3_text }}</p>
+                              </div>
+                            </div>
+                           {%- endif -%}
+                            <div class="sl-trustbox">
+                              {%- include 'trustbox-widget-landing-subscription' -%}
+                            </div><!-- /.product__rate flex align-center justify-center -->
+
+                         </div> <!-- sl-product-title -->
+                         <div class="sl-product-links anamate">
+                             <div class="sl-link">
+                                <h5 class="sl-link-title sl-title">{{ block.settings.one_time_title }}</h5>
+                                <p class="sl-link-text">{{ block.settings.one_time_subtitle }}</p>
+                                <p class="sl-link-price--no-promo">From {{ _product.price | money }}</p>
+                                <p class="sl-free-shipping">{{ block.settings.free_shipping }}</p>
+                               	<a href="{{ block.settings.buy_link }}?cat-landing" class="sl-link-btn btn--orange btn">{{ block.settings.buy_button }}</a>
+                             </div><!-- sl-link -->
+                             <div class="sl-link">
+                                <h5 class="sl-link-title sl-title">{{ block.settings.subscription_title }}</h5>
+                                <p class="sl-link-text">{{ block.settings.subscription_subtitle }}</p>
+                                <p class="sl-link-price--no-promo">Just {{ block.settings.subscription_price }}</p>
+                                <p class="sl-free-shipping">{{ block.settings.free_shipping }}</p>
+
+                                  <a class="{{btnClassName}}" href="{{ block.settings.subscribe_link }}?cat-landing">{{ block.settings.subscribe_button }}</a>
+
+                             </div><!-- sl-link -->
+                         </div><!-- sl-product-links -->
+                      </div><!-- sl-product-form -->
+                  </div><!-- sl-product -->
+
+                 <hr class="sl-border">
+
+                 {%- if block.settings.ingredient_section_title != "" -%}
+                 <div class="section-landing-ingredients">
+                 	<div class="section-title">
+                      <h2>{{block.settings.ingredient_section_title}}</h2>
+                   	</div>
+                   	<div class="ingredient-content">
+                      <div class="section-image">
+                      <img src="{{ block.settings.ingredient_image | img_url: '800x' }}" class="ingredient-image" style="border-radius: 10px;">
+
+                        <div class="arrow-svg revealOnScroll">
+                          {% include 'arrow-1' %}
+                        </div>
+                         <div class="arrow-svg revealOnScroll">
+                          {% include 'arrow-2' %}
+                        </div>
+                         <div class="arrow-svg-bottom revealOnScroll">
+                          {% include 'arrow-3' %}
+                        </div>
+                         <div class="arrow-svg-bottom revealOnScroll">
+                          {% include 'arrow-4' %}
+                        </div>
+
+                      </div>
+                      <div class="section-content">
+                        
+                        <div class="content-block anamate">
+                          <div class="block-title">
+                            <h4>{{ block.settings.ingredient_1_title }}</h4>
+                          </div>
+                          <div class="block-text">
+                            <p>{{ block.settings.ingredient_1_content }}</p>
+                          </div>
+                        </div>
+                        
+                        <div class="content-block anamate">
+                          <div class="block-title">
+                            <h4>{{ block.settings.ingredient_2_title }}</h4>
+                          </div>
+                          <div class="block-text">
+                            <p>{{ block.settings.ingredient_2_content }}</p>
+                          </div>
+                        </div>
+                        
+                        <div class="content-block anamate">
+                          <div class="block-title">
+                            <h4>{{ block.settings.ingredient_3_title }}</h4>
+                          </div>
+                          <div class="block-text">
+                            <p>{{ block.settings.ingredient_3_content }}</p>
+                          </div>
+                        </div>
+                        
+                        <div class="content-block anamate">
+                          <div class="block-title">
+                            <h4>{{ block.settings.ingredient_4_title }}</h4>
+                          </div>
+                          <div class="block-text">
+                            <p>{{ block.settings.ingredient_4_content }}</p>
+                          </div>
+                        </div>
+                        
+                        <div class="content-block anamate">
+                          <div class="block-title">
+                            <h4>{{ block.settings.ingredient_5_title }}</h4>
+                          </div>
+                          <div class="block-text">
+                            <p>{{ block.settings.ingredient_5_content }}</p>
+                          </div>
+                        </div>
+                        
+                      </div>
+                    </div>
+                   
+                 </div>
+                 
+                 {%- endif -%}
+                
+              </div><!-- section-body -->
+            </div>
+          	
+        </div><!-- section-landing-subscription -->
+    {% endfor %}
+</div>
+
+<script>
+$(document).ready(function() {
+  	if ($('header .logo').attr("href") !== "https://yumove.co.uk/collections/cat/yumove") {
+      $('header .logo').attr("href","https://yumove.co.uk/collections/cat/yumove");
+    }
+    var windw = this;
+    $.fn.followTo = function(pos, firstPos) {
+        var $this = this,
+            $window = $(windw);
+        var currentCat = 'Joint Care';
+
+        $window.scroll(function(e) {
+            $("[data-cat-id]").each(function(index) {
+                if ($('.sticky').offset().top >= $(this).offset().top) {
+                    currentCat = $(this).attr("data-cat-id");
+                }
+            });
+            switch (currentCat) {
+                case 'Joint Care':
+                    if ($('.sticky span a').text() !== 'Joint Care') {
+                        $('.sticky span a').text('Joint Care');
+                      	$('.sticky span a').attr("href", "https://yumove.co.uk/collections/cat/products/yumove-cat");
+                        $('.sticky span').addClass('product-label--green');
+                        $('.sticky span').removeClass('product-label--purple');
+                        $('.sticky span').removeClass('product-label--blue');
+                      
+                      	if ($('header .logo img').attr("src") !== "//cdn.shopify.com/s/files/1/0103/3784/5303/files/logo_2x_682fdf1f-e765-4093-b079-6f69e88eafba_330x.png?v=1569314947") {
+                      		$('header .logo img').attr("src","//cdn.shopify.com/s/files/1/0103/3784/5303/files/logo_2x_682fdf1f-e765-4093-b079-6f69e88eafba_330x.png?v=1569314947");
+                        }
+                      
+                        if ($('header .logo').attr("href") !== "https://yumove.co.uk/collections/cat/yumove") {
+                      		$('header .logo').attr("href","https://yumove.co.uk/collections/cat/yumove");
+                        }
+                    }
+                    break;
+                case 'Calming Care':
+                    if ($('.sticky span a').text() !== 'Calming Care') {
+                        $('.sticky span a').text('Calming Care');
+                      	$('.sticky span a').attr("href", "https://yumove.co.uk/collections/cat/products/yucalm-cat");
+                        $('.sticky span').addClass('product-label--purple');
+                        $('.sticky span').removeClass('product-label--green');
+                        $('.sticky span').removeClass('product-label--blue');
+                      
+                      	if ($('header .logo img').attr("src") !== "//cdn.shopify.com/s/files/1/0103/3784/5303/files/YuCALM_Logo_web_2x_9060c77e-fdc8-4ee5-bb0d-2e8e43cb75eb_330x.png?v=1600087791") {
+                      		$('header .logo img').attr("src","https://cdn.shopify.com/s/files/1/0103/3784/5303/files/YuCALM_Logo_web_2x_9060c77e-fdc8-4ee5-bb0d-2e8e43cb75eb_330x.png?v=1600087791");
+                        }
+                      
+                      	if ($('header .logo').attr("href") !== "https://yumove.co.uk/collections/cat/yucalm") {
+                      		$('header .logo').attr("href","https://yumove.co.uk/collections/cat/yucalm");
+                        }
+                    }
+                    break;
+                default:
+                    if ($('.sticky span a').text() !== 'Skin & Coat Care') {
+                        $('.sticky span a').text('Skin & Coat Care');
+                      	$('.sticky span a').attr("href", "https://yumove.co.uk/collections/cat/products/yuderm-moulting-cat");
+                        $('.sticky span').addClass('product-label--blue');
+                        $('.sticky span').removeClass('product-label--green');
+                        $('.sticky span').removeClass('product-label--purple');
+                    }
+                if ($this.css('opacity') == 0) {
+                	if ($('header .logo img').attr("src") !== "//cdn.shopify.com/s/files/1/0103/3784/5303/files/logo_2x_682fdf1f-e765-4093-b079-6f69e88eafba_330x.png?v=1569314947") {
+                      $('header .logo img').attr("src","//cdn.shopify.com/s/files/1/0103/3784/5303/files/logo_2x_682fdf1f-e765-4093-b079-6f69e88eafba_330x.png?v=1569314947");
+                    }
+                  	if ($('header .logo').attr("href") !== "https://yumove.co.uk/collections/cat/yumove") {
+                      $('header .logo').attr("href","https://yumove.co.uk/collections/cat/yumove");
+                    }
+                } else {
+                	if ($('header .logo img').attr("src") !== "//cdn.shopify.com/s/files/1/0103/3784/5303/t/276/assets/yuderm-logo_330x.png?v=13845892158097697473") {
+                      $('header .logo img').attr("src","//cdn.shopify.com/s/files/1/0103/3784/5303/t/276/assets/yuderm-logo_330x.png?v=13845892158097697473");
+                    }
+                  	if ($('header .logo').attr("href") !== "https://yumove.co.uk/collections/cat/yuderm") {
+                      $('header .logo').attr("href","https://yumove.co.uk/collections/cat/yuderm");
+                    }
+                }
+            }
+
+            if ($window.scrollTop() > pos || $window.scrollTop() < firstPos) {
+              
+                var topPos = $this.offset().top;
+                $this.css({
+                    opacity: 0
+                });
+            } else {
+                $this.css({
+                    opacity: 1
+                });
+            }
+        });
+    };
+
+    $('.sticky').followTo($('#end-sticky').offset().top, $('#start-sticky').offset().top - 300);
+});
+</script>
+ 
+{% schema %}
+{
+   "name":"Cat Landing Products",
+   "blocks":[
+      {
+         "type":"brand",
+         "name":"Brand",
+         "settings":[
+			{
+               "type": "select",
+               "id": "brand_colour",
+               "label": "Brand Colour",
+               "options": [
+                 {
+                   "value": "green",
+                   "label": "YuMOVE Green"
+                 },
+                 {
+                   "value": "purple",
+                   "label": "YuCALM Purple"
+                 },
+                 {
+                   "value": "blue",
+                   "label": "YuDERM Blue"
+                 }
+               ],
+               "default": "green"
+            },
+			{
+               "type": "select",
+               "id": "brand_cat",
+               "label": "Brand Category",
+               "options": [
+                 {
+                   "value": "Joint Care",
+                   "label": "Joint Care"
+                 },
+                 {
+                   "value": "Calming Care",
+                   "label": "Calming Care"
+                 },
+                 {
+                   "value": "Skin & Coat Care",
+                   "label": "Skin & Coat Care"
+                 }
+               ],
+               "default": "Joint Care"
+            },
+            {
+               "type":"product",
+               "id":"product",
+               "label":"Product"
+            },
+            {
+               "type":"image_picker",
+               "id":"product_image",
+               "label":"Product Image"
+            },
+            {
+               "type":"richtext",
+               "id":"description",
+               "label":"Product Subtext"
+            },
+			{
+               "type":"image_picker",
+               "id":"icon_1",
+               "label":"Icon 1"
+            },
+			{
+               "type":"text",
+               "id":"icon_1_text",
+               "label":"Icon 1 text"
+            },			
+			{
+               "type":"image_picker",
+               "id":"icon_2",
+               "label":"Icon 2"
+            },
+			{
+               "type":"text",
+               "id":"icon_2_text",
+               "label":"Icon 2 text"
+            },
+			{
+               "type":"image_picker",
+               "id":"icon_3",
+               "label":"Icon 3"
+            },
+			{
+               "type":"text",
+               "id":"icon_3_text",
+               "label":"Icon 3 text"
+            },
+            {
+               "type":"text",
+               "id":"free_shipping",
+               "label":"Free Shipping Text Text"
+            },
+            {
+               "type":"text",
+               "id":"one_time_title",
+               "label":"One Time Card Title"
+            },
+            {
+               "type":"text",
+               "id":"one_time_subtitle",
+               "label":"One Time Card Subtitle"
+            },
+            {
+               "type":"text",
+               "id":"buy_button",
+               "label":"Buy Button"
+            },
+            {
+               "type":"url",
+               "id":"buy_link",
+               "label":"Button Link"
+            },
+            {
+               "type":"text",
+               "id":"subscription_title",
+               "label":"Subscription Card Title"
+            },
+            {
+               "type":"text",
+               "id":"subscription_subtitle",
+               "label":"Subscription Card Subtitle"
+            },
+            {
+               "type":"text",
+               "id":"subscription_price",
+               "label":"Subscription Price"
+            },
+            {
+               "type":"text",
+               "id":"subscribe_button",
+               "label":"Subscription Button"
+            },
+            {
+               "type":"url",
+               "id":"subscribe_link",
+               "label":"Button Link"
+            },
+            {
+               "type":"text",
+               "id":"ingredient_section_title",
+               "label":"Ingredient Section Title"
+            },
+			{
+               "type":"image_picker",
+               "id":"ingredient_image",
+               "label":"Ingredients Image"
+            },
+            {
+               "type":"text",
+               "id":"ingredient_1_title",
+               "label":"Ingredient 1 Title"
+            },
+            {
+               "type":"text",
+               "id":"ingredient_1_content",
+               "label":"Ingredient 1 Content"
+            },
+            {
+               "type":"text",
+               "id":"ingredient_2_title",
+               "label":"Ingredient 2 Title"
+            },
+            {
+               "type":"text",
+               "id":"ingredient_2_content",
+               "label":"Ingredient 2 Content"
+            },
+            {
+               "type":"text",
+               "id":"ingredient_3_title",
+               "label":"Ingredient 3 Title"
+            },
+            {
+               "type":"text",
+               "id":"ingredient_3_content",
+               "label":"Ingredient 3 Content"
+            },
+            {
+               "type":"text",
+               "id":"ingredient_4_title",
+               "label":"Ingredient 4 Title"
+            },
+            {
+               "type":"text",
+               "id":"ingredient_4_content",
+               "label":"Ingredient 4 Content"
+            },
+			{
+               "type":"text",
+               "id":"ingredient_5_title",
+               "label":"Ingredient 5 Title"
+            },
+            {
+               "type":"text",
+               "id":"ingredient_5_content",
+               "label":"Ingredient 5 Content"
+            }
+         ]
+      }
+   ]
+}
+{% endschema %}
+

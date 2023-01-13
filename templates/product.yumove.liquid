@@ -1,0 +1,36 @@
+{% unless product.price == 0 %}
+
+  {%- assign _product = product.selected_or_first_available_variant -%}
+  {%- assign _content = product.content | strip | replace: '<p><span>&lt;!-- split --&gt;</span></p>', '<p>&lt;!-- split --&gt;</p>' -%}
+  {%- assign _content_parts = _content | split: '<p>&lt;!-- split --&gt;</p>' -%}
+  {%- assign _content_parts_size = _content_parts | size -%}
+
+  {%- section 'product-popup' -%}
+
+  <section class="section section-product section--gray">
+      <div class="shell">
+          <div id="product" class="product product--single flex cols justify-between">
+              <div class="col col--1of2">
+                  {%- include 'product.media' -%}
+              </div><!-- /.col col-/-1of2 -->
+
+              <div class="col col--1of2">
+                  {%- include 'product.variants' -%}
+              </div><!-- /.col col-/-1of2 -->
+          </div><!-- /#product.product -->
+      </div><!-- /.shell -->
+  </section><!-- /.section section-product -->
+  
+  {%- include 'product.bundle' -%}
+  {%- include 'product.cols' -%}
+  
+  {%- section 'section-product' -%}
+  {%- if _product.title == 'YuMOVE PLUS for Dogs' or 'YuMOVE Dog' or 'YuMOVE Young & Active' -%}
+    {%- section 'recommended-products' -%}
+  {%- endif -%}
+  {%- section 'reviews' -%}
+  {%- section 'features' -%}
+  {%- section 'faqs' -%}
+  {%- section 'instagram' -%}
+
+{% endunless %}

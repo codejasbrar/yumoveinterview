@@ -1,0 +1,345 @@
+<!-- Create your sections for the page and insert them here -->
+<!-- All sections must be editable in Shopify Customiser - see other sections as an example -->
+{% section "landing-dog-house-intro" %}
+{% section "landing-dog-about" %}
+<div class="mobile-view">
+	{% section "dog-testimonials" %}
+</div>
+<div class="desktop-view">
+	{% section "dog-tabs" %}
+</div>
+{% section "landing-dog-help" %}
+{% section "help-texts" %}
+{% section "landing-joint-support"%}
+{% section "landing-dog-plan-features" %}
+
+<script>
+  $(document).ready(function(){
+    $('.tab-wrap .left-tab h4').click(function(){	
+      $('.tab-wrap .left-tab h4').removeClass('active');
+      $(this).addClass('active');
+      $('.tab-wrap .right-content .content').removeClass('active');
+      $('.tab-wrap .right-content .content:nth-child('+$(this).attr("data-id")+')').addClass('active');
+    })
+    $('.testimonial_accordion_title').click(function(){
+    	$(this).toggleClass('active');
+    })
+    $('.slick-dots').click(function(){
+      $('.testimonial_accordion_title.active').removeClass('active');
+    });
+  })
+</script>
+<style>
+  .dog-intro .content .overlay {
+  	max-width: 100%;
+  }
+#shopify-section-dog-testimonials {
+  	background: #bacbc5;
+}
+.template-page--landing-dog-house section{
+     font-style: initial;
+}
+#shopify-section-dog-testimonials .slider-testimonials {
+	margin: 0 auto;
+}
+#shopify-section-dog-testimonials .slick-dots button {
+    width: 20px;
+    height: 20px;
+}
+#shopify-section-dog-testimonials .slider-testimonials--wide .testimonial{
+	padding-top: 5px;
+}
+
+#shopify-section-dog-testimonials .slider-testimonials--wide .testimonial__content{
+    margin: 0 auto 20px;
+    font-style: initial;
+    font-weight: 600;
+}
+#shopify-section-dog-testimonials .slider-testimonials--wide  .testimonial__author {
+    font-size: 25px;
+    padding-left: 0;
+}
+#shopify-section-landing-joint-support .section-features{
+    background: #ecebea;
+}
+  
+#shopify-section-landing-joint-support .feature .inner {
+    background: white;
+    border-radius: 10px;
+    height: 100%;
+  	padding: 20px;	
+}
+#shopify-section-landing-joint-support .feature__image{
+	height: auto;
+}
+#shopify-section-landing-joint-support .feature .inner .feature__content h5{
+	font-weight: 600;
+    color: #319b42;
+}
+#shopify-section-landing-joint-support .feature__image img{
+  	width: 100%;
+}
+  .testimonail_accordion_content {
+  	display: none;
+    font-size: 14px;
+  }
+  .testimonial_accordion_title {
+  	display: block;
+  }
+  .testimonial_accordion_title.active + .testimonail_accordion_content {
+  	display: block;
+  }
+  .testimonial_accordion_title.active:before {
+  	content: '-';
+  }
+  .testimonial_accordion_title:before {
+  	content: '+';
+  }
+  .videos-wrap iframe {
+  	
+    flex: 1;
+    padding: 30px;
+    height: 35vh;
+  }
+  
+  .videos-wrap iframe:first-child:last-child {
+  	height: 70vh;
+  }
+  .videos-wrap {
+  	
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+  }
+.big-joint-support-title {
+    display: flex;
+    padding: 20px 0;
+    text-align: center;
+    font-style: initial;
+}
+  .big-support-title, .big-support-subtitle {
+    line-height: 1.2;
+    color: #065449;
+  }
+  .can-you-help {
+  	
+    font-style: initial;
+    background: #cddcda;
+    padding: 60px 0 80px;
+  }
+  .can-you-help h2 {
+  	
+    text-align: center;
+    color: #065449;
+    margin-bottom: 30px;
+  }
+  .help-item-wrap {  	
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  .help-item-wrap span{
+  	
+    display: inline-flex;
+    background: #065449;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    color: white;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    font-weight: 600;
+    margin-right: 30px;
+  }
+  .help-item {
+    background: white;
+    padding: 20px 20px 70px;
+    border-radius: 15px;
+    width: 100%;
+    max-width: 800px;
+  }
+  .help-title {
+  	color: #065449;
+  }
+  .help-subtitle {
+  	color: #065449;
+    font-weight: 600;
+  }
+  #yucalm-about .section .section__title, #yucalm-testimonials.section .section__title {
+  	color: #065448;
+  }
+  #shopify-section-landing-dog-help .section__title {
+  	text-align: center;
+  }
+  #shopify-section-landing-dog-help .section__title,
+  #shopify-section-landing-dog-help p {
+  	color: #065449!important;
+    margin-bottom: 0;
+  }
+  #shopify-section-landing-dog-help p {
+  	font-size: 22px;
+  }
+  #shopify-section-landing-dog-help .section__content {
+    background: #d9d9d9;
+    padding: 20px;
+  }
+  #shopify-section-landing-dog-help #yucalm-about {  	
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .dog-intro p {  	
+    text-align: center;
+    line-height: 1;
+    font-size: 40px;
+  }
+  .dog-intro p i {  	
+    font-family: 'Verveine';
+    font-style: initial;
+    font-size: 60px;
+  }
+  .dog-intro p.introducing {
+    font-family: 'Verveine';
+    font-size: 50px;
+    transform: rotate(-5deg);
+  }
+  #shopify-section-landing-dog-help .full-div{
+    background: #065449;
+    height: 150px;
+    display: block;
+  }
+  .tab-wrap {
+  	display: flex;
+  }
+  .tab-wrap .left-tab {
+  	width: 280px;
+  }
+  .tab-wrap .right-content {
+    background: white;
+    padding: 30px 40px;
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+    border-bottom-left-radius: 50px;
+  }
+  .tab-wrap .right-content img {
+    object-fit: cover;
+    width: 100%;
+    margin-bottom: 0;
+    min-height: 500px;
+  }
+  .tab-wrap .right-content .content {
+  	position: relative;
+    display: none;
+  }
+  .tab-wrap .right-content .content.active {
+  	display: block;
+  }
+  .tab-wrap .right-content .left-dot {  	
+    position: absolute;
+    bottom: 50px;
+    width: 40px;
+    height: 40px;
+    background: #055449;
+    border-radius: 50%;
+    z-index: 10000;
+    cursor: help;
+  }
+  .tab-wrap .right-content .left-dot:nth-child(2) {
+    left: calc(20% - 20px);  	
+  }
+  .tab-wrap .right-content .left-dot:nth-child(3) {
+    left: calc(50% - 20px);  	
+  }
+  .tab-wrap .right-content .left-dot:nth-child(4) {
+    left: calc(80% - 20px);  	
+  }
+  #shopify-section-dog-tabs {  	
+    background: #bacbc5;
+    padding: 70px 0;
+  }
+  .tab-wrap .left-tab h4 {  	
+    padding: 25px;
+    line-height: 1;
+    border-radius: 10px;
+    background: #a4a4a4;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    margin-bottom: 10px;
+    cursor: pointer;
+    font-size: 20px;
+  }
+  .tab-wrap .left-tab h4.active {
+  	background: white;
+  }
+  .tab-wrap .right-content .left-dot p {
+  	display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;    
+    background-color: #319b42;
+    border: solid 2px #fff;
+    padding: 15px 10px;
+    color: white;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 6px;
+    text-align: center;
+    width: 400px;
+    max-width: 100vw;
+  }
+  .tab-wrap .right-content .left-dot:hover p {
+    display: block;
+  }
+  #shopify-section-landing-dog-about .section .section__media {
+  	padding-top: 0;
+  }
+  .dog-intro {
+  	padding: 40px;
+  }
+  .mobile-view {
+  	display: none;
+  }
+  @media (max-width: 767px) {
+    #shopify-section-dog-testimonials .section-testimonials {
+    	padding: 40px 0 40px;
+    }
+    #shopify-section-dog-testimonials .slider-testimonials {
+      background: white;
+      border-radius: 20px;
+    }
+    #shopify-section-dog-testimonials .testimonial__image img {
+    	
+      border-top-right-radius: 10px;
+      border-top-left-radius: 10px;
+    }
+    .mobile-view {
+      display: block;
+    }
+    .desktop-view {
+    	display: none;
+    }
+  	#shopify-section-dog-testimonials .slider-testimonials--wide .testimonial__content {
+    	padding-left: 0!important;
+    }
+    .dog-intro {
+      padding: 0px;
+    }
+    .videos-wrap {
+    	flex-direction: column;
+    }
+    .tab-wrap .left-tab h4 {
+    	font-size: 15px;
+    	padding: 10px;
+    	margin-bottom: 5px;
+    }
+    .tab-wrap .right-content img {
+    	min-height: 240px;
+    }
+    .tab-wrap .right-content .left-dot p {    	
+    	max-width: 50vw;
+        font-size: 15px;
+        line-height: 1.2;
+    }
+  }
+</style>

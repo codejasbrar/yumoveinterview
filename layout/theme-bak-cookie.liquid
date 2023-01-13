@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="{{ shop.locale }}">
+<head>
+	{%- include 'settings' -%}
+
+	{%- include 'head' -%}
+  
+    <!-- TrustBox script --> <script type="text/javascript" src="//widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js" async></script> <!-- End TrustBox script -->
+
+	{{ content_for_header }}
+
+  {%- if template contains 'collection' -%}
+    {% section 'filter-menu-settings' %}
+  {%- endif -%}
+
+  {% include 'shogun-head' %}
+</head>
+
+<body class="{{ template_class }}{% unless template.name == 'index' or template.suffix == 'subscription' or template.suffix contains 'index' or template.name == 'password' or template.name == 'account' or template.name == 'addresses' or template.name == 'order' or template.suffix == 'landing' or template.name == null %} scrolled--fixed{% endunless %}">
+<div class="wrapper">
+  <div class="wrapper__inner">
+   {%- unless template.name == 'password' or template.name == 'account' or template.name == 'addresses' or template.name == 'order' or template.name == null -%}
+      {%- include 'header' -%}
+
+      {%- unless template.name == 'cart' -%}
+        <div class="cart__outer flex justify-end">
+          <div class="cart__wrapper flex flex-column">
+            <div class="cart__wrapper-head">
+              <div class="flex justify-between align-center">
+                <h3>{{- 'cart.general.title' | t -}}</h3>
+
+                <a href="#" class="btn-close cart-trigger{% unless template.name == 'cart' %} cart-trigger-js{% endunless %} flex align-center" data-toggle-class="cart-expanded">
+                  {{ 'layout.customer.close' | t }} <i class="ico-circle ico-close"></i>
+                </a>
+              </div><!-- /.flex justify-between align-center -->
+            </div><!-- /.cart__wrapper-head -->
+
+            <div class="cart__wrapper-bar">
+              <div class="flex justify-center align-center">
+                {{settings.bar_content}}
+              </div><!-- /.flex -->
+            </div><!-- /.cart__wrapper-bar -->
+
+            <div class="cart__wrapper-body">
+              <div class="flex">
+                {%- include 'cart.form' -%}
+              </div><!-- /.flex -->
+            </div><!-- /.cart__wrapper-body -->
+          </div><!-- /.cart__wrapper -->
+        </div><!-- /.cart__outer -->
+      {%- endunless -%}
+    {%- endunless -%}
+
+    <div class="main">
+      {{ content_for_layout }}
+    </div><!-- /.main shell clear -->
+
+    {%- unless template.name == 'password' or template.name == 'account' or template.name == 'addresses' or template.name == 'order' or template.name == null -%}
+      {%- include 'footer' -%}
+    {%- endunless -%}
+  </div><!-- /.wrapper__inner -->
+</div><!-- /.wrapper -->
+{%- include 'ie-modal' -%}
+{{ theme_scripts }}
+{% include 'subscription-theme-footer' %}
+
+{% comment %}<script async type="text/javascript" src="//static.klaviyo.com/onsite/js/klaviyo.js?company_id=KeiVFu"></script>{% endcomment %}
+
+</body>
+</html>

@@ -1,0 +1,174 @@
+{%- assign _section = section.settings -%}
+{%- assign section_product = _section.product -%}
+{%- assign section_product_2 = _section.product_2 -%}
+{%- assign _product = all_products[section_product] -%}
+{%- assign _product_2 = all_products[section_product_2] -%}
+{%-assign _price_discount = _product.price | divided_by: 100.0 | times: 30.0 -%}
+{%-assign _price_discount_2 = _product_2.price | divided_by: 100.0 | times: 30.0 -%}
+
+<div id="yucalm-subscription" class="section-landing-subscription section-campaign-yucalm">
+    <div class="shell">
+       <div class="section-body">
+          <div class="sl-product">
+              <div class="sl-product-image">
+                <a href="{{ _product.url | within: collection }}" class="product__link">
+					<img src="{{ section.settings.product_image | img_url: '500x' }}" alt="">
+				</a>
+              </div> 
+              <div class="sl-product-form">
+                 <div class="sl-product-info">
+                    <h1 class="sl-product-title sl-title">{{ _product.title }}</h1>
+                    <p class="sl-product-pretext">{{ section.settings.description }}</p>
+        
+                    <div class="sl-trustbox">
+                      {% include 'trustbox-widget-landing-subscription' %}
+          		    </div><!-- /.product__rate flex align-center justify-center -->
+                   
+                 </div> <!-- sl-product-title -->
+                 <div class="sl-product-links">
+                     <div class="sl-link">
+                        <h5 class="sl-link-title sl-title">{{ section.settings.one_time_title }}</h5>
+                        <p class="sl-link-text">{{ section.settings.one_time_subtitle }}</p>
+                        <p class="sl-link-price">From {{ _product.price | money }}</p>
+                        <p class="sl-free-shipping">{{ section.settings.free_shipping }}</p>
+                        <form action="{{ section.settings.buy_link }}">
+                          <button input="submit" class="sl-link-btn btn--orange btn">{{ section.settings.buy_button }}</button>
+                        </form>                  
+                     </div><!-- sl-link -->
+
+                 </div><!-- sl-product-links -->
+              </div><!-- sl-product-form -->
+          </div><!-- sl-product -->
+         <hr class="sl-border">
+          <div class="sl-product">
+              <div class="sl-product-image">
+                <a href="{{ _product_2.url | within: collection }}" class="product__link">
+					<img src="{{ section.settings.product_image_2 | img_url: '500x' }}" alt="">
+				</a>
+              </div> 
+              <div class="sl-product-form">
+                 <div class="sl-product-info">
+                    <h1 class="sl-product-title sl-title">{{ _product_2.title }}</h1>
+                    <p class="sl-product-pretext">{{ section.settings.description_2 }}</p>
+        
+                    <div class="sl-trustbox">
+                      {% include 'trustbox-widget-campaign-yucalm.liquid' %}
+          		    </div><!-- /.product__rate flex align-center justify-center -->
+                   
+                 </div> <!-- sl-product-title -->
+                 <div class="sl-product-links">
+                     <div class="sl-link">
+                        <h5 class="sl-link-title sl-title">{{ section.settings.one_time_title_2 }}</h5>
+                        <p class="sl-link-text">{{ section.settings.one_time_subtitle_2 }}</p>
+                        <p class="sl-link-price">From {{ _product_2.price | money }}</p>
+                        <p class="sl-free-shipping">{{ section.settings.free_shipping }}</p>
+                        <form action="{{ section.settings.buy_link_2 }}">
+                          <button input="submit" class="sl-link-btn btn--orange btn">{{ section.settings.buy_button_2 }}</button>
+                        </form>                  
+                     </div><!-- sl-link -->
+                 </div><!-- sl-product-links -->
+              </div><!-- sl-product-form -->
+          </div><!-- sl-product -->
+       </div><!-- section-body -->
+    </div>
+</div><!-- section-landing-subscription -->
+
+<script>
+  $(document).ready(function(){
+    
+    $('.yucalm-landing-subscribe-btn').on('click', function(e) {
+      
+      window.document.location = '{{ section.settings.subscribe_link }}' + '?' + 'yucalm-landing';
+    });
+  });
+
+</script>
+
+{% schema %}
+{
+  "name": "Landing Subscription",
+  "settings": [
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Product"
+    },
+    {
+      "type": "image_picker",
+      "id": "product_image",
+      "label": "Product Image"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Product Subtext"
+    },
+    {
+      "type": "text",
+      "id": "free_shipping",
+      "label": "Free Shipping Text Text"
+    },
+    {
+      "type": "text",
+      "id": "one_time_title",
+      "label": "One Time Card Title"
+    },
+    {
+      "type": "text",
+      "id": "one_time_subtitle",
+      "label": "One Time Card Subtitle"
+    },
+    {
+      "type": "text",
+      "id": "buy_button",
+      "label": "Buy Button"
+    },
+    {
+      "type": "url",
+      "id": "buy_link",
+      "label": "Button Link"
+    },
+	{
+      "type": "product",
+      "id": "product_2",
+      "label": "Product 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "product_image_2",
+      "label": "Product Image 2"
+    },
+    {
+      "type": "richtext",
+      "id": "description_2",
+      "label": "Product Subtext 2"
+    },
+    {
+      "type": "text",
+      "id": "free_shipping_2",
+      "label": "Free Shipping Text Text 2"
+    },
+    {
+      "type": "text",
+      "id": "one_time_title_2",
+      "label": "One Time Card Title 2"
+    },
+    {
+      "type": "text",
+      "id": "one_time_subtitle_2",
+      "label": "One Time Card Subtitle 2"
+    },
+    {
+      "type": "text",
+      "id": "buy_button_2",
+      "label": "Buy Button 2"
+    },
+    {
+      "type": "url",
+      "id": "buy_link_2",
+      "label": "Button Link 2"
+    }
+  ]
+}
+{% endschema %}
+

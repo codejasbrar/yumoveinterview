@@ -1,0 +1,23 @@
+<div class="testimonial cols align-center">
+  <div class="testimonial__media col col--1of3">
+    {%- if _image != blank -%}
+      <img src="{{ _image | img_url: '300x' }}" alt="{{ _alt }}" loading="lazy">
+    {%- endif -%}
+  </div><!-- /.testimonial__media -->
+
+  <div class="testimonial__content col col--2of3">
+    {%- if _testimonial != blank -%}
+      <blockquote>
+        {{_testimonial}}
+      </blockquote>
+    {%- endif -%}
+
+    {%- if _title != blank -%}
+      <div class="testimonial__author">{{_title}}</div><!-- /.testimonial__author -->
+    {%- endif -%}
+  </div><!-- /.testimonial__content -->
+
+  <div class="testimonial__rate col flex justify-between align-center">
+    {{ settings.product_testimonial_reviews_html }}
+  </div><!-- /.testimonial__rate -->
+</div><!-- /.testimonial -->

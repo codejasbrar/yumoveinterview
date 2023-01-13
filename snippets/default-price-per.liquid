@@ -1,0 +1,77 @@
+{%- if product.handle contains 'yucalm-cat' -%}  
+    <div class="one_time form__row js-row-holder {% if option_name_handle == 'color' %}js-row-colors{% endif %}" data-type="{{- option_name_handle -}}">
+        <label {% if _type == 'select' %} for="field-{{- _name | handle -}}-{{- product.id -}}-{{- idx -}}-prime" {% endif %} class="form__label">{{ _name }}</label>
+
+        <div class="form__controls">
+          <div class="option-unselect-container">
+            <div class="value-container">
+              <p class="per-value" style="color: #319b42; display: none;"></p>
+            </div>
+          </div> 
+        </div><!-- /.form__controls -->
+      </div><!-- /.form__row -->
+  {%- elsif product.handle contains 'yumove-plus-for-horses' -%}
+    <div class="one_time form__row js-row-holder {% if option_name_handle == 'color' %}js-row-colors{% endif %}" data-type="{{- option_name_handle -}}">
+        <label {% if _type == 'select' %} for="field-{{- _name | handle -}}-{{- product.id -}}-{{- idx -}}-prime" {% endif %} class="form__label">{{ _name }}</label>
+
+        <div class="form__controls">
+          <div class="option-unselect-container">
+            <div class="value-container">
+              <p class="per-value" style="color: #319b42; display: none;"></p>
+            </div>
+          </div> 
+        </div><!-- /.form__controls -->
+      </div><!-- /.form__row -->
+{%- endif -%}
+
+<script>
+  $(document).ready(function () {
+    var productHandle = '{{ product.handle }}';
+   
+    $('.rc_block .rc_label').on('click', function(e) {
+      var selectedVariant = $('.radios-unselected .radio input:checked');
+      pricePerFunction();
+    }); 
+    
+    function pricePerFunction() {  
+      if(productHandle === 'yucalm-cat') {
+        var productAmount = 30;
+        var productUnit = 'capsule';
+      } else if(productHandle === 'yumove-plus-for-horses') {
+        var productAmount = 1.8;
+        var productUnit = 'kg';
+      }
+      
+      setTimeout(function() {
+        calculatePer(productAmount, productUnit);
+      },100); 
+    }
+    
+    function calculatePer(productAmount, productUnit) {
+      var fullPriceUntrimmed = $('.product__head .product__price').text();
+      var fullPriceTrimmed = $.trim(fullPriceUntrimmed).substring(1);
+      var perPriceUnrounded = ((fullPriceTrimmed * 100) / productAmount);
+      var perPrice = Math.round(perPriceUnrounded); 
+    
+      if(perPrice < 100) {
+        $('.per-value').html('<p style="color: #319b42;">only ' + perPrice + 'p per ' + productUnit + '</p>');
+      } else {
+        var decimalPrice = ( perPrice / 100 ).toFixed(2);
+      
+        $('.per-value').html('<p style="color: #319b42;">only £' + decimalPrice + ' per ' + productUnit + '</p>');
+      }
+      
+      $('.per-value').css('display', 'block');
+    };
+    
+    var observer = new MutationObserver(function(mutations) {
+      mutations.forEach(function(mutationRecord) {
+        pricePerFunction(); 
+      });    
+    });
+
+    var target = document.getElementById('rc_container');
+    observer.observe(target, { attributes : true, attributeFilter : ['style'] });
+
+  });  
+</script>

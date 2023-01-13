@@ -1,0 +1,24 @@
+<div id="sample-success">
+  <div class="sample-success-title">
+    <h2>{{ section.settings.title }}</h2>
+  </div><!-- /.sample-success-title -->
+  <iframe src="{{ section.settings.url }}" frameborder="0" class="sample-success-iframe"></iframe>
+</div><!-- /#intro__content -->
+
+{% schema %}
+  {
+    "name": "Success",
+    "settings": [
+       {
+         "type": "text",
+         "id": "title",
+         "label": "Success Title"
+       },
+       {
+         "type": "url",
+         "id": "url",
+         "label": "Iframe Url"
+       }
+    ]
+  }
+{% endschema %}

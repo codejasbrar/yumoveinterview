@@ -1,0 +1,28 @@
+<div class="testimonial">
+  <div class="testimonial__content">
+    {% case _stars %}
+    {% when 1 %}
+      {%- include "star-svg" -%}
+    {% when 2 %}
+      {%- include "star-svg" -%}{%- include "star-svg" -%}
+    {% when 3 %}
+      {%- include "star-svg" -%}{%- include "star-svg" -%}{%- include "star-svg" -%}
+    {% when 4 %}
+      {%- include "star-svg" -%}{%- include "star-svg" -%}{%- include "star-svg" -%}{%- include "star-svg" -%}
+    {% when 5 %}
+      {%- include "star-svg" -%}{%- include "star-svg" -%}{%- include "star-svg" -%}{%- include "star-svg" -%}{%- include "star-svg" -%}
+    {% else %}
+      This is not a cake nor a cookie
+    {% endcase %}
+    {%- if _title != blank -%}
+      <h4 class="testimonial-subtitle">{{ _title }}</h4>
+    {%- endif -%}
+    {%- if _testimonial != blank -%}
+      <p>{{_testimonial}}</p>     
+    {%- endif -%}
+
+    {%- if _author != blank -%}
+      <div class="testimonial__author">-{{_author}}</div><!-- /.testimonial__author -->
+    {%- endif -%}
+  </div><!-- /.testimonial__content -->
+</div><!-- /.testimonial -->

@@ -1,0 +1,234 @@
+
+{%- for block in section.blocks -%}
+  {%- if block.type == 'feature' -%}
+    {%- assign _section = block.settings -%}
+    {%- assign section_image = _section.image -%}
+    {%- assign section_video_url = _section.video_url -%}
+    {%- assign section_media_title = _section.media_title -%}
+    {%- assign section_title = _section.title -%}
+    {%- assign section_media_title_position = _section.media_title_position -%}
+    {%- assign section_content = _section.content -%}
+    {%- assign section_label = _section.label -%}
+    {%- assign section_url = _section.url -%}
+    {%- assign section_add_video_popup = _section.add_video_popup -%}
+    {%- assign section_add_play_icon = _section.add_play_icon -%}
+    {%- assign section_reverse = _section.reverse -%}
+
+    {%- if section_image != blank or section_video_url != blank or section_title != blank or section_content != blank -%}
+      <div id="yucalm-about">
+       
+        <section class="section section-about">
+          <div class="shell">
+            <div class="cols {% if section_reverse %} flex-reverse flex-column-reverse-xs{% else %} flex-column-xs{% endif %}">
+              {%- if section_title != blank or section_content != blank -%}
+                <div class="col col--1of2 flex">
+                  <div class="section__content flex align-center">
+                    <div class="section__content-inner">
+                      {%- if section_title != blank -%}
+                        <h3 class="section__title">{{section_title}}</h3><!-- /.section__title -->
+                      {%- endif -%}
+
+                      {{section_content}}
+
+                      {%- if section_url != blank and section_label != blank -%}
+                        <a href="{{section_url}}" class="btn btn--green{% if section_add_play_icon %} btn--icon{% endif %}{% if section_add_video_popup %} btn--play{% endif %}">
+                          {{section_label}}
+
+                          {%- if section_add_play_icon -%}
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="16.001" viewBox="0 0 14 16.001">
+                              <path id="Path_314" data-name="Path 314" d="M13.262-7.291l-11-6.5A1.492,1.492,0,0,0,0-12.5V.5A1.5,1.5,0,0,0,2.263,1.791l11-6.5A1.5,1.5,0,0,0,13.262-7.291Z" transform="translate(0 13.999)" fill="#fff"/>
+                            </svg>
+                          {%- endif -%}
+                        </a>
+                      {%- endif -%}
+                    </div><!-- /.section__content-inner -->
+                  </div><!-- /.section__content -->
+                </div><!-- /.col col-/-1of2 -->
+              {%- endif -%}
+
+              {%- if section_image != blank or section_video_url != blank -%}
+                <div class="col col--1of2 flex">
+                  <div class="section__media"{% if section_image != blank and section_video_url == blank %} style="background-image: url({{ section_image | img_url: '1000x' }});"{% endif %}>
+                    {% comment %}Option to add video{% endcomment %}
+                    {%- if section_video_url != blank -%}
+                      <video playsinline autoplay muted loop>
+                        <source src="{{section_video_url}}" type="video/mp4">
+                      </video>
+                    {%- endif -%}
+
+                    {%- if section_media_title != blank -%}
+                      <h5 class="{{section_media_title_position}}">
+                        {{section_media_title | newline_to_br | remove: '<p>' | remove: '</p>'}}
+                      </h5>
+                    {%- endif -%}
+                  </div><!-- /.section__media -->
+                </div><!-- /.col col-/-1of2 -->
+              {%- endif -%}
+            </div><!-- /.cols -->
+          </div><!-- /.shell -->
+        </section><!-- /.section section-about -->
+      </div>
+
+    {%- endif -%}
+  {%- endif -%}
+  {%- if block.type == 'empty_div' -%}
+	<a class="{{block.settings.class}}" href="https://yumove.co.uk/pages/sample-landing#sample-form">
+	</a>
+  {%- endif -%}
+  {%- if block.type == 'videos' -%}
+	<div class="videos-wrap">
+      {% if block.settings.video_url_left != blank %}
+        <iframe
+            src="{{block.settings.video_url_left}}">
+        </iframe>
+      {%- endif -%}
+      {% if block.settings.video_url_right != blank %}
+        <iframe
+            src="{{block.settings.video_url_right}}">
+        </iframe>
+      {%- endif -%}
+	</div>
+  {%- endif -%}
+{%- endfor -%}
+
+{% schema %}
+{
+	"name": "Dog Help",
+  	"blocks": [
+	  {
+		"type": "empty_div",
+		"name": "Empty Div",
+		"settings": [
+			{
+              "id": "class",
+              "type": "text",
+              "label": "Class"
+            }
+		]
+	  },
+	  {
+		"type": "videos",
+		"name": "videos",
+		"settings": [
+			{
+              "id": "video_url_left",
+              "type": "url",
+              "label": "Left Video URL"
+            },
+			{
+              "id": "video_url_right",
+              "type": "url",
+              "label": "Right Video URL"
+            }
+		]
+	  },
+      {
+        "type": "feature",
+        "name": "Feature",
+        "settings": [
+            {
+              "type": "image_picker",
+              "id": "image",
+              "label": "Image"
+            },
+            {
+                "type": "url",
+                "id": "video_url",
+                "label": "Video URL"
+            },
+            {
+              "type": "richtext",
+              "id": "media_title",
+              "label": "Overlay Title"
+            },
+            {
+              "type": "select",
+              "id": "media_title_position",
+              "label": "Position of Overlay Title",
+              "options": [
+                {
+                  "value": "top left",
+                  "label": "Top Left"
+                },
+                {
+                  "value": "top left right text-center",
+                  "label": "Top Center"
+                },
+                {
+                  "value": "top right",
+                  "label": "Top Right"
+                },
+                {
+                  "value": "center left",
+                  "label": "Center Left"
+                },
+                {
+                  "value": "center left right text-center",
+                  "label": "Center Center"
+                },
+                {
+                  "value": "center right",
+                  "label": "Center Right"
+                },
+                {
+                  "value": "bottom left",
+                  "label": "Bottom Left"
+                },
+                {
+                  "value": "bottom left right text-center",
+                  "label": "Bottom Center"
+                },
+                {
+                  "value": "bottom right",
+                  "label": "Bottom Right"
+                }
+              ],
+              "default": "top left right text-center"
+            },
+            {
+              "type": "header",
+              "content": "Content"
+            },
+            {
+              "type": "text",
+              "id": "title",
+              "label": "Title"
+            },
+            {
+              "type": "html",
+              "id": "content",
+              "label": "Content"
+            },
+            {
+              "type": "text",
+              "id": "label",
+              "label": "Button Label"
+            },
+            {
+              "type": "url",
+              "id": "url",
+              "label": "Button Link"
+            },
+            {
+                "type": "checkbox",
+                "id": "add_video_popup",
+                "label": "Add Popup",
+                "default": false
+            },
+            {
+                "type": "checkbox",
+                "id": "add_play_icon",
+                "label": "Add Play Icon",
+                "default": false
+            },
+            {
+                "type": "checkbox",
+                "id": "reverse",
+                "label": "Reverse content and image",
+                "default": false
+            }
+        ]
+	}
+	]
+}
+{% endschema %}

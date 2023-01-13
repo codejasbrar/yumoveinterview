@@ -1,0 +1,72 @@
+<div class="form__step" id="recommendation">
+	<div class="form__step-head">
+		<h2 class="form__step-title section__title">
+      {%- if _settings.recommendation_title1 != '' -%}
+        {{ _settings.recommendation_title1 }}
+      {%- else -%}
+        <span class="dog-name"></span>’s YuMOVE Recommendation!
+      {%- endif -%}
+    </h2><!-- /.section__title -->
+	</div><!-- /.form__step-head -->
+
+	<div class="form__step-body">
+    <div class="product">
+      <div class="cols">
+        <div class="col col--size1">
+          <div class="product__content">
+            <div class="product__head flex align-center justify-between">
+              <h4 class="product__title recommended-product-title">
+              </h4><!-- /.product__title -->
+
+              <div class="price">
+                 <del class="total-price"></del>
+
+                 <ins class="total-price__discount"></ins>
+              </div><!-- /.product__price -->
+            </div><!-- /.product__head -->
+
+            <div class="tp-container product__rate flex align-center">
+              {%- include 'subflow-trustpilot', data_skus: working_dog_skus, id: 'tp_working_dog' -%}
+              {%- include 'subflow-trustpilot', data_skus: one_a_day_skus, id: 'tp_one_a_day' -%}
+              {%- include 'subflow-trustpilot', data_skus: one_a_day_plus_skus, id: 'tp_one_a_day_plus' -%}
+              {%- include 'subflow-trustpilot', data_skus: yumove_dog_skus, id: 'tp_yumove_dog' -%}
+              {%- include 'subflow-trustpilot', data_skus: young_and_active_skus, id: 'tp_young_and_active' -%}
+              {%- include 'subflow-trustpilot', data_skus: yumove_plus_skus, id: 'tp_yumove_plus' -%}
+
+              <img class="tp-icon" src="{{ 'ico-trustpilot.png' | file_img_url: '200x' }}" alt="Trustpilot logo">
+            </div>
+
+            <div class="product__body">
+              <div id="split-description">
+
+              </div>
+
+              <h5>
+                Daily Amount:
+
+                <strong><span class="dosage__ongoing"></span> <span class="tabs-or-chews__ongoing"></span></strong>
+              </h5>
+
+              
+            </div><!-- /.product__body -->
+          </div><!-- /.product__content -->
+        </div><!-- /.col col-/-size1 -->
+        <div class="col col--size2">
+          <div class="product__media">
+            <img src="" alt="">
+          </div><!-- /.product__media -->
+
+          <div class="product__actions">
+            <a href="#" class="btn btn--gray btn--details">View more Details</a>
+          </div><!-- /.product__actions -->
+          
+        </div><!-- /.col col-/-size2 -->
+      </div><!-- /.product -->
+      <div class="form__step-actions">
+		    <a href="#recommendation2" class="btn btn--small btn--green btn--next">Next</a>
+	      </div><!-- /.form__step-actions -->
+    </div><!-- /.product -->
+  </div><!-- /.form__step-body -->
+
+	
+</div><!-- /.form__step -->

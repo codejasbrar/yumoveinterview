@@ -1,0 +1,49 @@
+<div id="yudigest-reasons" class="section">
+  <div class="shell">
+    <div class="reasons-content">
+      <div class="reasons-title">
+        <h2>{{ section.settings.reasons_title }}</h2>
+      </div><!-- /.reasons-title -->
+      <ul class="reasons-bullets">
+        <li>{{ section.settings.bullet_1 }}</li>
+        <li>{{ section.settings.bullet_2 }}</li>
+        <li>{{ section.settings.bullet_3 }}</li>
+        <li>{{ section.settings.bullet_4 }}</li>
+      </ul><!-- /.reasons-bullets -->
+    </div><!-- /.reasons-content -->
+  </div><!-- /.shell -->
+</div><!-- /#yucalm-reasons -->
+
+
+{% schema %}
+  {
+    "name": "Section name",
+    "settings": [
+      {
+        "type": "text",
+        "id": "reasons_title",
+        "label": "Reasons Title"
+      },
+      {
+        "type": "text",
+        "id": "bullet_1",
+        "label": "Bullet Point 1"
+      },
+      {
+        "type": "text",
+        "id": "bullet_2",
+        "label": "Bullet Point 2"
+      },
+      {
+        "type": "text",
+        "id": "bullet_3",
+        "label": "Bullet Point 3"
+      },
+      {
+        "type": "text",
+        "id": "bullet_4",
+        "label": "Bullet Point 4"
+      }
+    ]
+  }
+{% endschema %}

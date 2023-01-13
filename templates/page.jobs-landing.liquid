@@ -1,0 +1,193 @@
+<!-- Create your sections for the page and insert them here -->
+<!-- All sections must be editable in Shopify Customiser - see other sections as an example -->
+{{ 'slick.css' | asset_url | stylesheet_tag }}
+{{ 'slick.js' | asset_url | script_tag }}
+{% section "jobs-landing" %}
+{% section "jobs-landing-slider" %}
+{% section "jobs-landing-plan-features" %}
+{% section "jobs-landing-what-we-offer" %}
+{% section "our-approach" %}
+<style>
+  #shopify-section-jobs-landing, .main {
+    display: flex;
+    flex-direction: column;
+  }
+  .contain_with_grey {
+  	background-color: rgba(209,208,206,.4);
+  }
+  .contain_with_grey .section .section__content {
+  	background-color: white;
+  }
+  .contain_with_grey .section-about .section__media {
+  	background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+  .jobs-landing-block .section .section__content {
+  	padding: 40px;
+  }
+  
+  .jobs-landing-block .section__title {
+    line-height: 1.2;
+    margin-bottom: 20px;
+  }
+  .what-we-offer .services {
+  	
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .what-we-offer .services img {
+  	width: 100px;
+    height: 100px;
+  }
+  .what-we-offer .services .service {
+    width: 20%;
+    min-width: 150px;
+    padding: 20px;
+  }
+  #shopify-section-jobs-landing-plan-features {
+  	background: rgba(209,208,206,.4);
+  }
+  #shopify-section-jobs-landing-plan-features .feature .feature__image {
+  	height: auto;
+  }
+  .current-vacancies {
+  	margin-left: -20px;
+    margin-right: -20px;
+  }
+  .current-vacancies .slide {
+  	padding: 20px;
+  }
+  .current-vacancies .slide .slide-content {
+  	background: rgba(209,208,206,.4);
+    padding: 20px;
+    border-radius: 15px;  	
+  }
+  
+  .current-vacancies .slide .slide-content .category {
+    width: 150px;
+    border-radius: 30px;
+    background: #319b42;
+    color: white;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 16px;
+    line-height: 30px;
+  }
+  .current-vacancies .slide .slide-content .title {
+    color: #319b42;
+    font-size: 30px;
+    font-weight: 600;
+    margin-bottom: 0;
+  }
+  .current-vacancies .slick-dots button {
+    width: 18px;
+    height: 18px;
+  }
+
+  .current-vacancies .slick-dots li {
+  	margin: 0 5px;
+  }
+  .current-vacancies .slide .slide-content .content { 
+    
+    margin-top: 5px;
+    margin-bottom: 20px;
+    line-height: 1.2;
+    font-size: 18px;
+  }
+  .our-approach-wrap {
+    background: #e6f5eb;
+  }
+  .our-approach-wrap .image-wrap {
+    margin-top: 50px;
+  	display: flex;
+    justify-content: center;
+    align-items: stretch;
+    background: #319b42;
+  }
+  .our-approach-wrap .image-wrap img {
+  	object-fit: contain;
+    width: 33.33%;
+    margin-bottom: 0;
+    cursor: pointer;
+  }
+  .our-approach-wrap .image-wrap .name {
+  	font-size: 26px;
+    line-height: 1;
+  }
+  .our-approach-wrap .image-wrap .content span {  	
+    font-size: 70px;
+    line-height: 70px;
+    font-style: italic;
+    vertical-align: top;
+    color: #f28b00;
+  }
+  .our-approach-wrap .image-wrap .content::before {
+    display: block;
+    content: '"';
+    font-size: 70px;
+    color: #f28b00;
+    font-style: italic;
+    transform: rotate(
+180deg
+);
+    line-height: 0px;
+    position: absolute;
+    left: 5px;
+    top: -10px;
+  }
+  .our-approach-wrap .image-wrap .content {
+    font-family: Verveine,Times,"Times New Roman",serif;
+    line-height: 1.1;
+    font-size: 23px;
+    position: relative;
+    padding: 0 0 0 30px;
+  }
+  .our-approach-wrap .image-wrap .description {
+  	width: 66.66%;
+    color: white;    
+    padding: 20px 30px;
+    display: none;
+  }
+  .our-approach-wrap .image-wrap.active > .active{
+    display: block;
+  }
+  
+  .our-approach-wrap .image-wrap.active > *:not(.active) {
+  	display: none;
+  }
+  #shopify-section-jobs-landing-slider {
+  	order: 2;
+  }
+  #shopify-section-jobs-landing-plan-features {
+  	order: 4;
+  }
+  #shopify-section-jobs-landing-what-we-offer {
+  	order: 5;
+  }
+  #shopify-section-our-approach {
+  	order: 6;
+  }
+  @media(max-width: 768px) {
+  	.our-approach-wrap .image-wrap {
+    	
+    	flex-direction: column;
+    }
+  	.our-approach-wrap .image-wrap img, 
+  	.our-approach-wrap .image-wrap .description {
+    	width: 100%;
+    }
+  }
+</style>
+<script>
+  $(document).ready(function(){
+    $('.jobs-landing-block').appendTo(".main");
+    $('.image-wrap img ').click(function(){
+    	$(this).parent().toggleClass('active');
+    	$(this).toggleClass('active');
+      
+    	$(this).next().toggleClass('active');
+    });
+  })
+</script>

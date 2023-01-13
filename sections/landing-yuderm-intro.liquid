@@ -1,0 +1,142 @@
+{%- assign _section = section.settings -%}
+{%- assign section_image = _section.image -%}
+{%- assign section_mobile_image = _section.mobile_image -%}
+{%- assign section_title = _section.title -%}
+{%- assign section_content = _section.content -%}
+{%- assign section_label = _section.label -%}
+{%- assign section_url = _section.url -%}
+{%- assign section_content_position = _section.content_position -%}
+{%- assign section_intro_image = _section.intro_image -%}
+{%- assign section_image_position = _section.image_position -%}
+
+<div class="intro intro--about intro--small">
+  <div class="shell">
+    {%- if section_image != blank -%}
+      <div class="intro__media{% if section_mobile_image != blank %} hidden-xs{% endif %}" style="background-image: url({{ section_image | img_url: '1920x' }});"></div><!-- /.intro__media hidden-xs -->
+    {%- endif -%}
+
+    {%- if section_mobile_image != blank -%}
+      <div class="intro__media intro__media--mobile hidden-lg hidden-md hidden-sm" style="background-image: url({{ section_mobile_image | img_url: '767x' }});"></div><!-- /.intro__media intro__media-/-mobile visible-xs -->
+    {%- endif -%}
+
+    <div class="flex {{section_content_position}} flex-column-xs justify-end-xs align-center-xs text-center-xs intro-content">
+      <div class="intro__content">
+        {%- if section_title != blank -%}
+          <h2 class="intro__title">{{section_title}}</h2><!-- /.intro__title -->
+        {%- endif -%}
+
+        {%- if section_content != blank -%}
+          <h4>{{section_content | newline_to_br | remove: '<p>' | remove: '</p>'}}</h4>
+        {%- endif -%}
+
+        {% if _section.popup == true %}
+          <a class="btn landing-popup-cta">
+            {{section_label}} <img src="{{ 'noun_Paw_76186.png' | file_img_url: '20x' }}" alt="">
+          </a>
+        {%- else section_label != blank and section_url != blank -%}
+          <a href="{{section_url}}" class="btn btn--shop-now">
+            {{section_label}} <img src="{{ 'noun_Paw_76186.png' | file_img_url: '20x' }}" alt="">
+          </a>
+        {%- endif -%}
+      </div><!-- /.intro__content -->
+
+      {%- if section_intro_image != blank -%}
+        <img src="{{section_intro_image | img_url: '800x'}}" alt="" class="intro__image hidden-xs" style="{{section_image_position}}; width: 30%;">
+      {%- endif -%}
+    </div><!-- /.flex -->
+  </div><!-- /.shell -->
+</div><!-- /.intro -->
+
+{% schema %}
+{
+  "name": "Intro",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Media"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Background Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_image",
+      "label": "Background Image (Mobile)"
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "text",
+      "id": "content",
+      "label": "Content"
+    },
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Button Label"
+    },
+    {
+      "type": "url",
+      "id": "url",
+      "label": "Button Link"
+    },
+    {
+      "type": "checkbox",
+      "id": "popup",
+      "label": "Signup Popup",
+      "default": false,
+      "info": "Check to launch signup popup instead of join the club page"
+    },
+    {
+      "type": "select",
+      "id": "content_position",
+      "label": "Content Position",
+      "options": [
+          {
+            "value": "align-center justify-start",
+            "label": "Left"
+          },
+          {
+            "value": "align-center justify-center text-center",
+            "label": "Center"
+          },
+          {
+            "value": "align-center justify-end text-right",
+            "label": "Right"
+          }
+        ],
+        "default": "align-center justify-center text-center"
+    },
+    {
+      "type": "image_picker",
+      "id": "intro_image",
+      "label": "Intro Aside Image"
+    },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "Image Position",
+      "options": [
+          {
+            "value": "left: -30px;",
+            "label": "Left"
+          },
+          {
+            "value": "right: -30px;",
+            "label": "Right"
+          }
+        ],
+        "default": "right: -30px;"
+    }
+  ]
+}
+{% endschema %}

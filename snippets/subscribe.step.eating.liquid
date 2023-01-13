@@ -1,0 +1,93 @@
+<div class="form__step" id="eating">
+	<div class="form__step-head">
+		<h2 class="form__step-title section__title">
+      {%- if _settings.eating_title != '' -%}
+        {{ _settings.eating_title }}
+      {%- else -%}
+        How fussy is <span class="dog-name"></span>?
+      {%- endif -%}
+    </h2><!-- /.section__title -->
+	</div><!-- /.form__step-head -->
+
+	<div class="form__step-body">
+    <div class="form__row">
+      <div class="cols">
+        <div class="col col--1of2">
+          <p>{{ _settings.eating_text }}</p>
+        </div><!-- /.col col-/-1of2 -->
+
+        <div class="col col--1of2">
+          <img src="{{ 'Group_324.svg' | file_url }}" alt="feeding dog illustration">
+        </div><!-- /.col col-/-1of2 -->
+      </div><!-- /.cols -->
+    </div><!-- /.form__row -->
+
+   <div class="form__row">
+     <div class="form__controls">
+      
+      <input id="klaviyo_eating" type="hidden" name="peteating1" value="">
+      
+      <ul class="list-radios list-radios--small list-radios--tooltips flex align-end js-radio-required" data-name="eating-plan">
+         <li>
+           <div class="radio">
+             <input type="radio" name="eating-plan" id="fussy" value="Fussy" class="js-radio js-new-data">
+
+             <label for="fussy" class="has-tooltip">
+              <div class="form__label-inner">
+                <span>Fussy</span>
+              </div>
+
+              <div class="form__label-tooltip hidden">
+                <p>{{ _settings.fussy_tooltip }}</p>
+              </div><!-- /.form__label-tooltip -->
+             </label>
+           </div><!-- /.radio -->
+         </li>
+
+         <li>
+           <div class="radio">
+             <input type="radio" name="eating-plan" id="good" value="Good" class="js-radio js-new-data">
+
+             <label for="good" class="has-tooltip">
+              <div class="form__label-inner">
+                <span>Good</span>
+              </div>
+
+              <div class="form__label-tooltip hidden">
+                <p>{{ _settings.good_tooltip }}</p>
+              </div><!-- /.form__label-tooltip -->
+             </label>
+           </div><!-- /.radio -->
+         </li>
+
+         <li>
+           <div class="radio">
+             <input type="radio" name="eating-plan" id="hoover-everything" value="Hoover’s Everything" class="js-radio js-new-data">
+
+             <label for="hoover-everything" class="has-tooltip">
+              <div class="form__label-inner">
+                <span>Hoovers Everything</span>
+              </div>
+
+              <div class="form__label-tooltip hidden">
+                <p>{{ _settings.hoovers_tooltip }}</p>
+              </div><!-- /.form__label-tooltip -->
+             </label>
+           </div><!-- /.radio -->
+         </li>
+      </ul><!-- /.list-radios -->
+       <div class="text-and-button">
+          <div class="form__row-tooltip js-clear"></div><!-- /.form__row-tooltip -->
+          <div class="form__step-actions">
+		    <a href="#new-to-yumove" class="btn btn--small btn--green btn--next">Next</a>
+	      </div><!-- /.form__step-actions -->
+       </div>
+     
+     </div><!-- /.form__controls -->
+   </div><!-- /.form__row -->
+  </div><!-- /.form__step-body -->
+
+ 
+
+  <div class="form__step-error">Please complete all parts of this step</div><!-- /.form__step-error -->
+</div><!-- /.form__step -->

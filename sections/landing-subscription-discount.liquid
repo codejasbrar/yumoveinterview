@@ -1,0 +1,219 @@
+{%- assign _section = section.settings -%}
+{%- assign section_product = _section.product -%}
+{%- assign _product = all_products[section_product] -%}
+
+<div class="section-landing-subscription">
+    <div class="shell">
+       <div class="section-body">
+          <div class="sl-product">
+              <div class="sl-product-image">
+                <a href="{{ _product.url | within: collection }}" class="product__link">
+					<img src="{{ section.settings.product_image | img_url: '500x' }}" alt="">
+				</a>
+              </div> 
+              <div class="sl-product-form">
+                 <div class="sl-product-info">
+                    <h1 class="sl-product-title sl-title">{{ _product.title }}</h1>
+                    <p class="sl-product-pretext">{{ section.settings.description }}</p>
+        
+                    <div class="sl-trustbox">
+                      {% include 'trustbox-widget-landing-subscription' %}
+          		    </div><!-- /.product__rate flex align-center justify-center -->
+                   
+                 </div> <!-- sl-product-title -->
+                 <div class="sl-product-links">
+                     <div class="sl-link">
+                        <h5 class="sl-link-title sl-title">One-Time Purchase</h5>
+                        <p class="sl-link-text">60,120 or 300 Capsules</p>
+                       <div class="sl-link-price">
+                         From 
+                           <div class="landing-subscribe-price">
+                             {{ _product.price | money }}
+                             {% if section.settings.price_discount == true %}
+                               <svg><line x1="0" y1="100%" x2="100%" y2="0" /></svg>
+                             {% endif %}
+                           </div>
+                           {% if section.settings.price_discount == true %}
+                             <h5 class="landing-subscription-discount-price">
+                               {{- section.settings.discounted_price -}}
+                             </h5>
+                           {% endif %}
+                       </div>
+                        <form action="{{ section.settings.buy_link }}">
+                          <button input="submit" class="sl-link-btn btn--orange btn">{{ section.settings.buy_button }}</button>
+                        </form>                  
+                     </div><!-- sl-link -->
+                     <div class="sl-link">
+                        <h5 class="sl-link-title sl-title">Subscribe & Save</h5>
+                        <p class="sl-link-text">60 Capsules Delivered regularly</p>
+                        <div class="sl-link-price">
+                          Just                        
+                           <div class="landing-subscribe-price">
+                             {{ section.settings.subscription_price }}
+                             {% if section.settings.price_discount == true %}
+                               <svg><line x1="0" y1="100%" x2="100%" y2="0" /></svg>
+                             {% endif %}
+                           </div>
+                           {% if section.settings.price_discount == true %}
+                             <h5 class="landing-subscription-discount-price">
+                               {{- section.settings.subscription_discount_price -}}
+                             </h5>
+                           {% endif %}
+                          {{ section.settings.subscription_price_text }}
+                        </div>
+                        <form action="{{ section.settings.subscribe_link }}">
+                          <button input="submit" class="sl-link-btn btn--green btn">{{ section.settings.subscribe_button }}</button>
+                        </form>
+                     </div><!-- sl-link -->
+                 </div><!-- sl-product-links -->
+              </div><!-- sl-product-form -->
+          </div><!-- sl-product -->
+         
+         <hr class="sl-border">
+         
+          <div class="sl-info">
+             <h2 class="sl-info-title sl-title">{{ section.settings.info_title}}</h2>
+             <p class="sl-info-pretext">{{ section.settings.info_text }}</p>
+             <div class="sl-info-items">
+                 <div class="sl-item">
+                     <img src="{{ section.settings.icon_1 | img_url: '500x' }}" alt="" class="sl-icon">
+                     <p class="sl-item-text">{{ section.settings.icon_text_1 }}</p>
+                 </div><!-- sl-item -->
+                 <div class="sl-item">
+                     <img src="{{ section.settings.icon_2 | img_url: '500x' }}" alt="" class="sl-icon">
+                     <p class="sl-item-text">{{ section.settings.icon_text_2 }}</p>
+                 </div><!-- sl-item -->
+                 <div class="sl-item">
+                     <img src="{{ section.settings.icon_3 | img_url: '500x' }}" alt="" class="sl-icon">
+                     <p class="sl-item-text">{{ section.settings.icon_text_3 }}</p>
+                 </div><!-- sl-item -->
+                 <div class="sl-item">
+                     <img src="{{ section.settings.icon_4 | img_url: '500x' }}" alt="" class="sl-icon">
+                     <p class="sl-item-text">{{ section.settings.icon_text_4 }}</p>
+                 </div><!-- sl-item -->
+             </div><!--sl-info-items-->
+          </div><!-- sl-info -->
+       </div><!-- section-body -->
+    </div>
+</div><!-- section-landing-subscription -->
+
+
+
+{% schema %}
+{
+  "name": "Landing Subscription",
+  "settings": [
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Product"
+    },
+    {
+      "type": "image_picker",
+      "id": "product_image",
+      "label": "Product Image"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Product Subtext"
+    },
+    {
+      "type": "text",
+      "id": "info_title",
+      "label": "Information Title"
+    },
+    {
+      "type": "text",
+      "id": "info_text",
+      "label": "Information Text"
+    },
+    {
+      "type": "text",
+      "id": "buy_button",
+      "label": "Buy Button"
+    },
+    {
+      "type": "url",
+      "id": "buy_link",
+      "label": "Button Link"
+    },
+    {
+      "type": "text",
+      "id": "subscription_price",
+      "label": "Subscription Price"
+    },
+    {
+      "type": "text",
+      "id": "subscription_price_text",
+      "label": "Subscription Price Text"
+    },
+    {
+      "type": "checkbox",
+      "id": "price_discount",
+      "label": "Turn Discount Prices On",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "discounted_price",
+      "label": "Single item discount"
+    },
+    {
+      "type": "text",
+      "id": "subscription_discount_price",
+      "label": "Subscription item discount"
+    },
+    {
+      "type": "text",
+      "id": "subscribe_button",
+      "label": "Subscription Button"
+    },
+    {
+      "type": "url",
+      "id": "subscribe_link",
+      "label": "Button Link"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_1",
+      "label": "Icon 1"
+    },
+    {
+      "type": "text",
+      "id": "icon_text_1",
+      "label": "Icon 1 Text"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_2",
+      "label": "Icon 2"
+    },
+    {
+      "type": "text",
+      "id": "icon_text_2",
+      "label": "Icon 2 Text"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_3",
+      "label": "Icon 3"
+    },
+    {
+      "type": "text",
+      "id": "icon_text_3",
+      "label": "Icon 3 Text"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_4",
+      "label": "Icon 4"
+    },
+    {
+      "type": "text",
+      "id": "icon_text_4",
+      "label": "Icon 4 Text"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,56 @@
+<section class="section text-center what-we-offer">
+  <div class="shell">
+    {%- if section.blocks.size > 0 -%}
+       {%- if section.settings.title != blank -%}
+          <h3 class="section__title">{{section.settings.title}}</h3>
+      	{%- endif -%}
+    <div class="services">
+          {%- for block in section.blocks -%}
+				<div class="service">
+                <img src="{{ block.settings.image | img_url: 'x150' }}" loading="lazy">
+
+                {%- if block.settings.title != blank -%}
+                  <p class="content">{{block.settings.title}}</p>
+                {%- endif -%}
+    </div>
+          {%- endfor -%}
+    </div>
+    {%- endif -%}
+  </div>
+</section>
+{% schema %}
+  {
+    "name": "What we offer",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title"
+      }
+	],
+    "blocks": [
+        {
+          "type": "step",
+          "name": "Step",
+          "settings": [
+            {
+              "type": "image_picker",
+              "id": "image",
+              "label": "Image"
+            },
+            {
+              "type": "text",
+              "id": "title",
+              "label": "Title"
+            }
+          ]
+        }
+      ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

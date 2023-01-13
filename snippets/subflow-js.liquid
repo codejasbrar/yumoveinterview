@@ -398,8 +398,12 @@
             $('#tp_young_and_active').show();
           }
           else {
-            product = {{ young_and_active_m | json }};
-            variantId = '{{ ymact60_m_id }}';
+            {% comment %} console.log("ymact60_m_id=>{{ymact60_m_id}}"); {% endcomment %}
+            {% comment %} console.log("ymact60_m_id_ar=>{{ymact60_m_id_ar}}"); {% endcomment %}
+            product = {{ yumove_plus_m | json }};
+            {% comment %} product = {{ young_and_active_m | json }}; {% endcomment %}
+            variantId = '{{ ymp60_m_id }}';
+            {% comment %} variantId = '{{ ymact60_m_id }}'; {% endcomment %}
             autoRenewVariantId = '{{ ymact60_m_id_ar }}';
             loadingVariantId = ymact60LoadingId;
             $('#tp_young_and_active').show();
@@ -589,7 +593,6 @@
     }
     if(ongoingDosage > 1) { tabletsOrChewsOngoing += 's'; }
     if(loadingDosage > 1) { tabletsOrChewsLoading += 's'; }
-
     /** Get variant */
     for(var i = 0; i < product.variants.length; i++) {
       if(product.variants[i].id == variantId) {

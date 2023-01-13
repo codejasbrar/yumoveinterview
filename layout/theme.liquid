@@ -38,6 +38,7 @@
 {% include 'booster-common' %}
 
 {% include 'dynamic_yield' %}
+| {{ 'main.css' | asset_url | | stylesheet_tag }}  
 
 <!-- Select2  -->
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
@@ -247,6 +248,7 @@ var filtered = meta["product"]["variants"].filter(function(x) { return x["public
  
  
 </script>
+| {{ 'main.js' | asset_url | script_tag }}  
 <script>
   (function() {
     var loadScript = function(url, callback){

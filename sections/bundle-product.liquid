@@ -1,0 +1,51 @@
+<div id="bundle-product">
+  <div class="shell">
+    <div class="bundle-container">
+      <div class="bundle-products">
+        <div class="bundle-content">
+          <div class="bundle-info">
+            <h4>YuCALM & YuDERM bundle - £35.28</h4>
+            <p>For a healthy and happy cat, use YuCALM and YuDERM together.</p>
+          </div><!--- /.bundle-info --->
+          <div class="bundle-images">
+            <img src="{{all_products[section.settings.product_1].featured_image | img_url:'.150x'}}">
+            <p>+</p>
+            <img src="{{all_products[section.settings.product_2].featured_image | img_url:'.150x'}}">
+          </div><!--- /.bundle-images --->
+
+        </div><!--- /.bundle-content --->
+        <div class="bundle-actions">
+          <div class="bundle-price">
+            {% comment %} <p>£57.95 </p> {% endcomment %}
+          </div><!--- /.bundle-price --->
+          <div class="bundle-button">
+            <a href="javascript:void(0)" onclick="addAllItems('{{all_products[section.settings.product_1].selected_or_first_available_variant.id}},{{all_products[section.settings.product_2].selected_or_first_available_variant.id}}'); return false;" class="btn buy_bundle">Add To Cart</a>
+            <div id="cart-number"></div>
+          </div><!--- /.bundle-button --->
+        </div><!--- /.bundle-actions --->
+      </div><!--- /.bundle-products --->
+  </div><!--- /.bundle-container --->
+  </div><!--- /.shell --->
+</div><!--- /#product-bundle --->
+<script>
+
+
+</script>
+{% schema %}
+    {
+        "name":"bundle_product",
+        "class":"bundle_products",
+        "settings":[
+            {
+                "type":"product",
+                "id":"product_1",
+                "label":"choose bundle product one"
+            },
+            {
+                "type":"product",
+                "id":"product_2",
+                "label":"choose bundle product two"
+            }
+        ]
+    }
+{% endschema %}

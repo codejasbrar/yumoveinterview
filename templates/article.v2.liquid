@@ -1,0 +1,206 @@
+{% assign related_tag = blank %}
+{% assign recommended_product_tag = blank %}
+{% capture related_items_widget %}<span class="js-remove-paragraph"></span>{% endcapture %}
+
+{% comment %} get related posts tags and recommended product tag {% endcomment %}
+{% for tag in article.tags %}
+  {% if tag contains 'related:' %}
+    {% assign related_tag = tag | preppend: '@' | append: '@' %}
+  {% elsif tag contains 'product:' %}
+    {% assign recommended_product_tag = tag %}
+  {% endif %}
+{% endfor %}
+
+{% comment %} get related product {% endcomment %}
+{% assign product_handle = recommended_product_tag | split: 'product:' | last %}
+{% assign _product = all_products[product_handle] %}
+
+{%- if blog.articles.size > 1 -%}
+  {%- assign counter = 0 -%}
+  {% assign blog_handles = blog.handle | split: '!@#' %}
+  {% assign article_handles = '' %}
+
+    {% for handle in blog_handles %}
+      {% assign _blog = blogs[handle] %}
+      {% paginate _blog.articles by _blog.articles_count %}
+        {% for _article in _blog.articles %}
+          {%- if article.handle == _article.handle -%}
+            {% continue %}
+          {%- else -%}
+            {% assign _tags = _article.tags | join: '@' | prepened: '@' | append: '@' %}
+
+            {% if related_tag != blank and _tags contains related_tag %}
+              {% assign article_handles = article_handles | append: _article.handle | append: '@' %}
+
+              {%- assign counter = counter | plus: 1 -%}
+            {% else %}
+              {% assign not_related_handles = not_related_handles | append: _article.handle | append: '@' %}
+            {% endif %}
+          {%- endif -%}
+        {% endfor %}
+       {% endpaginate %}
+    {% endfor %}
+
+  {% assign articles_offset = 0 %}
+
+  {% if counter > 3 %}
+  {% comment %} If there are more than 3 related, set a random offset {% endcomment %}
+    {% assign min = 0 %}
+    {% assign max = counter | minus: 2 %}
+    {% assign diff = max | minus: min %}
+    {% assign randomNumber = "now" | date: "%N" | modulo: diff | plus: min %}
+    {% assign articles_offset = randomNumber %}
+  {% elsif counter < 3 %}
+  {% comment %} If there are less than 3 related, fill with not-related {% endcomment %}
+    {% assign article_handles = article_handles | append: not_related_handles %}
+  {% endif %}
+
+  {% capture related_main_items %}{% endcapture %}
+  {% capture related_sidebar_items %}{% endcapture %}
+  {% assign article_handles = article_handles | split: '@' %}
+
+  {% for article_handle in article_handles limit: 3 offset: articles_offset %}
+    {% assign _article = articles[article_handle] %}
+
+    {% capture related_main_items %}
+      {{- related_main_items -}}
+
+      {% render 'article-item-related', _article: _article %}
+    {% endcapture %}
+
+    {% capture related_sidebar_items %}
+      {{- related_sidebar_items -}}
+
+      {% render 'article-item-sidebar', _article: _article %}
+    {% endcapture %}
+  {% endfor %}
+
+  {% capture related_items_widget %}
+    <div class="widget-article widget-article--related">
+      <div class="widget__head">{{- 'blogs.article.related_posts' | t -}}</div>
+
+      <div class="widget__body">
+        <div class="article__aside-items">{{- related_sidebar_items -}}</div><!-- /.article__aside-items -->
+      </div><!-- /.article-items -->
+    </div><!-- /.widget-article -->
+  {% endcapture %}
+{%- endif -%}
+
+<div class="article-v2">
+  <div class="article__container">
+    <div class="article__content">
+      <header class="article__head">
+        <div
+          class="article__head-image visible-xs-block"
+          role="img"
+          aria-label="{{- article.image.alt -}}"
+          style="background-image: url('{{- article.image | img_url: '2000x' -}}');"
+        ></div><!-- /.article__head-image -->
+
+        <div class="article__head-content">
+          <h1 class="article__title">{{- article.title -}}</h1><!-- /.article__title -->
+
+          <div class="article__date">
+            <time datetime="{{- article.created_at | date: '%d %B %Y' -}}">{{- article.created_at | date: '%d %B %Y' -}}</time>
+          </div><!-- /.article__date -->
+
+          {% if article.excerpt != blank %}
+            <div class="article__excerpt">{{- article.excerpt -}}</div><!-- /.article__excerpt -->
+          {% endif %}
+        </div><!-- /.article__head-content -->
+
+        <div
+          class="article__head-image hidden-xs"
+          role="img"
+          aria-label="{{- article.image.alt -}}"
+          style="background-image: url('{{- article.image | img_url: '2000x' -}}');"
+        ></div><!-- /.article__head-image -->
+      </header><!-- /.article__head -->
+
+      <div class="article__body">
+        {%- if article.content != blank -%}
+          {{- article.content | replace: '[[related-posts]]', related_items_widget -}}
+        {%- endif -%}
+
+        {% if _product != blank %}
+          <div class="widget-article widget-article--lg">
+            <div class="widget__head">{{- 'products.product.recommended' | t -}}</div>
+
+            <div class="widget__body">
+              <div class="product-article product-article--lg">
+                <a href="{{- _product.url -}}" class="product__image">
+                    <img src="{{- _product.featured_image | img_url: '800x' -}}" alt="{{- _product.featured_image.alt -}}">
+                </a>
+
+                <div class="product__content">
+                  <a href="{{- _product.url -}}" class="product__title">
+                    <h5>{{- _product.title -}}</h5>
+                  </a>
+
+                  {% assign product_sub_title = 'Supports active and growing joints.' %}
+                  <p class="product__sub-title">{{- product_sub_title -}}</p><!-- /.product__sub-title -->
+
+                  <div class="product__reviews">
+                    <!-- TrustBox widget - Product Mini -->
+                    <div class="trustpilot-widget" data-locale="en-GB" data-template-id="54d39695764ea907c0f34825" data-businessunit-id="5e4e87b71f96930001914d27" data-style-height="24px" data-style-width="100%" data-theme="light" data-sku="{% for variant in _product.variants  %}{{ variant.sku }},{% endfor %}">
+                      <a href="https://uk.trustpilot.com/review/lintbells.com" target="_blank" rel="noopener">Trustpilot</a>
+                    </div> <!-- End TrustBox widget -->
+                  </div><!-- /.product__reviews -->
+
+                  <a href="{{- _product.url -}}" class="btn btn--green">{{- 'products.product.buy_now' | t -}}</a>
+                </div><!-- /.product__content -->
+              </div><!-- /.article__product -->
+            </div><!-- /.article-items -->
+          </div><!-- /.article__aside-item -->
+        {% endif %}
+      </div><!-- /.article__body -->
+    </div><!-- /.article__content -->
+
+    <div class="article__aside">
+      <div class="article__aside-inner">
+        {%- if blog.articles.size > 1 -%}
+          {{- related_items_widget -}}
+        {% endif %}
+
+        {% if _product != blank %}
+          <div class="widget-article">
+            <div class="widget__head">{{- 'products.product.recommended' | t -}}</div>
+
+            <div class="widget__body">
+              <div class="product-article">
+                <a href="{{- _product.url -}}" class="product__image">
+                    <img src="{{- _product.featured_image | img_url: '800x' -}}" alt="{{- _product.featured_image.alt -}}">
+                </a>
+
+                <a href="{{- _product.url -}}" class="product__title">
+                  <h5>{{- _product.title -}}</h5>
+                </a>
+
+                {% assign product_sub_title = 'Supports active and growing joints.' %}
+                <p class="product__sub-title">{{- product_sub_title -}}</p><!-- /.product__sub-title -->
+
+                <div class="product__reviews">
+                  <!-- TrustBox widget - Product Mini -->
+                  <div class="trustpilot-widget" data-locale="en-GB" data-template-id="54d39695764ea907c0f34825" data-businessunit-id="5e4e87b71f96930001914d27" data-style-height="24px" data-style-width="100%" data-theme="light" data-sku="{% for variant in _product.variants  %}{{ variant.sku }},{% endfor %}">
+                    <a href="https://uk.trustpilot.com/review/lintbells.com" target="_blank" rel="noopener">Trustpilot</a>
+                  </div> <!-- End TrustBox widget -->
+                </div><!-- /.product__reviews -->
+              </div><!-- /.article__product -->
+            </div><!-- /.article-items -->
+          </div><!-- /.article__aside-item -->
+        {% endif %}
+      </div><!-- /.article__aside-inner -->
+    </div><!-- /.article__aside -->
+  </div><!-- /.article__container -->
+
+  {%- if blog.articles.size > 1 -%}
+    <div class="article__foot">
+      <div class="shell article__foot-shell">
+        <h2 class="article__foot-title">{{- 'blogs.article.related_posts' | t -}}</h2>
+
+        <div class="articles-items">{{- related_main_items -}}</div><!-- /.article-items -->
+      </div><!-- /.shell article__foot-shell -->
+    </div><!-- /.article__foot -->
+  {% endif %}
+</div><!-- /.article -->
+

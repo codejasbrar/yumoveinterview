@@ -1,0 +1,976 @@
+<script>
+
+  Shopify.queue = [];
+  var dogsArray = [];
+
+  /** Hardcoded loading variant IDs */
+  var ymwd480LoadingId = 31285343780919;
+  var ymcs30LoadingId = 31285354725431;
+  var ymcm30LoadingId = 31285354758199;
+  var ymcl30LoadingId = 31285354790967;
+  var ymcs90LoadingId = 31285354823735;
+  var ymcm90LoadingId = 31285354856503;
+  var ymcl90LoadingId = 31285354889271;
+  var ypcs30LoadingId = 31323969486903;
+  var ypcm30LoadingId = 31323969519671;
+  var ypcl30LoadingId = 31323969552439;
+  var ypcl90LoadingId = 31285355020343;
+  var ym60LoadingId = 31285396209719;
+  var ym120LoadingId = 31285396242487;
+  var ymact60LoadingId = 31285404008503;
+  var ymact240LoadingId = 31285404041271;
+  var ymp60LoadingId = 31285413609527;
+  var ymp120LoadingId = 31285413642295;
+  var loadingVariantId = '';
+
+  $(function() {
+
+    /** On page load, set flag */
+    localStorage.setItem('newDog', true);
+
+    /** 
+     * When a dog is added, the flag is set to false.
+     * If a second dog is to be added, the flag needs to be reset
+     */
+    $('.btn--add-new').click(function() {
+      localStorage.setItem('newDog', true);
+    });
+    
+    /** Logic determining whether to skip the eating style step */
+    $('#btn--activity').click(function() {
+      var age = $('#age-select option:selected').val();
+      var activityLevel = $('input[name=activity]:checked').val();
+      var weight = $('input[name=weight]:checked').val();
+      var jointIssues = $('#joint-condition').is(':checked') ? true : false;
+      var nextPageHref;
+
+      if(($('#working-dog').is(':checked'))) {
+        localStorage.setItem('fussy', 'false');
+        nextPageHref = '#new-to-yumove';
+        backHref = '#activity';
+        $('#nav--eating-style').hide();
+      }
+      else if(jointIssues && (weight != 'Over 45kg')) {
+        localStorage.setItem('fussy', 'true');
+        nextPageHref = '#eating';
+        backHref = '#eating';
+        $('#nav--eating-style').show();        
+      }
+      // else if(((age < 4) && ((activityLevel == 'Active') || (activityLevel == 'Leisurely') || (activityLevel == 'Intensely Active'))) || ((weight == ('Up to 15kg') || weight == ('16-30kg')) && ((age >= 5) && (age <= 7)) && ((activityLevel == 'Active') || (activityLevel == 'Leisurely'))) || ((weight == 'Over 45kg') && (((age >= 5) && (age <= 7)) && ((activityLevel != 'Leisurely') && (activityLevel != 'Active'))))) {
+      //   localStorage.setItem('fussy', 'false');
+      //   nextPageHref = '#new-to-yumove';
+      //   backHref = '#activity';
+      //   $('#nav--eating-style').hide();        
+      // }
+      else if((((age < 4) && ((activityLevel == 'Active') || (activityLevel == 'Leisurely') || (activityLevel == 'Intensely Active'))) && !jointIssues) || ((weight == ('Up to 15kg') || weight == ('16-30kg')) && ((age >= 5) && (age <= 7)) && ((activityLevel == 'Active') || (activityLevel == 'Leisurely'))) || ((weight == 'Over 45kg') && ((age < 4) || ((age >= 8)) || (jointIssues) || ((age >= 5) && (age <= 7)) && (activityLevel != 'Leisurely') && (activityLevel != 'Active')))) {
+        localStorage.setItem('fussy', 'false');
+        nextPageHref = '#new-to-yumove';
+        backHref = '#activity';
+        $('#nav--eating-style').hide();
+      }  
+      else {
+        localStorage.setItem('fussy', 'true');
+        nextPageHref = '#eating';
+        backHref = '#eating';
+        $('#nav--eating-style').show();
+      }
+      $(this).attr('href', nextPageHref);
+    });      
+
+    /** Get values required for recommendation */
+    $('.btn--confirm').click(function() {
+      dogs = JSON.parse(localStorage.getItem('dogs'));
+      dog = dogs[dogs.length - 1];
+      name = dog.name;
+      weight = dog.weight;
+      activityLevel = dog.activity;
+      var fussy;
+      if(localStorage.getItem('fussy') == 'false') {
+        fussy = false;
+      }
+      else {
+        fussy = dog['eating-plan'] == "Fussy" ? true : false;
+      }
+      age = dog.age;
+      firstTime = dog.new;
+      workingDog = dog['working-dog'];
+      jointCondition = dog['joint-condition'];
+
+      /** If not new to YuMOVE, bypass loading information */
+      if(firstTime == 'No') {
+        if(dogs.length > 1) {
+          $('#recommendation .form__step-actions a').attr('href', '#subscription-plan');
+        } else {
+          $('#recommendation .form__step-actions a').attr('href', '#extras');
+        }
+        
+      }
+      else {
+        $('#recommendation .form__step-actions a').attr('href', '#recommendation2');
+        if(dogs.length > 1) {
+          $('#recommendation2 .form__step-actions a').attr('href', '#subscription-plan');
+        }
+      }
+
+      getRecommendation(weight, activityLevel, fussy, age, firstTime, workingDog, jointCondition, name);
+    });
+  });
+  
+  /**
+   * This is the main function that performs the following actions:
+   *
+   * - Select a variant ID based on provided dog attributes
+   * - Calculate prices with discounts
+   * - Populate elements
+   * - Get dosage quantities
+   * - Call function to populate plan template from array of dogs
+   * - Call function to add products to queue
+   */
+  function getRecommendation(weight, activityLevel, fussy, age, firstTime, workingDog, jointCondition, name) {
+
+    $('.trustbox-subflow').hide();
+
+    var loadingQuantity = 0;
+    var product, variantId, loadingVariantId, frequency, unitType, variant, chews, loadingDosage,
+      ongoingDosage, tabletsOrChews, rulesetId, loadingDosage, ongoingDosage, tabletsOrChewsOngoing, tabletsOrChewsLoading, autoRenewVariantId
+
+    /** Map dog to product */
+    if(workingDog) {
+      if(weight == '31-45kg') {
+        product = {{ working_dog_d | json }};
+        variantId = '{{ ymwd_480_d_id }}';  
+        autoRenewVariantId = '{{ ymwd_480_d_id_ar }}';
+        frequency = 160;
+        unitType = 'Days';
+      }
+      else {
+        product = {{ working_dog_m | json }};
+        variantId = '{{ ymwd_480_m_id }}'; 
+        autoRenewVariantId = '{{ ymwd_480_m_id_ar }}';
+        if(weight == 'Up to 15kg') {
+          frequency = 16;
+        }
+        else if(weight == '16-30kg') {
+          frequency = 8;
+        }
+        else if(weight == 'Over 45kg') {
+          frequency = 4;
+        }
+        unitType = 'Months';
+      }
+      quantity = 1;
+      loadingQuantity = 0;
+      loadingVariantId = '';
+      $('#tp_working_dog').show();
+    }
+    else {
+      if(weight == 'Up to 15kg') {
+        if(fussy) {
+          if((age >= 8) && (activityLevel == 'Active')) {
+            product = {{ one_a_day_m | json }};
+            variantId = '{{ ymcs30_id }}';
+            autoRenewVariantId = '{{ ymcs30_id_ar }}';
+            loadingVariantId = ymcs30LoadingId;
+            $('#tp_one_a_day').show();
+          }
+          else {
+            product = {{ one_a_day_plus_m | json }}; // DOESN'T EXIST
+            variantId = '{{ ypcs30_id }}';
+            autoRenewVariantId = '{{ ypcs30_id_ar }}';
+            loadingVariantId = ypcs30LoadingId;
+            $('#tp_one_a_day_plus').show();
+          }
+          frequency = 28;
+          unitType = 'Days';
+          chews = true;
+        } 
+        else {
+          if((age >= 8) && (activityLevel == 'Active')) {
+            product = {{ yumove_dog_m | json }};
+            variantId = '{{ ym60_m_id }}';
+            autoRenewVariantId = '{{ ym60_m_id_ar }}';
+            loadingVariantId = ym60LoadingId;
+            $('#tp_yumove_dog').show();
+          }
+          else if ((((activityLevel == 'Leisurely') || (activityLevel == 'Active')) && ((age <= 4) || ((age >= 5) && (age <= 7))) || ((activityLevel == 'Intensely Active') && (age <= 4))) && !jointCondition) {
+            product = {{ young_and_active_m | json }};
+            variantId = '{{ ymact60_m_id }}';
+            autoRenewVariantId = '{{ ymact60_m_id_ar }}';
+            loadingVariantId = ymact60LoadingId;
+            $('#tp_young_and_active').show();
+          }
+          else {
+            product = {{ yumove_plus_m | json }};
+            variantId = '{{ ymp60_m_id }}';
+            autoRenewVariantId = '{{ ymp60_m_id_ar }}';
+            loadingVariantId = ymp60LoadingId;
+            $('#tp_yumove_plus').show();
+          }
+          frequency = 58;
+          unitType = 'Days';
+        }     
+        quantity = 1;
+        loadingQuantity = 1;
+      }
+      else if(weight == '16-30kg') {
+        if(fussy) {
+          if((age >= 8) && (activityLevel == 'Active') && !jointCondition) {
+            product = {{ one_a_day_m | json }};
+            variantId = '{{ ymcm30_id }}';
+            autoRenewVariantId = '{{ ymcm30_id_ar }}';
+            loadingVariantId = ymcm30LoadingId;
+            $('#tp_one_a_day').show();
+          }
+          else {
+            product = {{ one_a_day_plus_m | json }}; // DOESN'T EXIST
+            variantId = '{{ ypcm30_id }}';
+            autoRenewVariantId = '{{ ypcm30_id_ar }}';
+            loadingVariantId = ypcm30LoadingId;
+            $('#tp_one_a_day_plus').show();
+          }          
+          frequency = 28;
+          unitType = 'Days';
+          chews = true;
+        } 
+        else {
+          if((age >= 8) && (activityLevel == 'Active') && !jointCondition) {
+            product = {{ yumove_dog_m | json }};
+            variantId = '{{ ym60_m_id }}';
+            autoRenewVariantId = '{{ ym60_m_id_ar }}';
+            loadingVariantId = ym60LoadingId;
+            $('#tp_yumove_dog').show();
+          }
+          else if ((((activityLevel == 'Leisurely') || (activityLevel == 'Active')) && ((age <= 4) || ((age >= 5) && (age <= 7))) || ((activityLevel == 'Intensely Active') && (age <= 4))) && !jointCondition) {
+            product = {{ young_and_active_m | json }};
+            variantId = '{{ ymact60_m_id }}';
+            autoRenewVariantId = '{{ ymact60_m_id_ar }}';
+            loadingVariantId = ymact60LoadingId;
+            $('#tp_young_and_active').show();
+          }
+          else {
+            product = {{ yumove_plus_m | json }};
+            variantId = '{{ ymp60_m_id }}';
+            autoRenewVariantId = '{{ ymp60_m_id_ar }}';
+            loadingVariantId = ymp60LoadingId;
+            $('#tp_yumove_plus').show();
+          }
+          frequency = 28;
+          unitType = 'Days';
+        }     
+        quantity = 1;
+        loadingQuantity = 1;    
+      }  
+      else if(weight == '31-45kg') {
+        if(fussy) {
+          if(((age >= 5) && (age <= 7)) && ((activityLevel == 'Leisurely') || (activityLevel == 'Active'))) {
+            product = {{ one_a_day_m | json }};
+            variantId = '{{ ymcl30_id }}';
+            autoRenewVariantId = '{{ ymcl30_id_ar }}';
+            loadingVariantId = ymcl30LoadingId;
+            frequency = 1;
+            unitType = 'Months';
+            $('#tp_one_a_day').show();
+          }
+          else {
+            loadingVariantId = ypcl30LoadingId;
+            if(((age >= 5) && (age <= 7)) && ((activityLevel == 'Inactive') || (jointCondition))) {
+              product = {{ one_a_day_plus_m | json }}; // DOESN'T EXIST
+              variantId = '{{ ypcl30_m_id }}';
+              autoRenewVariantId = '{{ ypcl30_m_id_ar }}';
+              frequency = 1;
+              unitType = 'Months';
+              $('#tp_one_a_day_plus').show();
+            }
+            else {
+              product = {{ one_a_day_plus_m | json }}; // DOESN'T EXIST
+              variantId = '{{ ypcl30_m_id }}';              
+              autoRenewVariantId = '{{ ypcl30_m_id_ar }}';              
+              frequency = 1;
+              unitType = 'Months';
+              $('#tp_one_a_day_plus').show();
+            }
+          }
+          quantity = 1;
+          loadingQuantity = 1;
+          chews = true;
+        }
+        else {
+          if(((age >= 5) && (age <= 7)) && ((activityLevel == 'Leisurely') || (activityLevel == 'Active'))) {
+            if(activityLevel == 'Leisurely') {
+              product = {{ yumove_plus_d | json }};
+              variantId = '{{ ymp120_d_id }}';
+              autoRenewVariantId = '{{ ymp120_d_id_ar }}';
+              loadingVariantId = ymp120LoadingId;
+              quantity = 1;
+              loadingQuantity = 1;
+              $('#tp_yumove_plus').show();
+            }
+            else if(activityLevel == 'Active') {
+              product = {{ yumove_dog_d | json }};
+              variantId = '{{ ym120_d_id }}';
+              autoRenewVariantId = '{{ ym120_d_id_ar }}';
+              loadingVariantId = ym120LoadingId;
+              quantity = 1;
+              loadingQuantity = 1;
+              $('#tp_yumove_dog').show();
+            }
+          }
+          else if(((age <= 4) && ((activityLevel == 'Leisurely') || (activityLevel == 'Active') || (activityLevel == 'Intensely Active'))) && !jointCondition) {
+            product = {{ young_and_active_d | json }};
+            variantId = '{{ ymact60_d_id }}';
+            autoRenewVariantId = '{{ ymact60_d_id_ar }}';
+            loadingVariantId = ymact60LoadingId;
+            quantity = 2;
+            loadingQuantity = 2;
+            $('#tp_young_and_active').show();
+          }
+          else {
+            product = {{ yumove_plus_d | json }};
+            variantId = '{{ ymp120_d_id }}';
+            autoRenewVariantId = '{{ ymp120_d_id_ar }}';
+            loadingVariantId = ymp120LoadingId;
+            quantity = 1;
+            loadingQuantity = 1;
+            $('#tp_yumove_plus').show();
+          }
+          frequency = 38;
+          unitType = 'Days';             
+        }
+      } 
+      else if(weight == 'Over 45kg') {
+        if(fussy) {
+          if(((age >= 5) && (age <= 7)) && ((activityLevel == 'Leisurely') || (activityLevel == 'Active'))) {
+            product = {{ one_a_day_m | json }};
+            variantId = '{{ ymcl90_id }}';
+            autoRenewVariantId = '{{ ymcl90_id_ar }}';
+            loadingVariantId = ymcl90LoadingId;
+            $('#tp_one_a_day').show();
+          }
+          else {
+            product = {{ one_a_day_plus_m | json }}; // DOESN'T EXIST
+            variantId = '{{ ypcl90_id }}';
+            autoRenewVariantId = '{{ ypcl90_id_ar }}';
+            loadingVariantId = ypcl90LoadingId;
+            $('#tp_one_a_day_plus').show();
+          }
+          frequency = 58;
+          unitType = 'Days';
+          quantity = 1;
+          loadingQuantity = 1;
+          chews = true;
+        }
+        else {
+          if(((age >= 5) && (age <= 7)) && ((activityLevel == 'Leisurely') || (activityLevel == 'Active'))) {
+            product = {{ yumove_dog_m | json }};
+            variantId = '{{ ym120_m_id }}';
+            autoRenewVariantId = '{{ ym120_m_id_ar }}';
+            loadingVariantId = ym120LoadingId;
+            quantity = 1;
+            loadingQuantity = 1;
+            $('#tp_yumove_dog').show();
+          }
+          else if((age <= 4) && ((activityLevel == 'Leisurely') || (activityLevel == 'Active') || (activityLevel == 'Intensely Active')) && !jointCondition) {
+            product = {{ young_and_active_m | json }};
+            variantId = '{{ ymact60_m_id }}';
+            autoRenewVariantId = '{{ ymact60_m_id_ar }}';
+            loadingVariantId = ymact60LoadingId;
+            quantity = 2;
+            loadingQuantity = 2;
+            $('#tp_young_and_active').show();
+          }
+          else {
+            product = {{ yumove_plus_m | json }};
+            variantId = '{{ ymp120_m_id }}';
+            autoRenewVariantId = '{{ ymp120_m_id_ar }}';
+            loadingVariantId = ymp120LoadingId;
+            quantity = 1;
+            loadingQuantity = 1;
+            $('#tp_yumove_plus').show();
+          }
+          frequency = 28;
+          unitType = 'Days';             
+        }
+      }                 
+    }  
+
+    if (unitType == 'Months') {
+      rulesetId = 220170;
+    }
+    else {
+      rulesetId = 223467;
+    }
+
+    if(weight == 'Up to 15kg') {
+
+    }
+
+    /** Determine dosage quantities */
+    if(chews) {
+      if(weight == 'Over 45kg') {
+        loadingDosage = 3;
+        ongoingDosage = 1.5;
+      }
+      else {
+        loadingDosage = 2;
+        ongoingDosage = 1
+      }
+      tabletsOrChewsOngoing = 'Chew';
+      tabletsOrChewsLoading = 'Chew';
+    }
+    else {
+      if(weight == 'Up to 15kg'){
+        loadingDosage = 2;
+        ongoingDosage = 1;
+      }
+      else if(weight == '16-30kg') {
+        loadingDosage = 4;
+        ongoingDosage = 2;
+      }
+      else if(weight == '31-45kg'){
+        loadingDosage = 6;
+        ongoingDosage = 3;
+      }
+      else {
+        loadingDosage = 8;
+        ongoingDosage = 4;        
+      }
+      tabletsOrChewsOngoing = 'Tablet';
+      tabletsOrChewsLoading = 'Tablet';
+    }
+    if(ongoingDosage > 1) { tabletsOrChewsOngoing += 's'; }
+    if(loadingDosage > 1) { tabletsOrChewsLoading += 's'; }
+
+    /** Get variant */
+    for(var i = 0; i < product.variants.length; i++) {
+      if(product.variants[i].id == variantId) {
+        variant = product.variants[i];
+        break;
+      }
+    } 
+
+    /** Calculate prices */
+    discount = {{ _settings.subscription_discount }};
+    discountPrice = variant.price - (variant.price * 0.{{ _settings.subscription_discount }});
+    multiDogDiscountPrice = variant.price - (variant.price * 0.4);
+    subtotal = variant.price * quantity;
+    discountSubtotal = ((variant.price - (variant.price * 0.{{ _settings.subscription_discount }})) * quantity)
+    multiDogDiscountSubtotal = ((variant.price - (variant.price * 0.4)) * quantity)
+    nextDeliverySubtotal = variant.price * (quantity);
+    nextDeliveryDiscountSubtotal = nextDeliverySubtotal - (nextDeliverySubtotal * 0.{{ _settings.subscription_discount }});
+
+    /** Populate HTML elements with recommendation info */
+    $('#recommendation .product__media img').attr('src', product.images[0]);
+    $('#split-description').html(product.description.split('&lt;!-- split --&gt;')[0]);
+    $('.recommended-product-title').text(product.title);
+    $('.recommended-product-price').text(Shopify.formatMoney((variant.price * quantity), "{{ shop.money_format }}"));
+    $('.recommended-product-price__discount').text(Shopify.formatMoney((discountPrice * quantity), "{{ shop.money_format }}"));
+
+    var handle = product.handle;
+    $('#recommendation .product__actions a').attr('href', '/products/' + handle);
+    $('#dog-plans__first-delivery').empty();
+    $('#dog-plans__next-delivery').empty();
+    $('#one-time-recommendations').empty();
+
+    $('#dosage__loading').text(loadingDosage);
+    $('.dosage__ongoing').text(ongoingDosage);
+    $('#tabs-or-chews__loading').text(tabletsOrChewsLoading);
+    $('.tabs-or-chews__ongoing').text(tabletsOrChewsOngoing); 
+
+    /** If editing a dog, remove the last element before adding to array */
+    if(localStorage.getItem('newDog') != 'true'){
+      dogsArray.pop();    
+    }  
+
+    /** Create array of dogs with product/variant information for plan template */
+    dogsArray.push({
+      name: name,
+      variant: variant,
+      productTitle: product.title,
+      productPrice: Shopify.formatMoney((variant.price * quantity), "{{ shop.money_format }}"),
+      discountProductPrice: Shopify.formatMoney((discountPrice * quantity), "{{ shop.money_format }}"),
+      subtotalUnformatted: subtotal,
+      subtotal: Shopify.formatMoney(subtotal, "{{ shop.money_format }}"),
+      discountSubtotalUnformatted: discountSubtotal,
+      discountSubtotal: Shopify.formatMoney(discountSubtotal, "{{ shop.money_format }}"),
+      multiDogDiscountSubtotalUnformatted: multiDogDiscountSubtotal,
+      multiDogDiscountSubtotal: Shopify.formatMoney(multiDogDiscountSubtotal, "{{ shop.money_format }}"),
+      nextDeliverySubtotalUnformatted: nextDeliverySubtotal,
+      nextDeliverySubtotal: Shopify.formatMoney(nextDeliverySubtotal, "{{ shop.money_format }}"),
+      nextDeliveryDiscountSubtotalUnformatted: nextDeliveryDiscountSubtotal,
+      nextDeliveryDiscountSubtotal: Shopify.formatMoney(nextDeliveryDiscountSubtotal, "{{ shop.money_format }}"),
+      oneTimeUrl: '/products/' + product.handle,
+      frequency: frequency,
+      unitType: unitType     
+    });
+
+    populatePlanTemplate(dogsArray);
+
+    buildQueue(autoRenewVariantId, quantity, frequency, unitType, rulesetId, firstTime, loadingVariantId, loadingQuantity);
+    
+    /** Flag set to false so that editing the current dog won't duplicate the product */
+    localStorage.setItem('newDog', false);     
+  }
+
+  /**
+   * There's a template in subscribe.step.plan.liquid
+   * 
+   * This function populates it for each dog
+   */
+   function populatePlanTemplate(dogsArray) {
+
+    var totalPrice = 0;
+    var totalPriceDiscount = 0;
+    var nextDeliveryTotalPrice = 0;
+    var nextDeliveryTotalPriceDiscount = 0; 
+    var multiDogTotalPriceDiscount = 0;
+    var visualFrequency, visualUnitType;
+
+    dogsArray.forEach(function(dog, index) {
+
+      /** Calculate totals */
+      totalPrice += dog.subtotalUnformatted;
+      totalPriceDiscount += dog.discountSubtotalUnformatted;
+      multiDogTotalPriceDiscount += dog.multiDogDiscountSubtotalUnformatted;
+      nextDeliveryTotalPrice += dog.nextDeliverySubtotalUnformatted;
+      nextDeliveryTotalPriceDiscount += dog.nextDeliveryDiscountSubtotalUnformatted;
+
+      unitType = dog.frequency > 1 ? dog.unitType : dog.unitType.slice(0, -1);
+      
+      if (dog.frequency == 28) {
+        console.log('frequency is 28 days');
+        visualFrequency = 1;
+        visualUnitType = 'Month';
+      } else if (dog.frequency == 58) {
+        visualFrequency = 2;
+        visualUnitType = 'Months';
+      } else {
+        visualFrequency = 40;
+        visualUnitType = 'Days';
+      }
+      
+      if (dogsArray.length > 1) {
+        var dogProperties = [{
+          name: dog.name,
+          productTitle: dog.productTitle,
+          productPrice: dog.productPrice,
+          subtotal: dog.subtotal,
+          discountSubtotal: dog.multiDogDiscountSubtotal,
+          nextDeliverySubtotal: dog.nextDeliverySubtotal,  
+          nextDeliveryDiscountSubtotal: dog.nextDeliveryDiscountSubtotal,
+          frequency: visualFrequency,
+          unitType: visualUnitType,
+          discountPercentage:'40'
+        }];    
+      } else {
+        var dogProperties = [{
+          name: dog.name,
+          productTitle: dog.productTitle,
+          productPrice: dog.productPrice,
+          subtotal: dog.subtotal,
+          discountSubtotal: dog.discountSubtotal,
+          nextDeliverySubtotal: dog.nextDeliverySubtotal,  
+          nextDeliveryDiscountSubtotal: dog.nextDeliveryDiscountSubtotal,
+          frequency: visualFrequency,
+          unitType: visualUnitType,
+          discountPercentage:{{ _settings.subscription_discount }}
+        }];    
+      }
+      
+      
+      function render(props) {
+        return function(tok, i) {
+          return (i % 2) ? props[tok] : tok;
+        };
+      }
+
+      /** Map dog object to js template in ../snippets/subscribe.step.plan.liquid */
+      $(function() {
+        var dogPlanFirstDeliveryTemplate = $('script[data-template="dog-plan__first-delivery"]').text().split(/\$\{(.+?)\}/g);
+        var dogPlanNextDeliveryTemplate = $('script[data-template="dog-plan__next-delivery"]').text().split(/\$\{(.+?)\}/g);
+        
+        /** Map properties to template   */
+        $('#dog-plans__first-delivery').append(dogProperties.map(function(properties) {
+          return dogPlanFirstDeliveryTemplate.map(render(properties)).join('');
+        }));
+        $('#dog-plans__next-delivery').append(dogProperties.map(function(properties) {
+          return dogPlanNextDeliveryTemplate.map(render(properties)).join('');
+        }));        
+      });
+
+      var oneTimeUrlCheckedD = dog.oneTimeUrl.includes('-d');
+      var oneTimeUrlCheckedOne = dog.oneTimeUrl.includes('-1');
+      var oneTimeUrlCheckedYmact = dog.oneTimeUrl.includes('yumove-young-active-d');
+      
+      if (oneTimeUrlCheckedYmact === true) {
+           var oneTimeUrlTrimmed = dog.oneTimeUrl.replace('yumove-young-active-d', 'yumove-active-dog');
+          $('#one-time-recommendations').append('\
+            <p>\
+              <a href="' + oneTimeUrlTrimmed + '">' + dog.productTitle + '</a>\
+            </p>\
+          ');                   
+        } else if (oneTimeUrlCheckedOne === true) {
+          var oneTimeUrlTrimmed = dog.oneTimeUrl.replace('-1', '');
+          $('#one-time-recommendations').append('\
+            <p>\
+              <a href="' + oneTimeUrlTrimmed + '">' + dog.productTitle + '</a>\
+            </p>\
+          ');                       
+        } else if (oneTimeUrlCheckedD === true) {
+           var urlEndsWith = dog.oneTimeUrl.endsWith('-d');
+                             
+          if ( urlEndsWith === true) {
+                            
+            var oneTimeUrlTrimmed = dog.oneTimeUrl;
+            var removeUrl = '-d';
+            var replaceUrl = '';
+          
+            var n = oneTimeUrlTrimmed.lastIndexOf(removeUrl);
+                             
+            oneTimeUrlTrimmed = oneTimeUrlTrimmed.slice(0, n) + oneTimeUrlTrimmed.slice(n).replace(removeUrl, replaceUrl);
+                             
+            $('#one-time-recommendations').append('\
+              <p>\
+                <a href="' + oneTimeUrlTrimmed + '">' + dog.productTitle + '</a>\
+              </p>\
+            ');                    
+          } else {
+            $('#one-time-recommendations').append('\
+              <p>\
+                <a href="' + dog.oneTimeUrl + '">' + dog.productTitle + '</a>\
+              </p>\
+            ');                     
+          }
+          
+        } else {
+        $('#one-time-recommendations').append('\
+          <p>\
+            <a href="' + dog.oneTimeUrl + '">' + dog.productTitle + '</a>\
+          </p>\
+        ');                    
+      }   
+                             
+      
+    });
+
+    /** Populate plan totals */
+    $('.total-price').text(Shopify.formatMoney(totalPrice, "{{ shop.money_format }}"));                                       
+    if (dogsArray.length > 1) {
+      $('.total-price__discount').text(Shopify.formatMoney(multiDogTotalPriceDiscount, "{{ shop.money_format }}"));                      
+    } else {
+      $('.total-price__discount').text(Shopify.formatMoney(totalPriceDiscount, "{{ shop.money_format }}"));                                                      
+    }  
+    $('.next-delivery-total-price').text(Shopify.formatMoney(nextDeliveryTotalPrice, "{{ shop.money_format }}"));
+    $('.next-delivery-total-price__discount').text(Shopify.formatMoney(nextDeliveryTotalPriceDiscount, "{{ shop.money_format }}"));  
+
+    if(totalPriceDiscount == nextDeliveryTotalPriceDiscount) { 
+      $('#next-delivery-note').show();
+    }
+    else {
+      $('#next-delivery-note').hide();
+    } 
+                           
+    
+  }
+
+  /**
+   * Build a queue of products which will be added to cart when the user proceeds to checkout
+   */
+  function buildQueue(autoRenewVariantId, quantity, frequency, unitType, rulesetId, firstTime, loadingVariantId, loadingQuantity) {
+    
+    /** Need to adjust the queue when a dog is edited to prevent products being added more than once */
+    if(localStorage.getItem('newDog') != 'true'){
+      if(Shopify.queue[Shopify.queue.length - 1].props.loadingProduct) {
+        Shopify.queue.pop();    
+      }
+      Shopify.queue.pop();    
+    }  
+
+    /** Add subscription product */
+    Shopify.queue.push({
+      variantId: autoRenewVariantId,
+      quantity: quantity,
+      props: {
+        shipping_interval_frequency: frequency,
+        shipping_interval_unitType: unitType,
+        subscription_id: rulesetId,
+        loadingProduct: false,
+        petName: name,
+        petWeight: weight,
+        petFirstTimeUser: firstTime
+      }
+    });
+
+    /** If loading, add loading product */
+    if (firstTime == 'Yes' && loadingVariantId != '') {
+      Shopify.queue.push({
+        variantId: loadingVariantId,
+        quantity: loadingQuantity,
+        props: {
+          loadingProduct: true
+        }
+      });
+    }
+    console.log(Shopify.queue);
+  }
+    
+                      
+                      /**
+   * 
+   * Extras section functions
+   * 
+   */
+    $('.btn-extras-subs').on('click', function(e) {
+      populateMultiSubs();
+    });
+    
+/**     This function will find the correct item based on what has been added and add to queue it will also amend any prices for the plan screen 
+     as well as adding the extra info to the plan */
+    
+    function populateMultiSubs() {
+     var multiSubProduct = 0;
+      
+     $('#extras-subscription-slider').find('.multi-sub-item').each(function(index) {
+       if($(this).find('.item-added-check').val() == 'added') {
+         var handle = $(this).find('.item-added-handle').val();
+         var frequency = $(this).find('.item-added-frequency').val();
+         var price = $(this).find('.sub-item-formated-price').text();
+         var title = $(this).find('.sub-item-title').text();
+         var rulesetId = 220170;
+         var unitType = 'Months';
+         var variantID;
+         
+         var fullPrice = $(this).find('.item-price-handle').text();
+         var fullPriceNumber = Number(fullPrice);
+         var currentTotal = $('#subscription-plan .price .total-price').text();
+         var formatedCurrentTotal = currentTotal.replace('£','');
+         var currentTotalNumber = Number(formatedCurrentTotal);
+         
+         multiSubProduct++;
+         
+         switch(handle) {
+          case 'imove':
+            variantID = '{{ imove_id_ar }}';
+            break;
+          case 'yuderm-itching-dog':
+            variantID = '{{ yuderm_itching_dog_id_ar }}';
+            break;
+          case 'yucalm-dog':
+            variantID = '{{ yucalm_dog_id_ar }}';
+            break;
+          case 'yudigest-for-dogs':
+            variantID = '{{ yudigest_for_dogs_id_ar }}';
+            break;
+          case 'yucalm-one-a-day':
+            variantID = '{{ yucalm_one_a_day_id_ar }}';
+            break;
+          case 'yumega-show-dog':
+            variantID = '{{ yumega_show_dog_id_ar }}';
+            break;
+          case 'yuderm-moulting-dog':
+            variantID = '{{ yuderm_moulting_dog_id_ar }}';
+            break;
+          case 'yuderm-skin-cream':
+            variantID = '{{ yuderm_skin_cream_id_ar }}';
+            break;
+          case 'yudigest-plus-for-dogs':
+            variantID = '{{ yudigest_plus_for_dogs_id_ar }}';
+            break;
+          case 'yuderm-boost':
+            variantID = '{{ yuderm_boost_id_ar }}';
+            break;
+          case 'yucare-tooth-cleaner':
+            variantID = '{{ yucare_tooth_cleaner_id_ar }}';
+            break;
+          case 'yucare-tooth-polish':
+            variantID = '{{ yucare_tooth_polish_id_ar }}';
+            break;
+          default:
+             variantID = 'invalid-variant';
+         }
+         
+         $(this).find('.item-added-id').val(variantID);
+                  
+         $('#recommendation2').find('.btn--next').attr('href', '#subscription-plan');
+         $('#recommendation1').find('.btn--next').attr('href', '#subscription-plan');
+                  
+         if( multiSubProduct > 0 ) {
+           $('.btn--add-new').text('Add another dog');
+           $('.plan-discount-percentage').text('40%');
+         }
+         
+         var unformattedCurrentTotal = currentTotalNumber + fullPriceNumber;
+         currentTotal = unformattedCurrentTotal.toFixed(2);
+         
+         var itemIndex = Shopify.queue.map(function(item) { return item.variantId; }).indexOf(variantID);
+         if(itemIndex < 0){
+           
+           if( multiSubProduct === 1 ) {
+             if(frequency == 1) {
+               $('<thead class="plan-extras"><tr><th colspan="2">Extras</th></tr></thead><tbody class="' + handle + '"><tr class="multi-sub-tr"><td>' + title + '</td><td>£' + fullPrice + '</td></tr><tr><td>Delivery every ' + frequency + ' month</td><td>Free</td></tr></tbody>').insertAfter('#dog-plans__first-delivery tbody:last-of-type');      
+             } else {
+               $('<thead class="plan-extras"><tr><th colspan="2">Extras</th></tr></thead><tbody class="' + handle + '"><tr class="multi-sub-tr"><td>' + title + '</td><td>£' + fullPrice + '</td></tr><tr><td>Delivery every ' + frequency + ' months</td><td>Free</td></tr></tbody>').insertAfter('#dog-plans__first-delivery tbody:last-of-type');
+             }
+           } else {
+             if(frequency == 1) {
+               $('<tbody class="' + handle + '"><tr class="extras-spacer"></tr><tr class="multi-sub-tr"><td>' + title + '</td><td>£' + fullPrice + '</td></tr><tr><td>Delivery every ' + frequency + ' month</td><td>Free</td></tr></tbody>').insertAfter('#dog-plans__first-delivery tbody:last-of-type');
+             } else {
+               $('<tbody class="' + handle + '"><tr class="extras-spacer"></tr><tr class="multi-sub-tr"><td>' + title + '</td><td>£' + fullPrice + '</td></tr><tr><td>Delivery every ' + frequency + ' months</td><td>Free</td></tr></tbody>').insertAfter('#dog-plans__first-delivery tbody:last-of-type');
+             }
+           }
+                   
+           var discountedTotalUnformated = (currentTotal / 100) * 60;  
+           var discountTotal = discountedTotalUnformated.toFixed(2);
+           $('#subscription-plan .price .total-price').text('£' + currentTotal);
+           $('#subscription-plan .price .total-price__discount').text('£' + discountTotal);
+          
+           Shopify.queue.push({
+             variantId: variantID,
+             quantity: 1,
+             props: {
+               shipping_interval_frequency: frequency,
+               shipping_interval_unitType: unitType,
+               subscription_id: rulesetId,
+               extras_item: true,
+             }
+           });
+         }
+         
+         console.log(Shopify.queue);
+       }  
+     }); 
+   }
+   
+/**  Event to handle the button change on extras step 2 and the removal of an item from the queue if the button is returned to and un added */
+
+   $('.sub-item-btn').on('click', function(e) {
+    var container = $(this).closest('.sub-item-actions');
+    var addedInput = $(container).find('.item-added-check').val();
+    var handle = $(container).find('.item-added-handle').val();
+    var fullPrice = $(container).find('.item-price-handle').text();
+    var handleSelector = '.' + handle
+    var variantId = $(container).find('.item-added-id').val();
+    
+    if(addedInput != 'added') {
+      $(this).addClass('sub-item-added');
+      $(this).find('.sub-item-btn-text').text('ADDED'); 
+      $(this).find('.interest-input').val('true');
+      $(container).find('.item-added-check').val('added');
+    } else {
+      $(this).removeClass('sub-item-added');
+      $(this).find('.sub-item-btn-text').text('ADD TO PLAN');
+      $(this).find('.interest-input').val('');
+      $(container).find('.item-added-check').val('');
+      
+      if(variantId != "") {
+        var removeIndex = Shopify.queue.map(function(item) { return item.variantId; }).indexOf(variantId);
+        Shopify.queue.splice(removeIndex, 1);
+        
+        $('#dog-plans__first-delivery').find(handleSelector).remove();
+        
+        
+        var fullPriceNumber = Number(fullPrice);
+        var currentTotal = $('#subscription-plan .price .total-price').text();
+        var formatedCurrentTotal = currentTotal.replace('£','');
+        var currentTotalNumber = Number(formatedCurrentTotal);
+        
+        var unformattedCurrentTotal = currentTotalNumber - fullPriceNumber;
+        currentTotal = unformattedCurrentTotal.toFixed(2);
+        $('#subscription-plan .price .total-price').text('£' + currentTotal);
+        
+        var extrasCheck = Shopify.queue.map(function(item) { return item.props.extras_item; }).indexOf(true);
+        if (extrasCheck < 0 && dogs.length < 2) {
+          console.log('all extra items removed');
+          $('.plan-discount-percentage').text('30%');
+           
+          var discountedTotalUnformated = (currentTotal / 100) * 65;  
+          var discountTotal = discountedTotalUnformated.toFixed(2);
+          $('#subscription-plan .price .total-price__discount').text('£' + discountTotal);
+        } else {
+          var discountedTotalUnformated = (currentTotal / 100) * 60;  
+          var discountTotal = discountedTotalUnformated.toFixed(2);
+          $('#subscription-plan .price .total-price__discount').text('£' + discountTotal);
+        } 
+        
+        if (extrasCheck < 0) {
+          $('#dog-plans__first-delivery').find('.plan-extras').remove();
+        }
+      }
+    }
+    
+  });
+
+  /** Process the queue */
+  Shopify.moveAlong = function() {
+
+    /** While there are requests in the queue, process the next one */
+    if (Shopify.queue.length) { 
+      var request = Shopify.queue.shift();
+      $.ajax('/cart/add.js', {
+        type: 'post',
+        data: {             
+          quantity: request.quantity,
+          id: request.variantId,
+          properties: request.props
+        },
+        dataType: 'json',
+        success: function (data, status, xhr) {
+          Shopify.moveAlong();
+        },
+        error: function (jqXhr, textStatus, errorMessage) {
+          console.log('ERROR: ' + $.parseJSON(jqXhr.status));
+          $('.subflow-error-modal').removeClass('hidden');
+          Shopify.queue = []; 
+        }
+      });                  
+    }
+    /** Once the queue's empty, we can move on */
+    else {
+      Shopify.queue = []; 
+      reChargeProcessCart();
+    }
+  }  
+
+  /** Clear the cart and process the queue */
+  $('#btn-checkout-recharge').click(function() {
+    $.post('/cart/clear.js',function(data) {
+      Shopify.moveAlong();  
+    }, "json");    
+  }); 
+  
+  /** Clear the cart and reload on close of error message */
+  $('.subflow-error-close').click(function() {
+    $.post('/cart/clear.js',function(data) {
+      location.reload(); 
+    }, "json");    
+  }); 
+
+  /** ReCharge script to bypass cart and go straight to checkout */
+  function reChargeProcessCart() {
+    function get_cookie(name){ return( document.cookie.match('(^|; )'+name+'=([^;]*)')||0 )[2] }
+    do {
+      token=get_cookie('cart');
+    } while(token == undefined);
+    var myshopify_domain='{{ shop.permanent_domain }}';
+    try { 
+      var ga_linker = ga.getAll()[0].get('linkerParam'); 
+    } catch(err) { 
+      var ga_linker =''; 
+    }
+    var customer_param = '{% if customer %}customer_id={{customer.id}}&customer_email={{customer.email}}{% endif %}';
+    
+    /** If there are multiple dogs, apply a discount code to give a total 30%(30.1ish) total discount */
+    var multisubItemAdded = '';
+    
+    $('#extras-subscription-slider').find('.multi-sub-item').each(function(index) {
+      if($(this).find('.item-added-check').val() == 'added') {
+        multisubItemAdded = 'true';
+      }
+    });
+    var discountCode = '';
+    if(dogsArray.length > 1 || multisubItemAdded == 'true') {
+      discountCode = '&discount={{ _settings.multiple_dog_discount }}';
+    }
+    window.location = "https://secure.yumove.co.uk/r/checkout?myshopify_domain="+myshopify_domain+"&cart_token="+token+"&"+ga_linker+"&"+customer_param+discountCode;
+  }   
+
+</script>

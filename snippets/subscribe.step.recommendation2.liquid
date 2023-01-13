@@ -1,0 +1,53 @@
+<div class="form__step" id="recommendation2">
+	<div class="form__step-head">
+		<h2 class="form__step-title section__title">{{ _settings.recommendation_title2 }}</h2><!-- /.section__title -->
+	</div><!-- /.form__step-head -->
+
+	<div class="form__step-body">
+    <div class="form__row">
+      <label for="" class="form__label">
+        {%- if _settings.recommendation_text != '' -%}
+          {{ _settings.recommendation_text }}
+        {%- else -%}
+          If <span class="dog-name"></span> hasn’t taken a Glucosamine supplement before, it is likely that his natural reserves have been run down. So when you start feeding <span class="recommended-product-title"></span>, double the recommended amount for 1 month. This ‘Loading’ time will replace their lost reserves and get them back on track to better mobility and comfort.
+        {%- endif -%}
+      </label>
+    </div><!-- /.form__row -->
+
+    <div class="form__row">
+      <div class="products">
+        <div class="cols">
+          <div class="col col--1of2">
+            <div class="product">
+              <div class="product__content">
+                <h4 class="product__title">First Month</h4><!-- /.product__title -->
+
+                <h5>
+                  Daily Amount:
+                  <strong><span id="dosage__loading"></span> <span id="tabs-or-chews__loading"></span></strong>
+                </h5>
+              </div><!-- /.product__content -->
+            </div><!-- /.product -->
+          </div><!-- /.col col-/-1of2 -->
+
+          <div class="col col--1of2">
+            <div class="product product--secondary">
+              <div class="product__content">
+                <h4 class="product__title">Next Month</h4><!-- /.product__title -->
+
+                <h5>
+                  Daily Amount:
+                  <strong><span class="dosage__ongoing"></span> <span class="tabs-or-chews__ongoing"></span></strong>
+                </h5>
+              </div><!-- /.product__content -->
+            </div><!-- /.product -->
+          </div><!-- /.col col-/-1of2 -->
+        </div><!-- /.cols -->
+      </div><!-- /.products -->
+    </div><!-- /.form__row -->
+  </div><!-- /.form__step-body -->
+
+	<div class="form__step-actions">
+		<a href="#subscription-plan" class="btn btn--small btn--green btn--next">Next</a>
+	</div><!-- /.form__step-actions -->
+</div><!-- /.form__step -->

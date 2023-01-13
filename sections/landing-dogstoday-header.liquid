@@ -1,0 +1,106 @@
+{%- assign _section = section.settings -%}
+{%- assign section_image = _section.image -%}
+{%- assign section_mobile_image = _section.mobile_image -%}
+{%- assign section_title = _section.title -%}
+{%- assign section_subtitle = _section.subtitle -%}
+{%- assign section_intro_image_1 = _section.intro_image_1 -%}
+{%- assign section_intro_image_2 = _section.intro_image_2 -%}
+{%- assign section_cta_url = _section.cta_url -%}
+{%- assign section_cta_text = _section.cta_text -%}
+
+<div class="intro intro--about intro--small" id="brand-header">
+  <div class="shell shell--fluid">
+    {%- if section_image != blank -%}
+      <div class="intro__media{% if section_mobile_image != blank %} hidden-xs{% endif %}" style="background-image: url({{ section_image | img_url: '1600x' }});"></div><!-- /.intro__media hidden-xs -->
+    {%- endif -%}
+
+    {%- if section_mobile_image != blank -%}
+      <div class="intro__media intro__media--mobile hidden-lg hidden-md hidden-sm" style="background-image: url({{ section_mobile_image | img_url: '1600x' }});"></div><!-- /.intro__media intro__media-/-mobile visible-xs -->
+    {%- endif -%}
+
+    <div class="flex justify-between sample-header-content">
+      <div class="intro__content">
+        <h2>{{ section_title }}</h2>
+        <p>{{ section_subtitle }}</p>
+
+        <div class="sample-header-trustpilot">
+          <a class="no-underline" href="https://uk.trustpilot.com/review/yumove.co.uk" target="_blank">
+            <img class="trust-logo" src="//cdn.shopify.com/s/files/1/0103/3784/5303/files/trust-logo_200x.png?4399" alt="Trustpilot logo">
+            <img src="//cdn.shopify.com/s/files/1/0103/3784/5303/files/ico-start_200x.png?4399" alt="Trustpilot stars icon">
+          </a>
+        </div><!-- /.sample-header-trustpilot -->
+
+        <a href="{{ section_cta_url }}" class="sub-intro-btn btn">
+          {{ section_cta_text }} <img class="intro-paw" src="//cdn.shopify.com/s/files/1/0103/3784/5303/t/246/assets/paw.png?v=15750324709497002990" alt="">
+        </a>
+      </div><!-- /.intro__content -->
+      
+      
+      
+      <div class="sample-intro-images">
+        {%- if section_intro_image_1 != blank -%}
+          <img src="{{section_intro_image_1 | img_url: '800x'}}" alt="" class="sample-intro-image">
+        {%- endif -%}
+        {%- if section_intro_image_2 != blank -%}
+          <img src="{{section_intro_image_2 | img_url: '800x'}}" alt="" class="sample-intro-image">
+        {%- endif -%}
+      </div><!-- /.sample-intro-images -->
+    </div><!-- /.flex -->
+  </div><!-- /.shell -->
+</div><!-- /.intro -->
+
+{% schema %}
+{
+  "name": "Intro",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Media"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Background Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_image",
+      "label": "Background Image (Mobile)"
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "CTA Url"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "CTA Text"
+    },
+    {
+      "type": "richtext",
+      "id": "subtitle",
+      "label": "Subtitle"
+    },
+    {
+      "type": "image_picker",
+      "id": "intro_image_1",
+      "label": "Intro Aside Image 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "intro_image_2",
+      "label": "Intro Aside Image 2"
+    }
+  ]
+}
+{% endschema %}

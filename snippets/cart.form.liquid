@@ -1,0 +1,21 @@
+<form action="/cart" method="post" novalidate class="form form--cart">
+	<div class="form__body flex justify-between align-start">
+		{%- if cart.item_count > 0 -%}
+			{%- include 'cart.form.content' -%}
+		{%- else -%}
+			<div class="form__content">
+				<div class="form__empty">
+					<p>
+						{{- 'cart.general.empty' | t -}}
+					</p>
+
+					{{- 'cart.general.continue_browsing_html' | t -}}
+				</div><!-- /.cart-empty -->
+			</div><!-- /.form__content -->
+		{%- endif -%}
+        
+        {%- include 'cart.cross.sell' -%}
+      
+		{%- include 'cart.form.aside' -%}
+	</div><!-- /.form__body -->
+</form>

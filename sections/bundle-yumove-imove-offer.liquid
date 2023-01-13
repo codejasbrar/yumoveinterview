@@ -1,0 +1,135 @@
+{%- assign _section = section.settings -%}
+{%- assign section_title = _section.title -%}
+
+
+<section class="bundle-container section section--gray"> 
+  <div class="shell">
+    <h2 id="bundle" class="section-title">
+      {{section_title}}
+    </h2>
+    
+    <div class="bundle-chooser">
+      <div class="bundle-chooser__header">
+      	{%- for block in section.blocks -%}
+        	{%- assign _block = block.settings -%}
+            {%- assign _image = _block.image -%}
+            {%- assign _title = _block.title -%}
+            {%- assign _subtitle = _block.subtitle -%}
+            {%- assign _class = 'bundle-chooser__header-item' -%}
+        
+            {% if forloop.first == true %}
+            	{%- assign _class = 'bundle-chooser__header-item active' -%}
+            {% endif %}
+        
+        <div class="{{_class}}">
+          <div>
+            <div>
+              <img src="{{ _image | img_url: '300x' }}" alt="{{_title}}" />
+            </div>
+            <div>
+              <h3>{{_title}}</h3>
+              {{_subtitle}}
+            </div>
+           </div>
+        </div>
+        {%- endfor -%}
+      </div>
+      <div class="bundle-chooser__container">
+        <div class="bundle_0 bundle active-bundle">
+          <p class="loading-bundle">Loading the YuMOVE Young & Active and iMOVE Bundle</p>
+          <div class="bundler-target-element" data-bndlr-ccid="1sbg"></div>
+        </div>
+        <div class="bundle_1 bundle">
+        	<div class="bundler-target-element" data-bndlr-ccid="1rvn"></div>
+        </div>
+        <div class="bundle_2 bundle">
+        	<div class="bundler-target-element" data-bndlr-ccid="13pw"></div>
+        </div>
+        <div class="bundle_3 bundle">
+        	<div class="bundler-target-element" data-bndlr-ccid="1sbh"></div>
+        </div>
+      </div>
+	</div>
+  </div>
+</section>
+
+<script>
+
+$( ".bundle-chooser__header-item" ).click(function() {
+  $( ".bundle-chooser__header-item.active" ).removeClass( "active" );
+  $(this).addClass("active");
+  $(".bundle-chooser__container").html($(this).attr("data-snippet"));
+  
+  $( ".bundle" ).removeClass( "active-bundle" );
+  $('.bundle_' + $(this).index()).addClass("active-bundle");
+  
+  $( ".bundle-description__item--active" ).removeClass( "bundle-description__item--active" );
+
+  $($('.bundle-description .bundle-description__item')[$(this).index()]).addClass("bundle-description__item--active");
+
+  
+  if ($( window ).width() <= 767) {
+    var bundleTop = Math.round($(".bundle-chooser__header").offset().top + 250);
+    var windowTop = Math.round($(window).scrollTop());
+    var topper = bundleTop - windowTop;
+    if (topper > 10) {
+      $([document.documentElement, document.body]).animate({
+        scrollTop: $(".bundle-chooser__container").offset().top - 100
+      }, 1000);
+    }
+    
+  } else {
+    var bundleTop = Math.round($(".bundle-chooser__header").offset().top);
+    var windowTop = Math.round($(window).scrollTop());
+    var topper = bundleTop - windowTop;
+    if (topper > 10) {
+      $([document.documentElement, document.body]).animate({
+        scrollTop: $(".bundle-chooser__header").offset().top
+      }, 1000);
+    }
+  }
+
+});
+  
+  $('body').on('DOMSubtreeModified', '.bundle_0', function(){
+    $('.loading-bundle').hide();
+  });
+  
+</script>
+
+{% schema %}
+{
+   "name":"Bundle Offers",
+   "settings":[
+      {
+         "type":"text",
+         "id":"title",
+         "label":"Title"
+      }
+   ],
+   "max_blocks":4,
+   "blocks":[
+      {
+         "type":"bundle",
+         "name":"Bundle",
+         "settings":[
+            {
+               "type":"image_picker",
+               "id":"image",
+               "label":"Bundle Image"
+            },
+            {
+               "type":"text",
+               "id":"title",
+               "label":"Bundle Name"
+            },
+            {
+               "type":"richtext",
+               "id":"subtitle",
+               "label":"Bundle Subtitle"
+            }
+         ]
+      }
+   ]
+}
+{% endschema %}

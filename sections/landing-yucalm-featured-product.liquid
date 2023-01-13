@@ -1,0 +1,48 @@
+{%- assign _section = section.settings -%}
+{%- assign section_product = _section.product -%}
+{%- assign _product = all_products[section_product] -%}
+{%- assign _subtitle = _section.subtitle -%}
+{%- assign _description = _section.description -%}
+{%- assign _featured_img = _section.featured_img -%}
+{%- assign _img_alt = _section.img_alt -%}
+
+<section id="yucalm-featured-product" class="section section-featured-product">
+  <div class="shell">
+    <div class="section__body">
+      {%- include 'featured-product-item--yucalm' with _product, _size: 'product--featured flex-reverse justify-center align-center' -%}
+    </div><!-- /.section__body -->
+  </div><!-- /.shell -->
+</section><!-- /.section section-featured-product -->
+
+{% schema %}
+{
+  "name": "Featured Products",
+  "settings": [
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Product"
+    },
+    {
+      "type": "richtext",
+      "id": "subtitle",
+      "label": "Subtitle"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description"
+    },
+    {
+       "type": "image_picker",
+       "id": "featured_img",
+       "label": "Featured Product Image"
+    },
+    {
+       "type": "text",
+       "id": "img_alt",
+       "label": "Image Alt Text"
+    }
+  ]
+}
+{% endschema %}

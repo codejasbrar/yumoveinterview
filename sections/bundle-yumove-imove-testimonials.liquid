@@ -1,0 +1,51 @@
+{%- assign _section = section.settings -%}
+{%- assign section_title = _section.title -%}
+{%- assign section_content = _section.content -%}
+
+<section class="section section-slider section--gray section-testimonials slider-testimonials--yumove-imove">
+  <div class="shell">
+    {%- include 'section-testimonials' -%}
+  </div><!-- /.shell -->
+</section><!-- /.section section-slider section--green -->
+
+{% schema %}
+{
+  "name": "Testimonials",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "richtext",
+      "id": "content",
+      "label": "Content"
+    }
+  ],
+  "max_blocks": 4,
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Author Avatar"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Author Name"
+        },
+        {
+          "type": "richtext",
+          "id": "testimonial",
+          "label": "Testimonial"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,85 @@
+{%- assign _section = section.settings -%}
+{%- assign section_title = _section.title -%}
+{%- assign section_content = _section.content -%}
+
+{%- if section_title != blank or section.blocks.size > 0 -%}
+  <section class="section landing-sub-features landing-brand-features">
+    <div class="shell">
+      {%- if section_title != blank -%}
+        <header class="section__head">
+          <h2 class="section__title anamate">{{section_title}}</h2><!-- /.section__title -->
+        </header><!-- /.section__head -->
+      {%- endif -%}
+      <div class="sub-features-content">
+         <div class="section__body">
+           <div class="flex features features--medium justify-between">
+             {%- for block in section.blocks -%}
+               {%- assign _block = block.settings -%}
+               {%- assign block_image = _block.image -%}
+               {%- assign block_title = _block.title -%}
+               {%- assign block_text = _block.text -%}
+               {%- assign block_content = _block.content -%}
+
+               <div class="feature anamate flex align-center">
+                 {%- if block_image != blank -%}
+                   <div class="feature__image flex align-center justify-center">
+                     <img src="{{ block_image | img_url: '160x' }}" alt="">
+                   </div><!-- /.feature__image -->
+                 {%- endif -%}
+
+                 {%- if block_title != blank or block_content != blank -%}
+                   <div class="feature__content">
+                     {%- if block_title != blank -%}
+                       <h4>{{block_title}}</h4>
+                     {%- endif -%}
+                    
+                      {%- if block_text != blank -%}
+                        <p>{{block_text}}</p>
+                      {%- endif -%}
+                  </div><!-- /.feature__content -->
+                {%- endif -%}
+              </div><!-- /.feature -->
+            {%- endfor -%}
+          </div><!-- /.features cols -->
+        </div><!-- /.section__body -->
+      </div><!-- /.sub-features-content -->
+     
+    </div><!-- /.shell -->
+  </section><!-- /.section section-features -->
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Benefits",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

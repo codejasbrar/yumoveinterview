@@ -1,0 +1,635 @@
+{%- assign _settings = section.settings -%}
+{%- assign working_dog_m = all_products[_settings.working_dog_m] -%}
+{%- assign working_dog_skus = '' -%}
+{%- for variant in working_dog_m.variants -%}
+  {%- assign working_dog_skus = working_dog_skus | append: variant.sku -%}
+  {%- unless forloop.last -%}
+    {%- assign working_dog_skus = working_dog_skus | append: ',' -%}
+  {%- endunless -%}
+  {%- if variant.sku == 'YMWD-480' -%}
+    {%- assign ymwd_480_m_id = variant.id -%}
+    {%- assign ymwd_480_m_id_ar = variant.metafields.subscriptions.discount_variant_id -%}
+  {%- endif -%}
+{%- endfor -%}
+{%- assign working_dog_d = all_products[_settings.working_dog_d] -%}
+{%- for variant in working_dog_d.variants -%}
+  {%- if variant.sku == 'YMWD-480' -%}
+    {%- assign ymwd_480_d_id = variant.id -%}
+    {%- assign ymwd_480_d_id_ar = variant.metafields.subscriptions.discount_variant_id -%}
+  {%- endif -%}
+{%- endfor -%}
+{%- assign one_a_day_m = all_products[_settings.one_a_day_m] -%}
+{%- assign one_a_day_skus = '' -%}
+{%- for variant in one_a_day_m.variants -%}
+  {%- assign one_a_day_skus = one_a_day_skus | append: variant.sku -%}
+  {%- unless forloop.last -%}
+    {%- assign one_a_day_skus = one_a_day_skus | append: ',' -%}
+  {%- endunless -%}
+  {%- if variant.sku == 'YMCS30' -%}
+    {%- assign ymcs30_id = variant.id -%}
+    {%- assign ymcs30_id_ar = variant.metafields.subscriptions.discount_variant_id -%}
+  {%- elsif variant.sku == 'YMCM30' -%}  
+    {%- assign ymcm30_id = variant.id -%}
+    {%- assign ymcm30_id_ar = variant.metafields.subscriptions.discount_variant_id -%}
+  {%- elsif variant.sku == 'YMCL30' -%}  
+    {%- assign ymcl30_id = variant.id -%}    
+    {%- assign ymcl30_id_ar = variant.metafields.subscriptions.discount_variant_id -%}
+  {%- elsif variant.sku == 'YMCS90' -%}  
+    {%- assign ymcs90_id = variant.id -%}  
+    {%- assign ymcs90_id_ar = variant.metafields.subscriptions.discount_variant_id -%}
+  {%- elsif variant.sku == 'YMCM90' -%}  
+    {%- assign ymcm90_id = variant.id -%}    
+    {%- assign ymcm90_id_ar = variant.metafields.subscriptions.discount_variant_id -%}
+  {%- elsif variant.sku == 'YMCL90' -%}  
+    {%- assign ymcl90_id = variant.id -%}   
+    {%- assign ymcl90_id_ar = variant.metafields.subscriptions.discount_variant_id -%}
+  {%- endif -%}
+{%- endfor -%}
+{%- assign one_a_day_d = all_products[_settings.one_a_day_d] -%}
+{%- for variant in one_a_day_d.variants -%}
+  {%- if variant.sku == 'YPCL30' -%}
+    {%- assign ypcl30_d_id = variant.id -%} 
+    {%- assign ypcl30_d_id_ar = variant.metafields.subscriptions.discount_variant_id -%}
+  {%- endif -%}
+{%- endfor -%}
+{%- assign one_a_day_plus_m = all_products[_settings.one_a_day_plus_m] -%}
+{%- assign one_a_day_plus_skus = '' -%}
+{%- for variant in one_a_day_plus_m.variants -%}
+  {%- assign one_a_day_plus_skus = one_a_day_plus_skus | append: variant.sku -%}
+  {%- unless forloop.last -%}
+    {%- assign one_a_day_plus_skus = one_a_day_plus_skus | append: ',' -%}
+  {%- endunless -%}
+  {%- if variant.sku == 'YPCS30' -%}  
+    {%- assign ypcs30_id = variant.id -%}    
+    {%- assign ypcs30_id_ar = variant.metafields.subscriptions.discount_variant_id -%}
+  {%- elsif variant.sku == 'YPCM30' -%}  
+    {%- assign ypcm30_id = variant.id -%}  
+    {%- assign ypcm30_id_ar = variant.metafields.subscriptions.discount_variant_id -%}
+  {%- elsif variant.sku == 'YPCL30' -%}  
+    {%- assign ypcl30_m_id = variant.id -%}    
+    {%- assign ypcl30_m_id_ar = variant.metafields.subscriptions.discount_variant_id -%}
+  {%- elsif variant.sku == 'YPCL90' -%}  
+    {%- assign ypcl90_id = variant.id -%}           
+    {%- assign ypcl90_id_ar = variant.metafields.subscriptions.discount_variant_id -%}
+  {%- endif -%}  
+{%- endfor -%}
+{%- assign yumove_dog_m = all_products[_settings.yumove_dog_m] -%}
+{%- assign yumove_dog_skus = '' -%}
+{%- for variant in yumove_dog_m.variants -%}
+  {%- assign yumove_dog_skus = yumove_dog_skus | append: variant.sku -%}
+  {%- unless forloop.last -%}
+    {%- assign yumove_dog_skus = yumove_dog_skus | append: ',' -%}
+  {%- endunless -%}
+  {%- if variant.sku == 'YM60' -%}
+    {%- assign ym60_m_id = variant.id -%}
+    {%- assign ym60_m_id_ar = variant.metafields.subscriptions.discount_variant_id -%}
+  {%- elsif variant.sku == 'YM120' -%}
+    {%- assign ym120_m_id = variant.id -%}
+    {%- assign ym120_m_id_ar = variant.metafields.subscriptions.discount_variant_id -%}
+  {%- endif -%}
+{%- endfor -%}
+{%- assign yumove_dog_d = all_products[_settings.yumove_dog_d] -%}
+{%- for variant in yumove_dog_d.variants -%}
+  {%- if variant.sku == 'YM60' -%}
+    {%- assign ym60_d_id = variant.id -%}
+    {%- assign ym60_d_id_ar = variant.metafields.subscriptions.discount_variant_id -%}
+  {%- elsif variant.sku == 'YM120' -%}
+    {%- assign ym120_d_id = variant.id -%}
+    {%- assign ym120_d_id_ar = variant.metafields.subscriptions.discount_variant_id -%}
+  {%- endif -%}
+{%- endfor -%}
+{%- assign young_and_active_m = all_products[_settings.young_and_active_m] -%}
+{%- assign young_and_active_skus = '' -%}
+{%- for variant in young_and_active_m.variants -%}
+  {%- assign young_and_active_skus = young_and_active_skus | append: variant.sku -%}
+  {%- unless forloop.last -%}
+    {%- assign young_and_active_skus = young_and_active_skus | append: ',' -%}
+  {%- endunless -%}
+  {%- if variant.sku == 'YMACT60' -%}
+    {%- assign ymact60_m_id = variant.id -%}
+    {%- assign ymact60_m_id_ar = variant.metafields.subscriptions.discount_variant_id -%}
+  {%- elsif variant.sku == 'YMACT240' -%}
+    {%- assign ymact240_m_id = variant.id -%}
+    {%- assign ymact240_m_id_ar = variant.metafields.subscriptions.discount_variant_id -%}
+  {%- endif -%}
+{%- endfor -%}
+{%- assign young_and_active_d = all_products[_settings.young_and_active_d] -%}
+{%- for variant in young_and_active_d.variants -%}
+  {%- if variant.sku == 'YMACT60' -%}
+    {%- assign ymact60_d_id = variant.id -%}
+    {%- assign ymact60_d_id_ar = variant.metafields.subscriptions.discount_variant_id -%}
+  {%- elsif variant.sku == 'YMACT240' -%}
+    {%- assign ymact240_d_id = variant.id -%}
+    {%- assign ymact240_d_id_ar = variant.metafields.subscriptions.discount_variant_id -%}
+  {%- endif -%}
+{%- endfor -%}
+{%- assign yumove_plus_m = all_products[_settings.yumove_plus_m] -%}
+{%- assign yumove_plus_skus = '' -%}
+{%- for variant in yumove_plus_m.variants -%}
+  {%- assign yumove_plus_skus = yumove_plus_skus | append: variant.sku -%}
+  {%- unless forloop.last -%}
+    {%- assign yumove_plus_skus = yumove_plus_skus | append: ',' -%}
+  {%- endunless -%}
+  {%- if variant.sku == 'YMP60' -%}
+    {%- assign ymp60_m_id = variant.id -%}
+    {%- assign ymp60_m_id_ar = variant.metafields.subscriptions.discount_variant_id -%}
+  {%- elsif variant.sku == 'YMP120' -%}
+    {%- assign ymp120_m_id = variant.id -%}
+    {%- assign ymp120_m_id_ar = variant.metafields.subscriptions.discount_variant_id -%}
+  {%- endif -%}
+{%- endfor -%}
+{%- assign yumove_plus_d = all_products[_settings.yumove_plus_d] -%}
+{%- for variant in yumove_plus_d.variants -%}
+  {%- if variant.sku == 'YMP60' -%}
+    {%- assign ymp60_d_id = variant.id -%}
+    {%- assign ymp60_d_id_ar = variant.metafields.subscriptions.discount_variant_id -%}
+  {%- elsif variant.sku == 'YMP120' -%}
+    {%- assign ymp120_d_id = variant.id -%}
+    {%- assign ymp120_d_id_ar = variant.metafields.subscriptions.discount_variant_id -%}
+  {%- endif -%}
+{%- endfor -%}
+
+{%- for product in collections['calming'].products -%}
+  {%- if product.handle == 'yucalm-dog' -%}
+    {%- assign yucalm_dog = product -%}
+      {%- for variant in yucalm_dog.variants -%}
+        {%- if variant.sku == 'YUCA30' -%}
+          {%- assign yucalm_dog_id = variant.id -%}
+          {%- assign yucalm_dog_id_ar = variant.metafields.subscriptions.discount_variant_id -%}
+        {%- endif -%}
+      {%- endfor -%}
+   {%- elsif product.handle == 'yucalm-one-a-day' -%}
+    {%- assign yucalm_one_a_day  = product -%}
+      {%- for variant in yucalm_one_a_day.variants -%}
+        {%- if variant.sku == 'YCCS30' -%}
+          {%- assign yucalm_one_a_day_id = variant.id -%}
+          {%- assign yucalm_one_a_day_id_ar = variant.metafields.subscriptions.discount_variant_id -%}
+        {%- endif -%}
+      {%- endfor -%}
+   {%- endif -%}
+{%- endfor -%}
+
+{%- for product in collections['human'].products -%}
+  {%- if product.handle == 'imove' -%}
+    {%- assign imove = product -%}
+      {%- for variant in imove.variants -%}
+        {%- if variant.sku == 'IMOVE' -%}
+        {%- assign imove_id = variant.id -%}
+        {%- assign imove_id_ar = variant.metafields.subscriptions.discount_variant_id -%}
+      {%- endif -%}
+    {%- endfor -%}
+  {%- endif -%}
+{%- endfor -%}
+
+{%- for product in collections['digestive-health'].products -%}
+  {%- if product.handle == 'yudigest-for-dogs' -%}
+    {%- assign yudigest_for_dogs  = product -%}
+      {%- for variant in yudigest_for_dogs.variants -%}
+        {%- if variant.sku == 'YUDI60' -%}
+          {%- assign yudigest_for_dogs_id = variant.id -%}
+          {%- assign yudigest_for_dogs_id_ar = variant.metafields.subscriptions.discount_variant_id -%}
+        {%- endif -%}
+      {%- endfor -%}
+   {%- elsif product.handle == 'yudigest-plus-for-dogs' -%}
+     {%- assign yudigest_plus_for_dogs  = product -%}
+       {%- for variant in yudigest_plus_for_dogs.variants -%}
+         {%- if variant.sku == 'YUDP6' -%}
+           {%- assign yudigest_plus_for_dogs_id = variant.id -%}
+           {%- assign yudigest_plus_for_dogs_id_ar = variant.metafields.subscriptions.discount_variant_id -%}
+         {%- endif -%}
+       {%- endfor -%}
+   {%- endif -%}
+{%- endfor -%}
+
+{%- for product in collections['dental'].products -%}
+  {%- if product.handle == 'yucare-tooth-cleaner' -%}
+    {%- assign yucare_tooth_cleaner  = product -%}
+      {%- for variant in yucare_tooth_cleaner.variants -%}
+        {%- if variant.sku == 'YCTC' -%}
+          {%- assign yucare_tooth_cleaner_id = variant.id -%}
+          {%- assign yucare_tooth_cleaner_id_ar = variant.metafields.subscriptions.discount_variant_id -%}
+        {%- endif -%}
+      {%- endfor -%}
+   {%- elsif product.handle == 'yucare-tooth-polish' -%}
+     {%- assign yucare_tooth_polish  = product -%}
+       {%- for variant in yucare_tooth_polish.variants -%}
+         {%- if variant.sku == 'YCTP' -%}
+           {%- assign yucare_tooth_polish_id = variant.id -%}
+           {%- assign yucare_tooth_polish_id_ar = variant.metafields.subscriptions.discount_variant_id -%}
+         {%- endif -%}
+       {%- endfor -%}
+   {%- endif -%}
+{%- endfor -%}
+
+{%- for product in collections['skin-coat'].products -%}
+  {%- if product.handle == 'yuderm-itching-dog' -%}
+    {%- assign yuderm_itching_dog = product -%}
+      {%- for variant in yuderm_itching_dog.variants -%}
+        {%- if variant.sku == 'YDI250' -%}
+          {%- assign yuderm_itching_dog_id = variant.id -%}
+          {%- assign yuderm_itching_dog_id_ar = variant.metafields.subscriptions.discount_variant_id -%}
+        {%- endif -%}
+      {%- endfor -%}
+   {%- elsif product.handle == 'yumega-show-dog' -%}
+     {%- assign yumega_show_dog  = product -%}
+       {%- for variant in yumega_show_dog.variants -%}
+         {%- if variant.sku == 'YSD' -%}
+           {%- assign yumega_show_dog_id = variant.id -%}
+           {%- assign yumega_show_dog_id_ar = variant.metafields.subscriptions.discount_variant_id -%}
+         {%- endif -%}
+       {%- endfor -%}
+   {%- elsif product.handle == 'yuderm-moulting-dog' -%}
+     {%- assign yuderm_moulting_dog  = product -%}
+       {%- for variant in yuderm_moulting_dog.variants -%}
+         {%- if variant.sku == 'YDM250' -%}
+           {%- assign yuderm_moulting_dog_id = variant.id -%}
+           {%- assign yuderm_moulting_dog_id_ar = variant.metafields.subscriptions.discount_variant_id -%}
+         {%- endif -%}
+       {%- endfor -%}
+   {%- elsif product.handle == 'yuderm-boost' -%}
+     {%- assign yuderm_boost  = product -%}
+       {%- for variant in yuderm_boost.variants -%}
+         {%- if variant.sku == 'YDB180' -%}
+           {%- assign yuderm_boost_id = variant.id -%}
+           {%- assign yuderm_boost_id_ar = variant.metafields.subscriptions.discount_variant_id -%}
+         {%- endif -%}
+       {%- endfor -%} 
+    {%- endif -%}
+{%- endfor -%}
+
+
+<div class="subscribe">
+	<div class="shell">
+		<div class="flex">
+			{%- include 'subscribe.aside-extras' -%}
+   
+			<div class="subscribe__content">
+				<section class="section section-subscribe">
+					<header class="section__head flex align-center justify-between">
+						<a href="#" class="link-back">
+							<i class="ico-circle ico-back"></i>
+							<span>Back</span>
+						</a>
+                        {%- include 'subscribe.nav-extras', _class: 'hidden-lg hidden-md' -%}
+						<a href="/" class="link-close">
+							<span>Close</span>
+							<i class="ico-circle ico-close"></i>
+						</a>
+					</header><!-- /.section__head -->
+
+					<div class="section__body">
+						<div class="section__content">
+							{%- include 'subscribe.nav-mobile-extras', _class: 'hidden-lg hidden-md' -%}
+                            
+							<div class="form form--steps">
+								<form id="subflow_signup" action="?" data-ajax-submit="//manage.kmail-lists.com/ajax/subscriptions/subscribe" method="post" data-name='1'>
+                                  	
+                                    {%- include 'klaviyo-subflow-fields-extras' -%}
+									{%- include 'subscribe.step.register' -%}
+									{%- include 'subscribe.step.details' -%}
+									{%- include 'subscribe.step.weight' -%}
+									{%- include 'subscribe.step.activity' -%}
+									{%- include 'subscribe.step.eating' -%}
+									{%- include 'subscribe.step.new' -%}
+									{%- include 'subscribe.step.confirm' -%}
+									{%- include 'subscribe.step.recommendation' -%}
+									{%- include 'subscribe.step.recommendation2-extras' -%}
+                                    {%- include 'subscribe.step.extras' -%}
+                                    {%- include 'subscribe.step.extras2' -%}
+									{%- include 'subscribe.step.plan-extras' -%}
+								</form>
+							</div><!-- /.form -->
+						</div><!-- /.section__content -->
+					</div><!-- /.section__body -->
+				</section><!-- /.section section-subscribe -->
+			</div><!-- /.subscribe__content -->
+          {% include 'subflow-error-modal' %}
+		</div><!-- /.flex -->
+	</div><!-- /.shell -->
+</div>
+
+{%- include 'shopify-money-format' -%}
+
+{%- include 'subflow-js-extras' -%}
+
+{%- include 'klaviyo-subflow-js-extras' -%}
+
+{% schema %}
+{
+  "name": "Subscription Flow",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Products"
+    },  
+    {
+      "id": "working_dog_m",
+      "type": "product",
+      "label": "Working Dog Monthly"
+    },   
+    {
+      "id": "working_dog_d",
+      "type": "product",
+      "label": "Working Dog Daily"
+    },  
+    {
+      "id": "one_a_day_m",
+      "type": "product",
+      "label": "One-A-Day Monthly"
+    }, 
+    {
+      "id": "one_a_day_d",
+      "type": "product",
+      "label": "One-A-Day Daily"
+    }, 
+    {
+      "id": "one_a_day_plus_m",
+      "type": "product",
+      "label": "One-A-Day Plus Monthly"
+    },        
+    {
+      "id": "yumove_dog_m",
+      "type": "product",
+      "label": "yuMOVE Dog Monthly"
+    },  
+    {
+      "id": "yumove_dog_d",
+      "type": "product",
+      "label": "yuMOVE Dog Daily"
+    },   
+    {
+      "id": "young_and_active_m",
+      "type": "product",
+      "label": "Young & Active Monthly"
+    },  
+    {
+      "id": "young_and_active_d",
+      "type": "product",
+      "label": "Young & Active Daily"
+    },  
+    {
+      "id": "yumove_plus_m",
+      "type": "product",
+      "label": "YuMOVE Plus for Dogs Monthly"
+    },  
+    {
+      "id": "yumove_plus_d",
+      "type": "product",
+      "label": "YuMOVE Plus for Dogs Daily"
+    },  
+    {
+      "id": "subscription_discount",
+      "type": "text",
+      "label": "Subscription Discount %"
+    },
+    {
+      "id": "discount_code",
+      "type": "text",
+      "label": "Discount Code"
+    },
+	{
+	  "id": "multiple_dog_discount",
+	  "type": "text",
+	  "label": "Multiple Dog Discount Code"
+	},
+  	{
+  		"type": "header",
+  		"content": "Register"
+  	},
+    {
+      "type": "text",
+      "id": "register_title",
+      "label": "Title"
+    },  
+    {
+      "type": "richtext",
+      "id": "opt_in_text",
+      "label": "Opt In Text"
+    },      	
+  	{
+  		"type": "header",
+  		"content": "Details"
+  	}, 
+    {
+      "type": "text",
+      "id": "welcome1",
+      "label": "Welcome1"
+    }, 
+    {
+      "type": "text",
+      "id": "welcome2",
+      "label": "Welcome2"
+    }, 
+    {
+      "type": "textarea",
+      "id": "breeds",
+      "label": "Breeds"
+    }, 
+    {
+      "type": "text",
+      "id": "details_text",
+      "label": "Text"
+    },              	 
+  	{
+  		"type": "header",
+  		"content": "Weight"
+  	},
+    {
+      "type": "text",
+      "id": "weight_title",
+      "label": "Title"
+    },   	
+    {
+      "type": "text",
+      "id": "weight_text",
+      "label": "Text"
+    },   	
+  	{
+  		"type": "header",
+  		"content": "Activity"
+  	},  
+    {
+      "type": "text",
+      "id": "activity_title",
+      "label": "Title"
+    },   
+    {
+      "type": "text",
+      "id": "activity_text",
+      "label": "Text"
+    },   
+    {
+      "type": "text",
+      "id": "inactive_tooltip",
+      "label": "Inactive Tooltip"
+    }, 
+    {
+      "type": "text",
+      "id": "leisurely_tooltip",
+      "label": "Leisurely Tooltip"
+    }, 
+    {
+      "type": "text",
+      "id": "active_tooltip",
+      "label": "Active Tooltip"
+    }, 
+    {
+      "type": "text",
+      "id": "intensely_active_tooltip",
+      "label": "Intensely Active Tooltip"
+    }, 
+    {
+      "type": "text",
+      "id": "joint_condition_tooltip",
+      "label": "Joint Condition Tooltip"
+    }, 
+    {
+      "type": "text",
+      "id": "working_dog_tooltip",
+      "label": "Working Dog Tooltip"
+    },                          	
+  	{
+  		"type": "header",
+  		"content": "Eating"
+  	},
+    {
+      "type": "text",
+      "id": "eating_title",
+      "label": "Title"
+    },  
+    {
+      "type": "text",
+      "id": "eating_text",
+      "label": "Text"
+    },   
+    {
+      "type": "text",
+      "id": "fussy_tooltip",
+      "label": "Fussy Tooltip"
+    },   
+    {
+      "type": "text",
+      "id": "good_tooltip",
+      "label": "Good Tooltip"
+    },   
+    {
+      "type": "text",
+      "id": "hoovers_tooltip",
+      "label": "Hoovers Everything Tooltip"
+    },                    	
+  	{
+  		"type": "header",
+  		"content": "New to YuMOVE?"
+  	},  
+    {
+      "type": "text",
+      "id": "first_time_title",
+      "label": "Title"
+    },  
+    {
+      "type": "text",
+      "id": "first_time_text1",
+      "label": "Text1"
+    },   
+    {
+      "type": "richtext",
+      "id": "first_time_text2",
+      "label": "Text2"
+    },      	
+  	{
+  		"type": "header",
+  		"content": "Confirm"
+  	},
+    {
+      "type": "text",
+      "id": "confirm_title",
+      "label": "Title"
+    },  
+    {
+      "type": "textarea",
+      "id": "confirm_text",
+      "label": "Text"
+    },        	
+  	{
+  		"type": "header",
+  		"content": "Recommendation"
+  	}, 
+    {
+      "type": "text",
+      "id": "recommendation_title1",
+      "label": "Title1"
+    },  
+    {
+      "type": "text",
+      "id": "recommendation_title2",
+      "label": "Title2"
+    },  
+    {
+      "type": "textarea",
+      "id": "recommendation_text",
+      "label": "Text"
+    }, 
+    {
+  		"type": "header",
+  		"content": "Extras"
+  	}, 
+    {
+      "type": "textarea",
+      "id": "extras_text1",
+      "label": "Text1"
+    },
+    {
+      "type": "text",
+      "id": "extras_title2",
+      "label": "Title2"
+    }, 
+    {
+      "type": "textarea",
+      "id": "extras_text2",
+      "label": "Text2"
+    },
+  	{
+  		"type": "header",
+  		"content": "Plan"
+  	},
+    {
+      "type": "text",
+      "id": "plan_title",
+      "label": "Title"
+    },
+    {
+      "type": "text",
+      "id": "no_commitment",
+      "label": "No Commitment Text"
+    },
+    {
+      "type": "text",
+      "id": "pause",
+      "label": "Pause Text"
+    },
+    {
+      "type": "text",
+      "id": "not_for_you",
+      "label": "Not For You Text"
+    },
+    {
+      "type": "text",
+      "id": "next_delivery_note",
+      "label": "Next Delivery Note"
+    }                         	    	  	  	  		
+  ],
+  "blocks": [
+    {
+      "type": "one_time_purchase",
+      "name": "One Time Purchase",
+      "settings": [
+        {
+          "type": "product",
+          "id": "one_time_product",
+          "label": "Product"
+        }
+      ]
+    }
+  ]  
+}
+{% endschema %}

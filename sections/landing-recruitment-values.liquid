@@ -1,0 +1,59 @@
+{%- assign _section = section.settings -%}
+{%- assign section_maintitle = _section.main_title -%}
+{%- assign section_content = _section.content -%}
+{%- assign section_background = _section.background-colour -%}
+{%- assign _image = _section.image -%}
+
+<section class="section section-recruitment-values">
+  <div class="shell">
+    <h2 class="section__title anamate">{{section_maintitle}}</h2>
+    
+    <div class="text-block-image text-block-image--reverse">
+      {%- include 'text-block' -%}
+      {%- include 'image-block' -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Values Text & Image Block",
+  "settings": [
+    {
+      "type": "text",
+      "id": "main_title",
+      "label": "Section title"
+    },
+    {
+      "type": "html",
+      "id": "content",
+      "label": "Content"
+    },
+	{
+      "type": "select",
+      "id": "background-colour",
+      "label": "Text Block Background Colour",
+      "options": [
+          {
+            "value": "text-block--grey",
+            "label": "Grey"
+          },
+          {
+            "value": "text-block--green",
+            "label": "Green"
+          },
+          {
+            "value": "text-block--white",
+            "label": "White"
+          }
+        ],
+        "default": "text-block--green"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image Block"
+    }
+  ]
+}
+{% endschema %}

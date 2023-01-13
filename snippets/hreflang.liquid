@@ -1,0 +1,38 @@
+<link rel="canonical" href="{{ canonical_url }}" />
+{% assign url_path = canonical_url | remove: shop.url %}
+
+{% if template contains 'product' %}
+<link rel="alternate" href="https://yumove.co.uk{{url_path}}" hreflang="en-GB" />
+<link rel="alternate" href="https://yumove.com/products/yumove-hip-joint-supplement-for-dogs" hreflang="en-US" />
+<link rel="alternate" href="https://yumove.co.uk{{url_path}}" hreflang="x-default" />
+{% elsif template contains 'article' %}
+  {% if article.tags != blank %}
+    {% for tag in article.tags %}
+      {% if tag contains 'href'%} 
+        <link rel="alternate" href="https://yumove.co.uk{{url_path}}" hreflang="en-GB" />
+        <link rel="alternate" href="{{ tag | remove: 'href:' }}" hreflang="en-US" />      
+        <link rel="alternate" href="https://yumove.co.uk{{url_path}}" hreflang="x-default" />
+      {% endif %}
+    {% endfor %}
+   {% else %}
+     <link rel="alternate" href="https://yumove.co.uk{{url_path}}" hreflang="en-GB" />
+     <link rel="alternate" href="https://yumove.com{{url_path}}" hreflang="en-US" />
+     <link rel="alternate" href="https://yumove.co.uk{{url_path}}" hreflang="x-default" />
+   {% endif %}
+{% elsif template contains 'collection' %}
+  {% if collection.handle == 'direct-sample' or collection.handle == 'dog' or collection.handle == 'dog-joints' %}  
+    <link rel="alternate" href="https://yumove.co.uk{{url_path}}" hreflang="en-GB" />
+    <link rel="alternate" href="https://yumove.com{{url_path}}" hreflang="en-US" />
+    <link rel="alternate" href="https://yumove.co.uk{{url_path}}" hreflang="x-default" />
+  {% else %}
+    <link rel="alternate" href="https://yumove.co.uk{{url_path}}" hreflang="en-GB" />
+    <link rel="alternate" href="https://yumove.com/collections/dog" hreflang="en-US" />
+    <link rel="alternate" href="https://yumove.co.uk{{url_path}}" hreflang="x-default" />
+  {% endif %}
+{% else %}
+<link rel="alternate" href="https://yumove.co.uk{{url_path}}" hreflang="en-GB" />
+<link rel="alternate" href="https://yumove.com{{url_path}}" hreflang="en-US" />
+<link rel="alternate" href="https://yumove.co.uk{{url_path}}" hreflang="x-default" />
+{%endif %}
+
+

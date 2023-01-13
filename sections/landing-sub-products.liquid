@@ -1,0 +1,91 @@
+{%- assign _section = section.settings -%}
+{%- assign section_title = _section.title -%}
+<section class="section section--gray landing-sub-products">
+  <div class="shell">
+    {%- if section_title != blank -%}
+      <header class="section__head">
+        <h2 class="section__title">{{section_title}}</h2><!-- /.section__title -->
+      </header><!-- /.section__head -->
+    {%- endif -%}
+
+    <div class="section__body">
+      <div class="products products--featured cols">
+        {%- for block in section.blocks -%}
+          {%- assign _block = block.settings -%}
+          {%- assign block_product = _block.product -%}
+          {%- assign _product = all_products[block_product] -%}
+          {%- assign _saving = _block.saving_text -%}
+          {%- assign _description = _block.description -%}
+          {%- assign _from = _block.from -%}
+
+          {%- include 'featured-product-item--sub' with _product, _size: 'col col--1of3 flex-column ' -%}
+        {%- endfor -%}
+      </div><!-- /.products cols -->
+      <div class="flex guarantee-block">
+        <div class="flex guarantee-block__image">
+          <img src="https://cdn.shopify.com/s/files/1/0103/3784/5303/files/Asset_2_2x_aab1c575-76e0-4123-be98-8b9f98bb46e6_500x.png?v=1613735985">
+        </div>
+        <div class="flex guarantee-block__text">
+          <h2>{{_section.mb_title}}</h2>
+          <p>{{_section.mb_desc}}</p>
+         </div>
+      </div>
+    </div><!-- /.section__body -->
+  </div><!-- /.shell -->
+</section><!-- /.section section-products -->
+
+{% schema %}
+{
+  "name": "Products",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "text",
+      "id": "mb_title",
+      "label": "Money Back Title"
+    },
+    {
+      "type": "richtext",
+      "id": "mb_desc",
+      "label": "Money Back Description"
+    }
+  ],
+  "max_blocks": 3,
+  "blocks": [
+    {
+      "type": "product",
+      "name": "Product",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product"
+        },
+        {
+          "type": "richtext",
+          "id": "description",
+          "label": "Description"
+        },
+        {
+          "type": "richtext",
+          "id": "saving_text",
+          "label": "Saving Text"
+        },
+        {
+          "type": "richtext",
+          "id": "from",
+          "label": "From Text"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+
+
+

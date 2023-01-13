@@ -1,0 +1,219 @@
+<header class="header">
+  <div class="header__body">
+    <div class="shell shell--fluid">
+      <div class="flex align-center justify-between-xs justify-between-sm">
+        <a href="#" class="nav-trigger hidden-lg hidden-md">
+          <div class="nav-trigger__icon">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+
+          <span>Menu</span>
+        </a>
+        
+        {%- if page.template_suffix == 'landing-yucalm' -%}
+          {%- if settings.yucalm_logo != blank -%}
+            <a href="/" class="logo">
+              <img src="{{settings.yucalm_logo | img_url: '330x'}}" alt="">
+            </a>  
+          {%- endif -%}
+        {%- elsif page.template_suffix == 'campaign-yucalm-landing' -%}
+          {%- if settings.yucalm_logo != blank -%}
+            <a href="/" class="logo">
+              <img src="{{settings.yucalm_logo | img_url: '330x'}}" alt="">
+            </a>  
+          {%- endif -%}
+        {%- elsif page.template_suffix == 'landing-yuderm' -%}
+          {%- if settings.yuderm_logo != blank -%}
+            <a href="/" class="logo">
+              <img src="{{settings.yuderm_logo | img_url: '330x'}}" alt="">
+            </a>  
+          {%- endif -%}
+        {%- elsif page.template_suffix == 'landing-yuderm-discount' -%}
+          {%- if settings.yuderm_logo != blank -%}
+            <a href="/" class="logo">
+              <img src="{{settings.yuderm_logo | img_url: '330x'}}" alt="">
+            </a>  
+          {%- endif -%}
+        {%- else -%}
+          {%- if settings.main_logo != blank -%}
+            <a href="/" class="logo">
+              <img src="{{settings.main_logo | img_url: '330x'}}" alt="">
+            </a>  
+          {%- endif -%}
+        {%- endif -%}
+        
+        
+        <a href="#" class="cart-trigger{% unless template.name == 'cart' %} cart-trigger-js{% endunless %} hidden-lg hidden-md" data-toggle-class="cart-expanded">
+          <div class="mobile-cart-container">
+            <div>
+              <svg xmlns="http://www.w3.org/2000/svg" width="22.051" height="20.636" viewBox="0 0 22.051 20.636">
+                <g id="Group_310" data-name="Group 310" transform="translate(-11.484 -14.066)">
+                <path id="Path_286" data-name="Path 286" d="M34.077,56.37a13.044,13.044,0,0,0-.9-3.108.541.541,0,0,0-.638-.25.5.5,0,0,0-.42.459,14.46,14.46,0,0,0,.134,3.193l.3,1.881a.759.759,0,0,0,.812.544,1.307,1.307,0,0,0,.208-.017,1.034,1.034,0,0,0,.7-.39.592.592,0,0,0,.106-.448Z" transform="translate(-14.689 -27.757)" fill="#fff"/>
+                <path id="Path_287" data-name="Path 287" d="M62.482,53.026a.534.534,0,0,0-.632.246l-.013.028a14.381,14.381,0,0,0-.887,3.079l-.3,1.849a.6.6,0,0,0,.1.464,1.033,1.033,0,0,0,.7.391,1.329,1.329,0,0,0,.207.017.762.762,0,0,0,.815-.56l.3-1.862a12.887,12.887,0,0,0,.134-3.206A.508.508,0,0,0,62.482,53.026Z" transform="translate(-35.052 -27.767)" fill="#fff"/>
+                <path id="Path_288" data-name="Path 288" d="M48.14,53.014a.535.535,0,0,0-.606.385,13.33,13.33,0,0,0-.384,3.138V58.4c0,.4.395.7.918.7s.918-.3.918-.7V56.536a13.346,13.346,0,0,0-.38-3.124A.493.493,0,0,0,48.14,53.014Z" transform="translate(-25.432 -27.77)" fill="#fff"/>
+                <path id="Path_289" data-name="Path 289" d="M33.393,22.708a.886.886,0,0,0-.358-.306.878.878,0,0,0,.131-.114.862.862,0,0,0,.225-.639,1.042,1.042,0,0,0-.356-.722l-3-2.654a59.642,59.642,0,0,0-5.178-4.1.543.543,0,0,0-.731.07.558.558,0,0,0-.02.75,59.953,59.953,0,0,0,4.7,4.653l3,2.651-9.147-.118h-.09c-1.643-.014-3.342-.028-5.021-.028q-1.3,0-2.595-.007l-1.271,0,2.817-2.494a59.324,59.324,0,0,0,4.682-4.637.547.547,0,0,0,.031-.737.563.563,0,0,0-.755-.106,60.894,60.894,0,0,0-5.188,4.09l-3,2.653a1.046,1.046,0,0,0-.361.722.867.867,0,0,0,.167.557.868.868,0,0,0-.42.3.858.858,0,0,0-.13.762l.187.617.267,1q.133.51.264,1.023c.321,1.251.653,2.544,1.062,3.82a19.686,19.686,0,0,0,.94,2.436,6.718,6.718,0,0,0,.722,1.206,3.7,3.7,0,0,0,.539.592,1.085,1.085,0,0,0,.23.174,2.259,2.259,0,0,0,.2.129l.186.1.24.087a5.683,5.683,0,0,0,1.47.251q.329.011.66.011c.22,0,.441,0,.66-.011.705-.024,1.4-.087,2.075-.148l.733-.062c.3-.024.6-.048.879-.048h3.716a7.528,7.528,0,0,0,2.822-.349l.449.545v-.89a1.731,1.731,0,0,0,.277-.54c.574-1.636,1.148-3.286,1.722-4.935.144-.409.287-.822.431-1.235s.287-.824.43-1.233l.8-2.332A.836.836,0,0,0,33.393,22.708ZM22.866,32.583c-.353,0-.685.026-1.006.051l-.417.032c-.807.07-1.568.135-2.322.176-.392.014-.782.014-1.144,0a4.706,4.706,0,0,1-.972-.146l-.1-.036-.051-.025c-.015-.01-.029-.023-.044-.036l-.059-.048a1.726,1.726,0,0,1-.273-.3,6.063,6.063,0,0,1-.546-.907,18.072,18.072,0,0,1-.852-2.2c-.407-1.256-.746-2.581-1.073-3.863l-.339-1.3q.826,0,1.654-.007c.742,0,1.485-.007,2.236-.007h.09c1.641-.014,3.338-.028,5.017-.028s3.388-.028,5.094-.057l3.836-.043.217-.005c-.987,3.193-1.886,6.135-2.744,8.976a10.71,10.71,0,0,0-2.49-.234Z" fill="#fff"/>
+                </g>
+              </svg>
+           
+              <span>
+               {{ 'layout.customer.cart' | t }}
+              </span>
+            </div>
+            <div>
+              <span class="count" style="{% if cart.item_count == 0 %}display:none;{% endif %}">{{cart.item_count}}</span>
+            </div>
+          </div>
+          
+           
+        </a>
+        
+        <div class="nav-wrapper">
+          <div class="nav-wrapper__inner flex align-center justify-between">
+            <nav class="nav flex">
+              {%- assign main_menu = settings.main_menu | default: 'main-menu' -%}
+
+              {%- include 'menu', handle: main_menu -%}
+
+              {%- if settings.header_btn_label != blank and settings.header_btn_url != blank -%}
+                <ul>
+                  <li>
+                    <a href="{{settings.header_btn_url}}" class="btn">{{settings.header_btn_label}}</a>
+                  </li>
+                </ul>
+              {%- endif -%}
+            </nav><!-- /.nav -->
+
+            <nav class="nav-access">
+              <ul class="menu">
+                {%- if shop.customer_accounts_enabled -%}
+                  {%- if customer -%}
+                    <li>
+                      <a href="/account">
+                        <div class="nav-access-icon">
+                           <svg xmlns="http://www.w3.org/2000/svg" width="20.643" height="20.642" viewBox="0 0 20.643 20.642"><g transform="translate(0)"><path d="M12.321,2A10.322,10.322,0,0,0,4.949,19.546c.243.243.494.472.759.693a7.687,7.687,0,0,0,.833.627,10.29,10.29,0,0,0,11.56,0,7.687,7.687,0,0,0,.833-.627c.265-.221.516-.45.759-.693A10.322,10.322,0,0,0,12.321,2Zm0,19.168a8.76,8.76,0,0,1-5.854-2.219,5.9,5.9,0,0,1,11.707,0,8.76,8.76,0,0,1-5.854,2.219ZM10.109,10.109a2.212,2.212,0,1,1,2.212,2.212,2.212,2.212,0,0,1-2.212-2.212Zm9.289,7.52a7.388,7.388,0,0,0-4.534-4.851,3.686,3.686,0,1,0-5.087,0,7.388,7.388,0,0,0-4.534,4.851,8.847,8.847,0,1,1,14.155,0Z" transform="translate(-2 -2)" fill="#fff"/></g></svg>
+                        </div>
+
+                        <span class="nav-access-icon-label">{{- 'layout.customer.account' | t -}}</span>
+                      </a>
+                    </li>
+                  {%- else -%}
+                    <li>
+                      <a href="/account/login">
+                        <div class="nav-access-icon">
+                           <svg xmlns="http://www.w3.org/2000/svg" width="20.643" height="20.642" viewBox="0 0 20.643 20.642"><g transform="translate(0)"><path d="M12.321,2A10.322,10.322,0,0,0,4.949,19.546c.243.243.494.472.759.693a7.687,7.687,0,0,0,.833.627,10.29,10.29,0,0,0,11.56,0,7.687,7.687,0,0,0,.833-.627c.265-.221.516-.45.759-.693A10.322,10.322,0,0,0,12.321,2Zm0,19.168a8.76,8.76,0,0,1-5.854-2.219,5.9,5.9,0,0,1,11.707,0,8.76,8.76,0,0,1-5.854,2.219ZM10.109,10.109a2.212,2.212,0,1,1,2.212,2.212,2.212,2.212,0,0,1-2.212-2.212Zm9.289,7.52a7.388,7.388,0,0,0-4.534-4.851,3.686,3.686,0,1,0-5.087,0,7.388,7.388,0,0,0-4.534,4.851,8.847,8.847,0,1,1,14.155,0Z" transform="translate(-2 -2)" fill="#fff"/></g></svg>
+                        </div>
+                        <span class="nav-access-icon-label">{{- 'layout.customer.log_in' | t -}}</span>
+                      </a>
+                    </li>
+                  {%- endif -%}
+                {%- endif -%}
+                
+                <li class="search">
+                  <a role="button">
+                    <div class="nav-access-icon">
+
+                      <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                           viewBox="0 0 32 32" style="enable-background:new 0 0 32 32;" xml:space="preserve">
+                      <style type="text/css">
+                          .st0{fill:#ffffff;}
+                      </style>
+                      <path class="st0" d="M28.6,26.7L23,21l-0.5-0.5c0,0-0.3-0.3-1.1-0.2c0,0,0,0,0,0c1.6-1.8,2.6-4.3,2.6-6.9C24,7.7,19.3,3,13.5,3
+                          S3,7.7,3,13.5C3,19.3,7.7,24,13.5,24c2.6,0,5-1,6.9-2.6c-0.1,0.7,0.2,1.1,0.2,1.1L21,23l0,0l5.6,5.6c0.2,0.2,0.5,0.2,0.7,0l1.2-1.2
+                          C28.8,27.2,28.8,26.9,28.6,26.7z M13.5,21.5c-4.4,0-8-3.6-8-8s3.6-8,8-8s8,3.6,8,8S17.9,21.5,13.5,21.5z"/>
+                      </svg>
+                    </div>
+
+                    <p class="nav-access-icon-label">SEARCH</p>
+                  </a>
+                </li>
+
+                <li class="header-basket">     
+                  <a href="/cart" class="{% unless template.name == 'cart' %} cart-trigger-js{% endunless %}" data-toggle-class="cart-expanded">
+                    <div>
+                      <div class="nav-access-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22.051" height="20.636" viewBox="0 0 22.051 20.636">
+                          <g id="Group_310" data-name="Group 310" transform="translate(-11.484 -14.066)">
+                            <path id="Path_286" data-name="Path 286" d="M34.077,56.37a13.044,13.044,0,0,0-.9-3.108.541.541,0,0,0-.638-.25.5.5,0,0,0-.42.459,14.46,14.46,0,0,0,.134,3.193l.3,1.881a.759.759,0,0,0,.812.544,1.307,1.307,0,0,0,.208-.017,1.034,1.034,0,0,0,.7-.39.592.592,0,0,0,.106-.448Z" transform="translate(-14.689 -27.757)" fill="#fff"/>
+                            <path id="Path_287" data-name="Path 287" d="M62.482,53.026a.534.534,0,0,0-.632.246l-.013.028a14.381,14.381,0,0,0-.887,3.079l-.3,1.849a.6.6,0,0,0,.1.464,1.033,1.033,0,0,0,.7.391,1.329,1.329,0,0,0,.207.017.762.762,0,0,0,.815-.56l.3-1.862a12.887,12.887,0,0,0,.134-3.206A.508.508,0,0,0,62.482,53.026Z" transform="translate(-35.052 -27.767)" fill="#fff"/>
+                            <path id="Path_288" data-name="Path 288" d="M48.14,53.014a.535.535,0,0,0-.606.385,13.33,13.33,0,0,0-.384,3.138V58.4c0,.4.395.7.918.7s.918-.3.918-.7V56.536a13.346,13.346,0,0,0-.38-3.124A.493.493,0,0,0,48.14,53.014Z" transform="translate(-25.432 -27.77)" fill="#fff"/>
+                            <path id="Path_289" data-name="Path 289" d="M33.393,22.708a.886.886,0,0,0-.358-.306.878.878,0,0,0,.131-.114.862.862,0,0,0,.225-.639,1.042,1.042,0,0,0-.356-.722l-3-2.654a59.642,59.642,0,0,0-5.178-4.1.543.543,0,0,0-.731.07.558.558,0,0,0-.02.75,59.953,59.953,0,0,0,4.7,4.653l3,2.651-9.147-.118h-.09c-1.643-.014-3.342-.028-5.021-.028q-1.3,0-2.595-.007l-1.271,0,2.817-2.494a59.324,59.324,0,0,0,4.682-4.637.547.547,0,0,0,.031-.737.563.563,0,0,0-.755-.106,60.894,60.894,0,0,0-5.188,4.09l-3,2.653a1.046,1.046,0,0,0-.361.722.867.867,0,0,0,.167.557.868.868,0,0,0-.42.3.858.858,0,0,0-.13.762l.187.617.267,1q.133.51.264,1.023c.321,1.251.653,2.544,1.062,3.82a19.686,19.686,0,0,0,.94,2.436,6.718,6.718,0,0,0,.722,1.206,3.7,3.7,0,0,0,.539.592,1.085,1.085,0,0,0,.23.174,2.259,2.259,0,0,0,.2.129l.186.1.24.087a5.683,5.683,0,0,0,1.47.251q.329.011.66.011c.22,0,.441,0,.66-.011.705-.024,1.4-.087,2.075-.148l.733-.062c.3-.024.6-.048.879-.048h3.716a7.528,7.528,0,0,0,2.822-.349l.449.545v-.89a1.731,1.731,0,0,0,.277-.54c.574-1.636,1.148-3.286,1.722-4.935.144-.409.287-.822.431-1.235s.287-.824.43-1.233l.8-2.332A.836.836,0,0,0,33.393,22.708ZM22.866,32.583c-.353,0-.685.026-1.006.051l-.417.032c-.807.07-1.568.135-2.322.176-.392.014-.782.014-1.144,0a4.706,4.706,0,0,1-.972-.146l-.1-.036-.051-.025c-.015-.01-.029-.023-.044-.036l-.059-.048a1.726,1.726,0,0,1-.273-.3,6.063,6.063,0,0,1-.546-.907,18.072,18.072,0,0,1-.852-2.2c-.407-1.256-.746-2.581-1.073-3.863l-.339-1.3q.826,0,1.654-.007c.742,0,1.485-.007,2.236-.007h.09c1.641-.014,3.338-.028,5.017-.028s3.388-.028,5.094-.057l3.836-.043.217-.005c-.987,3.193-1.886,6.135-2.744,8.976a10.71,10.71,0,0,0-2.49-.234Z" fill="#fff"/>
+                          </g>
+                         </svg>
+                      </div>
+                
+                      <span class="nav-access-icon-label">{{ 'layout.customer.cart' | t }}</span>
+                    </div>
+                    <span class="count">{{cart.item_count}}</span>
+                  </a> 
+                </li>
+              </ul>
+            </nav><!-- /.nav-access -->
+            <div class="socials hidden-md hidden-lg">
+              {%- include 'socials' with 'list-socials flex align-center' -%}
+            </div>
+          </div>
+        </div><!-- /.nav-wrapper -->
+        <!-- /.nav-access -->
+      </div><!-- /.flex -->
+    </div>
+    <!-- /.shell shell--fluid -->
+  </div>
+  <!-- /.header__body -->
+
+  <div class="header__bar header-bar-normal">
+    <div class="shell shell--fluid">
+      <div class="flex justify-center align-center header-bar-container">
+        <span>{{settings.bar_content}}</span>
+        {% unless template contains 'article' %}
+          <div class="header-bar-close ico-circle ico-close"></div> 
+        {% endunless %}
+      </div><!-- /.flex -->
+    </div>
+    <!-- /.shell shell--fluid -->
+  </div>
+  <div class="covid-bar hidden">
+    <!-- /.header__bar -->
+    <div class="header__bar">
+      <div class="shell shell--fluid">
+        <div class="flex justify-center">
+          <p class="covid-text">{{ settings.covid_banner }}</p>
+        </div><!-- /.flex -->
+      </div>
+      <!-- /.shell shell--fluid -->
+    </div>
+  <!-- /.header__bar -->
+  </div>
+  
+  
+  {%- if template contains 'article' -%}
+    <div class="header__bar header__bar--alt is-hidden js-show-on-scroll">
+      <div class="shell">
+        <div class="header__bar-inner">
+          <div class="header__bar-content hidden-xs hidden-sm">
+            <p>
+              <strong>{{- 'blogs.article.now_reading' | t -}}:</strong>
+
+              {{- article.title -}}
+            </p>
+          </div><!-- /.header__bar-content -->
+
+          <div class="header__bar-aside">
+            {%- include 'share' class: 'share-icons' -%}
+
+            <ul class="list-bar-nav">
+              <li>
+                <a href="{{- blog.previous_article -}}">{{- 'blogs.article.prev' | t -}}</a>
+              </li>
+
+              <li>
+                <a href="{{- blog.next_article -}}">{{- 'blogs.article.next' | t -}}</a>
+              </li>
+            </ul><!-- /.list-bar-nav -->
+          </div><!-- /.header__bar-aside -->
+        </div><!-- /.header__bar-inner -->
+      </div><!-- /.shell -->
+    </div><!-- /.header__bar -->
+  {%- endif -%}
+</header>

@@ -1,0 +1,70 @@
+<section class="section section-login alternative-login"{% if settings.login_image != blank %} style="background-image: url({{ settings.login_image | img_url: '1600x' }}); "{% endif %}>
+  <div class="shell">
+    <div class="flex cols align-center">
+     
+     
+
+      <div class="col col--size3">
+        <div class="section__content">
+          {%- if settings.login_content != blank or settings.login_title != blank -%}
+            <div class="section__content-head">
+              {%- if settings.login_title != blank -%}
+                <h2 class="section__title">{{settings.login_title_alternative}}</h2><!-- /.section__title -->
+              {%- endif -%}
+            </div><!-- /.section__content-head -->
+          {%- endif -%}
+
+          {%- if settings.login_content != blank -%}
+            <div class="section__content-body">
+              {{settings.login_content_alternative}}
+            </div><!-- /.section__content-body -->
+          {%- endif -%}
+          
+              <div class="section__content-body">
+                {{settings.create_account_content}}
+              </div><!-- /.section__content-body -->       
+
+            <a href="#popup--register" class="btn btn--green btn--popup">
+              {{ 'customer.login.create_account' | t }}
+            </a>
+        </div><!-- /.section__content -->
+      </div><!-- /.col col-/-size3 -->
+
+      
+    </div><!-- /.flex -->
+  </div><!-- /.shell -->
+</section><!-- /.section section-login -->
+
+<div class="hidden">
+  <div class="popup popup--form" id="popup-reset">
+    <a href="#" class="btn-close popup-close">
+      <i class="ico-circle ico-cross"></i>
+    </a>
+
+    {%- include 'form.recover' -%}
+  </div><!-- /#popup-reset.popup popup-/-reset -->
+
+  <div class="popup popup--form" id="popup--register">
+    <a href="#" class="btn-close popup-close">
+      <i class="ico-circle ico-cross"></i>
+    </a>
+
+    {%- include 'form.register' -%}
+  </div><!-- /#popup-register.popup popup-register -->
+</div><!-- /.hidden -->
+
+<style>
+
+  .template-page--awin\.join .nav-wrapper, .template-page--awin\.join .cart-trigger, .template-page--awin\.join .nav-trigger, .template-page--awin\.join .header__bar, .template-page--awin\.join .cart__outer {
+	display: none !important;
+  }
+  
+  .template-page--awin\.join.scrolled--fixed .main {
+    padding-top: 140px !important;
+  }
+  
+  .template-page--awin\.join .logo, .template-page--awin\.join .footer .shell {
+  	visibility: hidden;
+  }
+  
+</style>

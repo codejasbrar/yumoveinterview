@@ -1,0 +1,333 @@
+{% assign _imove_product = all_products["imove"] %}
+{% assign _imove_variant = _imove_product.first_available_variant %}
+{% assign _yudigest_product = all_products["yudigest-plus-for-dogs"] %}
+{% assign _yudigest_variant = _yudigest_product.first_available_variant %}
+{% assign _skin_product = all_products["yuderm-skin-cream"] %}
+{% assign _skin_variant = _skin_product.first_available_variant %}
+{% assign _itching_product = all_products["yuderm-itching-dog"] %}
+{% assign _itching_variant = _itching_product.first_available_variant %}
+{% assign _yucalm_product = all_products["yucalm-dog"] %}
+{% assign _yucalm_variant = _yucalm_product.first_available_variant %}
+
+<div class="cart-cross-sell-container">
+  <div class="cart-cross-sell cross-sell-imove">
+    <div class="table table--cart">
+      <table>
+        <thead>
+          <tr>
+            <th colspan="5" class="cross-sell-title">
+              <h5>You May Also Like</h5>
+              <i class="ico-circle ico-close ico--small cross-sell-close"></i>
+            </th>   
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="cross-sell-content">
+            <td class="table__image">
+  		    <a href="#" class="table__image-inner" style="background-image: url({{  _imove_product.featured_image | img_url: '240x' }}); "></a>
+  	      </td>
+            <td class="table__name">
+  		    <a href="{{-  _imove_product.url -}}" class="table__product">
+                <h5 class="flex justify-between cross-product-title">
+  		  	    {{- _imove_product.title -}}
+              
+  		  	    <span class="price flex flex-reverse align-center hidden-lg hidden-md hidden-sm hidden-cart">
+  		  		  {%- if  _imove_product.compare_at_price > _imove_product.price -%}
+  		  			  <ins>{{ _imove_product.price | money}}<  
+  		  			  <del>{{ _imove_product.compare_at_price | money}}</del>
+  		  	   	  {%- else -%}
+  		  			  {{ _imove_product.price | money}}
+  		  		  {%- endif -%}
+  		  	    </span><!-- /.price -->  
+  		    	<span class="price flex flex-reverse align-center hidden-section">
+  		  		  {%- if  _imove_product.compare_at_price > _imove_product.price -%}
+  		  			  <ins>{{ _imove_product.price | money}}<  
+  		  			  <del>{{ _imove_product.compare_at_price | money}}</del>
+  		  		  {%- else -%}
+  		  		  	{{ _imove_product.price | money}}
+  		  	  	  {%- endif -%}
+  		  	    </span><!-- /.price -->
+  		      </h5>
+              </a>
+              {%- assign _content =  _imove_product.content | strip | replace: '<p><span>&lt;!-- split --&gt;</span></p>', '<p>&lt;!-- split --&gt;</p>' -%}
+              {%- assign _content_parts = _content | split: '<p>&lt;!-- split --&gt;</p>' -%}
+          
+              <p class="table__variant">{{- _content_parts[0] -}}</p><!-- /.table__variant -->
+            </td>
+          </tr>
+          <tr class="cross-sell-actions imove-actions">
+            <td>
+              {% if _imove_product.variants.size > 1 %}
+                <select class="cross-sell-select select cross-sell-imove-select">
+                  {% for variant in _imove_product.variants %}
+                    <option value="{{ variant.id }}">{{ variant.title }}</option>
+                  {% endfor %}
+                </select>
+              {% endif %}
+              <input type="hidden" id="imove-variant-id" class="cross-sell-variant-id" value="{{ _imove_variant.id }}">
+              <button id="cross-sell-add" class="btn">ADD TO BASKET</button>
+            </td> 
+          </tr>   
+        </tbody>
+      </table>
+    </div><!-- /.table -->
+  </div><!-- /.cart-cross-sell -->
+  
+  <div class="cart-cross-sell cross-sell-yudigest">
+    <div class="table table--cart">
+      <table>
+        <thead>
+          <tr>
+            <th class="cross-sell-title">
+              <h5>You May Also Like</h5>
+              <i class="ico-circle ico-close ico--small cross-sell-close"></i>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="cross-sell-content">
+            <td class="table__image">
+  		    <a href="#" class="table__image-inner" style="background-image: url({{ _yudigest_product.featured_image | img_url: '240x' }}); "></a>
+  	      </td>
+            <td class="table__name">
+  		    <a href="{{- _yudigest_product.url -}}" class="table__product">
+                <h5 class="flex justify-between cross-product-title">
+  		  	    {{- _yudigest_product.title -}}
+              
+  		  	    <span class="price flex flex-reverse align-center hidden-lg hidden-md hidden-sm hidden-cart">
+  		  		  {%- if _yudigest_product.compare_at_price > _yudigest_product.price -%}
+  		  			  <ins>{{_yudigest_product.price | money}}<  
+  		  			  <del>{{_yudigest_product.compare_at_price | money}}</del>
+  		  	   	  {%- else -%}
+  		  			  {{cross_sell.price | money}}
+  		  		  {%- endif -%}
+  		  	    </span><!-- /.price -->  
+  		    	<span class="price flex flex-reverse align-center hidden-section">
+  		  		  {%- if _yudigest_product.compare_at_price > _yudigest_product.price -%}
+  		  			  <ins>{{_yudigest_product.price | money}}<  
+  		  			  <del>{{_yudigest_product.compare_at_price | money}}</del>
+  		  		  {%- else -%}
+  		  		  	{{_yudigest_product.price | money}}
+  		  	  	  {%- endif -%}
+  		  	    </span><!-- /.price -->
+  		      </h5>
+              </a>
+              {%- assign _content = _yudigest_product.content | strip | replace: '<p><span>&lt;!-- split --&gt;</span></p>', '<p>&lt;!-- split --&gt;</p>' -%}
+              {%- assign _content_parts = _content | split: '<p>&lt;!-- split --&gt;</p>' -%}
+          
+              <p class="table__variant">{{- _content_parts[0] -}}</p><!-- /.table__variant -->
+            </td>
+          </tr>
+          <tr class="cross-sell-actions yudigest-actions">
+            <td>
+              {% if _yudigest_product.variants.size > 1 %}
+                <select class="cross-sell-select select cross-sell-yudigest-select">
+                  {% for variant in _yudigest_product.variants %}
+                    <option value="{{ variant.id }}">{{ variant.title }}</option>
+                  {% endfor %}
+                </select>
+              {% endif %}
+                <input type="hidden" id="yudigest-variant-id" class="cross-sell-variant-id" value="{{ _yudigest_variant.id }}">
+                <button id="cross-sell-add" class="btn">ADD TO BASKET</button>
+            </td> 
+          </tr>   
+        </tbody>
+      </table>
+    </div><!-- /.table -->
+  </div><!-- /.cart-cross-sell -->
+  
+  <div class="cart-cross-sell cross-sell-skin">
+    <div class="table table--cart">
+      <table>
+        <thead>
+          <tr>
+            <th class="cross-sell-title">
+              <h5>You May Also Like</h5>
+              <i class="ico-circle ico-close ico--small cross-sell-close"></i>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="cross-sell-content">
+            <td class="table__image">
+  		    <a href="#" class="table__image-inner" style="background-image: url({{ _skin_product.featured_image | img_url: '240x' }}); "></a>
+  	      </td>
+            <td class="table__name">
+  		    <a href="{{- _skin_product.url -}}" class="table__product">
+                <h5 class="flex justify-between cross-product-title">
+  		  	    {{- _skin_product.title -}}
+              
+  		  	    <span class="price flex flex-reverse align-center hidden-lg hidden-md hidden-sm hidden-cart">
+  		  		  {%- if _skin_product.compare_at_price > _skin_product.price -%}
+  		  			  <ins>{{_skin_product.price | money}}<  
+  		  			  <del>{{_skin_product.compare_at_price | money}}</del>
+  		  	   	  {%- else -%}
+  		  			  {{_skin_product.price | money}}
+  		  		  {%- endif -%}
+  		  	    </span><!-- /.price -->  
+  		    	<span class="price flex flex-reverse align-center hidden-section">
+  		  		  {%- if _skin_product.compare_at_price > _skin_product.price -%}
+  		  			  <ins>{{_skin_product.price | money}}<  
+  		  			  <del>{{_skin_product.compare_at_price | money}}</del>
+  		  		  {%- else -%}
+  		  		  	{{_skin_product.price | money}}
+  		  	  	  {%- endif -%}
+  		  	    </span><!-- /.price -->
+  		      </h5>
+              </a>
+              {%- assign _content = _skin_product.content | strip | replace: '<p><span>&lt;!-- split --&gt;</span></p>', '<p>&lt;!-- split --&gt;</p>' -%}
+              {%- assign _content_parts = _content | split: '<p>&lt;!-- split --&gt;</p>' -%}
+          
+              <p class="table__variant">{{- _content_parts[0] -}}</p><!-- /.table__variant -->
+            </td>
+          </tr>
+          <tr class="cross-sell-actions skin-actions">
+            <td> 
+              {% if _skin_product.variants.size > 1 %}
+                <select class="cross-sell-select select cross-sell-skin-select">
+                  {% for variant in _skin_product.variants %}
+                    <option value="{{ variant.id }}">{{ variant.title }}</option>
+                  {% endfor %}
+                </select>
+              {% endif %}
+                <input type="hidden" id="skin-variant-id" class="cross-sell-variant-id" value="{{ _skin_variant.id }}">
+                <button id="cross-sell-add" class="btn">ADD TO BASKET</button>
+            </td> 
+          </tr>   
+        </tbody>
+      </table>
+    </div><!-- /.table -->
+  </div><!-- /.cart-cross-sell -->
+  
+  <div class="cart-cross-sell cross-sell-itching">
+    <div class="table table--cart">
+      <table>
+        <thead>
+          <tr>
+            <th class="cross-sell-title">
+              <h5>You May Also Like</h5>
+              <i class="ico-circle ico-close ico--small cross-sell-close"></i>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="cross-sell-content">
+            <td class="table__image">
+	  	    <a href="#" class="table__image-inner" style="background-image: url({{ _itching_product.featured_image | img_url: '240x' }}); "></a>
+	        </td>
+            <td class="table__name">
+	  	    <a href="{{- _itching_product.url -}}" class="table__product">
+                <h5 class="flex justify-between cross-product-title">
+	  	  	    {{- _itching_product.title -}}
+              
+	  	  	    <span class="price flex flex-reverse align-center hidden-lg hidden-md hidden-sm hidden-cart">
+	  	  		  {%- if _itching_product.compare_at_price > _itching_product.price -%}
+	  	  			  <ins>{{_itching_product.price | money}}<  
+	  	  			  <del>{{_itching_product.compare_at_price | money}}</del>
+	  	  	   	  {%- else -%}
+	  	  			  {{_itching_product.price | money}}
+	  	  		  {%- endif -%}
+	  	  	    </span><!-- /.price -->  
+	  	    	<span class="price flex flex-reverse align-center hidden-section">
+	  	  		  {%- if _itching_product.compare_at_price > _itching_product.price -%}
+	  	  			  <ins>{{_itching_product.price | money}}<  
+	  	  			  <del>{{_itching_product.compare_at_price | money}}</del>
+	  	  		  {%- else -%}
+	  	  		  	{{_itching_product.price | money}}
+	  	  	  	  {%- endif -%}
+	  	  	    </span><!-- /.price -->
+	  	      </h5>
+              </a>
+              {%- assign _content = _itching_product.content | strip | replace: '<p><span>&lt;!-- split --&gt;</span></p>', '<p>&lt;!-- split --&gt;</p>' -%}
+              {%- assign _content_parts = _content | split: '<p>&lt;!-- split --&gt;</p>' -%}
+          
+              <p class="table__variant">{{- _content_parts[0] -}}</p><!-- /.table__variant -->
+            </td>
+          </tr>
+          <tr class="cross-sell-actions itching-actions">
+            <td>
+              {% if _itching_product.variants.size > 1 %}
+                <select class="cross-sell-select select cross-sell-itching-select">
+                  {% for variant in _itching_product.variants %}
+                    <option value="{{ variant.id }}">{{ variant.title }}</option>
+                  {% endfor %}
+                </select>
+              {% endif %}
+                <input type="hidden" id="itching-variant-id" class="cross-sell-variant-id" value="{{ _itching_variant.id }}">
+                <button id="cross-sell-add" class="btn">ADD TO BASKET</button>
+            </td> 
+          </tr>   
+        </tbody>
+      </table>
+    </div><!-- /.table -->
+  </div><!-- /.cart-cross-sell -->
+
+  <div class="cart-cross-sell cross-sell-yucalm">
+    <div class="table table--cart">
+      <table>
+        <thead>
+          <tr>
+            <th class="cross-sell-title">
+              <h5>You May Also Like</h5>
+              <i class="ico-circle ico-close ico--small cross-sell-close"></i>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="cross-sell-content">
+            <td class="table__image">
+  		    <a href="#" class="table__image-inner" style="background-image: url({{ _yucalm_product.featured_image | img_url: '240x' }}); "></a>
+  	      </td>
+            <td class="table__name">
+  		    <a href="{{- _yucalm_product.url -}}" class="table__product">
+                <h5 class="flex justify-between cross-product-title">
+  		  	    {{- _yucalm_product.title -}}
+              
+  		  	    <span class="price flex flex-reverse align-center hidden-lg hidden-md hidden-sm hidden-cart">
+  		  		  {%- if _yucalm_product.compare_at_price > _yucalm_product.price -%}
+  		  			  <ins>{{_yucalm_product.price | money}}<  
+  		  			  <del>{{_yucalm_product.compare_at_price | money}}</del>
+  		  	   	  {%- else -%}
+  		  			  {{_yucalm_product.price | money}}
+  		  		  {%- endif -%}
+  		  	    </span><!-- /.price -->  
+  		    	<span class="price flex flex-reverse align-center hidden-section">
+  		  		  {%- if _yucalm_product.compare_at_price > _yucalm_product.price -%}
+  		  			  <ins>{{_yucalm_product.price | money}}<  
+  		  			  <del>{{_yucalm_product.compare_at_price | money}}</del>
+  		  		  {%- else -%}
+  		  		  	{{_yucalm_product.price | money}}
+  		  	  	  {%- endif -%}
+  		  	    </span><!-- /.price -->
+  		      </h5>
+              </a>
+              {%- assign _content = _yucalm_product.content | strip | replace: '<p><span>&lt;!-- split --&gt;</span></p>', '<p>&lt;!-- split --&gt;</p>' -%}
+              {%- assign _content_parts = _content | split: '<p>&lt;!-- split --&gt;</p>' -%}
+          
+                <p class="table__variant">{{- _content_parts[0] -}}</p><!-- /.table__variant -->
+              </td>
+            </tr>
+            <tr class="cross-sell-actions yucalm-actions">
+              <td>
+              {% if _yucalm_product.variants.size > 1 %}
+                <select class="cross-sell-select select cross-sell-yucalm-select">
+                  {% for variant in _yucalm_product.variants %}
+                    <option value="{{ variant.id }}">{{ variant.title }}</option>
+                  {% endfor %}
+                </select>
+              {% endif %}
+                <input type="hidden" id="yucalm-variant-id" class="cross-sell-variant-id" value="{{ _yucalm_variant.id }}">
+                <button id="cross-sell-add" class="btn">ADD TO BASKET</button>
+            </td> 
+          </tr>   
+        </tbody>
+      </table>
+    </div><!-- /.table -->
+  </div><!-- /.cart-cross-sell -->
+</div>
+
+<style>
+  .select2-container {
+    z-index: 10020;
+}
+</style>

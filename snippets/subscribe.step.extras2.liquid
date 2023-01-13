@@ -1,0 +1,214 @@
+<div class="form__step" id="extras2">
+	<div class="form__step-head">
+		<h2 class="form__step-title section__title">{{ _settings.extras_title2 }}</h2><!-- /.section__title -->
+	</div><!-- /.form__step-head -->
+
+	<div class="form__step-body">
+    <div class="form__row">
+      <label for="" class="form__label">
+        {%- if _settings.extras_text2 != '' -%}
+          {{ _settings.extras_text2 }}
+        {%- endif -%}
+      </label>
+    </div><!-- /.form__row -->
+
+    <div class="form__row">
+      <div class="extras-loading-div"></div>
+      <div id="extras-subscription-slider">
+        {% for product in collections['calming'].products %}
+          {% if product.handle contains 'cat' %}
+          {% else %}
+          <div class="multi-sub-item multi-sub-calming sub-item-not-visibile">
+            <img src="{{ product.featured_image | img_url }}">
+            <div class="sub-item-content">
+              <h5 class="sub-item-title">{{ product.title }}</h5>
+              <div class="sub-item-description">
+                {%- assign _content = product.content | strip | replace: '<p><span>&lt;!-- split --&gt;</span></p>', '<p>&lt;!-- split --&gt;</p>' -%}
+                {%- assign _content_parts = _content | split: '<p>&lt;!-- split --&gt;</p>' -%}
+               
+                {{_content_parts[0]}}
+                <a href="{{ product.url }}" class="read-more btn--details">read more</a>
+              </div>
+              <p class="sub-item-price">Just <span class="sub-item-formated-price">£{{ product.price | money_without_currency | divided_by: 100 | times: 65 | round: 2 }}<span> per delivery</p>
+              <p class="sub-item-select-title">Delivered Every</p>
+              <div class="sub-item-select">
+                <select id="calming-item-select-{{ forloop.index }}" class="select frequency-select calming-select" name="calming-frequency-{{ forloop.index }}" data-placeholder="Delivery frequency" style="width: 100%;">
+                  <option value="1">1 month</option>
+                  <option value="2">2 months</option>
+                  <option value="3">3 months</option>
+                  <option value="4">4 months</option>
+                  <option value="5">5 months</option>
+                  <option value="6">6 months</option>
+			    </select>
+              </div><!-- /.sub-item-select -->
+              <div class="sub-item-actions">
+                <a href="#" class="sub-item-btn btn"><span class="sub-item-btn-text">Add to Plan</span> <span class="sub-item-tick">{% include 'tick-svg' %}</span></a>
+                <input type="hidden" id="calming-item-{{ forloop.index }}" name="calming-item-{{ forloop.index }}" class="item-added-check" value="">
+                <input type="hidden" id="calming-item-frequency-{{ forloop.index }}" name="calming-item-frequency-{{ forloop.index }}" class="item-added-frequency" value="1">
+                <input type="hidden" id="calming-item-id-{{ forloop.index }}" name="calming-item-id-{{ forloop.index }}" class="item-added-id" value="">
+                <input type="hidden" id="calming-item-name-{{ forloop.index }}" name="calming-item-name-{{ forloop.index }}" class="item-added-handle" value="{{ product.handle }}">
+                <p class="item-price-handle hidden">{{ product.price | money_without_currency }}</p>
+              </div><!-- /.sub-item-actions -->
+            </div><!-- /.sub-item-content -->
+          </div><!-- /.multi-sub-item -->
+          {% endif %}
+        {% endfor %}
+        {% for product in collections['human'].products %}
+          <div class="multi-sub-item multi-sub-human sub-item-not-visibile">
+            <img src="{{ product.featured_image | img_url }}">
+            <div class="sub-item-content">
+              <h5 class="sub-item-title">{{ product.title }}</h5>
+             <div class="sub-item-description">
+                {%- assign _content = product.content | strip | replace: '<p><span>&lt;!-- split --&gt;</span></p>', '<p>&lt;!-- split --&gt;</p>' -%}
+                {%- assign _content_parts = _content | split: '<p>&lt;!-- split --&gt;</p>' -%}
+               
+                {{_content_parts[0]}}
+                <a href="{{ product.url }}" class="read-more btn--details">read more</a>
+              </div>
+              <p class="sub-item-price">Just <span class="sub-item-formated-price">£{{ product.price | money_without_currency | divided_by: 100 | times: 65 | round: 2 }}</span> per delivery</p>
+             
+              <p class="sub-item-select-title">Delivered Every</p>
+              <div class="sub-item-select">
+                 <select id="human-item-select-{{ forloop.index }}" class="select frequency-select human-select" name="human-frequency-{{ forloop.index }}" data-placeholder="Delivery frequency" style="width: 100%;">
+				 
+                  <option value="1">1 month</option>
+                  <option value="2">2 months</option>
+                  <option value="3">3 months</option>
+                  <option value="4">4 months</option>
+                  <option value="5">5 months</option>
+                  <option value="6">6 months</option>
+			    </select>
+              </div><!-- /.sub-item-select -->
+              <div class="sub-item-actions">
+                <a href="#" class="sub-item-btn btn"><span class="sub-item-btn-text">Add to Plan</span> <span class="sub-item-tick">{% include 'tick-svg' %}</span></a>
+                <input type="hidden" id="human-item-{{ forloop.index }}" name="human-item-{{ forloop.index }}" class="item-added-check" value="">
+                <input type="hidden" id="human-item-frequency-{{ forloop.index }}" name="human-item-frequency-{{ forloop.index }}" class="item-added-frequency" value="1">
+                <input type="hidden" id="human-item-id-{{ forloop.index }}" name="human-item-id-{{ forloop.index }}" class="item-added-id" value="">
+                <input type="hidden" id="human-item-name-{{ forloop.index }}" name="human-item-name-{{ forloop.index }}" class="item-added-handle" value="{{ product.handle }}">
+                <p class="item-price-handle hidden">{{ product.price | money_without_currency }}</p>
+              </div><!-- /.sub-item-actions -->
+            </div><!-- /.sub-item-content -->
+          </div><!-- /.multi-sub-item -->
+        {% endfor %}
+        {% for product in collections['skin-coat'].products %}
+          {% if product.handle contains 'cat' %}
+          {% else %}
+          <div class="multi-sub-item multi-sub-skin sub-item-not-visibile">
+            <img src="{{ product.featured_image | img_url }}">
+            <div class="sub-item-content">
+              <h5 class="sub-item-title">{{ product.title }}</h5>
+              <div class="sub-item-description">
+                {%- assign _content = product.content | strip | replace: '<p><span>&lt;!-- split --&gt;</span></p>', '<p>&lt;!-- split --&gt;</p>' -%}
+                {%- assign _content_parts = _content | split: '<p>&lt;!-- split --&gt;</p>' -%}
+               
+                {{_content_parts[0]}}
+                <a href="{{ product.url }}" class="read-more btn--details">read more</a>
+              </div>
+              <p class="sub-item-price">Just <span class="sub-item-formated-price">£{{ product.price | money_without_currency | divided_by: 100 | times: 65 | round: 2 }}</span> per delivery</p>
+             
+              <p class="sub-item-select-title">Delivered Every</p>
+              <div class="sub-item-select">
+               <select id="skin-item-select-{{ forloop.index }}" class="select frequency-select skin-select" name="skin-frequency-{{ forloop.index }}" data-placeholder="Delivery frequency" style="width: 100%;">
+				 
+                  <option value="1">1 month</option>
+                  <option value="2">2 months</option>
+                  <option value="3">3 months</option>
+                  <option value="4">4 months</option>
+                  <option value="5">5 months</option>
+                  <option value="6">6 months</option>
+			    </select>
+              </div><!-- /.sub-item-select -->
+              <div class="sub-item-actions">
+                <a href="#" class="sub-item-btn btn"><span class="sub-item-btn-text">Add to Plan</span> <span class="sub-item-tick">{% include 'tick-svg' %}</span></a>
+                <input type="hidden" id="skin-item-{{ forloop.index }}" name="skin-item-{{ forloop.index }}" class="item-added-check" value="">
+                <input type="hidden" id="skin-item-frequency-{{ forloop.index }}" name="skin-item-frequency-{{ forloop.index }}" class="item-added-frequency" value="1">
+                <input type="hidden" id="skin-item-id-{{ forloop.index }}" name="skin-item-id-{{ forloop.index }}" class="item-added-id" value="">
+                <input type="hidden" id="skin-item-name-{{ forloop.index }}" name="skin-item-name-{{ forloop.index }}" class="item-added-handle" value="{{ product.handle }}">
+                <p class="item-price-handle hidden">{{ product.price | money_without_currency }}</p>
+              </div><!-- /.sub-item-actions -->
+            </div><!-- /.sub-item-content -->
+          </div><!-- /.multi-sub-item -->
+          {% endif %}
+        {% endfor %}
+        {% for product in collections['digestive-health'].products %}
+          <div class="multi-sub-item multi-sub-digestive sub-item-not-visibile">
+            <img src="{{ product.featured_image | img_url }}">
+            <div class="sub-item-content">
+              <h5 class="sub-item-title">{{ product.title }}</h5>
+              <div class="sub-item-description">
+                {%- assign _content = product.content | strip | replace: '<p><span>&lt;!-- split --&gt;</span></p>', '<p>&lt;!-- split --&gt;</p>' -%}
+                {%- assign _content_parts = _content | split: '<p>&lt;!-- split --&gt;</p>' -%}
+               
+                {{_content_parts[0]}}
+                <a href="{{ product.url }}" class="read-more btn--details">read more</a>
+              </div>
+              <p class="sub-item-price">Just <span class="sub-item-formated-price">£{{ product.price | money_without_currency | divided_by: 100 | times: 65 | round: 2 }}</span> per delivery</p>
+             
+              <p class="sub-item-select-title">Delivered Every</p>
+              <div class="sub-item-select">
+                <select id="digestive-item-select-{{ forloop.index }}" class="select frequency-select digestive-select" name="digestive-frequency-{{ forloop.index }}" data-placeholder="Delivery frequency" style="width: 100%;">
+				  
+                  <option value="1">1 month</option>
+                  <option value="2">2 months</option>
+                  <option value="3">3 months</option>
+                  <option value="4">4 months</option>
+                  <option value="5">5 months</option>
+                  <option value="6">6 months</option>
+			    </select>
+              </div><!-- /.sub-item-select -->
+              <div class="sub-item-actions">
+                <a href="#" class="sub-item-btn btn"><span class="sub-item-btn-text">Add to Plan</span> <span class="sub-item-tick">{% include 'tick-svg' %}</span></a>
+                <input type="hidden" id="digestive-item-{{ forloop.index }}" name="digestive-item-{{ forloop.index }}" class="item-added-check" value="">
+                <input type="hidden" id="digestive-item-frequency-{{ forloop.index }}" name="digestive-item-frequency-{{ forloop.index }}" class="item-added-frequency" value="1">
+                <input type="hidden" id="digestive-item-id-{{ forloop.index }}" name="digestive-item-id-{{ forloop.index }}" class="item-added-id" value="">
+                <input type="hidden" id="digestive-item-name-{{ forloop.index }}" name="digestive-item-name-{{ forloop.index }}" class="item-added-handle" value="{{ product.handle }}">
+                <p class="item-price-handle hidden">{{ product.price | money_without_currency }}</p>
+              </div><!-- /.sub-item-actions -->
+            </div><!-- /.sub-item-content -->
+          </div><!-- /.multi-sub-item -->
+        {% endfor %}
+        {% for product in collections['dental'].products %}
+          <div class="multi-sub-item multi-sub-dental sub-item-not-visibile">
+            <img src="{{ product.featured_image | img_url }}">
+            <div class="sub-item-content">
+              <h5 class="sub-item-title">{{ product.title }}</h5>
+              <div class="sub-item-description">
+                {%- assign _content = product.content | strip | replace: '<p><span>&lt;!-- split --&gt;</span></p>', '<p>&lt;!-- split --&gt;</p>' -%}
+                {%- assign _content_parts = _content | split: '<p>&lt;!-- split --&gt;</p>' -%}
+               
+                {{_content_parts[0]}}
+                <a href="{{ product.url }}" class="read-more btn--details">read more</a>
+              </div>
+              <p class="sub-item-price">Just <span class="sub-item-formated-price">£{{ product.price | money_without_currency | divided_by: 100 | times: 65 | round: 2 }}</span> per delivery</p>
+              
+              <p class="sub-item-select-title">Delivered Every</p>
+              <div class="sub-item-select">
+                <select id="dental-item-select-{{ forloop.index }}" class="select frequency-select dental-select" name="dental-frequency-{{ forloop.index }}" data-placeholder="Delivery frequency" style="width: 100%;">
+				  
+                  <option value="1">1 month</option>
+                  <option value="2">2 months</option>
+                  <option value="3">3 months</option>
+                  <option value="4">4 months</option>
+                  <option value="5">5 months</option>
+                  <option value="6">6 months</option>
+			    </select>
+              </div><!-- /.sub-item-select -->
+              <div class="sub-item-actions">
+                <a href="#" class="sub-item-btn btn"><span class="sub-item-btn-text">Add to Plan</span> <span class="sub-item-tick">{% include 'tick-svg' %}</span></a>
+                <input type="hidden" id="dental-item-{{ forloop.index }}" name="dental-item-{{ forloop.index }}" class="item-added-check" value="">
+                <input type="hidden" id="dental-item-frequency-{{ forloop.index }}" name="dental-item-frequency-{{ forloop.index }}" class="item-added-frequency" value="1">
+                <input type="hidden" id="dental-item-id-{{ forloop.index }}" name="dental-item-id-{{ forloop.index }}" class="item-added-id" value="">
+                <input type="hidden" id="dental-item-name-{{ forloop.index }}" name="dental-item-name-{{ forloop.index }}" class="item-added-handle" value="{{ product.handle }}">
+                <p class="item-price-handle hidden">{{ product.price | money_without_currency }}</p>
+              </div><!-- /.sub-item-actions -->
+            </div><!-- /.sub-item-content -->
+          </div><!-- /.multi-sub-item -->
+        {% endfor %}
+      </div><!-- /.subscription-slider -->
+    </div><!-- /.form__row -->
+  </div><!-- /.form__step-body -->
+
+	<div class="form__step-actions">
+		<a href="#subscription-plan" class="btn btn--small btn--green btn--next btn-extras-subs">Next</a>
+	</div><!-- /.form__step-actions -->
+</div><!-- /.form__step -->

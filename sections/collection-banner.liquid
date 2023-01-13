@@ -1,0 +1,51 @@
+{%- assign _section = section.settings -%}
+{%- assign section_image = _section.image -%}
+{%- assign section_mobile_image = _section.mobile_image -%}
+{%- assign section_url = _section.url -%}
+
+<style>
+  .banner-collections {
+  	border-radius: 15px;
+    margin-top: -30px;
+    margin-bottom: 25px;
+    display: block;
+  }
+  .collections-banner-link:hover .banner-collections {
+  	opacity: 0.9;
+  }
+</style>
+
+<div>
+  <a class="collections-banner-link" href="{{section_url}}">
+      {%- if section_image != blank -%}
+        <img class="banner-collections {% if section_mobile_image != blank %} hidden-xs{% endif %}" src="{{ section_image | img_url: '1600x' }}" />
+      {%- endif -%}
+
+      {%- if section_mobile_image != blank -%}
+        <img class="banner-collections hidden-lg hidden-md hidden-sm" src="{{ section_mobile_image | img_url: '1600x' }}"/>
+      {%- endif -%}
+  </a>
+</div>
+
+{% schema %}
+{
+  "name": "Collections Banner",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Desktop Banner Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_image",
+      "label": "Mobile Banner Image"
+    },
+    {
+      "type": "url",
+      "id": "url",
+      "label": "Banner Link"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,49 @@
+{%- assign tag_count = 0 -%}
+
+{%- for tag in collection.all_tags -%}
+  {%- if tag contains '_c-' or tag contains '_c:'  -%}
+    {%- assign tag_count = tag_count | plus: 1 -%}
+  {%- endif -%}
+{%- endfor -%}
+
+{%- if tag_count > 1 -%}
+  <div class="nav-tags {{_class}}">
+    <ul>
+      {%- for tag in collection.all_tags -%}
+        {%- if tag contains '_c-' or tag contains '_c:'  -%}
+          {%- assign _tag = tag | remove: '_c-' | remove: '_c:' | replace: '-', ' ' | strip | capitalize  -%}
+
+          {% if _tag contains 'Dog' %}
+            {% if current_tags contains tag %}
+              <li class="current">
+                <a href="{{collection.url}}" title='{{_tag}}'>{{_tag}}</a>
+              </li>
+            {%- else -%}
+              <li>
+                <a href="{{collection.url}}/{{tag}}" title='{{_tag}}'>{{_tag}}</a>
+              </li>
+            {% endif %}
+          {% endif %}
+        {%- endif -%}
+      {%- endfor -%}
+
+      {%- for tag in collection.all_tags -%}
+        {%- if tag contains '_c-' or tag contains '_c:'  -%}
+          {%- assign _tag = tag | remove: '_c-' | remove: '_c:' | replace: '-', ' ' | strip | capitalize  -%}
+
+          {%- unless _tag contains 'Dog' -%}
+            {% if current_tags contains tag %}
+              <li class="current">
+                <a href="{{collection.url}}" title='{{_tag}}'>{{_tag}}</a>
+              </li>
+            {%- else -%}
+              <li>
+                <a href="{{collection.url}}/{{tag}}" title='{{_tag}}'>{{_tag}}</a>
+              </li>
+            {% endif %}
+          {%- endunless -%}
+        {%- endif -%}
+      {%- endfor -%}
+    </ul>
+  </div><!-- /.nav-tags -->
+{%- endif -%}

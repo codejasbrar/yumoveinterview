@@ -1,0 +1,72 @@
+{% case fragment %}
+	{% when 'head' %}
+		<header class="section__head flex align-center justify-between">
+			<a href="/account" class="link-back">
+				<i class="ico-circle ico-back"></i>
+				<span>Back</span>
+			</a>
+
+			<div class="link-close">
+				<a href="/account/logout">
+					<span>{{ 'layout.customer.log_out' | t }}</span>
+				</a>
+
+				<a href="/account/logout">
+					<i class="ico-circle ico-close"></i>
+				</a>
+			</div><!-- /.link-close -->
+
+		</header><!-- /.section__head -->
+	{% when 'sidebar' %}
+		<aside class="section-account__aside">
+			{%- if settings.main_logo != blank -%}
+			  <a href="/" class="logo">
+			    <img src="{{settings.main_logo | img_url: '330x'}}" alt="">
+			  </a>
+			{%- endif -%}
+
+			<div class="section-account__aside-media hidden-xs hidden-sm"{% if settings.account_image != blank %} style="background-image: url({{ settings.account_image | img_url: '1600x' }});"{% endif %}></div><!-- /.section-account__aside-media -->
+
+			<div class="section-account__aside-media hidden-lg hidden-md"{% if settings.account_image_mobile != blank %} style="background-image: url({{ settings.account_image_mobile | img_url: '1600x' }});"{% endif %}></div><!-- /.section-account__aside-media -->
+
+			<div class="section__nav">
+				{% if template == 'customers/account' %}
+					<h2 class="text-center hidden-md hidden-lg">{{- 'customer.account.account' | t -}}</h2>
+				{% endif %}
+
+				{% if template == 'customers/account.orders' or template == 'customers/order' or template == 'customers/addresses' %}
+					<h2 class="text-center hidden-md hidden-lg">{{ 'customer.account.orders' | t }}</h2>
+				{% endif %}
+
+				<ul class=" hidden-sm hidden-xs">
+					<li{% if template == 'customers/account' %} class="current"{% endif %}>
+						<a href="/account">
+							{{- 'customer.account.account' | t -}}
+						</a>
+					</li>
+
+					<li{% if template == 'customers/account.orders' or template == 'customers/order' or template == 'customers/addresses' %} class="current"{% endif %}>
+						<a href="/account?view=orders">
+							{{ 'customer.account.orders' | t }}
+						</a>
+					</li>
+
+					{%- if customer.metafields.subscriptions.customer_string != blank -%}
+						<li>
+							<a href="https://yumove-uk.myshopify.com/tools/recurring/customers/{{customer.metafields.subscriptions.customer_string}}/subscriptions">
+								{{ 'customer.account.subscribe' | t }}
+							</a>
+						</li>
+					{%- endif -%}
+				</ul>
+			</div><!-- /.section__nav -->
+
+			{%- if settings.account__aside_title != blank -%}
+				<h1>
+					{{ settings.account__aside_title | newline_to_br | remove: '<p>' | remove: '</p>' }}
+				</h1>
+			{%- endif -%}
+		</aside><!-- /.section__aside -->
+{% endcase %}
+
+{%- assign fragment = '' -%}

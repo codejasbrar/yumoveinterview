@@ -1,0 +1,45 @@
+{%- if _product != empty -%}
+	<div class="product {{_size}} text-center flex {% unless _product.available %}product--sold-out{% endunless %}">
+		{%- if _product.featured_image -%}
+			<div class="product__media">
+              <div class="sub-product-header">
+                <h4 class="product__title">
+				  <a href="{{ _product.url | within: collection }}">
+					{{- _product.title -}}
+				  </a>
+			    </h4><!-- /.product__title -->
+              
+                <p class="product__info">
+				  {%- if _description != blank -%}
+					{{- _description -}}
+				  {%- endif -%}
+			    </p><!-- /.product__info -->
+              
+                <div class="product__rate flex align-center justify-center">{% include 'trustbox-widget-product-mini-landing' %}</div><!-- /.product__rate flex align-center justify-center -->
+
+              </div>
+              
+				<a href="{{ _product.url | within: collection }}" class="product__link">
+					<img src="{{ _product.featured_image | img_url: '500x' }}" alt="">
+				</a>
+              
+               {%- if _saving != blank -%}
+				 <h5 class="sub-save-text">{{_saving | newline_to_br | remove: '<p>' | remove: '</p>'}}</h5><!-- /.product__subtitle -->
+			   {%- endif -%}
+
+			     <h5 class="sub-save-from">
+				  {{ _from }}
+			     </h5>
+
+			     <a href="{{ _product.url | within: collection }}" class="btn btn--green">
+				  {{ 'products.product.subscribe' | t }}
+			     </a>
+		       {%- else -%}
+			     <a href="{{ _product.url | within: collection }}">
+				   {{ 'image' | placeholder_svg_tag }}
+			     </a>
+		       {%- endif -%}
+			</div><!-- /.product__media -->          
+	</div><!-- /.product__item -->
+{%- endif -%}
+{%- assign _product = '' -%}

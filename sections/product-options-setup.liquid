@@ -1,0 +1,52 @@
+{%- assign _blocks = section.blocks -%}
+
+{%- if _blocks.size > 0 -%}
+  {%- assign _options = '' -%}
+
+  {%- for block in _blocks -%}
+    {%- assign current_block = block.settings -%}
+
+    {%- if current_block.title != blank -%}
+      {%- assign title_handle = current_block.title | handle -%}
+
+      {%- assign _options = _options | append: title_handle | append: ':' | append: current_block.option_type | append: '|||' -%}
+    {%- endif -%}
+  {%- endfor -%}
+
+  <p class="hidden">{{- _options -}}</p><!-- /.hidden -->
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Product options - setup",
+  "blocks": [
+    {
+      "type": "option",
+      "name": "option",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Product option name"
+        },
+        {
+          "type": "select",
+          "id": "option_type",
+          "label": "Type",
+          "options": [
+              {
+                "value": "select",
+                "label": "Select"
+              },
+              {
+                "value": "checkboxes",
+                "label": "Checkboxes"
+              }
+            ],
+            "default": "select"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

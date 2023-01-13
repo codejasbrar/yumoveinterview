@@ -1,0 +1,66 @@
+{%- assign _section = section.settings -%}
+{%- assign section_image = _section.image -%}
+{%- assign section_mobile_image = _section.mobile_image -%}
+
+<div id="sample-rejection" class="sample-hidden">
+  <div class="section-sample-rejection">
+    <div class="shell shell-fluid">
+      {%- if section_image != blank -%}
+        <div class="intro__media{% if section_mobile_image != blank %} hidden-xs{% endif %}" style="background-image: url({{ section_image | img_url: '1200x', crop: 'center' }});"></div><!-- /.intro__media hidden-xs -->
+      {%- endif -%}
+
+      {%- if section_mobile_image != blank -%}
+        <div class="intro__media intro__media--mobile hidden-lg hidden-md hidden-sm" style="background-image: url({{ section_mobile_image | img_url: '600x' }});"></div><!-- /.intro__media intro__media-/-mobile visible-xs -->
+      {%- endif -%}
+      
+      <div class="section-body"> 
+        <div class="rejection-content">
+          <h2>{{ section.settings.title }}</h2>
+          <div class="rejection-text-container">
+            <p>{{ section.settings.text }}</p>
+          </div><!-- rejection-text-container --> 
+          <a href="{{ section.settings.url }}" class="btn">{{ section.settings.btn_text }}</a>
+        </div><!-- rejection-content --> 
+      </div><!-- section-body -->
+    </div><!-- shell -->
+  </div><!-- section-sample-rejection -->
+</div><!-- sample-rejection -->
+
+{% schema %}
+  {
+    "name": "Sample Rejection",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Background Image"
+      },
+      {
+        "type": "image_picker",
+        "id": "mobile_image",
+        "label": "Background Image (Mobile)"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Rejection Title"
+      },
+      {
+        "type": "richtext",
+        "id": "text",
+        "label": "Rejection Text"
+      },
+      {
+        "type": "url",
+        "id": "url",
+        "label": "Button Url"
+      },
+      {
+        "type": "text",
+        "id": "btn_text",
+        "label": "Button Text"
+      }
+    ]
+  }
+{% endschema %}
+

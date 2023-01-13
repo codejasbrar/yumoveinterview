@@ -1,0 +1,38 @@
+{%- if section.blocks.size > 0 -%}
+<div class="nav-tags">
+    <ul>
+      {%- for block in section.blocks -%}
+      	{%- if block.settings.block_link != blank -%}
+      	<li>
+        	<a href="{{ block.settings.block_link }}" title='{{ block.settings.title }}'>{{ block.settings.title }}</a>
+        </li>
+      	{%- endif -%}
+      {%- endfor -%}
+    </ul>
+  </div><!-- /.nav-tags -->
+{%- endif -%}
+{% schema %}
+  {
+    "name": "Nav",
+    "settings": [
+	],
+	"blocks": [
+      {
+        "type": "link",
+        "name": "Link",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title"
+          },
+          {
+            "type": "url",
+            "id": "block_link",
+            "label": "Link"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

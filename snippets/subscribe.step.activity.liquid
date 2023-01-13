@@ -1,0 +1,226 @@
+<div class="form__step" id="activity">
+	<div class="form__step-head">
+		<h2 class="form__step-title section__title">
+      {%- if _settings.activity_title != '' -%}
+        {{ _settings.activity_title }}
+      {%- else -%}
+        How is <span class="dog-name"></span>’s level of activity?
+      {%- endif -%}
+    </h2><!-- /.section__title -->
+	</div><!-- /.form__step-head -->
+
+	<div class="form__step-body">
+    <div class="form__row">
+      <label for="activity" class="form__label form__label--small">{{ _settings.activity_text }}</label>
+
+      <div class="form__controls flex-xs flex-column-xs">
+        <div class="form__controls-images hidden-lg hidden-md hidden-sm">
+          <div class="form__controls-image hidden" data-input="inactive">
+            {%- include 'activity.inactive' -%}
+
+            <h5>Less Active</h5>
+          </div><!-- /.form__controls-image -->
+
+          <div class="form__controls-image js-default-image" data-input="leisurely">
+            {%- include 'activity.leisurely' -%}
+
+            <h5>Leisurely</h5>
+          </div><!-- /.form__controls-image -->
+
+          <div class="form__controls-image hidden" data-input="active">
+            {%- include 'activity.active' -%}
+
+            <h5>Active</h5>
+          </div><!-- /.form__controls-image -->
+
+          <div class="form__controls-image hidden" data-input="intenselyactive">
+            {%- include 'activity.intenselyactive' -%}
+
+            <h5>Intensely Active</h5>
+          </div><!-- /.form__controls-image -->
+
+        </div><!-- /.form__controls-images hidden-lg hidden-md hidden-sm -->
+        
+        <input id="klaviyo_activity" type="hidden" name="petactivity1" value="">
+        <input id="klaviyo_joint_condition" type="hidden" name="petjointcondition1" value="">
+        <input id="klaviyo_working" type="hidden" name="petworking1" value="">
+
+        <ul class="list-radios list-radios--tooltips flex align-end js-radio-required" data-name="activity">
+          <li>
+            <div class="radio">
+              <input type="radio" name="activity" id="inactive" value="Inactive" class="js-radio js-new-data js-change-image">
+
+              <label for="inactive" class="has-tooltip">
+                 <div class="form__label-image activity-icons hidden-xs">
+                   {%- include 'activity.inactive' -%}
+
+                   <span>Less Active</span>
+                 </div>
+
+                 <div class="form__label-tooltip hidden">
+                   <p>{{ _settings.inactive_tooltip }}</p>
+                 </div><!-- /.form__label-tooltip hidden -->
+
+                 <div class="form__label-inner hidden-lg hidden-md hidden-sm">
+                   <span>Less Active</span>
+                 </div>
+               </label>
+            </div><!-- /.radio -->
+          </li>
+
+          <li>
+            <div class="radio">
+              <input type="radio" name="activity" id="leisurely" value="Leisurely" class="js-radio js-new-data js-change-image js-default" checked="checked">
+
+              <label for="leisurely" class="has-tooltip">
+               <div class="form__label-image activity-icons hidden-xs">
+                 {%- include 'activity.leisurely' -%}
+
+                 <span>Leisurely</span>
+               </div>
+
+               <div class="form__label-tooltip hidden">
+                 <p>{{ _settings.leisurely_tooltip }}</p>
+               </div><!-- /.form__label-tooltip hidden -->
+
+               <div class="form__label-inner hidden-lg hidden-md hidden-sm">
+                 <span>Leisurely</span>
+               </div>
+              </label>
+            </div><!-- /.radio -->
+          </li>
+
+          <li>
+            <div class="radio">
+              <input type="radio" name="activity" id="active" value="Active" class="js-radio js-new-data js-change-image">
+
+              <label for="active" class="has-tooltip">
+               <div class="form__label-image activity-icons hidden-xs">
+                 {%- include 'activity.active' -%}
+
+                 <span>Active</span>
+               </div>
+
+               <div class="form__label-tooltip hidden">
+                 <p>{{ _settings.active_tooltip }}</p>
+               </div><!-- /.form__label-tooltip hidden -->
+
+               <div class="form__label-inner hidden-lg hidden-md hidden-sm">
+                 <span>Active</span>
+               </div>
+              </label>
+            </div><!-- /.radio -->
+          </li>
+
+          <li>
+            <div class="radio">
+              <input type="radio" name="activity" id="intenselyactive" value="Intensely Active" class="js-radio js-new-data js-change-image">
+
+              <label for="intenselyactive" class="has-tooltip">
+               <div class="form__label-image activity-icons hidden-xs">
+                 {%- include 'activity.intenselyactive' -%}
+
+                 <span>Intensely Active</span>
+               </div>
+
+               <div class="form__label-tooltip hidden">
+                 <p>{{ _settings.intensely_active_tooltip }}</p>
+               </div><!-- /.form__label-tooltip hidden -->
+
+               <div class="form__label-inner hidden-lg hidden-md hidden-sm">
+                 <span>Intensely Active</span>
+               </div>
+              </label>
+            </div><!-- /.radio -->
+          </li>
+        </ul><!-- /.list-radios -->
+
+        <div class="form__row-tooltip js-clear js-default-tooltip">
+          <p>{{ _settings.leisurely_tooltip }}</p>
+        </div><!-- /.form__row-tooltip -->
+      </div><!-- /.form__controls -->
+    </div><!-- /.form__row -->
+
+    <div class="form__row activity-checkboxes">
+      <ul class="list-checkboxes">
+        <li>
+          <div class="checkbox">
+            <input type="checkbox" name="joint-condition" id="joint-condition" class="js-checkbox js-new-data">
+
+            <label for="joint-condition" class="flex-xs align-center justify-between-xs">
+              <span>Does <span class="dog-name">Buster</span> have a known joint condition?</span>
+
+              <div class="checkbox__tooltip">
+                <i class="ico-info">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                    <path d="M6.14,6.14a12,12,0,1,0,16.971,0A12,12,0,0,0,6.14,6.14Zm8.967,1.52a1.849,1.849,0,0,1,0,3.7,1.865,1.865,0,0,1-1.849-1.874A1.838,1.838,0,0,1,15.106,7.659Zm2.609,12.386a1.212,1.212,0,0,1-.253.431,3.3,3.3,0,0,1-2.432,1.089,7.958,7.958,0,0,1-1.342-.076,1.959,1.959,0,0,1-1.545-1.976l.3-1.976c.2-1.14.405-2.305.608-3.445,0-.076.025-.152.025-.228,0-.481-.152-.659-.633-.709a5.072,5.072,0,0,1-.608-.1.446.446,0,0,1-.329-.456c.025-.2.152-.329.405-.38a2.318,2.318,0,0,1,.431-.025h3.5c.431,0,.684.2.684.633A5.084,5.084,0,0,1,16.4,13.89c-.228,1.317-.481,2.609-.709,3.926-.076.431-.177.861-.228,1.292a1.79,1.79,0,0,0,.051.633.5.5,0,0,0,.557.405,2.34,2.34,0,0,0,.684-.2,4.723,4.723,0,0,1,.507-.253C17.563,19.59,17.791,19.767,17.715,20.046Z" transform="translate(-2.625 -2.625)" fill="#319b42"/>
+                  </svg>
+                </i>
+
+                <div class="checkbox__tooltip-inner">
+                  <i class="ico-circle ico-close hidden-lg hidden-md hidden-sm"></i>
+
+                  <p>{{ _settings.joint_condition_tooltip }}</p>
+                </div><!-- /.checkbox__tooltip-inner -->
+              </div><!-- /.checkbox__tooltip -->
+            </label>
+          </div><!-- /.checkbox -->
+        </li>
+
+        <li>
+          <div class="checkbox">
+            <input type="checkbox" name="working-dog" id="working-dog" class="js-checkbox js-new-data">
+
+            <label for="working-dog" class="flex-xs align-center justify-between-xs">
+              <span>Is <span class="dog-name">Buster</span> a working dog?</span>
+
+              <div class="checkbox__tooltip">
+                <i class="ico-info">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                    <path d="M6.14,6.14a12,12,0,1,0,16.971,0A12,12,0,0,0,6.14,6.14Zm8.967,1.52a1.849,1.849,0,0,1,0,3.7,1.865,1.865,0,0,1-1.849-1.874A1.838,1.838,0,0,1,15.106,7.659Zm2.609,12.386a1.212,1.212,0,0,1-.253.431,3.3,3.3,0,0,1-2.432,1.089,7.958,7.958,0,0,1-1.342-.076,1.959,1.959,0,0,1-1.545-1.976l.3-1.976c.2-1.14.405-2.305.608-3.445,0-.076.025-.152.025-.228,0-.481-.152-.659-.633-.709a5.072,5.072,0,0,1-.608-.1.446.446,0,0,1-.329-.456c.025-.2.152-.329.405-.38a2.318,2.318,0,0,1,.431-.025h3.5c.431,0,.684.2.684.633A5.084,5.084,0,0,1,16.4,13.89c-.228,1.317-.481,2.609-.709,3.926-.076.431-.177.861-.228,1.292a1.79,1.79,0,0,0,.051.633.5.5,0,0,0,.557.405,2.34,2.34,0,0,0,.684-.2,4.723,4.723,0,0,1,.507-.253C17.563,19.59,17.791,19.767,17.715,20.046Z" transform="translate(-2.625 -2.625)" fill="#319b42"/>
+                  </svg>
+                </i>
+
+                <div class="checkbox__tooltip-inner">
+                  <i class="ico-circle ico-close hidden-lg hidden-md hidden-sm"></i>
+
+                  <p>{{ _settings.working_dog_tooltip }}</p>
+                </div><!-- /.checkbox__tooltip-inner -->
+              </div><!-- /.checkbox__tooltip -->
+            </label>
+          </div><!-- /.checkbox -->
+        </li>
+      </ul><!-- /.list-checkboxes -->
+      <div class="form__step-actions">
+		<a id="btn--activity" href="#eating" class="btn btn--small btn--green btn--next">Next</a>
+	</div><!-- /.form__step-actions -->
+    </div><!-- /.form__row -->
+  </div><!-- /.form__step-body -->
+
+	
+
+  <div class="form__step-error">Please complete all parts of this step</div><!-- /.form__step-error -->
+</div><!-- /.form__step -->
+
+{% comment %}<script>
+  $('#btn--activity').click(function() {
+    var age = $('#age-select option:selected').val();
+    var activityLevel = $('input[name=activity]:checked').val();
+    var weight = $('input[name=weight]:checked').val();
+    var jointIssues = $('#joint-condition').is(':checked') ? true : false;
+    var nextPageHref;
+    if(($('#working-dog').is(':checked')) || (((age < 4) && ((activityLevel == 'Active') || (activityLevel == 'Leisurely') || (activityLevel == 'Intensely Active'))) && ! jointIssues) || ((weight == ('Up to 15kg') || weight == ('16-30kg')) && ((age >= 5) && (age <= 7)) && ((activityLevel == 'Active') || (activityLevel == 'Leisurely'))) || ((weight == 'Over 45kg') && ((age < 4) || ((age >= 8)) ||(jointIssues) || ((age >= 5) && (age <= 7)) && (activityLevel != 'Leisurely') && (activityLevel != 'Active')))) {
+      localStorage.setItem('fussy', 'false');
+      nextPageHref = '#new-to-yumove';
+      backHref = '#activity';
+      $('#nav--eating-style').hide();
+    }
+    else {
+      localStorage.setItem('fussy', 'true');
+      nextPageHref = '#eating';
+      backHref = '#eating';
+      $('#nav--eating-style').show();
+    }
+    $(this).attr('href', nextPageHref);
+  });
+</script>{% endcomment %}

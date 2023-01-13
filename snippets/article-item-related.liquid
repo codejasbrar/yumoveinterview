@@ -1,0 +1,19 @@
+<div class="article-item">
+  <div class="article__inner">
+    {%- if _article.image != blank -%}
+      <a href="{{- _article.url -}}" class="article__image" style="background-image: url({{- _article.image | img_url: '400x' -}});" role="img" aria-label="{{- _article.image.alt | escape -}}"></a><!-- /.article__image -->
+    {%- endif -%}
+
+    <div class="article-item__body">
+      <h3>
+        <a href="{{- _article.url -}}">{{- _article.title -}}</a>
+      </h3>
+
+      {%- if _article.excerpt != blank -%}
+        {{- _article.excerpt | truncatewords: 8 | append: '</p>' -}}
+      {%- endif -%}
+
+      <a href="{{- _article.url -}}" class="btn btn--green article__btn">{{- 'blogs.article.read_more' | t -}}</a>
+    </div><!-- /.article__body -->
+  </div><!-- /.article__inner -->
+</div><!-- /.article-item -->

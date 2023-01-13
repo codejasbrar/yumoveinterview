@@ -1,0 +1,93 @@
+<section class="section section--gray section-slider section-landing-ingredients section-brand-landing-icons landing-sub-info"> 
+  <div class="shell">
+    <div class="section-title">
+      {{ section.settings.main_title }}
+       <p class="section-sub-title">{{ section.settings.sub_title }}</p>
+    </div>
+
+    <div class="section__body">
+        <div class="slider-signs">
+            <div class="slider__clip">
+                <div class="slider__slides">
+                    {%- for block in section.blocks -%}
+                        {%- assign _block = block.settings -%}
+                        {%- assign block_image = _block.image -%}
+                        {%- assign block_title = _block.title -%}
+                        {%- assign block_content = _block.content -%}
+                        <div class="slider__slide">
+                            <div class="feature feature--col flex align-start">
+                                {%- if block_image != blank -%}
+                                    <div class="feature__image flex align-center justify-center">
+                                        <img src="{{ block_image | img_url: '300x' }}" alt="">
+                                    </div><!-- /.feature__image -->
+                                {%- endif -%}
+
+                                {%- if block_title != blank or block_content != blank -%}
+                                    <div class="feature__content">
+                                        {%- if block_title != blank -%}
+                                            <h4>{{block_title}}</h4>
+                                        {%- endif -%}
+
+                                        {{block_content}}
+
+                                        {%- if forloop.last and section_content != blank -%}
+                                            <div class="section__hint">
+                                                {{ section_content }}
+                                            </div><!-- /.section__hint -->
+                                        {%- endif -%}
+                                    </div><!-- /.feature__content -->
+                                {%- endif -%}
+                            </div><!-- /.feature -->
+                        </div>
+                        {%- endfor -%}
+                </div>
+            </div>
+        </div>
+    </div>
+        
+    </div>
+
+  </div><!-- /.shell -->
+</section>
+
+
+{% schema %}
+{
+   "name":"Signs",
+   "settings":[
+      {
+         "type":"text",
+         "id":"main_title",
+         "label":"Signs Title"
+      },
+      {
+         "type":"text",
+         "id":"sub_title",
+         "label":"Signs Sub Title"
+      }
+   ],
+   "blocks":[
+      {
+         "type":"sign",
+         "name":"Sign",
+         "settings":[
+            {
+               "type":"image_picker",
+               "id":"image",
+               "label":"Image"
+            },
+            {
+               "type":"text",
+               "id":"title",
+               "label":"Title"
+            },
+            {
+               "type":"richtext",
+               "id":"content",
+               "label":"Content"
+            }
+         ]
+      }
+   ]
+}
+{% endschema %}

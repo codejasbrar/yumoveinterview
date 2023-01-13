@@ -1,0 +1,77 @@
+{%- assign _section = section.settings -%}
+{%- assign section_title = _section.title -%}
+{%- assign section_content = _section.content -%}
+{%- assign section_background = _section.background-colour -%}
+{%- assign _image = _section.image -%}
+
+<style>
+  .lintbells-fam-msg {
+    position: absolute;
+    color: white;
+    z-index: 9;
+    bottom: -15px;
+    left: 26px;
+  }
+  .relative {
+  	position: relative;
+  }
+  @media(min-width: 768px) {
+  	.lintbells-fam-msg {
+		bottom: 0px;
+    	left: 50px;
+    }
+  }
+</style>
+
+<section class="section">
+  <div class="shell">
+    <div class="text-block-image text-block-image--reverse relative">
+      <p class="anamate lintbells-fam-msg">part of the Lintbells family</p>
+      {%- include 'text-block' -%}
+      {%- include 'image-block' -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "About Text & Image Block",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "html",
+      "id": "content",
+      "label": "Content"
+    },
+	{
+      "type": "select",
+      "id": "background-colour",
+      "label": "Text Block Background Colour",
+      "options": [
+          {
+            "value": "text-block--grey",
+            "label": "Grey"
+          },
+          {
+            "value": "text-block--green",
+            "label": "Green"
+          },
+          {
+            "value": "text-block--white",
+            "label": "White"
+          }
+        ],
+        "default": "text-block--green"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image Block"
+    }
+  ]
+}
+{% endschema %}

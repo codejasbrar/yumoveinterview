@@ -1,0 +1,111 @@
+<div class="form__step" id="weight">
+	<div class="form__step-head">
+		<h2 class="form__step-title section__title">
+      {%- if _settings.weight_title != '' -%}
+        {{ _settings.weight_title }}
+      {%- else -%}
+        How much does <span class="dog-name"></span> weigh?
+      {%- endif -%}
+    </h2><!-- /.section__title -->
+	</div><!-- /.form__step-head -->
+
+	<div class="form__step-body">
+    <div class="form__row">
+      <label for="weight" class="form__label form__label--small">{{ _settings.weight_text }}</label>
+
+      <div class="form__controls">
+          <div class="form__controls-images hidden-lg hidden-md hidden-sm">
+            <div class="form__controls-image hidden" data-input="15">
+              {%- include 'size.small' -%}
+            </div><!-- /.form__controls-image hidden -->
+
+            <div class="form__controls-image hidden" data-input="16-30">
+              {%- include 'size.medium' -%}
+            </div><!-- /.form__controls-image hidden -->
+
+            <div class="form__controls-image js-default-image" data-input="31-45">
+              {%- include 'size.large' -%}
+            </div><!-- /.form__controls-image hidden -->
+
+            <div class="form__controls-image hidden" data-input="46">
+              {%- include 'size.extralarge' -%}
+            </div><!-- /.form__controls-image hidden -->
+          </div><!-- /.form__controls-images -->
+        
+          <input id="klaviyo_weight" type="hidden" name="petweight1" value="">
+
+          <ul class="list-radios list-radios--weight flex align-end js-radio-required" data-name="weight">
+            <li>
+              <div class="radio">
+                <input type="radio" name="weight" id="15" class="js-radio js-new-data js-change-image" value="Up to 15kg">
+
+                <label for="15">
+                   <div class="form__label-image hidden-xs">
+                     {%- include 'size.small' -%}
+                   </div>
+
+                   <div class="form__label-inner">
+                     <span>Up to 15kg</span>
+                   </div>
+                 </label>
+              </div><!-- /.radio -->
+            </li>
+
+            <li>
+              <div class="radio">
+                <input type="radio" name="weight" id="16-30" class="js-radio js-new-data js-change-image" value="16-30kg">
+
+                <label for="16-30">
+                 <div class="form__label-image hidden-xs">
+                   {%- include 'size.medium' -%}
+                 </div>
+
+                 <div class="form__label-inner">
+                   <span>16 – 30kg</span>
+                 </div>
+                </label>
+              </div><!-- /.radio -->
+            </li>
+
+            <li>
+              <div class="radio">
+                <input type="radio" name="weight" id="31-45" class="js-radio js-new-data js-change-image js-default" value="31-45kg" checked="checked">
+
+                <label for="31-45">
+                 <div class="form__label-image hidden-xs">
+                   {%- include 'size.large' -%}
+                 </div>
+
+                 <div class="form__label-inner">
+                   <span>31 – 45kg</span>
+                 </div>
+                </label>
+              </div><!-- /.radio -->
+            </li>
+
+            <li>
+              <div class="radio">
+                <input type="radio" name="weight" id="46" class="js-radio js-new-data js-change-image" value="Over 45kg">
+
+                <label for="46">
+                 <div class="form__label-image hidden-xs">
+                   {%- include 'size.extralarge' -%}
+                 </div>
+
+                 <div class="form__label-inner">
+                   <span>Over 45kg</span>
+                 </div>
+                </label>
+              </div><!-- /.radio -->
+            </li>
+          </ul><!-- /.list-radios -->
+      </div><!-- /.form__controls -->
+    </div><!-- /.form__row -->
+  </div><!-- /.form__step-body -->
+
+	<div class="form__step-actions">
+		<a href="#activity" class="btn btn--small btn--green btn--next">Next</a>
+	</div><!-- /.form__step-actions -->
+
+  <div class="form__step-error">Please complete all parts of this step</div><!-- /.form__step-error -->
+</div><!-- /.form__step -->

@@ -1,0 +1,491 @@
+{% include 'shogun-products', content: page %}
+{%- section 'digital-grad-intro' -%}
+
+<style>
+  #shopify-section-digital-grad-intro .intro__content {
+    padding: 0;
+    max-width: 770px;
+  }
+  
+  #shopify-section-digital-grad-intro .intro h5 {
+  	max-width: 638px;
+    margin-top: 30px;
+  }
+  .section--recruitment-cta, .section--recruitment-cta .text-block.section__head {
+    padding-top: 0;
+    font-weight: bold;
+  }
+  .section--recruitment-cta a:not(.btn) {
+  	text-decoration: none;
+    color: #319b42;
+  }
+  .section--recruitment-cta .btn {color: #1d1d1d;}
+  
+  .section--recruitment-cta .btn:hover {border-color: #f28b00;}
+  
+   .section--recruitment-cta a:not(.btn):hover {
+  	text-decoration: underline;
+  }
+  .text-block, .text-block.section__head {
+  	max-width: 1070px;
+    width: 100%;
+    margin: auto;
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+  }
+  .text-block .large-text {
+  	font-size: 20px;
+    line-height: 1.3;
+  }
+  .text-block li {
+  	text-align: left;
+    margin-bottom: 10px;
+  }
+  .text-block li:last-of-type {
+    margin-bottom: 0px;
+  }
+  .text-block--green {
+  	background: #319b42;
+  }
+  .text-block--grey {
+  	background: rgba(209,208,206,.4);
+  }
+  .text-block--white {
+  	background: #fff;
+  }
+  .text-block--green * {
+  	color: #fff;
+  }
+  .text-block--green h2 {
+    margin-bottom: 15px;
+    line-height: 1.2;
+  }
+  .text-block--grey h2 {
+    color: #319b42;
+  }
+  .text-block__list-col {
+    text-align: left;
+  }
+  .text-block__list-col li {
+  	margin-bottom: 20px;
+  }
+  .job-card {
+  	position: relative;
+    margin-bottom: 75px;
+  }
+  .job-card:first-of-type {
+  	margin-top: 60px;
+  }
+  .job-card:last-of-type {
+	margin-bottom: 30px;
+  }
+  .job-card__number {
+    background: #eaf6ec;
+    width: 98px;
+    height: 98px;
+    position: absolute;
+    border-radius: 100%;
+    top: -49px;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+        -ms-transform: translateX(-50%);
+            transform: translateX(-50%);
+  }
+  .job-card__number span {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+    font-family: 'Verveine';
+    font-size: 50px;
+    color: #319b42;
+    line-height: 1;
+  }
+  h3.job-card__title {
+    font-weight : bold;
+    font-size : 29px;
+    color : #319B42;
+    line-height: 1.2;
+    margin: 40px 0 18px;
+    display: inline-block;
+    border-bottom: solid #d1d0ce 1.5px;
+    padding-bottom: 8px;
+  }
+  
+  .text-block-image .image-block img {margin: 0;}
+ 
+  .text-block-image .text-block, .text-block-image .image-block {
+    margin: 0;
+    text-align: left;
+  }
+  .text-block-image .text-block h2, .section-recruitment-values h2 {text-align: center;}
+  .section-recruitment-values ul {
+    counter-reset: section;
+      margin-left: 45px;
+  }
+  
+  .section-recruitment-values li {
+  	list-style: none;
+    padding-left: 10px;
+    position: relative;
+  }
+  
+  .section-recruitment-values .text-block {
+    padding-left:0;
+    -webkit-box-flex: 0!important;
+        -ms-flex: 0 0 50%!important;
+            flex: 0 0 50%!important;
+    padding-top: 0;
+    padding-right: 0;
+  }
+  .section-recruitment-values, .section--video, .section--location {padding: 0;}
+  .section--location {
+  	margin-bottom: 58px;
+  }
+   .section--location h2 {
+  	margin-bottom: 10px;
+  }
+  .section-recruitment-values li::before {
+    content: '';
+    width: 36px;
+    height: 36px;
+    border-radius: 100%;
+    position: absolute;
+    left: -45px;
+    top: 50%;
+    background: #aedce8;
+    -webkit-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+            transform: translateY(-50%);
+  }
+  .section-recruitment-values .section__title {
+      margin-bottom: 20px;
+  }
+  .section-recruitment-values li::after {
+    content: counter(section);
+    position: absolute;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+            transform: translateY(-50%);
+    left: -31px;
+    counter-increment: section;
+    font-family: 'Verveine';
+  }
+
+  .section-recruitment-values li:nth-of-type(3)::before, .section-recruitment-values li:nth-of-type(4)::before {
+	background: #face91;
+  }
+  
+  .section-recruitment-values li:nth-of-type(5)::before, .section-recruitment-values li:nth-of-type(6)::before {
+	background: #cae08f;
+  }
+  .youtube-video {
+    position: relative;
+    padding-bottom: 45.25%;
+    height: 0;
+    border-radius: 15px;
+    overflow: hidden;
+  }
+  .youtube-video iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+  }
+  .banner__text {
+    position: absolute;
+    width: calc(660 / 1320 * 100%);
+    background: #319b42;
+    color: white;
+    padding: 60px;
+    border-radius: 15px;
+    top: 50%;
+    right: 0;
+    -webkit-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+            transform: translateY(-50%);
+    margin-right: calc(48 / 1320 * 100%);
+  }
+  .banner.banner--with-text {
+    position: relative;
+  }
+  .banner.banner--with-text img {
+    margin: 0;
+    padding: 0;
+  }
+  #shopify-section-digital-grad-intro .intro h4 {
+	font-size: 20px;
+  }
+  .text-block-image .text-block {
+  	margin-bottom: 40px;
+  }
+  .section-recruitment-values {
+  	margin-top: 20px;
+  }
+  .section-recruitment-values .text-block-image .text-block {margin-bottom: 0;}
+  .section-recruitment-values .text-block-image {
+  	margin-bottom: 20px;
+  }
+  .lintbells-msg {
+      position: absolute;
+    z-index: 9;
+    color: white;
+    font-weight: bold;
+    top: 60px;
+    width: 100%;
+    
+    }
+  @media(min-width: 768px) {
+    .lintbells-msg {
+      -webkit-transform: none;
+          -ms-transform: none;
+              transform: none;
+      top: 15px;
+      left: 210px;
+      text-align: none;
+    }
+    .section-recruitment-values .text-block-image {
+      margin-bottom: 0px;
+    }
+    .section-recruitment-values .section__title {
+      margin-bottom: 40px;
+  	}
+    .section-recruitment-values {
+  		margin-top: 0px;
+  	}
+  .section-recruitment-values .text-block-image .text-block {margin-bottom: 40px;}
+    .text-block-image .text-block {
+      margin-bottom: 0px;
+    }
+    #shopify-section-digital-grad-intro .intro h4 {
+    	font-size: 24px;
+      margin-top: 30px;
+    }
+    .job-card:last-of-type {
+      margin-bottom: 75px;
+    }
+    .text-block-image {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-pack: justify;
+          -ms-flex-pack: justify;
+              justify-content: space-between;
+    }
+    
+    .text-block-image--reverse {
+    	-webkit-box-orient: horizontal;
+    	-webkit-box-direction: reverse;
+    	    -ms-flex-direction: row-reverse;
+    	        flex-direction: row-reverse;
+    }
+
+    #shopify-section-text-image-block .section {
+    	padding-bottom: 0;
+    }
+    .text-block-image .text-block, .text-block-image .image-block {
+      -webkit-box-flex: 0;
+          -ms-flex: 0 0 48%;
+              flex: 0 0 48%;
+    }
+    
+    .text-block__list-col {
+      -webkit-columns: 2;
+         -moz-columns: 2;
+              columns: 2;
+    }
+    .text-block, .text-block.section__head {
+		padding: 40px;
+    }
+    h3.job-card__title {
+		margin-top: 18px;
+    }
+    .text-block .large-text {
+      font-size: 28px;
+      text-align: left;
+    }
+  }
+  
+  @media(min-width: 1025px) {
+  	.lintbells-msg {
+      left: 300px;
+      top: 26px;
+    }
+  }
+
+  @media(max-width: 767px) {
+    .apply {
+    	margin-top: 20px;
+    }
+    .lintbells-msg {
+    	text-align: center;
+    }
+    .youtube-video {
+      padding-bottom: 56.25%;
+    }
+    .banner--with-text {
+    	display: -webkit-box;
+    	display: -ms-flexbox;
+    	display: flex;
+		-webkit-box-orient: vertical;
+		-webkit-box-direction: reverse;
+		    -ms-flex-direction: column-reverse;
+		        flex-direction: column-reverse;
+    }
+    .banner.banner--with-text img {
+		margin-top: 20px;
+		border-radius: 15px;
+    }
+    .banner__text {
+    	padding: 30px;
+    	position: static;
+    	width: 100%;
+    	top: 0;
+    	-webkit-transform: none;
+    	    -ms-transform: none;
+    	        transform: none;
+    	margin-right: 0;
+    }
+    #shopify-section-digital-grad-intro .intro.intro--small h2 {
+      font-size: 28px;
+      margin-top: 60px;
+      margin-bottom: 15px;
+    }
+  }
+
+  @media(min-width: 768px) and (max-width:1024px) {
+    #shopify-section-digital-grad-intro .intro__content {
+      max-width: 470px;
+    }
+  }
+</style>
+
+<!-- Green section: Intro Block -->
+<section class="section section--gray">
+  <div class="shell">
+    <div class="text-block text-block--green anamate">
+      <h2>We're looking for individuals who are:</h2>
+      <div class="text-block__list-col">
+        <ul>
+          <li>In their first digital role and seeking a new challenge</li>
+          <li>Have just completed a degree or qualification</li>
+          <li>A highly engaged social media user</li>
+          <li>Highly passionate about the areas of social, influencer marketing and affiliates</li>
+          <li>Willing to get stuck in</li>
+          <li>Enthusiastic, driven and ambitious, with a keen interest in pets!</li>
+        </ul>
+      </div>
+    </div>
+    
+    <header class="section__head text-block">
+      <h2 class="section__title anamate">The roles</h2>
+      <p class="section-sub-title anamate">We’re seeking not 1, but 3 digital enthusiasts for an 18-month contract within 3 areas: Social, Influencer and Affiliates. You’ll work for 6 months in each, as part of an award-winning Direct to Consumer team. <br/><br/>Here’s what you’ll be doing in each role…</p>
+    </header>
+    
+    <!-- role cards -->
+    <article class="text-block text-block--white job-card anamate">
+      <div class="job-card__number"><span>1</span></div>
+      <h3 class="job-card__title">Influencer Assistant</h3>
+      <div class="text-block__list-col">
+        <ul>
+          <li>Manage micro-influencers, ensuring the product is supplied and content is posted</li>
+          <li>Brainstorm new, creative approaches to influencer campaigns</li>
+          <li>Support on social listening through influencers’ activity, and flag follow-up requirements</li>
+          <li>Monitor and report the results of various projects with influencers, including co-created and/or co-branded content promotions, lead sharing and/or event partnerships</li>
+          <li>Monitor influencer activity to ensure tone and imagery is on-brand</li>
+          <li>Develop content ideas and curate content</li>
+          <li>Identify and build relationships with prominent influencers and thought leaders </li>
+          <li>Keep great ongoing relationships with current influencers and offer new ways to grow the partnerships</li>
+        </ul>
+      </div>
+      <button class="btn apply">Apply now<img src="{{ 'paw.png' | asset_img_url: '30x' }}" alt="Paw silhouette"></button>
+    </article>
+    
+    <article class="text-block text-block--white job-card anamate">
+      <div class="job-card__number"><span>2</span></div>
+      <h3 class="job-card__title">Social Media Assistant</h3>
+      <div class="text-block__list-col">
+        <ul>
+          <li>Responsible for setting the social media community strategy for:</li>
+          <ul>
+            <li>Instagram - posts and stories</li>
+            <li>Facebook - posts</li>
+          </ul>
+          <li>Planning and scheduling the social media content calendar</li>
+          <li>Working with the Paid Performance Agency on paid promotion</li>
+          <li>Working with the in-house Creative Studio to create social media assets</li>
+          <li>Monthly reporting</li>
+        </ul>
+      </div>
+      <button class="btn apply">Apply now<img src="{{ 'paw.png' | asset_img_url: '30x' }}" alt="Paw silhouette"></button>
+    </article>
+    
+    <article class="text-block text-block--white job-card anamate">
+      <div class="job-card__number"><span>3</span></div>
+      <h3 class="job-card__title">Affiliates Assistant</h3>
+      <div class="text-block__list-col">
+        <ul>
+          <li>Engaging and networking with a broad range of affiliates across cashback, loyalty, content and social</li>
+          <li>Putting together a quarterly plan of affiliate offers to gain extra exposure for the channel and drive sales in seasonal sale periods</li>
+          <li>Weekly and monthly reporting for the channel, with focus on new customer acquisition numbers and Cost Per Action</li>
+          <li>Working on one strategic partnership (with support from Acquisition Lead) per month</li>
+          <li> Collaboration with SEO Lead on how we can work with content partners to further our organic reach and growth</li>
+        </ul>
+      </div>
+      <button class="btn apply">Apply now<img src="{{ 'paw.png' | asset_img_url: '30x' }}" alt="Paw silhouette"></button>
+    </article>
+    
+    <div id="apply-now" class="text-block text-block--green anamate">
+      <h2>How to apply</h2>
+      <p class="large-text">If you think you’re the purrfect match, then send an <strong>up-to-date CV</strong> and a <strong>1-minute video</strong> answering the question <i>‘How will social media influence pet businesses in the next 3 years?’</i> to <a href="mailto:jobs@lintbells.com?subject=Digital%20Marketing%20Grad%20Application&body=To%20apply%20please%20state%20which%20role%20you%20want%20to%20apply%20for,%20attach%20an%20up-to-date%20CV%20and%20attach%20a%201-minute%20video%20answering%20the%20question%20‘How%20will%20social%20media%20influence%20pet%20businesses%20in%20the%20next%203%20years?’.">jobs@lintbells.com</a></p>
+    </div>
+  </div>
+</section>
+
+{%- section 'text-image-block' -%}
+{%- section 'landing-recruitment-about' -%}
+{%- section 'landing-recruitment-values' -%}
+
+<section class="section section--recruitment-cta anamate">
+  <div class="shell">
+  	<header class="section__head text-block">
+      <h2 class="section__title anamate anamate--visible">Apply Now</h2>
+      <p class="section-sub-title anamate anamate--visible">Join the Lintbells team and apply for one of our Digital Marketing Graduate roles</p>
+      <button class="btn apply">Apply now<img src="//cdn.shopify.com/s/files/1/0103/3784/5303/files/noun_Paw_76186_20x.png?v=12994924200792552108" alt="Paw silhouette">
+      </button>
+    </header>
+  </div>
+</section>
+
+<section class="section section--video">
+  <div class="shell">
+    <div class="youtube-video">
+    	<iframe width="560" height="315" src="https://www.youtube.com/embed/P6Dvt16U7Ug?rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+  </div>
+</section>
+
+{%- section 'landing-recruitment-pd' -%}
+
+{%- section 'landing-recruitment-location' -%}
+
+<section class="section section--recruitment-cta">
+  <div class="shell">
+  	<header class="section__head text-block">
+      <h2 class="section__title anamate">Find out more</h2>
+      <p class="section-sub-title anamate">Check us out at <a href="https://yumove.co.uk">www.yumove.co.uk</a> or <a href="https://www.lintbells.com" target="_blank">www.lintbells.com</a></p>
+    </header>
+  </div>
+</section>
+
+<script>
+  $(".apply").on('click', function(event){
+    $("html, body").animate({ scrollTop: $('#apply-now').offset().top - 100 }, 1000);
+});
+
+</script>

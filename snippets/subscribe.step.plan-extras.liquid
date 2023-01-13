@@ -1,0 +1,138 @@
+<div class="form__step" id="subscription-plan">
+	<div class="form__step-head">
+		<h2 class="form__step-title section__title">{{ _settings.plan_title }}</h2><!-- /.section__title -->
+	</div><!-- /.form__step-head -->
+
+	<div class="form__step-body">
+    <div class="form__row">
+      <div class="tabs">
+        <div class="tabs__head">
+          <div class="tabs__nav">
+            <ul>
+             <li class="current">
+                <a href="#first-delivery">Each Delivery</a>
+              </li>
+
+              <li>
+                <a href="#next-delivery">One Time Purchase</a>
+              </li>
+            </ul>
+          </div><!-- /.tabs__nav -->
+        </div><!-- /.tabs__head -->
+
+        <div class="tabs__body">
+          <div class="tab current" id="first-delivery">
+            <div class="table table--price">
+              <table id="dog-plans__first-delivery">
+
+              </table>
+              <table>
+                <tfoot>
+                  <tr>
+                    <th>Total</th>
+
+                    <th>
+                      <div class="price">
+                        <del class="total-price"></del>
+
+                        <ins class="total-price__discount"></ins>
+                      </div><!-- /.price -->
+                    </th>
+                  </tr>
+                </tfoot>
+              </table>
+            </div><!-- /.table -->
+            <div class="form__step-actions form__step-actions--sicky flex align-center justify-between subflow-checkout-desktop">
+		        <a href="#" id="add-another-dog" class="btn btn--green form__btn btn--add-new">Add another dog<br>(40% off)</a>
+
+                <span id="btn-checkout-recharge" class="btn btn--orange form__btn">Secure<br>checkout</span>
+                {% comment %}<input id="btn-checkout-recharge" type="submit" value="Secure checkout" class="btn btn--orange form__btn">{% endcomment %}
+	          </div><!-- /.form__step-actions -->
+          </div><!-- /.tab -->
+         
+          <div class="tab" id="next-delivery">
+            <div class="table table--price">
+              <p><big>{{ _settings.not_for_you }}</big></p>
+
+              <div id="one-time-recommendations" class="btn btn--orange"> 
+                <script>console.log('subscribe.step.plan-extras');</script>
+<!--               		<div id="one-time-recommendations">  -->
+            </div><!-- /.table -->
+          </div><!-- /.tab -->
+        </div><!-- /.tabs__body -->
+
+      </div><!-- /.tabs -->
+
+      <p id="next-delivery-note" style="display: none;">{{ _settings.next_delivery_note }}</p>
+
+      <h4>{{ _settings.no_commitment }}</h4>
+
+      <p><big>{{ _settings.pause }}</big></p>
+
+      <ul class="list-dogs flex align-center">
+        <li>
+          <img src="{{ 'Group_317.png' |  file_img_url: 'x150' }}" alt="Dedicated customer service icon">
+        </li>
+
+        <li>
+          <img src="{{ 'Group_318.png' |  file_img_url: 'x150' }}" alt="Free shipping icon">
+        </li>
+
+        <li>
+          <img src="{{ 'Group_319.png' |  file_img_url: 'x150' }}" alt="% discount saving icon">
+        </li>
+
+        <li>
+          <img src="{{ 'Repeat_Grid_1.png' |  file_img_url: 'x150' }}" alt="Money back guarantee icon">
+        </li>
+      </ul><!-- /.list-dogs -->
+
+     
+
+      </div>
+      
+    </div><!-- /.form__row -->
+  </div><!-- /.form__step-body -->
+    
+	
+</div><!-- /.form__step -->
+
+<script type="text/template" data-template="dog-plan__first-delivery">
+  <thead>
+    <tr data-field="name">
+      <th colspan="2">
+        ${name}’s Plan
+      </th>
+    </tr>
+  </thead> 
+
+  <tbody>
+    <tr>
+      <td>${productTitle}</td>
+
+      <td>${productPrice}</td>
+    </tr>
+
+    ${loadingElement}                 
+
+    <tr>
+      <td>Delivery every ${frequency} ${unitType}</td>
+
+      <td>Free</td>
+    </tr>
+
+    <tr>
+      <td>
+        <div class="hidden-xs">YuMOVE subscription discount</div><!-- /.hidden-xs -->
+
+        <div class="hidden-lg hidden-md hidden-sm">Subscription discount</div><!-- /.hidden-lg hidden-md hidden-sm -->
+      </td>
+
+      <td class="plan-discount-percentage">${discountPercentage}% off</td>
+    </tr>
+
+    
+  </tbody>          
+
+</script>
+

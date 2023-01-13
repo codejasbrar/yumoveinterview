@@ -1,0 +1,238 @@
+<script>
+  $(document).ready(function() {
+    var productQty = 1;
+    var productId = '';
+    
+    $('#sample-form-submit').on('click', function() {
+      var weight = $('#sample-size-select option:selected').val();
+      var age = $('#sample-age-select option:selected').val();
+      var activity = $('#sample-activity-select option:selected').val();
+      var petName = $('[name="dog_name"]').val().trim();
+      var email = $('[name="email"]').val().trim();
+      var firstName = $('[name="first_name"]').val().trim();
+      var lastName = $('[name="last_name"]').val().trim();
+      var joint = $('input[name="joint-condition"]:checked').length > 0;
+      var consent = $('input[name="consent"]:checked').length > 0;
+      var petType = 'Dog';
+      
+      var young60Id = '30288893280311';
+      var dog60Id = '30288816439351';
+      var dog120Id = '30288816472119';
+      var plus60Id = '30288813162551';
+      var plus120Id = '30288813195319';
+      
+      if(weight == '' || age == '' || activity == '' || petName == '' || email =='' || firstName == '' || lastName == '') {
+        console.log('missing fields');
+        $('.form-error-container').removeClass('hidden');
+        return;
+      } else {
+        if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email)){
+          console.log('valid email');
+        } else {
+          console.log('invalid email');
+          $('.form-error-container').removeClass('hidden');
+          return;
+        }
+      } 
+     
+      /***** Placeholder Until I get sample product Info *****/
+      var plus_60, plus_120, dog_60, dog_120, young_60, young_120;
+      plus_60 = "plus 60";
+      plus_120 = "plus 120";
+      dog_60 = "dog 60";
+      dog_120 = "dog 120";
+      young_60 = "young 60";
+      young_120 = "young 120";
+      var sampleProduct = "";
+      
+      if(weight == '0-15kg'){
+        if(activity == 'less active' || joint == true){
+          sampleProduct = plus_60;
+          productId = plus60Id;
+        } else {
+          if(age < 5){
+            sampleProduct = young_60;
+            productId = young60Id;
+            productQty = 1;
+          } else if((age >= 5) && (age < 8)){
+            sampleProduct = dog_60;
+            productId = dog60Id;
+          } else {
+            sampleProduct = plus_60;
+            productId = plus60Id;
+          }
+        } 
+      } else if (weight == '16-30kg'){
+        if (activity == 'less active' || joint == true){
+          sampleProduct = plus_120;
+          productId = plus120Id;
+        } else {
+          if(age < 5){
+            sampleProduct = young_120;
+            productId = young60Id;
+            productQty = 2;
+          } else if((age >= 5) && (age < 8)){
+            sampleProduct = young_120;
+            productId = young60Id;
+            productQty = 2;
+          } else {
+            sampleProduct = plus_120;
+            productId = plus120Id;
+          }
+        }
+      } else if (weight == '31-45kg'){
+        if (activity == 'less active' || joint == true){
+          sampleProduct = plus_120;
+          productId = plus120Id;
+        } else {
+          if(age < 5){
+            sampleProduct = young_120;
+            productId = young60Id;
+            productQty = 2;
+          } else if((age >= 5) && (age < 8)){
+            if(activity == 'leisurely' || activity == 'intensely active'){
+              sampleProduct = plus_120;
+              productId = plus120Id;
+            } else {
+              sampleProduct = dog_120;
+              productId = dog120Id;
+            }
+          } else {
+            sampleProduct = plus_120;
+            productId = plus120Id;
+          }
+        }
+      } else {
+        if(activity == 'less active' || joint == true){
+          sampleProduct = plus_120;
+          productId = plus120Id;
+        } else {
+          if(age < 5){
+            sampleProduct = young_120;
+            productId = young60Id;
+            productQty = 2;
+          } else if((age >= 5) && (age < 8)){
+            if(activity == 'leisurely' || activity == 'active'){
+              sampleProduct = dog_120;
+              productId = dog120Id;
+            } else {
+              sampleProduct = plus_120;
+              productId = plus120Id;
+            }
+          } else {
+            sampleProduct = plus_120;
+            productId = plus120Id;
+          }
+        }
+      } 
+      
+      
+      $.get('https://{{ shop.domain }}/tools/yumoveapp/get_customer', { email: $('[name="email"]').val().trim() }, 
+      function(data) {
+        console.log(data);
+        if(data.allow_sample == true) {
+          console.log(data.message);
+          if (sampleProduct == "dog 60" || sampleProduct == "dog 120"){
+            console.log('Show dog product');
+            $('.sl-dog-product').removeClass('sample-hidden');
+          } else if (sampleProduct == 'plus 60' || sampleProduct == 'plus 120'){
+            console.log('Show plus product');
+            $('.sl-plus-product').removeClass('sample-hidden');
+          } else if (sampleProduct == 'young 60' || sampleProduct == 'young 120'){
+            console.log('Show young product');
+            $('.sl-young-product').removeClass('sample-hidden');
+          } else {
+            console.log('Something went wrong');
+          }
+            
+            $('#sample-header').addClass('sample-hidden');
+            $('#sample-form').addClass('sample-hidden');
+            $('#sample-success').addClass('sample-hidden');
+            $('#sample-callout').addClass('sample-hidden');
+            $('#sample-features').addClass('sample-hidden');
+            
+            $('#sample-product').removeClass('sample-hidden');
+        } else {
+          console.log(data.message);
+          $('#sample-header').addClass('sample-hidden');
+          $('#sample-form').addClass('sample-hidden');
+          $('#sample-success').addClass('sample-hidden');
+          $('#sample-callout').addClass('sample-hidden');
+          $('#sample-features').addClass('sample-hidden');
+            
+          $('#sample-rejection').removeClass('sample-hidden');
+        }
+      });
+
+      var petDetails = {};
+        petDetails['shop'] = location.host;
+        petDetails['list_id'] = 'Jr7j2F';
+        petDetails['email'] = email;
+        petDetails['$first_name'] = firstName;
+        petDetails['$last_name'] = lastName;
+        petDetails['First_Name'] = firstName;
+        petDetails['Last_Name'] = lastName;
+        petDetails['petname1'] = petName;
+        petDetails['petweight1'] = weight;
+        petDetails['petage1'] = age;
+        petDetails['petactivity1'] = activity;
+        petDetails['pettype1'] = petType;
+        
+        if (joint == true) {
+          petDetails['petjointcondition1'] = true;
+        }
+        if (consent == true){
+          petDetails['Accepts Marketing'] = true;
+        }
+        
+      
+       var api_url = "https://lintbells.herokuapp.com/klaviyo-signup";
+        
+        $.ajax({
+          method: "GET",
+          url: api_url,
+          data: petDetails,
+          success: function() {
+            console.log('klaviyo form submitted');
+          }
+        })
+        .done(function( msg ) {
+          console.log(msg);
+        });
+    });
+    
+    $('.sample-add-btn').on('click', function(e) { 
+      var sampleInCart = false;
+      
+       jQuery.getJSON('/cart.js', function(cart) {
+         $(cart.items).each(function(index) {
+           var currentTitle = cart.items[index].title;
+           
+           if (currentTitle.indexOf('YuMOVE Young & Active Sample') !== -1   || currentTitle.indexOf('YuMOVE Dog Sample') !== -1 || currentTitle.indexOf('YuMOVE PLUS for Dogs Sample') !== -1 ){
+             sampleInCart = true;
+           } 
+           
+         });  
+      
+         if (sampleInCart == false) {
+           data = {
+             "id": productId,
+             "quantity": productQty,
+           }
+           console.log(data);
+           jQuery.ajax({
+             type: 'POST',
+             url: '/cart/add.js',
+             data: data,
+             dataType: 'json',
+             success: function() { 
+               window.location.href = '/cart'; 
+             }
+            });
+          } else {
+            $('.sample-product-error').removeClass('sample-hidden');
+          }
+       });       
+    });
+  });
+</script>

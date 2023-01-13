@@ -1,0 +1,54 @@
+<div id="recommended-products">
+  <div class="shell">
+    <div class="recommended-title">
+      <h2>{{ section.settings.recommended_title }}</h2>
+    </div><!-- .recommended-title -->
+    <div id="recommended-products-slider">
+      {%- for block in section.blocks -%}
+        {%- assign _block = block.settings -%}
+        {%- assign block_product = _block.product -%}
+        {%- assign _product = all_products[block_product] -%}
+        <a class="recommended-product-link" href="{{ _product.url }}">
+          <div class="recommended-product">
+            <div class="recommended-product-image">
+              <img src="{{ _product.featured_image | img_url: '800x' }}" alt="" loading="lazy">
+            </div><!-- .recommended-product-image -->
+            <p class="recommended-product-title">{{ _product.title }}</p>
+            <p class="recommended-product-description">{{ block.settings.description }}</p>
+            <p class="recommended-product-price">From {{ _product.price | money }}</p>
+          </div><!-- .recommended-product -->
+        </a>
+      {%- endfor -%}
+    </div><!-- #recommended-products-slider -->
+  </div><!-- .shell --> 
+</div><!-- #recommended-products -->
+{% schema %}
+  {
+    "name": "Recommended Products",
+    "settings": [
+       {
+          "type": "text",
+          "id": "recommended_title",
+          "label": "Recommended Title"
+       }
+    ],
+      "blocks": [
+      {
+        "type": "product",
+        "name": "product",
+        "settings": [
+          {
+            "type": "product",
+            "id": "product",
+            "label": "Product"
+          },
+          {
+            "type": "text",
+            "id": "description",
+            "label": "Product Description"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

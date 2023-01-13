@@ -1,0 +1,99 @@
+{%- assign _section = section.settings -%}
+{%- assign section_title = _section.title -%}
+{%- assign section_content = _section.content -%}
+
+<section class="section section-slider section-testimonials landing-sub-testimonials landing-cat-testimonials">
+  <div class="shell">
+    {%- if section_title != blank or section_content != blank -%}
+      <header class="section__head text-center">
+        <h2 class="section__title">{{section_title}}</h2><!-- /.section__title -->
+
+        {{section_content}}
+      </header><!-- /.section__head -->
+    {%- endif -%}
+
+    <div class="section__body">
+      <div class="slider-testimonials slider-testimonials--wide">
+      <div class="slider__clip">
+          <div class="slider__slides">
+            {%- for block in section.blocks -%}
+              {%- assign _block = block.settings -%}
+              {%- assign _title = _block.title -%}
+              {%- assign _testimonial = _block.testimonial -%}
+              {%- assign _product = all_products[_block.product] -%}
+
+              <div class="slider__slide">
+                <div class="testimonial cols align-center">
+                  <div class="testimonial__media col col--1of3">
+            
+                    {%- if _product.featured_image != blank -%}
+                      <img src="{{ _product.featured_image | img_url: '300x' }}" alt="{{ _product.title }}">
+                    {%- endif -%}
+                  </div><!-- /.testimonial__media -->
+
+                  <div class="testimonial__content col col--2of3">
+                    {%- if _testimonial != blank -%}
+                      <blockquote>
+                        {{_testimonial}}
+                      </blockquote>
+                    {%- endif -%}
+
+                    {%- if _title != blank -%}
+                      <div class="testimonial__author">{{_title}}</div><!-- /.testimonial__author -->
+                    {%- endif -%}
+                  </div><!-- /.testimonial__content -->
+
+                  <div class="testimonial__rate col flex justify-between align-center">
+                    {{ settings.product_testimonial_reviews_html }}
+                  </div><!-- /.testimonial__rate -->
+                </div><!-- /.testimonial -->
+              </div><!-- /.slider__slide -->
+            {%- endfor -%}
+          </div><!-- /.slider__slides -->
+        </div><!-- /.slider__clip -->
+      </div><!-- /.slider-testimonials -->
+    </div><!-- /.section__body -->
+  </div><!-- /.shell -->
+</section><!-- /.section section-slider section--green -->
+
+{% schema %}
+{
+  "name": "Testimonials",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "richtext",
+      "id": "content",
+      "label": "Content"
+    }
+  ],
+  "max_blocks": 3,
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Author Name"
+        },
+        {
+          "type": "richtext",
+          "id": "testimonial",
+          "label": "Testimonial"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

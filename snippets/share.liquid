@@ -1,0 +1,39 @@
+{% assign share_url = shop.url | append: request.path  %}
+{% assign share_url_encoded = share_url | url_encode %}
+{% assign share_title = article.title | default: product.title | default: page.title | default: collection.title %}
+{% assign share_title_encoded = share_title | url_encode %}
+{% assign share_image = article.image | default: product.featured_image | collection.image | img_url: '800x' | url_encode %}
+{% assign mailto_title_prefix = 'See our page: ' %}
+
+{% capture mailto_body %}
+	{{ share_title }} -- {{ share_url }}
+
+	{{ article.content | default: product.content | default: page.content | default: collection.description | truncatewords: 20 | strip_html }}
+{% endcapture %}
+
+{% capture share_links %}
+facebook|Share on Facebook|https://facebook.com/sharer/sharer.php?u={{ share_url_encoded }}
+twitter|Share on Twitter|https://twitter.com/intent/tweet/?text={{ share_title_encoded }}&amp;url={{ share_url_encoded }}
+pinterest|Share on Pinterest|https://pinterest.com/pin/create/button/?url={{ share_url_encoded }}&amp;media={{ share_image }}&amp;description={{ share_title_encoded }}
+{% endcapture %}
+{% assign share_links = share_links | newline_to_br | split: '<br />' %}
+
+<div class="{{ class }}">
+	<span class="hidden-xs hidden-sm">{{- 'blogs.article.share' | t -}}:</span>
+
+	<ul>
+		{% for share_link in share_links %}
+			{% assign link = share_link | strip | split: '|' %}
+			{%- if link == empty -%}
+				{%- continue -%}
+			{%- endif -%}
+
+			<li class="share__item">
+					<a href="{{ link[2] }}" target="_blank" title="{{ link[1] }}" aria-label="{{ link[1] }}" class="share__link" >
+						<i class="fa fa-{{ link[0] }}" aria-hidden="true" ></i>
+					</a>
+			</li>
+		{% endfor %}
+
+	</ul>
+</div><!-- /.share-icons -->

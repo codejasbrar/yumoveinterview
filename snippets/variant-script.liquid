@@ -1,0 +1,25 @@
+<script>
+  {%- if define_variables -%}
+    window.productOptionsArray = [];
+    window.productVariants = [];
+  {%- endif -%}
+
+  var productOptions = [
+    {%- for option in _product.options_with_values -%}
+      {
+        name: "{{- option.name | handle -}}",
+        position: {{- option.position -}},
+        values: {{- option.values | join: "___" | handle | split: "___" | json -}}
+      }{%- unless forloop.last -%},{%- endunless -%}
+    {%- endfor -%}
+  ]
+
+  var productVariant = [
+    {%- for variant in _product.variants -%}
+      {{ variant | json }}{%- unless forloop.last -%},{%- endunless -%}
+    {%- endfor -%}
+  ]
+
+  window.productOptionsArray.push(productOptions);
+  window.productVariants.push(productVariant);
+</script>

@@ -1,0 +1,31 @@
+<div class="section">
+  <div class="shell contact_container">
+      <div class="page--default">
+          <div class="section__head">
+              <h1 class="section__title" id="msg">{{- page.title -}}</h1>
+          </div><!-- /.section__head -->
+          <div class="page__content">
+            <div class="max__rte">
+              {{- page.content -}}
+            </div><!-- /.max__rte -->
+          </div><!-- /.page__content -->          
+        <div class="form__flex">
+          <div class="flex__field">
+            {%- include 'contact-form' -%}
+          </div><!-- /.flex__field -->
+          <div class="flex__text">
+            {% section 'contact-text' %}
+          </div><!-- /.flex__text -->
+        </div><!-- /.form__flex -->
+      </div>
+  </div><!-- /.shell -->
+</div><!-- /.section -->
+<script>
+// $('#contact_form').on('submit', function(e) {
+//   $('html,body').animate({scrollTop: $('#msg').offset().top},'slow');
+// }); 
+$('#contact_form').on('submit', function(e) {
+  $('html').animate({scrollTop: $('#msg').offset().top},'slow');
+  $('body').animate({scrollTop: $('#msg').offset().top},'slow');
+});   
+</script>

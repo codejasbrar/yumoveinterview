@@ -1,0 +1,27 @@
+<div class="product__content">
+  <div class="product__head flex align-center justify-between">
+    <h1 class="product__title" itemprop="name">{{- product.title -}}</h1>
+
+    <h4 class="product__price price">
+      {%- include 'price' with _product -%}
+    </h4><!-- /.product__price price -->
+  </div><!-- /.product__head -->
+
+    <div class="product__rate flex align-center">
+      {% if product.title contains 'Horse' %}
+        <div class="trustbox_widget_mini horse-trustbox">{% include 'trustbox-widget-product-mini-horse' %}</div>
+        <img src="//cdn.shopify.com/s/files/1/0103/3784/5303/files/ico-trustpilot_200x.png?4399" alt="">
+      {% else %}
+        <div class="trustbox_widget_mini">{% include 'trustbox-widget-product-mini' %}</div>
+        <img src="//cdn.shopify.com/s/files/1/0103/3784/5303/files/ico-trustpilot_200x.png?4399" alt="">
+      {% endif %}
+    </div><!-- /.product__rate flex align-center -->
+
+  {%- if _content_parts_size > 1 -%}
+    <div class="product__entry">
+      {{_content_parts[0]}}
+    </div><!-- /.product__entry -->
+  {%- endif -%}
+
+  {% if product.available %}{% include 'subscription-product' %}{% endif %}
+</div><!-- /.product__content -->

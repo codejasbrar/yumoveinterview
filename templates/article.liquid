@@ -1,0 +1,59 @@
+<div class="article">
+  <header class="article__head{% unless article.image != blank %} article__head--no-image{% endunless %}"{% if article.image != blank %} style="background-image: url({{- article.image | img_url: '2800x' -}});" role="img" aria-label="{{- article.image.alt | escape -}}"{% endif %}>
+    <h1>{{- article.title -}}</h1>
+  </header><!-- /.article__head -->
+
+  <div class="article__body">
+    <div class="article__inner">
+      <time datetime="{{- article.created_at | date: '%d %B %Y' -}}">{{- article.created_at | date: '%d %B %Y' -}}</time>
+
+      {%- if article.content != blank -%}
+        {{- article.content -}}
+      {%- endif -%}
+    </div><!-- /.article__inner -->
+  </div><!-- /.article__body -->
+
+  {%- if blog.articles.size > 1 -%}
+    <div class="article__foot">
+      <div class="shell article__foot-shell">
+        <h2>{{- 'blogs.article.related_posts' | t -}}</h2>
+
+        <div class="articles-items">
+          {%- assign counter = 0 -%}
+
+          {%- for _article in blog.articles -%}
+            {%- if article.handle == _article.handle -%}
+              {% continue %}
+            {%- else -%}
+              <div class="article-item">
+                <div class="article__inner">
+                  {%- if _article.image != blank -%}
+                    <a href="{{- _article.url -}}" class="article__image" style="background-image: url({{- _article.image | img_url: '400x' -}});" role="img" aria-label="{{- _article.image.alt | escape -}}"></a><!-- /.article__image -->
+                  {%- endif -%}
+
+                  <div class="article__body">
+                    <h3>
+                      <a href="{{- _article.url -}}">{{- _article.title -}}</a>
+                    </h3>
+
+                    {%- if _article.excerpt != blank -%}
+                      {{- _article.excerpt | truncatewords: 8 | append: '</p>' -}}
+                    {%- endif -%}
+
+                    <a href="{{- _article.url -}}" class="btn btn--green article__btn">{{- 'blogs.article.read_more' | t -}}</a>
+                  </div><!-- /.article__body -->
+                </div><!-- /.article__inner -->
+              </div><!-- /.article-item -->
+
+              {%- assign counter = counter | plus: 1 -%}
+
+              {%- if counter >= 3 -%}
+                {% break %}
+              {%- endif -%}
+            {%- endif -%}
+          {%- endfor -%}
+        </div><!-- /.article-items -->
+      </div><!-- /.shell article__foot-shell -->
+    </div><!-- /.article__foot -->
+  {%- endif -%}
+</div><!-- /.article -->

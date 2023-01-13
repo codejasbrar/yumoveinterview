@@ -1,0 +1,122 @@
+<script type="text/javascript" src="//www.klaviyo.com/media/js/public/klaviyo_subscribe.js"></script>
+<script type="text/javascript">
+
+  KlaviyoSubscribe.attachToForms('#subflow_signup', {
+    hide_form_on_success: true,
+    extra_properties: {
+      $source: '$embed',
+      $method_type: "Klaviyo Form",
+      $method_id: 'embed',
+      $consent_version: 'Embed default text'
+    }
+  });
+
+  $(function() {
+
+    // Submit form via Ajax to make sure values persist
+    $( "#btn--add-firstname,#btn-checkout-recharge" ).click(function() {
+       
+        $("#subflow_signup").ajaxSubmit({url: '//manage.kmail-lists.com/ajax/subscriptions/subscribe', type: 'post'})
+    });
+    
+
+    // Set Quiz Stage with each step button click
+    $('a[href$="#details"]').click(function() {
+        $("#Quiz_Stage").val("Weight");
+    });
+
+    $('a[href$="#weight"]').click(function() {
+        $("#Quiz_Stage").val("Level of Activity");
+    });
+
+    $('a[href$="#activity"]').click(function() {
+        $("#Quiz_Stage").val("Eating Style");
+    });
+
+    $('a[href$="#eating"]').click(function() {
+        $("#Quiz_Stage").val("New to YuMOVE");
+    });
+
+    $('a[href$="#new-to-yumove"]').click(function() {
+        $("#Quiz_Stage").val("Confirm");
+    });
+    
+    $('a[href$="#confirm"]').click(function() {
+        $("#Quiz_Stage").val("Register");
+    });
+
+    $('a[href$="#register"]').click(function() {
+        $("#Quiz_Stage").val("Recommendation");
+    });
+
+    $('a[href$="#recommendation"]').click(function() {
+        $("#Quiz_Stage").val("Subscription Plan");
+    });
+
+    $('a[href$="#recommendation2"],a[href$="#subscription-plan"]').click(function() {
+        $("#Quiz_Stage").val("Secure Checkout");
+    });
+
+    // Change form field names for additional dogs
+    $('#add-another-dog').click(function() {
+        console.log("another dog");
+        var dog_number = JSON.parse(localStorage.dogs).length + 1;
+        $('#klaviyo_fields').val(`First_Name,Last_Name,$consent,Quiz_Stage,Multiple_Dogs,petname${dog_number},petbreed${dog_number},petage${dog_number},pettype${dog_number},petweight${dog_number},petactivity${dog_number},petworking${dog_number},petjointcondition${dog_number},petnew${dog_number},peteating${dog_number}`);
+
+        $('#klaviyo_name').attr('name', `petname${dog_number}`);
+        $('#klaviyo_age').attr('name', `petage${dog_number}`);
+        $('#klaviyo_breed').attr('name', `petbreed${dog_number}`);
+        $('#klaviyo_weight').attr('name', `petweight${dog_number}`);
+        $('#klaviyo_activity').attr('name', `petactivity${dog_number}`);
+        $('#klaviyo_joint_condition').attr('name', `petjointcondition${dog_number}`);
+        $('#klaviyo_working').attr('name', `petworking${dog_number}`);
+        $('#klaviyo_eating').attr('name', `peteating${dog_number}`);
+        $('#klaviyo_new').attr('name', `petnew${dog_number}`);
+        $('#klaviyo_pet_type').attr('name', `pettype${dog_number}`);
+
+        $('#klaviyo_multiple_dogs').val('yes');
+    })
+
+    $('#name').change(function() {
+        var klaviyo_name = $(this).val()
+        $('#klaviyo_name').val(klaviyo_name);
+    });
+
+    $('#breed').change(function() {
+        var klaviyo_breed = $(this).val()
+        $('#klaviyo_breed').val(klaviyo_breed);
+    });
+
+    $('.list-radios--weight li').click(function() {
+        var klaviyo_weight = $(this).find('.js-radio').val()
+        $('#klaviyo_weight').val(klaviyo_weight);
+    });
+
+    $('#activity .list-radios--tooltips li').click(function() {
+        var klaviyo_activity = $(this).find('.js-radio').val()
+        $('#klaviyo_activity').val(klaviyo_activity);
+    });
+
+    $('#new-to-yumove .list-radios--small li').click(function() {
+        var klaviyo_new = $(this).find('.js-radio').val()
+        $('#klaviyo_new').val(klaviyo_new);
+    });
+
+    $('#eating .list-radios--small li').click(function() {
+        var klaviyo_eating = $(this).find('.js-radio').val()
+        $('#klaviyo_eating').val(klaviyo_eating);
+    });
+
+    $('#joint-condition').click(function() {
+        var klaviyo_condition = $(this).val()
+        $('#klaviyo_joint_condition').val(klaviyo_condition);
+    });
+
+    $('#working-dog').click(function() {
+        var klaviyo_working = $(this).val()
+        $('#klaviyo_working').val(klaviyo_working);
+    });
+
+  });
+
+</script>

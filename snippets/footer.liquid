@@ -1,0 +1,89 @@
+<footer class="footer">
+  <div class="shell shell--small">
+    <div class="footer__body cols">
+      <div class="footer__aside col col--1of3">
+        {%- if page.template_suffix == 'landing-yucalm' -%}
+          {%- if settings.yucalm_logo != blank -%}
+            <a href="/" class="logo">
+              <img src="{{settings.yucalm_logo | img_url: '330x'}}" alt="">
+            </a>  
+          {%- endif -%}
+        {%- elsif page.template_suffix == 'campaign-yucalm-landing' -%}
+          {%- if settings.yucalm_logo != blank -%}
+            <a href="/" class="logo">
+              <img src="{{settings.yucalm_logo | img_url: '330x'}}" alt="">
+            </a>  
+          {%- endif -%}
+        {%- elsif page.template_suffix == 'landing-yuderm' -%}
+          {%- if settings.yuderm_logo != blank -%}
+            <a href="/" class="logo">
+              <img src="{{settings.yuderm_logo | img_url: '330x'}}" alt="">
+            </a>  
+          {%- endif -%} 
+        {%- elsif page.template_suffix == 'landing-yuderm-discount' -%}
+          {%- if settings.yuderm_logo != blank -%}
+            <a href="/" class="logo">
+              <img src="{{settings.yuderm_logo | img_url: '330x'}}" alt="">
+            </a>  
+          {%- endif -%} 
+        {%- else -%}
+          {%- if settings.main_logo != blank -%}
+            <a href="/" class="logo">
+              <img src="{{settings.main_logo | img_url: '330x'}}" alt="">
+            </a>  
+          {%- endif -%}
+        {%- endif -%}
+
+        <div class="socials">
+          {%- include 'socials' with 'list-socials flex align-center' -%}
+        </div>
+        <!-- /.socials -->
+      </div>
+      <!-- /.footer__aside -->
+
+      <div class="footer__content col col--2of3">
+        <nav class="footer__nav">
+          {%- assign footer_menu = settings.footer_menu | default: 'footer' -%}
+
+          {%- include 'menu', handle: footer_menu -%}
+        </nav>
+        <!-- /.nav -->
+      </div>
+      <!-- /.footer__content -->
+    </div>
+    <!-- /.footer__body -->
+
+    <div class="footer__bar">
+      <div class="flex justify-between cols align-end">
+        <div class="footer__aside col col--1of3">
+          {%- include 'cards-icons', class: 'flex align-center' -%}
+        </div><!-- /.footer__aside -->
+
+        <div class="footer__content col col--2of3 text-right">
+          {%- if settings.lintbells_logo != blank -%}
+            <a href="{{ settings.lintbells_url }}" class="logo-lintbells">
+              <img src="{{ settings.lintbells_logo | img_url: '300x' }}" alt="As part of the lintbells logo" />
+            </a>
+          {%- endif -%}
+        </div><!-- /.footer__content -->
+
+
+        <nav class="footer__nav--small col flex align-center">
+          {%- if settings.copyright != blank -%}
+            <div class="copyright">
+              {%- assign current_year = 'now' | date: '%Y' -%}
+              {{ settings.copyright | replace: '[year]', current_year }}
+            </div><!-- /.copyright -->
+          {%- endif -%}
+
+          {%- assign secondary_footer_menu = settings.secondary_footer_menu | default: 'secondary-footer-menu' -%}
+
+          {%- include 'menu', handle: secondary_footer_menu -%}
+        </nav><!-- /.footer-nav--small -->
+      </div>
+      <!-- /.flex -->
+    </div>
+    <!-- /.footer__bar -->
+  </div>
+  <!-- /.shell shell--small -->
+</footer>

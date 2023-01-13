@@ -1,0 +1,5 @@
+{% assign current_variant = product.selected_or_first_available_variant %}
+<!-- TrustBox widget - Product Reviews SEO --> 
+<div class="trustpilot-widget" data-locale="en-GB" data-template-id="5717796816f630043868e2e8" data-businessunit-id="5e4e87b71f96930001914d27" data-style-height="600px" data-style-width="100%" data-theme="light" data-sku="{% for variant in product.variants  %}{{ variant.sku }},{% endfor %}" data-name="{{- product.title -}}"> 
+	<a href="https://uk.trustpilot.com/review/yumove.co.uk" target="_blank" rel="noopener">Trustpilot</a> 
+</div> <!-- End TrustBox widget -->

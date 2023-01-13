@@ -1,0 +1,24 @@
+{%- if section_title != blank or section_content != blank -%}
+  <header class="section__head text-center">
+    <h2 class="section__title">{{section_title}}</h2><!-- /.section__title -->
+
+    {{section_content}}
+  </header><!-- /.section__head -->
+{%- endif -%}
+
+<div class="section__body">
+      <div class="pawsquad-testimonials-container">
+        {%- for block in section.blocks -%}
+          {%- assign _block = block.settings -%}
+          {%- assign _image = _block.image -%}
+          {%- assign _alt = _block.image_alt -%}
+          {%- assign _title = _block.title -%}
+          {%- assign _testimonial = _block.testimonial -%}
+          {%- assign _author = _block.author -%}
+          {%- assign _stars = _block.stars -%}
+          <div class="pawsquad-testimonial">
+            {%- include 'testimonial-pawsquad' -%}
+          </div><!-- /.slider__slide -->
+        {%- endfor -%}
+      </div><!-- /.slider__slides -->
+</div><!-- /.section__body -->

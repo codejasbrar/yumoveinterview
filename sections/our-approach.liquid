@@ -1,0 +1,65 @@
+<div class="our-approach-wrap text-center section">
+  <div class="shell">
+    <h3 class="section__title">{{section.settings.title}}</h3>
+    <p class="section__subtitle">{{section.settings.content}}</p>
+    <div class="image-wrap">
+          {%- for block in section.blocks -%}
+                <img src="{{ block.settings.image | img_url: 'x400' }}" loading="lazy">
+      			<div class="description text-left">
+                  <p class="name"><b>{{block.settings.name}},</b> {{block.settings.position}}</p>
+                  <p class="content">{{block.settings.content}}<span>"</span></p>
+      			</div>
+          {%- endfor -%}
+    </div>
+  </div>
+</div>
+{% schema %}
+  {
+    "name": "Our Approach",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title"
+      },
+      {
+        "type": "textarea",
+        "id": "content",
+        "label": "Content"
+      }],
+    "blocks": [
+        {
+          "type": "step",
+          "name": "Step",
+          "settings": [
+            {
+              "type": "image_picker",
+              "id": "image",
+              "label": "Image"
+            },
+            {
+              "type": "text",
+              "id": "name",
+              "label": "Name"
+            },
+            {
+              "type": "text",
+              "id": "position",
+              "label": "Position"
+            },
+            {
+              "type": "textarea",
+              "id": "content",
+              "label": "Content"
+            }
+          ]
+        }
+      ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

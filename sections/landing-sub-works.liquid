@@ -1,0 +1,101 @@
+<div class="landing-sub-works">
+    <div class="shell">
+       <div class="section-body">        
+          <div class="sl-info">
+             <h2 class="sl-info-title sl-title">{{ section.settings.works_title}}</h2>
+             <div class="sl-info-items">
+                 <div class="sl-item">
+                     <img src="{{ section.settings.icon_1 | img_url: '500x' }}" alt="" class="sl-icon">
+                     <h2 class="sl-item-title">{{ section.settings.icon_title_1 }}</h2>
+                     <p class="sl-item-text">{{ section.settings.icon_text_1 }}</p>
+                 </div><!-- sl-item -->
+                 <div class="sl-item">
+                     <img src="{{ section.settings.icon_2 | img_url: '500x' }}" alt="" class="sl-icon">
+                     <h2 class="sl-item-title">{{ section.settings.icon_title_2 }}</h2>
+                     <p class="sl-item-text">{{ section.settings.icon_text_2 }}</p>
+                 </div><!-- sl-item -->
+                 <div class="sl-item">
+                     <img src="{{ section.settings.icon_3 | img_url: '500x' }}" alt="" class="sl-icon">
+                     <h2 class="sl-item-title">{{ section.settings.icon_title_3 }}</h2>
+                     <p class="sl-item-text">{{ section.settings.icon_text_3 }}</p>
+                 </div><!-- sl-item -->
+             </div><!--sl-info-items-->
+          </div><!-- sl-info -->
+          <div class="sub-info-btn">
+            <a href="{{ section.settings.url}}" class="sub-intro-btn btn">
+            {{section.settings.label}} 
+            </a>
+          </div>       
+       </div><!-- section-body -->
+    </div>
+</div><!-- section-landing-subscription -->
+
+
+
+{% schema %}
+{
+  "name": "Landing Works",
+  "settings": [
+    {
+      "type": "text",
+      "id": "works_title",
+      "label": "How it Works Title"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_1",
+      "label": "Icon 1"
+    },
+    {
+      "type": "text",
+      "id": "icon_title_1",
+      "label": "Icon 1 Title"
+    },
+    {
+      "type": "text",
+      "id": "icon_text_1",
+      "label": "Icon 1 Text"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_2",
+      "label": "Icon 2"
+    },
+     {
+      "type": "text",
+      "id": "icon_title_2",
+      "label": "Icon 2 Title"
+    },
+    {
+      "type": "text",
+      "id": "icon_text_2",
+      "label": "Icon 2 Text"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_3",
+      "label": "Icon 3"
+    },
+    {
+      "type": "text",
+      "id": "icon_title_3",
+      "label": "Icon 3 Title"
+    },
+    {
+      "type": "text",
+      "id": "icon_text_3",
+      "label": "Icon 3 Text"
+    },
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Button Label"
+    },
+    {
+      "type": "url",
+      "id": "url",
+      "label": "Button Link"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,278 @@
+{%- assign total_price = 0 -%}
+{%- assign total_compare_price = 0 -%}
+
+<div class="form__content">
+	<div class="table table--cart">
+		<table>
+			<thead>
+				<tr>
+					<th class="table__name" colspan="2" >
+						{{- 'cart.label.name' | t -}}
+					</th>
+
+					<th class="table__price">
+						{{- 'cart.label.price' | t -}}
+					</th>
+
+					<th class="table__quantity">
+						{{- 'cart.label.quantity' | t -}}
+					</th>
+
+					<th class="table__total" colspan="2" >
+						{{- 'cart.label.total' | t -}}
+					</th>
+				</tr>
+			</thead>
+
+			<tbody>
+
+
+				{%- for line_item in cart.items -%}
+
+                    {%- assign subflow_product = false -%}
+                    {%- assign loading_product = false -%}
+              
+                    {%- assign sample_product = false -%}
+
+
+                    {%- for property in line_item.properties -%}
+                      {%- if property.first == 'loadingProduct' -%}
+                          {%- assign subflow_product = true -%}
+                          {%- break -%}
+                      {%- endif -%}
+                    {%- endfor %}
+
+                    {%- for property in line_item.properties -%}
+                      {%- if property.first == 'loadingProduct' and property.last == 'true' -%}
+                          {%- assign loading_product = true -%}
+                          {%- break -%}
+                      {%- endif -%}
+                    {%- endfor %}
+                    
+                    {%- if line_item.title contains 'Sample' -%}
+                       {%- assign sample_product = true -%}
+              
+                    {%- endif -%}
+                    
+					{%- assign _product = line_item.product.variants | where: 'id', line_item.id -%}
+
+					{%- assign product_price = _product[0].price -%}
+					{%- assign product_compare_price = _product[0].compare_at_price -%}
+
+					{%- assign product_total_price = product_price | times: line_item.quantity -%}
+					{%- assign product_total_compare_price = product_compare_price | times: line_item.quantity -%}
+
+					{%- assign total_price = total_price | plus: product_total_price -%}
+					{%- assign total_compare_price = total_compare_price | plus: product_total_compare_price -%}
+
+					<tr class="product">
+						<td class="table__image">
+							<a href="#" class="table__image-inner" style="background-image: url({{ line_item.image | img_url: '240x' }}); "></a>
+						</td>
+
+						<td class="table__name">
+							<a href="{{- line_item.url -}}" class="table__product">
+								<h5 class="flex justify-between cart-product-title">
+									{{- line_item.product.title -}}
+
+									<span class="price flex flex-reverse align-center hidden-lg hidden-md hidden-sm hidden-cart">
+										{%- if product_total_compare_price > product_total_price -%}
+											<ins>{{product_total_price | money}}</ins>
+
+											<del>{{product_total_compare_price | money}}</del>
+										{%- else -%}
+											{{product_total_price | money}}
+										{%- endif -%}
+									</span><!-- /.price -->
+
+									<span class="price flex flex-reverse align-center hidden-section">
+										{%- if product_total_compare_price > product_total_price -%}
+											<ins>{{product_total_price | money}}</ins>
+
+											<del>{{product_total_compare_price | money}}</del>
+										{%- else -%}
+											{{product_total_price | money}}
+										{%- endif -%}
+									</span><!-- /.price -->
+								</h5>
+							</a>
+
+							{%- unless line_item.variant.title contains 'Default' -%}
+								<p class="table__variant">{{- line_item.variant.title -}}</p><!-- /.table__variant -->
+							{%- endunless -%}
+
+							{%- assign property_size = line_item.properties | size -%}
+
+							{%- if property_size > 0 -%}
+								<p class="table__properties flex flex-column hidden">
+									{%- for p in line_item.properties -%}
+										{%- unless p.last == blank -%}
+											<span>
+												{{- p.first -}}:
+
+												{%- if p.last contains '/uploads/' -%}
+													<a href="{{- p.last -}}">{{- p.last | split: '/' | last -}}</a>
+												{%- else -%}
+													{{- p.last -}}
+												{%- endif -%}
+											</span>
+										{%- endunless -%}
+									{%- endfor -%}
+								</p><!-- /.table__properties -->
+							{%- endif -%}
+						</td>
+
+						<td class="table__price hidden-xs hidden-cart" data-attr="{{- 'cart.label.price' | t -}}">
+							<span class="price flex flex-reverse align-center justify-center">
+								{%- if product_compare_price > product_price -%}
+									<ins>{{product_price | money}}</ins>
+
+									<del>{{product_compare_price | money}}</del>
+								{%- else -%}
+									{{product_price | money}}
+								{%- endif -%}
+							</span><!-- /.price -->
+						</td>
+                        {% for property in line_item.properties %}
+                          {% if property.first == 'connectedLoadingId' %}
+                            {% assign connectedId = property.last %}
+                          {% endif %}
+                        {% endfor %}
+						<td class="table__quantity" data-attr="{{- 'cart.label.quantity' | t -}}">
+							<div class="product__qty">
+								{%- unless subflow_product == true or sample_product == true -%}
+							  	<button type="button" class="btn-qty btn-minus{% if line_item.quantity == 1 %} disabled{% endif %}" data-handle="{{line_item.product.handle}}" data-step="-1">-</button>
+							  {%- endunless -%}
+
+							  <input type="text" class="field field--quantity" name="updates[]" id="quantity_{{- line_item.id -}}" value="{{- line_item.quantity -}}" min="0" placeholder="" {%- if subflow_product == true or sample_product == true -%}disabled{%- endif -%}>
+							  {%- unless subflow_product == true or sample_product == true -%}
+							  	<button type="button" class="btn-qty btn-plus" data-handle="{{line_item.product.handle}}" data-step="1">+</button>
+							  {%- endunless -%}
+							</div>
+
+							{%- if subflow_product == true-%}
+								{%- unless loading_product == true -%}
+									<a href="/" id="line-item--{{ line_item.variant_id }}" onclick="removeZeroPriceProducts('{{ line_item.sku }}', '{{ line_item.key }}', '{{ connectedId }}')" class="remove--subflow-product hidden-cart">
+								{%- endunless -%}
+							{%- else -%}
+								<a href="/cart/change?line={{- forloop.index -}}&amp;quantity=0" class="remove hidden-cart">
+							{%- endif -%}
+
+								{%- unless loading_product == true -%}
+									<span>{{- 'cart.general.remove' | t -}}</span>
+
+									<i class="ico-circle ico-close ico--small visible-xs-inline-block"></i>
+								{%- endunless -%}
+							</a>
+
+							{%- if subflow_product == true-%}
+								{%- unless loading_product == true -%}
+									<a href="/" onclick="removeZeroPriceProducts('{{ line_item.sku }}', '{{ line_item.key }}', '{{ connectedId }}')" class="remove--subflow-product hidden-section">
+								{%- endunless -%}
+							{%- else -%}
+								<a href="/cart/change?line={{- forloop.index -}}&amp;quantity=0" class="remove hidden-section">
+							{%- endif -%}
+
+							{%- unless loading_product == true -%}
+								<span class="hidden-lg hidden-md">{{- 'cart.general.remove' | t -}}</span>
+
+								<i class="ico-circle ico-close ico--small"></i>
+							{%- endunless -%}
+							</a>
+						</td>
+
+						<td class="table__total hidden-xs hidden-cart" data-attr="{{- 'cart.label.total' | t -}}">
+							<span class="price flex flex-reverse align-center">
+								{%- if product_total_compare_price > product_total_price -%}
+									<ins>{{product_total_price | money}}</ins>
+
+									<del>{{product_total_compare_price | money}}</del>
+								{%- else -%}
+									{{product_total_price | money}}
+								{%- endif -%}
+							</span><!-- /.price -->
+						</td>
+					</tr>
+				{%- endfor -%}
+			</tbody>
+
+			<tfoot>
+				<tr class="hidden-cart">
+		{% comment %}			<td class="table__subtotal-reviews hidden-xs" colspan="3">
+						{% include 'trustbox-widget-mini' %}  
+					</td>
+{% endcomment %}
+					<td class="table__subtotal-label" colspan="5">
+						<h5 class="flex align-center justify-between">
+							{{- 'cart.general.subtotal' | t -}}
+
+							<span class="price">{{- total_price | money -}}</span>
+						</h5>
+
+						{%- if cart.total_discounts > 0 -%}
+							{%- assign savings = cart.total_discounts | money -%}
+
+							<span class="table__subtotal-savings">
+								{{- 'cart.general.savings_html' | t: price: savings -}}
+							</span>
+						{%- endif -%}
+					</td>
+				</tr>
+
+				<tr class="hidden-section">
+					<td class="table__subtotal-label" colspan="5">
+						<h5 class="flex align-center justify-between">
+							{{- 'cart.general.total' | t -}}
+
+							<span class="price">{{- total_price | money -}}</span>
+						</h5>
+					</td>
+				</tr>
+			</tfoot>
+		</table>
+      
+	</div><!-- /.table table-cart -->
+</div><!-- /.form-body -->
+
+<script>
+    
+	var cart = {{ cart | json }};
+	var postUrlParams = ''; 
+    
+    for (var i = 0; i < cart.items.length; i++) {
+      console.log(cart.items[i]);
+    }
+    
+  
+  	/** Handle zero priced products in the cart */
+	function removeZeroPriceProducts(sku, key, connectedId) {
+     
+		console.log(cart);
+
+		postUrlParams += 'updates[' + key + ']=0';
+
+		$.each(cart.items, function(index, loadingItem) {
+
+			if((loadingItem.handle.endsWith('-loading')) && ((loadingItem.sku == sku) || (loadingItem.properties.connectedLoadingId == connectedId))) {
+				postUrlParams += '&updates[' + loadingItem.key + ']=0';
+			} else if ((loadingItem.handle.endsWith('-starter-pack')) && ((loadingItem.sku == sku) || (loadingItem.properties.connectedLoadingId == connectedId))) {
+                postUrlParams += '&updates[' + loadingItem.key + ']=0';
+            } 
+
+		});
+
+		if(postUrlParams != '') {
+			$.post('/cart/update.js', postUrlParams, function(data) {
+				location.reload();
+				var data = data;
+			}, 'json').done(function(data) {
+			  // $('.form__aside-total .price').text(Shopify.formatMoney(data.total_price, "{{ shop.money_format }}"));
+			}).fail(function(error) {
+			  console.debug(error);
+			}).always(function() {
+			  console.log('finished');
+			});	
+		}	
+
+	}
+</script>

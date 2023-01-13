@@ -1,0 +1,239 @@
+<style>
+  .tc-dropper {
+  	display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+  #dropper {
+  	width: 12px;
+    height: 12px;
+    border: 3px solid #000;
+    border-width: 3px 3px 0 0;
+    display: inline-block;
+    margin-left: 20px;
+    -ms-transform: rotate(135deg);
+    transform: rotate(135deg);
+    margin-top: -4px;
+  }
+  #tc-content {
+    display: none
+  }
+  #tc-content.active {
+  	display: block
+  }
+  
+  .tc-collapsed #dropper {
+  	-ms-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    margin-top: 4px;
+  }
+  .terms-and-condition {
+  	margin-top: 30px
+  }
+  .error[for="consent-web"]:before {
+  	border-color: #D0331F
+  }
+</style>
+
+<div class="shell page_container">
+	<div class="page--default">
+		<div class="page__head">
+			<h1 class="page__title">
+				{{- page.title -}}
+			</h1>
+		</div><!-- /.page__head -->
+
+		<div class="page__content">
+          	<p><img src="https://cdn.shopify.com/s/files/1/0103/3784/5303/files/Golden-Ticket-email-header.jpg?v=1580749026" alt="Golden ticket winner" width="" height="" /></p>
+			
+          	<section class="section section-join" style="padding-bottom: 40px">
+              <div class="shell" style="padding: 0">
+                <div class="section__body">
+                  <div class="section__content">
+                    <div  id="join-form">
+                      <form id="email_signup" class="klaviyo_styling klaviyo_gdpr_embed_NPQXjH form" action="//manage.kmail-lists.com/subscriptions/subscribe" data-ajax-submit="//manage.kmail-lists.com/ajax/subscriptions/subscribe" method="GET" novalidate="novalidate">
+                        <input type="hidden" name="g" value="NPQXjH">
+                        <input type="hidden" name="$fields" value="$first_name,$last_name,$consent,winning_code">
+
+                        <div class="klaviyo_field_group">
+                          <div class="form__row">
+                            <h2 class="section__title">Please confirm your details</h2><!-- /.section__title -->
+                          </div><!-- /.form__row -->
+
+                          <div class="form__cols">
+                            <div class="form__col">
+                              <div class="form__row form__row--required">
+                                <label for="#field-first-name">First name*</label>
+
+                                <div class="form__controls">
+                                  <input class="field" type="text" name="$first_name" tabindex="0" placeholder="Your first name" aria-label="First name*" aria-invalid="false" value="" id="field-first-name" required>
+                                </div><!-- /.form__controls -->
+                              </div><!-- /.form__row -->
+                            </div><!-- /.form__col -->
+
+                            <div class="form__col">
+                              <div class="form__row">
+                                <label for="#field-last-name">Last name</label>
+
+                                <div class="form__controls">
+                                  <input class="field" type="text" name="$last_name" tabindex="0" placeholder="Your last name" aria-label="Last name" aria-invalid="false" value="" id="field-last-name">
+                                </div><!-- /.form__controls -->
+                              </div><!-- /.form__row -->
+                            </div><!-- /.form__col -->
+                          </div><!-- /.form__cols -->
+
+                          <div class="form__row form__row--required">
+                            <label for="#field-email">Email*</label>
+
+                            <div class="form__controls">
+                              <input class="field" type="email" name="email" tabindex="0" placeholder="Enter your email" aria-label="Email*" aria-invalid="false" value="" id="field-email" required>
+                            </div><!-- /.form__controls -->
+                          </div><!-- /.form__row -->
+
+                   
+                          <div class="form__row form__row--required">
+                            <label for="#winning-code">Winning code</label>
+
+                            <div class="form__controls">
+                              <input class="field" type="text" name="winning_code" tabindex="0" placeholder="Enter your winning code" aria-label="Winning code" aria-invalid="false" value="" id="winning-code">
+                            </div><!-- /.form__controls -->
+                          </div><!-- /.form__row -->
+
+
+                          <div class="klaviyo_form_actions form-actions">
+                            <div class="klaviyo_messages">
+                              <div class="form__success success_message" style="display:none;"></div>
+                              <div class="form__error error_message" style="display:none;"></div>
+                            </div>
+                            
+                            <button type="submit" class="btn btn--small klaviyo_submit_button">Confirm</button>
+                            
+                            <div class="terms-and-condition">
+                                <p class="tc-dropper">
+                                  	<input type="checkbox" name="$consent" id="consent-web" value="web" required>
+                                    <label for="consent-web" style="height: 32px;padding-bottom: 0;line-height: 38px;" aria-label="Consent*" aria-invalid="false"><strong>Terms and Conditions</strong></label>
+                                    <span id="dropper"></span>
+                                </p>
+                                <ol id="tc-content" style="font-size: 14px">
+                                <li>
+                                <p><strong></strong>Lintbells’ Limited (the “Promoter”) “YuMOVE Golden Ticket” competition (“Competition”) is only open to Eligible Participants. An Eligible Participant is any person aged 18 or over, attending the Kennel Club Crufts 2020 exhibition (“Crufts”). The Promoter reserves the right to verify the eligibility of all Eligible Participants. By taking part in this Competition, Eligible Participants confirm that they accept the terms and conditions set out below. This Competition excludes employees of the Promoter, their immediate families, its affiliated companies, distributors, agents or anyone else professionally connected to the Competition.</p>
+                                </li>
+                                <li>
+                                <p>The Competition will take place at the Crufts on the 5th – 8th March 2020 at the National Exhibition Centre (NEC), North Ave, Marston Green, Birmingham B40 1NT at the Lintbells trade stand in Hall 3, Stand 121(“Stand”).</p>
+                                </li>
+                                <li>
+                                <p>To enter the Competition Eligible Participants must purchase a tub of YuMOVE for Dog 300 tablets available at Promoter’s Stand at Crufts.</p>
+                                </li>
+                                <li>
+                                <p>The Competition will be open from 5th March 2020 at 06.30am GMT until 18.30pm GMT on the 8th March 2020 (‘the Closing Date”). The competition will only run during the Stand opening hours at Crufts. After the Closing Date no more entries can be accepted, no further participation in the Competition will be allowed. No extra purchase or fee is necessary to enter this Competition. No responsibility will be taken for lost, damaged, delayed or illegible entries. No proof of purchase is necessary to enter</p>
+                                </li>
+                                <li>
+                                <p>Only one Prize per person is permitted. No third party is permitted to claim the Prize. The Promoter reserves the right, in its sole discretion, to disqualify any person it finds (a) to be attempting to claim the Prize more than once; (b) to be tampering with the entry and/or Prize claiming process or the operation of this Competition; (c) to be acting in violation of these terms and conditions; (d) to be acting otherwise than in good faith; or (e) to have provided any false or misleading information as part of the process of entering the Competition and/or claiming the Prize.</p>
+                                </li>
+                                <li>
+                                <p>There is a total of 4 Prizes. The winner will be the person who finds a ‘Golden Ticket’ in a tub of YuMOVE for Dog 300 tablets. The ticket will clearly display instructions for the winner to claim the Prize, a link to Promoter’s Competition: https://yumove.co.uk/pages/golden-ticket and a unique Golden Ticket code (“Code”) required to claim the Prize.</p>
+                                </li>
+                                <li>
+                                <p>To claim the Prize the winner will be required to follow the weblink https://yumove.co.uk/pages/golden-ticket, enter their email address and the Code, and read and accept these Competition Terms and Conditions by ticking the box provided. They will then be sent a confirmation email stating further instructions on how to receive the Prize by contacting Promoter’s customer services by email or telephone.</p>
+                                </li>
+                                <li>
+                                <p>The Prize includes a one-year (12 months) supply of YuMOVE for Dog (“Prize”).</p>
+                                </li>
+                                <li>
+                                <p>The Prize conditions: The Prize excludes YuMOVE Advance products. Prize only applies to one dog per household. The type and quantity of YuMOVE supplied within a one year period will vary depending on the weight and age of the winner’s dog and will be left up to the discretion of the Promoter to recommend on a suitable quantity of the Prize for the winner’s dog.</p>
+                                </li>
+                                <li>
+                                <p>The winner residing in the UK will be signed up to Promoter’s FREE Subscribe &amp; Save yearly subscription plan (“Subscribe &amp; Save”) required in order to receive the Prize. The winner can unsubscribe at any time however they will be required to subscribe for the full year in order to receive full year’s free supply of YuMOVE for Dog as stated in the Prize. Subscribe &amp; Save is subject to terms and conditions, please see https://yumove.co.uk/pages/terms-conditions for further details. Card details will be required to sign up to Subscribe &amp; Save however nothing will be charged for duration of the winner’s subscription year. The winner will be sent a reminder with an option to unsubscribe before the end of the year.</p>
+                                </li>
+                                <li>
+                                <p>The winner residing outside of the UK will receive the Prize as a one-off delivery, subject to the Prize conditions stated in clause 9 (above) and upon further instructions from Promoter’s customer services.</p>
+                                </li>
+                                <li>
+                                <p>The Prize must be redeemed and claimed by 1st June 2020. If the winner does not claim the Prize within this period, the Code will expire and will be no longer valid to claim the Prize.</p>
+                                </li>
+                                <li>
+                                <p>The winner will be required to provide their name, email address and the Code to claim the Prize.</p>
+                                </li>
+                                <li>
+                                <p>The Prize is non changeable and non-transferable. No cash or credit alternatives are offered. Any extra quantities of the Prize above the amount advised by the Promoter and/or purchases of other Lintbells’ products under Subscribe &amp; Save or otherwise will be made at winners own expense. The Promoter reserves the right to provide substitute prizes of a similar value, should the specific Prize become unavailable for any reasons beyond its control.</p>
+                                </li>
+                                <li>
+                                <p>Personal data will be taken where necessary from all entries received but shall be limited to those details reasonably necessary for the administration of the Competition. This information may be shared with any other third parties reasonably involved in the Competition without liability to the Promoter or such third parties. The Promoter’s privacy policy can be found online at https://yumove.co.uk/pages/privacy-policy-cookies.</p>
+                                </li>
+                                <li>
+                                <p>The Promoter accepts no responsibility for damage or loss resulting from misdirected or incomplete entries arising from errors in submitting incomplete or incorrect entry information or in ability to participate in the Competition or other such causes. The Promoter has no responsibility for any malfunction, delay, loss or damage caused by its malfunction, or the actions of its administrators.</p>
+                                </li>
+                                <li>
+                                <p>The Winners shall be final. No correspondence or negotiation will be entered into by the Promoter concerning either the decision or the result. The Promoter reserves the right to cancel or amend the terms of this Competition without notice and any tickets and/or any part of the Prize issued in the event of major catastrophe, war, civil or military disturbance, earthquake or any actual, anticipated or alleged breach of any applicable law or regulation or any other similar events beyond its control.</p>
+                                </li>
+                                <li>
+                                <p>The Promoter is not responsible for any loss or damage howsoever caused to Eligible Participants to the maximum extent permitted by law and will not be liable for any loss, injury or damage, howsoever caused to Eligible Participants, except where and only to the extent that any such loss is caused by the negligence of the Promoter, its employees or agents.</p>
+                                </li>
+                                <li>
+                                <p>This Competition will be governed by English law and is subject to the exclusive jurisdiction of the English Courts. Promotional materials form part of these terms and conditions, but in the event of any conflict these terms and conditions will prevail.</p>
+                                </li>
+                                <li>
+                                <p>By entering this Competition, you are agreeing to be subscribed to the Promoter’s newsletter. You may unsubscribe at any time. The Promoter does not share your details with third parties.</p>
+                                </li>
+                                <li>
+                                <p>For further enquiries: write to us Lintbells Limited, West Barn, Fairclough Hall Farm, Halls Green, Weston, SG4 7DP or email us hello@yumove.com.</p>
+                                </li>
+                                <li>
+                                <p>The Promoter or its agencies accept no responsibility for any loss, injury or damage suffered through acceptance of the Prize.</p>
+                                </li>
+                                <li>
+                                <p>Entry to this Competition does not affect your statutory rights.</p>
+                                </li>
+                                <li>
+                                <p>The Promoter is: Lintbells Limited, registered office at West Barn, Fairclough Hall Farm, Halls Green, Weston, SG4 7DP, UK with the company number 05928692.</p>
+                                </li>
+                                </ol>
+                            </div>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+
+                    <script type="text/javascript" src="//www.klaviyo.com/media/js/public/klaviyo_subscribe.js"></script>
+                    <script type="text/javascript">
+                      KlaviyoSubscribe.attachToForms('#email_signup', {
+                        hide_form_on_success: false
+                      });
+                    </script>
+                  </div><!-- /.section__content -->
+                </div><!-- /.section__body -->
+              </div><!-- /.shell -->
+            </section><!-- /.section section-join -->
+          	
+            <p style="margin-bottom: 0; font-size: 20px; background-color: #21a850; padding: 15px; color: #fff;border-radius: 15px">If you do no have an email address please call - 01462790886
+              <br>You will still need your winners code available.
+            </p>
+		</div><!-- /.page__content -->
+	</div>
+</div><!-- /.shell -->
+
+
+<script>
+  $(document).ready(function() {
+    $('.tc-dropper').on('click', function() {
+      $(this).toggleClass('tc-collapsed');
+      $('#tc-content').toggleClass('active');
+      
+      $('.klaviyo_submit_button').on('click', function(e) {
+        console.log('OK');
+        if($('[name="$first_name"]').val().trim() == '' || $('[name="email"]').val().trim() == '' || $('#consent-web').prop('checked') == false) {
+          e.preventDefault();
+          if($('#consent-web').prop('checked') == false) $('[for="consent-web"]').addClass('error');
+          if($('[name="$first_name"]').val().trim() == '') $('[name="$first_name"]').closest('.form__row').addClass('form__row--error');
+          if($('[name="email"]').val().trim() == '') $('[name="email"]').closest('.form__row').addClass('form__row--error');
+          console.log('OK');
+          return;
+        }
+      });
+      
+      $('[for="consent-web"]').on('click', function() {
+      	$(this).removeClass('error')
+      });
+    });
+  });
+</script>

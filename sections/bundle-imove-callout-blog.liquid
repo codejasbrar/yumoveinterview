@@ -1,0 +1,58 @@
+{%- assign _section = section.settings -%}
+{%- assign section_title = _section.title -%}
+{%- assign section_label = _section.label -%}
+{%- assign section_url = _section.url -%}
+
+{%- if section_title != blank or section_label != blank and section_url != blank -%}
+  <section id="imove-blog-callout" class="section section-callout section-callout--imove">
+    <div class="shell">
+      <div class="section__body">
+        <div class="flex flex-column align-center justify-center-xs">
+          {%- if section_title != blank -%}
+            <h2 class="section__title">{{section_title}}</h2><!-- /.section__title -->
+          {%- endif -%}
+
+          {% if _section.popup == true %}
+            <a class="btn landing-popup-cta">
+              {{section_label}} <img src="{{ 'noun_Paw_76186.png' | file_img_url: '20x' }}" alt="">
+            </a>
+          {%- else section_label != blank and section_url != blank -%}
+            <a href="{{section_url}}" class="btn">
+              {{section_label}} <img src="{{ 'noun_Paw_76186.png' | file_img_url: '20x' }}" alt="">
+            </a>
+          {%- endif -%}
+        </div><!-- /.flex justify-between-align-center -->
+      </div><!-- /.section__body -->
+    </div><!-- /.shell -->
+  </section><!-- /.section section-callout -->
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "iMOVE Blog Callout",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Button Label"
+    },
+    {
+      "type": "url",
+      "id": "url",
+      "label": "Button Link"
+    },
+    {
+      "type": "checkbox",
+      "id": "popup",
+      "label": "Signup Popup",
+      "default": false,
+      "info": "Check to launch signup popup instead of join the club page"
+    }
+  ]
+}
+{% endschema %}

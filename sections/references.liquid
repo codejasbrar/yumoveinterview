@@ -1,0 +1,33 @@
+<section class="section references"> 
+  <div class="shell">
+    <p>
+    {%- for block in section.blocks -%}
+        {%- assign _block = block.settings -%}
+        {%- assign block_text = _block.text -%}
+
+        {{block_text}}<br/>
+    {%- endfor -%}
+    </p>   
+  </div><!-- /.shell -->
+</section>
+
+
+{% schema %}
+{
+   "name":"References",
+   "blocks":[
+      {
+         "type":"reference",
+         "name":"Reference",
+         "settings":[
+            {
+               "type":"text",
+               "id":"text",
+               "label":"Text"
+            }
+         ]
+      }
+   ]
+}
+{% endschema %}
+

@@ -1,0 +1,14 @@
+{% comment %}
+  Login as a Guest
+{% endcomment %}
+{% if shop.checkout.guest_login %}
+  <div class="form form--guest form--small">
+    {%- form 'guest_login' -%}
+      <div class="form__actions text-center">
+        <button type="submit" class="form__btn btn">
+          {{- 'customer.login.guest_continue' | t -}}
+        </button>
+      </div><!-- /.form__actions -->
+    {% endform %}
+  </div><!-- /.form -->
+{%- endif -%}

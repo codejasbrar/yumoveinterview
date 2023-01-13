@@ -1,0 +1,29 @@
+<section class="marquee">
+    <div class="marquee__content">
+        <ul class="list-inline">
+            {% for block in section.blocks %}
+            <li>{{ block.settings.headline}}</li>
+            {% endfor%}
+        </ul>
+    </div>
+</section>
+
+{% schema %}
+{
+  "name": "Marquee",
+  "max_blocks": 4,
+  "blocks": [
+    {
+      "type": "message",
+      "name": "Message",
+      "settings": [
+        {
+          "type": "text",
+          "id": "headline",
+          "label": "Headline"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

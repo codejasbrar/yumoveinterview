@@ -1,0 +1,83 @@
+<div class="form form--account form--register form--small">
+  {% form 'create_customer', class: 'js-ajax-form' %}
+    {%- assign error_class = 'form__row--error' | prepend: ' ' -%}
+    {%- capture error_first_name -%}{%- if form.errors contains 'first_name' -%}{{- error_class -}}{%- endif -%}{%- endcapture -%}
+    {%- capture error_last_name -%}{%- if form.errors contains 'last_name' -%}{{- error_class -}}{%- endif -%}{%- endcapture -%}
+    {%- capture error_email -%}{%- if form.errors contains 'email' -%}{{- error_class -}}{%- endif -%}{%- endcapture -%}
+    {%- capture error_password -%}{%- if form.errors contains 'password' -%}{{- error_class -}}{%- endif -%}{%- endcapture -%}
+
+    <div class="form__head">
+      <h2 class="form__title section__title">
+        {{- 'customer.register.title' | t -}}
+      </h2><!-- /.form__title -->
+    </div><!-- /.form__head -->
+
+    {% if form.errors %}
+      <div class="form__errors">
+        {{- form.errors | default_errors -}}
+      </div><!-- /.form__errors -->
+    {% endif %}
+
+    <div class="form__errors" style="display: none;">
+      Error
+    </div><!-- /.form__errors -->
+
+    <div class="form__success" style="display: none;">
+      success
+    </div><!-- /.form__success -->
+
+    <div class="form__body">
+      <div class="form__row{{- error_first_name -}}">
+        <label for="field-first-name" class="form__label">{{- 'customer.register.first_name' | t -}}</label>
+
+        <div class="form__controls">
+          <input type="text" class="field" name="customer[first_name]" id="field-first-name" value="{{- form.first_name -}}" placeholder="{{- 'customer.register.first_name_placeholder' | t -}}">
+        </div><!-- /.form__controls -->
+      </div><!-- /.form__row -->
+
+      <div class="form__row{{- error_last_name -}}">
+        <label for="field-last-name" class="form__label">{{- 'customer.register.last_name' | t -}}</label>
+
+        <div class="form__controls">
+          <input type="text" class="field" name="customer[last_name]" id="field-last-name" value="{{- form.last_name -}}" placeholder="{{- 'customer.register.last_name_placeholder' | t -}}">
+        </div><!-- /.form__controls -->
+      </div><!-- /.form__row -->
+
+      <div class="form__row{{- error_email -}}">
+        <label for="field-email" class="form__label">{{- 'customer.register.email' | t -}}</label>
+
+        <div class="form__controls">
+          <input type="email" class="field" name="customer[email]" id="field-email" value="{{- form.email -}}" placeholder="{{- 'customer.register.email_placeholder' | t -}}" required>
+        </div><!-- /.form__controls -->
+      </div><!-- /.form__row -->
+
+      <div class="form__row{{- error_password -}}">
+        <label for="field-password" class="form__label">{{- 'customer.register.password' | t -}}</label>
+
+        <div class="form__controls">
+          <input type="password" class="field" name="customer[password]" id="field-password" value="" placeholder="{{- 'customer.register.password_placeholder' | t -}}" required>
+        </div><!-- /.form__controls -->
+      </div><!-- /.form__row -->
+
+      <div class="form__row">
+        <div class="form__controls">
+          <ul class="list-checkboxes">
+            <li>
+              <div class="checkbox">
+                <input type="checkbox" name="customer[accepts_marketing]" value="false" id="marketing" />
+
+                <label for="marketing">{{- 'customer.register.accept_marketing_html' | t -}}</label>
+              </div><!-- /.checkbox -->
+            </li>
+          </ul><!-- /.list-checkboxes -->
+        </div><!-- /.form__controls -->
+      </div><!-- /.form__row -->
+    </div><!-- /.form__body -->
+
+    <div class="form__actions flex align-center justify-between">
+      <button type="submit" class="btn btn--green btn--block">
+        {{- 'customer.register.submit' | t -}}
+      </button>
+    </div><!-- /.form__actions -->
+  {% endform %}
+</div><!-- /.form -->

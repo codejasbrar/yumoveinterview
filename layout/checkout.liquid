@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="{{ locale }}" dir="{{ direction }}" class="{{ checkout_html_classes }}">
+  <head>
+    <script>
+      dataLayer = [];
+    </script>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-PT4KCZX');</script>
+    <!-- End Google Tag Manager -->    
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height, minimum-scale=1.0, user-scalable=0">
+    <meta name="referrer" content="origin">
+
+    <title>{{ page_title }}</title>
+
+    {%- include 'settings' -%}
+
+    {%- include 'head' -%}
+
+    {{ checkout_stylesheets }}
+    {{ checkout_scripts }}
+    {% include 'dynamic_yield' %}{% include 'dynamic_yield_purchase' %}
+
+
+    {{ content_for_header }}
+  <script>
+    (function(n,t,i,r){var u,f;n[i]=n[i]||{},n[i].initial={accountCode:"LINTB11111",host:"LINTB11111.pcapredict.com"},n[i].on=n[i].on||function(){(n[i].onq=n[i].onq||[]).push(arguments)},u=t.createElement("script"),u.async=!0,u.src=r,f=t.getElementsByTagName("script")[0],f.parentNode.insertBefore(u,f)})(window,document,"pca","//LINTB11111.pcapredict.com/js/sensor.js")
+    pca.on("data", function(a,b,c){
+
+if (a === "address"){
+
+var bannedList = ['GY9','GY1','GY10','GY3','GY4','GY5','JE1','JE2','JE3'], //modify this to match desired outcode
+
+postInCode = c.PostalCode.split (" ", 1);
+
+for (var i = 0; i < bannedList.length; i++ ){
+
+if ( bannedList[i] == postInCode){
+
+alert(bannedList[i] + " Not allowed!"); //you can modify this to stop the user from continuing with the form submission if required
+
+};
+
+};
+
+};
+
+}); 
+  </script>
+  
+<!-- Start of Littledata - Fix Google Analytics Script-->
+{% include 'LittledataLayer' %}
+<!-- End of Littledata - Fix Google Analytics Script -->
+
+  {% include 'shogun-head' %}
+    <!-- Start of Pledeling Charity Script 19/3/20--> 
+    <div data-round-up-via-pledgeling="4473644580919"></div>
+<!-- End of Pledeling Charity Script 19/3/20-->
+ 
+</head>
+  <body class="template-checkout">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PT4KCZX"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->    
+    {%- if settings.thank_you__page_title != blank -%}
+      <style type="text/css" media="screen">
+        .template-checkout .section-checkout [data-step='thank-you']:before, .template-checkout .section-checkout [data-step='thank_you']:before {
+          content: '{{settings.thank_you__page_title}}';
+        }
+      </style>
+    {%- endif -%}
+
+    <div class="wrapper">
+      <section class="section section-checkout">
+        <div class="shell">
+          <header class="section__head">
+            {{ skip_to_content_link }}
+            {{ content_for_logo }}
+          </header><!-- /.section__head -->
+
+          {{ order_summary_toggle }}
+
+          <div class="section__body flex justify-between align-start">
+            <div class="section__content">
+              <div class="section__content-head">
+                {{ breadcrumb }}
+              </div><!-- /.section__content-head -->
+
+              <div class="section__content-body">
+                {{ alternative_payment_methods }}
+                {{ content_for_layout }}
+                {{ content_for_footer }}
+              </div><!-- /.section__content-body -->
+            </div><!-- /.section__content -->
+
+            <aside class="section__aside">
+              <div class="sidebar__content">
+                <h2 class="sidebar__content-title">
+                  {{ 'cart.general.order_summary' | t }}
+                </h2><!-- /.sidebar__content-title -->
+
+                {{ content_for_order_summary }}
+              </div>
+            </aside><!-- /.section__aside -->
+            
+            
+          </div>
+
+          {{ tracking_code }}
+
+          <footer class="section__foot">
+            <nav class="section__foot-nav">
+              {%- assign checkout_footer_menu = settings.checkout_footer_menu | default: 'checkout-footer-menu' -%}
+
+              {%- include 'menu', handle: checkout_footer_menu -%}
+            </nav><!-- /.section__foot-nav -->
+          </footer><!-- /.section__foot -->
+        </div><!-- /.shell -->
+      </section><!-- /.section -->
+    </div><!-- /.wrapper -->
+  {%- include 'ie-modal' -%}
+  {{ theme_scripts }}
+    
+  {% include 'awin-master-tag' %}
+  {% if page_title contains "Thank you" %}
+    {% include 'awin-pixel-snippet' %}
+  {% endif %}
+    <script>
+      function callObserver() {
+      	var target = document.querySelector('.order-summary__section--discount');
+
+        var observer = new MutationObserver(function(mutations) {
+           var discountCode = document.getElementById('checkout_reduction_code').value;
+          if (discountCode.trim().toLowerCase() === 'club30') {
+              var errorMessageContainer = document.querySelector('#error-for-reduction_code');
+             
+             if (errorMessageContainer) {
+               errorMessageContainer.innerText = 'CLUB30 is no longer active. Please use CLUB25 to save 25%';
+               callObserver(); // recall itself as the original element has been modified dynamically and lost it's binding.
+             }
+           }
+        });
+
+        var config = { attributes: true, childList: true, characterData: true, subTree: true };
+
+        observer.observe(target, config);
+      }
+      callObserver();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,99 @@
+<section class="section-landing-ingredients landing-sub-info"> 
+  <div class="shell">
+    <div class="section-title">
+      {{ section.settings.main_title }}
+       <p class="section-sub-title">{{ section.settings.sub_title }}</p>
+    </div>
+    
+    <div class="ingredient-content">
+      <div class="section-image">
+       <img src="{{ section.settings.featured_image | img_url: '800x' }}" alt="">
+    </div>
+    <div class="section-content">
+      {% for block in section.blocks %}
+        <div class="info-block">
+          <div>
+            <img src="{{ block.settings.icon | img_url: '500x' }}" alt="{{ block.settings.icon_alt }}" class="sub-info-icon">
+          </div>
+          <div class="block-text-container">
+            <div class="block-title">
+              <h4>{{ block.settings.heading }}</h4>
+            </div>
+            <div class="block-text">
+              <p>{{ block.settings.content }}</p>
+            </div>
+          </div>    
+        </div>
+      {% endfor%}
+    </div>
+    </div>
+    <div class="sub-info-btn">
+      <a href="{{ section.settings.url}}" class="sub-intro-btn btn">
+            {{section.settings.label}} 
+          </a>
+    </div>       
+  </div><!-- /.shell -->
+</section>
+
+
+{% schema %}
+  {
+    "name": "Landing Info",
+    "settings": [
+      {
+        "type": "text",
+        "id": "main_title",
+        "label": "Info Title"
+      },
+      {
+        "type": "text",
+        "id": "sub_title",
+        "label": "Info Sub Title"
+      },
+      {
+        "type": "image_picker",
+        "id": "featured_image",
+        "label": "Featured Image"
+      },
+      {
+        "type": "text",
+        "id": "label",
+        "label": "Button Label"
+      },
+      {
+        "type": "url",
+        "id": "url",
+        "label": "Button Link"
+      }
+    ],
+    "blocks": [
+    {
+      "type": "Feature",
+      "name": "Features",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Feature Title"
+        },
+        {
+          "type": "text",
+          "id": "content",
+          "label": "Feature Content"
+        },
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Icon"
+        },
+        {
+          "type": "text",
+          "id": "icon_alt",
+          "label": "Icon Alt Text"
+        }
+      ]
+    }
+  ]
+  }
+{% endschema %}
+

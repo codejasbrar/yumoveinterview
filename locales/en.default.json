@@ -1,0 +1,312 @@
+{
+  "general": {
+    "navigation": {
+      "back": "Back",
+      "navigate_to": "Navigate to…"
+    },
+    "meta": {
+      "tags": "Tagged \"{{ tags }}\"",
+      "page": "Page {{ page }}"
+    },
+    "404": {
+      "title": "Oops",
+      "subtext": "The page you requested does not exist!",
+      "link_html": "<a class=\"btn \" href=\"\/collections\/all\">Continue Shopping<\/a>"
+    },
+    "password_page": {
+      "title": "yumove-uk",
+      "opening_soon": "Will be opening soon...",
+      "spread_the_word": "Spread the word:",
+      "login_form_heading": "Enter store using password:",
+      "login_form_password_label": "Password",
+      "login_form_password_placeholder": "Your password",
+      "login_form_submit": "Enter",
+      "signup_form_heading": "Find out when we open:",
+      "signup_form_email_label": "Email",
+      "signup_form_email_placeholder": "Your email",
+      "signup_form_submit": "Submit",
+      "signup_form_success": "We will send you an email right before we open!",
+      "admin_link_html": "Are you the store owner? <a href=\"\/admin\" class=\"text-link\">Log in here<\/a>",
+      "password_link": "Enter using password",
+      "powered_by_shopify_html": "This shop will be powered by {{ shopify }}",
+      "close": "Close (Esc)"
+    },
+    "breadcrumbs": {
+      "home": "Home",
+      "home_link_title": "Back to the frontpage"
+    },
+    "pagination": {
+      "previous": "Previous",
+      "next": "Next",
+      "label": "{{ first_item }} - {{ last_item }} of {{ all_items }} Results"
+    },
+    "search": {
+      "no_results_html": "Your search for \"{{ terms }}\" did not yield any results.",
+      "results_for_html": "Your search for \"{{ terms }}\" revealed the following:",
+      "title": "Search for products on our site",
+      "label": "Search",
+      "placeholder": "Search",
+      "submit": "Search"
+    },
+    "copyright": "Copyright"
+  },
+  "layout": {
+    "customer": {
+      "cart": "Basket",
+      "account": "Account",
+      "log_out": "Log out",
+      "log_in": "Login",
+      "close": "Close"
+    },
+    "socials": {
+      "social_platform": "{{ name }} on {{ platform }}"
+    }
+  },
+  "collections": {
+    "general": {
+      "title": "Collections",
+      "apply": "Apply",
+      "no_matches": "Sorry, there are no products in this collection"
+    },
+    "sorting": {
+      "title": "Sort by",
+      "manual": "Featured",
+      "best_selling": "Best Selling",
+      "title_ascending": "Alphabetically, A-Z",
+      "title_descending": "Alphabetically, Z-A",
+      "price_ascending": "Price, low to high",
+      "price_descending": "Price, high to low",
+      "created_descending": "Date, new to old",
+      "created_ascending": "Date, old to new"
+    }
+  },
+  "products": {
+    "product": {
+      "sold_out": "Sold Out",
+      "out_of_stock": "Out of Stock",
+      "sale": "Sale",
+      "quantity": "Quantity",
+      "add_to_cart": "Add to Basket",
+      "unavailable": "Unavailable",
+      "from": "From",
+      "buy_now": "Buy Now",
+      "subscribe": "Subscribe",
+      "recommended": "Recommended Product"
+    }
+  },
+  "blogs": {
+    "blog_empty": "There are no articles here yet.",
+    "blog_all_category": "All Categories",
+    "article": {
+      "related_posts": "Related Posts",
+      "posted_on_date": "Posted on {{ date }}",
+      "read_more": "Read more",
+      "now_reading": "Now reading",
+      "share": "Share",
+      "prev": "Prev",
+      "next": "Next"
+    },
+    "comments": {
+      "title_count": {
+        "one": "{{ count }} comment",
+        "other": "{{ count }} comments"
+      },
+      "name": "Name",
+      "email": "Email",
+      "message": "Message",
+      "post": "Post Comment",
+      "form_title": "Leave a comment",
+      "moderated": "Please note, comments must be approved before they are published",
+      "success_moderated": "Your comment was posted successfully. We will publish it in a little while, as our blog is moderated.",
+      "success": "Your comment was posted successfully! Thank you!"
+    }
+  },
+  "cart": {
+    "general": {
+      "title": "Basket",
+      "remove": "Remove",
+      "note": "Special instructions for seller",
+      "subtotal": "Subtotal",
+      "total": "Total",
+      "order_summary": "Order Summary",
+      "savings_html": "You're saving {{ price }}",
+      "shipping_at_checkout": "Tax included. Free UK shipping.",
+      "cards_hint": "All major credit & debit cards accepted",
+      "checkout": "Secure checkout",
+      "empty": "Your cart is currently empty.",
+      "continue_browsing_html": "<a class=\"btn\" href=\"\/collections\/all\">Continue Shopping<\/a>"
+    },
+    "label": {
+      "name": "Product",
+      "price": "Price",
+      "quantity": "Quantity",
+      "total": "Total"
+    }
+  },
+  "contact": {
+    "form": {
+      "title": "Get in touch with us…",
+      "name": "Name",
+      "name_placeholder": "Your full name",
+      "email": "Email",
+      "email_placeholder": "Enter your email address",
+      "phone": "Phone Number",
+      "phone_placeholder": "Enter your number",
+      "message": "Message",
+      "message_placeholder": "Enter your message",
+      "submit": "Send Message",
+      "post_error": "Error.",
+      "post_success": "Thanks for contacting us. We'll get back to you as soon as possible."
+    }
+  },
+  "customer": {
+    "account": {
+      "title": "My Account",
+      "orders": "Orders",
+      "subscribe": "Subscriptions",
+      "account": "Account",
+      "log_out": "Log out",
+      "view_orders": "View Orders",
+      "view_subscriptions": "View Subscriptions"
+    },
+    "activate_account": {
+      "title": "Activate Account",
+      "subtext": "Create your password to activate your account.",
+      "password": "Password",
+      "password_confirm": "Confirm Password",
+      "submit": "Activate Account",
+      "cancel": "Decline Invitation"
+    },
+    "addresses": {
+      "default": "Default Address",
+      "additional": "Additional Address",
+      "add_new": "Add Address",
+      "first_name": "First Name",
+      "last_name": "Last Name",
+      "company": "Company",
+      "address1": "Address",
+      "address2": "Address",
+      "city": "City",
+      "country": "Country",
+      "province": "Province",
+      "zip": "Postal\/Zip Code",
+      "phone": "Phone",
+      "set_default": "Set as default address",
+      "add": "Add Address",
+      "update": "Update Address",
+      "cancel": "Cancel",
+      "edit": "Edit",
+      "delete": "Delete",
+      "empty": "You haven't added any addresses yet."
+    },
+    "login": {
+      "title": "Login",
+      "email": "Email",
+      "email_placeholder": "Enter your email address",
+      "password": "Password",
+      "password_placeholder": "Enter your password",
+      "forgot_password": "Forgot your password?",
+      "re_activate": "Re-activate",
+      "sign_in": "Login",
+      "create_account": "Create account",
+      "guest_title": "Continue as a guest",
+      "guest_continue": "Continue",
+      "touble_login": "Having Trouble Logging in?"
+    },
+    "orders": {
+      "title": "Order History",
+      "address_book": "Address Book",
+      "order": "Order",
+      "view_order": "View Order",
+      "date": "Date",
+      "payment_status": "Payment",
+      "fulfillment_status": "Status",
+      "total": "Total",
+      "none": "You haven't placed any orders yet."
+    },
+    "order": {
+      "title": "Order {{ name }}",
+      "date": "Order placed on {{ date }}",
+      "cancelled": "Order Cancelled on {{ date }}",
+      "cancelled_reason": "Reason: {{ reason }}",
+      "billing_address": "Billing Address",
+      "payment_status": "Payment Status",
+      "shipping_address": "Shipping Address",
+      "fulfillment_status": "Fulfillment Status",
+      "discount": "Discount",
+      "shipping": "Shipping",
+      "tax": "Tax",
+      "product": "Product",
+      "sku": "SKU",
+      "price": "Price",
+      "quantity": "Quantity",
+      "total": "Total",
+      "fulfilled_at": "Fulfilled {{ date }}",
+      "subtotal": "Subtotal"
+    },
+    "recover_password": {
+      "title": "Reset your password",
+      "reactivate_title": "Re-activate your account",
+      "email": "Email",
+      "email_placeholder": "e.g. john.smith@company.com",
+      "submit": "Submit",
+      "reactivate_submit": "Re-activate",
+      "cancel": "Cancel",
+      "subtext": "We will send you an email to reset your password.",
+      "reactivate_subtext": "Enter the email address you used for your Lintbells account.",
+      "success": "We've sent you an email with a link to update your password.",
+      "reactivate_success": "Success"
+    },
+    "reset_password": {
+      "title": "Reset account password",
+      "subtext": "Enter a new password for {{ email }}",
+      "password": "Password",
+      "password_confirm": "Confirm Password",
+      "submit": "Reset Password",
+      "login": "Login"
+    },
+    "register": {
+      "title": "Create account",
+      "first_name": "First name",
+      "first_name_placeholder": "Your first name",
+      "last_name": "Last name",
+      "last_name_placeholder": "Your last name",
+      "email": "Email",
+      "email_placeholder": "Enter your email address",
+      "password": "Password",
+      "password_placeholder": "Enter your password",
+      "accept_marketing_html": "Yes I’d like to be kept up to date with emails, I have read the <a href='#'>Privacy Policy<\/a> and agree to the <a href='#'>Terms of Service<\/a>.",
+      "submit": "Create account",
+      "login": "Return to login"
+    }
+  },
+  "gift_cards": {
+    "issued": {
+      "title": "Here's your {{ value }} gift card for {{ shop }}!",
+      "subtext": "Here's your gift card!",
+      "disabled": "Disabled",
+      "expired": "Expired on {{ expiry }}",
+      "active": "Expires on {{ expiry }}",
+      "redeem": "Use this code at checkout to redeem your gift card",
+      "shop_link": "Start shopping",
+      "print": "Print",
+      "add_to_apple_wallet": "Add to Apple Wallet"
+    }
+  },
+  "date_formats": {
+    "short": "%B %d, %Y",
+    "long": "%d %B, %Y",
+    "full": "%d %B, %Y",
+    "gift_card": "%d\/%m\/%y"
+  },
+  "shopify": {
+    "checkout": {
+      "order_summary": {
+        "shipping_default_value": "Free UK shipping"
+      },
+      "payment_gateway": {
+        "credit_card_label": "Debit or Credit Card"
+      }
+    }
+  }
+}

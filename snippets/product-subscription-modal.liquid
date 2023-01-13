@@ -1,0 +1,304 @@
+<div class="product-modal-background">
+ <div class="product-modal">
+   <div class="modal-nav">
+     <div class="modal-header">
+       <nav class="subscribe__nav">
+         <ul>
+           <li class="nav-details done current">
+             <p class="nav-details-text">
+               Dogs Details
+             </p>
+           </li>
+
+           <li class="nav-weight small not-clickable">
+             <p class="nav-weigth-text">
+               Weight
+             </p>
+           </li>
+           <li class="nav-plan small not-clickable">
+             <p class="nav-plan-text">
+               Subscription Plan
+             </p>
+           </li>
+         </ul>
+       </nav>
+     </div>
+     <div class="product-modal-info">
+       <div class="subscribe-tooltip subscribe_modal_close">
+         <i class="ico-circle ico-close"></i>
+       </div>
+     </div>
+   </div>
+     
+   
+   <div class="form--steps">
+     <div class="modal-step-name">
+         <div class="form__step-head">
+            <h2 class="form__step-title section__title">What is your dog's name?</h2><!-- /.section__title -->
+           </div><!-- /.form__step-head -->
+           <div class="form__step-body">
+           <div class="form__controls dogs-name">
+		     <input type="text" class="field dogs-name" name="name" id="dogs-name" value="" placeholder="Dog’s name">
+		   </div><!-- /.form__controls -->
+         </div>
+        
+         <div class="form__step-head">
+           <h2 class="form__step-title section__title">Is it your dog's first time taking YuMOVE?</h2><!-- /.section__title -->
+         </div><!-- /.form__step-head -->
+         <div class="form__step-body">
+         <div class="form__row">
+           
+     
+           <div class="form__controls">
+                  
+             <ul class="list-radios list-radios--small flex align-end js-radio-required" data-name="new">
+                <li>
+                  <div class="radio">
+                    <input type="radio" name="new" id="yes" value="Yes" class="js-radio">
+     
+                    <label for="yes">
+                     <div class="form__label-inner">
+                       <span>Yes</span>
+                     </div>
+                    </label>
+                  </div><!-- /.radio -->
+                </li>
+     
+                <li>
+                  <div class="radio">
+                    <input type="radio" name="new" id="no" value="No" class="js-radio">
+     
+                    <label for="no">
+                     <div class="form__label-inner">
+                       <span>No</span>
+                     </div>
+                    </label>
+                  </div><!-- /.radio -->
+                </li>
+              </ul><!-- /.list-radios -->
+              <p class="modal-error hidden" >Please select an option</p>
+           </div><!-- /.form__controls -->
+         </div><!-- /.form__row -->
+       </div>
+       <div class="subscribe-modal-button">
+           <div id="step-details-btn" class="btn btn--orange">Next Step: Dog Weight</div>
+         </div>
+     </div>
+     
+     <div class="modal-step-weight hidden">
+       <div class="form__step-head">
+		<h2 class="form__step-title section__title">How much does your dog weigh?</h2><!-- /.section__title -->        
+	   </div><!-- /.form__step-head -->
+       <div class="form__step-body">
+         <div class="form__row">
+            <p>Knowing their weight helps us get the amount of nutrition, just right.</p>
+     
+            <div class="form__controls">
+               <div class="form__controls-images hidden-lg hidden-md hidden-sm">
+                 <div class="form__controls-image hidden" data-input="15">
+                   {%- include 'size.small' -%}
+                 </div><!-- /.form__controls-image hidden -->
+     
+                 <div class="form__controls-image hidden" data-input="16-30">
+                   {%- include 'size.medium' -%}
+                 </div><!-- /.form__controls-image hidden -->
+     
+                 <div class="form__controls-image js-default-image" data-input="31-45">
+                   {%- include 'size.large' -%}
+                 </div><!-- /.form__controls-image hidden -->
+     
+                 <div class="form__controls-image hidden" data-input="46">
+                   {%- include 'size.extralarge' -%}
+                 </div><!-- /.form__controls-image hidden -->
+               </div><!-- /.form__controls-images -->
+             
+               <ul class="list-radios list-radios--weight flex modal-weight align-end js-radio-required" data-name="weight">
+                 <li>
+                   <div class="radio">
+                     <input type="radio" name="weight" id="15" class="js-radio js-new-data js-change-image" value="Up to 15kg">
+     
+                     <label for="15">
+                        <div class="form__label-image hidden-xs">
+                          {%- include 'size.small' -%}
+                        </div>
+     
+                        <div class="form__label-inner">
+                          <span>Up to 15kg</span>
+                        </div>
+                      </label>
+                   </div><!-- /.radio -->
+                 </li>
+     
+                 <li>
+                   <div class="radio">
+                     <input type="radio" name="weight" id="16-30" class="js-radio js-new-data js-change-image" value="16-30kg">
+     
+                     <label for="16-30">
+                      <div class="form__label-image hidden-xs">
+                        {%- include 'size.medium' -%}
+                      </div>
+     
+                      <div class="form__label-inner">
+                        <span>16 – 30kg</span>
+                      </div>
+                     </label>
+                   </div><!-- /.radio -->
+                 </li>
+     
+                 <li>
+                   <div class="radio">
+                     <input type="radio" name="weight" id="31-45" class="js-radio js-new-data js-change-image js-default" value="31-45kg" checked="checked">
+     
+                     <label for="31-45">
+                      <div class="form__label-image hidden-xs">
+                        {%- include 'size.large' -%}
+                      </div>
+     
+                      <div class="form__label-inner">
+                        <span>31 – 45kg</span>
+                      </div>
+                     </label>
+                   </div><!-- /.radio -->
+                 </li>
+     
+                 <li>
+                   <div class="radio">
+                     <input type="radio" name="weight" id="46" class="js-radio js-new-data js-change-image" value="Over 45kg">
+     
+                     <label for="46">
+                      <div class="form__label-image hidden-xs">
+                        {%- include 'size.extralarge' -%}
+                      </div>
+     
+                      <div class="form__label-inner">
+                        <span>Over 45kg</span>
+                      </div>
+                     </label>
+                   </div><!-- /.radio -->
+                 </li>
+               </ul><!-- /.list-radios -->
+           </div><!-- /.form__controls -->
+         </div><!-- /.form__row -->
+       </div><!-- /.form__step-body --> 
+       <div class="subscribe-modal-button">
+           <div id="step-weight-btn" class="btn btn--orange">Next Step: Subscription Plan</div>
+         </div>
+     </div><!-- /.modal-step-weight -->
+     
+     <div class="modal-step-plan hidden">
+       <div class="form__step-head">
+		<h2 class="form__step-title section__title">Recommended Subscription Plan</h2><!-- /.section__title -->        
+	   </div><!-- /.form__step-head -->
+       <div class="form__step-body">
+         <div class="plan-info-container">
+           <div class="plan-info-row">
+             <p>{{ product.title }} <span class="product_each_month">quantity</span> tablets</p>
+             <p class="plan-info-price full-price">price</p>
+           </div>
+           <div class="plan-info-row">
+             <p>Delivered <span class="subscription-month">frequency</span></p>
+             <p class="plan-info-price">FREE</p>
+           </div>
+           <div class="plan-info-row">
+             <p>YuMOVE Subscription discount</p>
+             <p class="plan-info-price">30% off</p>
+           </div>
+         </div>
+       </div>
+       <div class="plan-total-container plan-info-row">
+         <div>
+           <h5>Total</h5>
+         </div>
+         <div class="total-price-container">
+           <h5 class="total-price product_subscription_price">Total Price</h5>
+           <p><span class="per-month">price per frequency</span></p>
+         </div>
+       </div>
+       <div class="plan-info-row plan-btn-container">
+         <div class="subscribe-modal-button">
+          <div id="calculate-plan-btn" class="btn btn--green">Subscribe</div>
+        </div>
+        {%- if product.title == 'YuMOVE PLUS for Dogs' or product.title == 'YuMOVE Dog' or product.title == 'YuMOVE Young & Active' -%}
+        <div class="edit-plan-container" class="subscribe-modal-button">
+          <div id="edit-plan-btn" class="btn btn--green">Edit delivery & amount</div>
+        </div>
+         {%- endif -%}
+       </div>
+     </div>
+     
+     {%- if product.title == 'YuMOVE PLUS for Dogs' or product.title == 'YuMOVE Dog' or product.title == 'YuMOVE Young & Active' -%}
+     <div class="modal-step-edit hidden">
+       <div class="form__step-head">
+		<h2 class="form__step-title section__title">Edit Delivery & Tablet Amount</h2><!-- /.section__title -->        
+	   </div><!-- /.form__step-head -->
+       <div class="form__step-body">
+         <div class="plan-info-container">
+           <div class="plan-info-row">
+             <p class="plan-info-price">Amount</p>
+             <p class="plan-info-price edit-full-price"></p>
+           </div>
+           <div class="form__controls modal-select-amount">
+                      {%- if product.title == 'YuMOVE PLUS for Dogs' or  product.title =='YuMOVE Dog' -%}
+						<select id="amount-select" class="select amount-select" name="amount" data-placeholder="Tablet amount" style="width: 100%;">
+							<option value=""></option>
+                            <option value="60">60 Tablets</option>
+                            <option value="120">120 Tablets</option>
+                            <option value="300">300 Tablets</option>
+						</select>
+                       {% elsif product.title == 'YuMOVE Young & Active' %}
+                        <select id="amount-select" class="select amount-select" name="amount" data-placeholder="Tablet amount" style="width: 100%;">
+							<option value=""></option>
+                            <option value="60">60 Tablets</option>
+                            <option value="240">240 Tablets</option>
+						</select>
+                       {%- endif -%}
+				</div><!-- /.form__controls -->
+           <div class="plan-info-row">
+             <p class="plan-info-price">Deliver Every</p>
+             <p class="plan-info-price">FREE</p>
+           </div>
+          <div class="form__controls modal-select-frequency select-unclickable">
+						<select id="frequency-select" class="select frequency-select" name="frequency" data-placeholder="Delivery frequency" style="width: 100%;">
+							<option value=""></option>
+						</select>
+                      
+				</div><!-- /.form__controls -->
+           <input id="product-amount-container" type="hidden" name="productAmount" value="">
+  	       <input id="product-frequency-container" type="hidden" name="productFrequency" value="">
+           <p id="productAmountText" class="hidden productAmountText"></p>
+           <div class="plan-info-row">
+             <p>YuMOVE Subscription discount</p>
+             <p class="plan-info-price">30% off</p>
+           </div>
+         </div>
+       </div>
+       <div class="plan-total-container plan-info-row">
+         <div>
+           <h5>Total</h5>
+         </div>
+         <div class="total-price-container">
+           <h5 class="edit-total-price total-price"></h5>
+           <p><span class="edit-frequency"></span></p>
+         </div>
+       </div>
+       <div class="plan-info-row plan-btn-container">
+         <div class="subscribe-modal-button">
+          <div id="update-plan-btn" class="btn btn--orange">Subscribe</div>
+        </div>
+        <div class="subscribe-modal-button">
+          <div id="cancel-edit-btn" class="btn btn--green cancel-edit-btn">Back</div>
+        </div>
+       </div>
+     </div>
+     {%- endif -%}
+   
+     
+ </div>
+</div>
+</div>
+<style>
+  .select2-container {
+    z-index: 10045;
+}
+</style>
+{% include 'product-subscribe-js' %}

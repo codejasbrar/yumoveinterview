@@ -1,0 +1,182 @@
+{%- assign _section = section.settings -%}
+{%- assign section_image = _section.image -%}
+{%- assign section_mobile_image = _section.mobile_image -%}
+
+<div id="sample-product" class="sample-hidden">
+  <div class="section-landing-subscription">
+    <div class="shell">
+      {%- if section_image != blank -%}
+        <div class="intro__media{% if section_mobile_image != blank %} hidden-xs{% endif %}" style="background-image: url({{ section_image | img_url: '1600x' }});"></div><!-- /.intro__media hidden-xs -->
+      {%- endif -%}
+
+      {%- if section_mobile_image != blank -%}
+        <div class="intro__media intro__media--mobile hidden-lg hidden-md hidden-sm" style="background-image: url({{ section_mobile_image | img_url: '600x' }});"></div><!-- /.intro__media intro__media-/-mobile visible-xs -->
+      {%- endif -%}
+      
+       <div class="section-body"> 
+         <div class="product-titles">
+           <h2>{{ section.settings.title }}</h2>
+           <div class="sample-header-trustpilot">
+             <img class="trust-logo" src="//cdn.shopify.com/s/files/1/0103/3784/5303/files/trust-logo_200x.png?4399" alt="Trustpilot logo">
+             <img src="//cdn.shopify.com/s/files/1/0103/3784/5303/files/ico-start_200x.png?4399" alt="Trustpilot stars icon">
+           </div><!-- /.sample-header-trustpilot -->
+         </div>
+       {%- assign _section = section.settings -%}
+       {%- assign section_product_1 = _section.product_1 -%}
+       {%- assign _product_1 = all_products[section_product_1] -%}
+  
+  
+        <div class="sl-product sl-dog-product sample-hidden">
+          <div class="product-recommend-text">
+            <p>For your loyal companion we recommend:</p>
+            <div class="orange-sample-icon">
+              <img src="{{ 'orange-sample-icon.png' | asset_url }}">
+            </div>
+          </div><!-- product-recommend-text -->
+          <div class="sl-product-content">
+            <div class="sl-product-image">
+              <a href="{{ _product_1.url | within: collection }}" class="product__link">
+  			    <img src="{{ _product_1.featured_image | img_url: '500x' }}" alt="">
+  		      </a>
+              </div> 
+              <div class="sl-product-info">
+                <h3 class="sl-product-title sl-title">{{ _product_1.title }}</h3>
+                <div class="sl-product-pretext">{{ section.settings.description_1 }}</div>
+          
+                <div class="sl-trustbox">
+                  {% include 'trustbox-widget-landing-sample-1' %}
+                </div>
+                
+                <input type="hidden" class="variant-id" value="{{ _product_1.id }}">
+                <p class="sample-product-error sample-hidden">You already have a sample in your cart</p>
+                <a class="btn sample-add-btn">Try now for £5</a>
+            </div> <!-- sl-product-title -->
+          </div><!-- sl-product-content -->
+          
+         </div><!-- sl-product -->
+  
+     {%- assign _section = section.settings -%}
+     {%- assign section_product_2 = _section.product_2 -%}
+     {%- assign _product_2 = all_products[section_product_2] -%}
+  
+        <div class="sl-product sl-plus-product sample-hidden">
+          <div class="product-recommend-text">
+            <p>For your loyal companion we recommend:</p>
+            <div class="orange-sample-icon">
+              <img src="{{ 'orange-sample-icon.png' | asset_url }}">
+            </div>
+          </div><!-- product-recommend-text -->
+          <div class="sl-product-content">
+            <div class="sl-product-image">
+              <a href="{{ _product_2.url | within: collection }}" class="product__link">
+  			    <img src="{{ _product_2.featured_image | img_url: '500x' }}" alt="">
+  		      </a>
+              </div> 
+              <div class="sl-product-info">
+                <h3 class="sl-product-title sl-title">{{ _product_2.title }}</h3>
+                <div class="sl-product-pretext">{{ section.settings.description_2 }}</div>
+          
+                <div class="sl-trustbox">
+                  {% include 'trustbox-widget-landing-sample-2' %}
+                </div>
+                
+                <input type="hidden" class="variant-id" value="{{ _product_2.id }}">
+                <p class="sample-product-error sample-hidden">You already have a sample in your cart</p>
+                <a class="btn sample-add-btn">Try now for £5</a>
+            </div> <!-- sl-product-title -->
+          </div><!-- sl-product-content -->
+          
+         </div><!-- sl-product -->
+  
+      {%- assign _section = section.settings -%}
+      {%- assign section_product_3 = _section.product_3 -%}
+      {%- assign _product_3 = all_products[section_product_3] -%}
+  
+        <div class="sl-product sl-young-product sample-hidden">
+          <div class="product-recommend-text">
+            <p>For your loyal companion we recommend:</p>
+            <div class="orange-sample-icon">
+              <img src="{{ 'orange-sample-icon.png' | asset_url }}">
+            </div>
+          </div><!-- product-recommend-text -->
+          <div class="sl-product-content">
+            <div class="sl-product-image">
+              <a href="{{ _product_3.url | within: collection }}" class="product__link">
+  			    <img src="{{ _product_3.featured_image | img_url: '500x' }}" alt="">
+  		      </a>
+              </div> 
+              <div class="sl-product-info">
+                <h3 class="sl-product-title sl-title">{{ _product_3.title }}</h3>
+                <div class="sl-product-pretext">{{ section.settings.description_3 }}</div>
+          
+                <div class="sl-trustbox">
+                  {% include 'trustbox-widget-landing-sample-3' %}
+                </div>
+                
+                <input type="hidden" class="variant-id" value="{{ _product_3.id }}">
+                <p class="sample-product-error sample-hidden">You already have a sample in your cart</p>
+                <a class="btn sample-add-btn">Try now for £5</a>
+            </div> <!-- sl-product-title -->
+          </div><!-- sl-product-content -->
+          
+         </div><!-- sl-product -->
+        </div><!-- section-body -->
+      </div><!-- shell -->
+    </div><!-- section-landing-subscription -->
+</div> <!-- #sample-product -->
+
+
+
+
+{% schema %}
+{
+  "name": "Landing Subscription",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Background Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_image",
+      "label": "Background Image (Mobile)"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Product Section Title"
+    },
+    {
+      "type": "product",
+      "id": "product_1",
+      "label": "YuMOVE Dog Product"
+    },
+    {
+      "type": "richtext",
+      "id": "description_1",
+      "label": "YuMOVE Dog Product Subtext"
+    },
+    {
+      "type": "product",
+      "id": "product_2",
+      "label": "YuMOVE Plus for Dog's Product"
+    },
+    {
+      "type": "richtext",
+      "id": "description_2",
+      "label": "YuMOVE Plus for Dog's Product Subtext"
+    },
+    {
+      "type": "product",
+      "id": "product_3",
+      "label": "YuMOVE Young and Active Product"
+    },
+    {
+      "type": "richtext",
+      "id": "description_3",
+      "label": "YuMOVE Young and Active Product Subtext"
+    }
+  ]
+}
+{% endschema %}

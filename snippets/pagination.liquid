@@ -1,0 +1,81 @@
+{%- assign class = class | default: 'paging paging--default' -%}
+{%- assign label = label | default: false -%}
+
+{%- if paginate.pages > 1 -%}
+	{%- unless label_prev -%}
+		{%- assign label_prev = 'general.pagination.previous' | t -%}
+	{%- endunless -%}
+
+	{%- unless label_next -%}
+		{%- assign label_next = 'general.pagination.next' | t -%}
+	{%- endunless -%}
+
+	<div class="{{ class }}">
+		{%- if label != false -%}
+			<span class="paging-label">
+				{% comment %}{{ 'general.pagination.label' | t: current_page: paginate.current_page, pages: paginate.pages }}{% endcomment %}
+				{%- assign _size = _size | default: 12 -%}
+				{%- assign _pages = paginate.pages -%}
+				{%- assign _current_page = paginate.current_page -%}
+				{%- assign _prev_page = paginate.current_page | minus: 1 -%}
+				{%- assign first_item = _size | times: _prev_page | plus: 1 -%}
+				{%- assign last_item = _size | times: _current_page -%}
+
+				{%- if last_item > all_items -%}
+					{%- assign last_item = all_items -%}
+				{%- endif -%}
+
+				{{ 'general.pagination.label' | t: first_item: first_item, last_item: last_item, all_items: all_items }}
+			</span>
+		{%- endif -%}
+
+		<div class="paging__innner">
+			{%- if buttons != false -%}
+				{%- if paginate.previous.url -%}
+					<a href="{{ paginate.previous.url }}" class="paging-prev">
+						<i class="fa fa-chevron-left"></i>
+					</a>
+				{%- endif -%}
+			{%- endif -%}
+
+			{%- if pager != false -%}
+				<ul>
+					{%- for part in paginate.parts -%}
+						{%- if part.is_link -%}
+							<li>
+								<a href="{{ part.url }}">
+									{{ part.title }}
+								</a>
+							</li>
+						{%- else -%}
+							{%- if part.title == paginate.current_page -%}
+								<li class="current">
+									<span>
+										{{- part.title -}}
+									</span>
+								</li>
+							{%- else -%}
+								<li>
+									<span class="paging-ellipsis">
+										{{- part.title -}}
+									</span>
+								</li>
+							{%- endif -%}
+						{%- endif -%}
+					{%- endfor -%}
+				</ul>
+			{%- endif -%}
+
+			{%- if buttons != false -%}
+				{%- if paginate.next.url -%}
+					<a href="{{ paginate.next.url }}" class="paging-next">
+						<i class="fa fa-chevron-right"></i>
+					</a>
+				{%- endif -%}
+			{%- endif -%}
+		</div><!-- /.paging__innner -->
+	</div><!-- /.paging -->
+{%- endif -%}
+{%- assign class = '' -%}
+{%- assign buttons = true -%}
+{%- assign label = false -%}

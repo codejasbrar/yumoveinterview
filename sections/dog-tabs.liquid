@@ -1,0 +1,74 @@
+<div class="slider-tabs-sec">
+  <div class="shell">
+    <div class="tab-wrap">
+      <div class="left-tab">
+        {%- for block in section.blocks -%}
+          <h4 class="title {% if forloop.index == 1 %}active{% endif %}" data-id={{ forloop.index }}>
+            {{block.settings.title}}
+          </h4>
+        {%- endfor -%}
+      </div>
+      <div class="right-content">
+        {%- for block in section.blocks -%}
+          <div class="content {% if forloop.index == 1 %}active{% endif %}" data-id={{ forloop.index }}>   
+            <img src="{{block.settings.tab_image | img_url: 'master'}}">
+            <div class="left-dot">
+              <p>{{block.settings.hover_text_1}}</p>
+            </div>
+            <div class="left-dot">
+              <p>{{block.settings.hover_text_2}}</p>
+            </div>
+            <div class="left-dot">
+              <p>{{block.settings.hover_text_3}}</p>
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</div>
+{% schema %}
+  {
+    "name": "Tabs section",
+    "settings": [],
+    "blocks": [
+      {
+        "type": "Tab",
+        "name": "Tab",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Tab Name"
+          },
+          {
+            "type": "image_picker",
+            "id": "tab_image",
+            "label": "Tab Image"
+          },
+		  {
+			"type": "text",
+			"id": "hover_text_1",
+			"label": "Hover Text 1"
+		  },
+		  {
+			"type": "text",
+			"id": "hover_text_2",
+			"label": "Hover Text 2"
+		  },
+		  {
+			"type": "text",
+			"id": "hover_text_3",
+			"label": "Hover Text 3"
+		  }
+        ]
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

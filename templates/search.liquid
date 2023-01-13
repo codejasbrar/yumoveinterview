@@ -1,0 +1,41 @@
+<div class="shell">
+	<div class="search--default default--holder">
+		<div class="page__head">
+			<h1 class="page__title">
+				{{- 'general.search.title' | t -}}
+			</h1>
+		</div><!-- /.page__head -->
+
+		<div class="search__results">
+			{%- include 'form-search' -%}
+
+			{%- if search.results != empty and search.performed -%}
+				<p class="results">
+					{{- 'general.search.results_for_html' | t: terms: search.terms -}}
+				</p>
+			{%- elsif search.results == empty and search.performed -%}
+				<p class="no-results">
+					{{- 'general.search.no_results_html' | t: terms: search.terms -}}
+				</p>
+			{%- endif -%}
+
+			{%- if search.performed -%}
+				{%- paginate search.results by 10 -%}
+					{%- if search.results != empty and search.terms != "" -%}
+						<div class="collection__items">
+							{%- for _item in search.results -%}
+								{%- if _item.object_type == 'article' -%}
+									{%- include 'article-item' with _item -%}
+								{%- else _item.object_type == 'product' -%}
+									{%- include 'product-item' with _item -%}
+								{%- endif -%}
+							{%- endfor -%}
+						</div><!-- /.search__items -->
+
+						{%- include 'pagination' -%}
+					{%- endif -%}
+				{%- endpaginate -%}
+			{%- endif -%}
+		</div><!-- /.search__results -->
+	</div>
+</div><!-- /.shell -->

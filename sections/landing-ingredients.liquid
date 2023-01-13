@@ -1,0 +1,122 @@
+<section class="section-landing-ingredients"> 
+  <div class="shell">
+    <div class="section-title">
+      {{ section.settings.main_title }}
+    </div>
+    <div class="ingredient-content">
+      <div class="section-image">
+      <img src="{{ 'YuMOVE-Ingredients-white_2x_1.png' | asset_url }}" class="ingredient-image">
+        
+        <div class="arrow-svg revealOnScroll">
+          {% include 'arrow-1' %}
+        </div>
+         <div class="arrow-svg revealOnScroll">
+          {% include 'arrow-2' %}
+        </div>
+         <div class="arrow-svg-bottom revealOnScroll">
+          {% include 'arrow-3' %}
+        </div>
+         <div class="arrow-svg-bottom revealOnScroll">
+          {% include 'arrow-4' %}
+        </div>
+        
+    </div>
+    <div class="section-content">
+      {% for block in section.blocks %}
+        <div class="content-block anamate">
+          <div class="block-title">
+            <h4>{{ block.settings.heading }}</h4>
+          </div>
+          <div class="block-text">
+            <p>{{ block.settings.content }}</p>
+          </div>
+        </div>
+      {% endfor%}
+    </div>
+    </div>
+  </div><!-- /.shell -->
+</section>
+
+
+{% schema %}
+  {
+    "name": "Landing Ingredients",
+    "settings": [
+      {
+        "type": "text",
+        "id": "main_title",
+        "label": "Ingredient Title"
+      }
+    ],
+    "blocks": [
+    {
+      "type": "Ingredients",
+      "name": "Ingredients",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Ingredient Title"
+        },
+        {
+          "type": "text",
+          "id": "content",
+          "label": "Ingredient Content"
+        }
+      ]
+    }
+  ]
+  }
+{% endschema %}
+
+<script>
+$(document).ready(function(){
+  function isScrolledIntoView(elem) {
+    var docViewTop = $(window).scrollTop();
+    var docViewBottom = docViewTop + $(window).height();
+
+    var elemTop = $(elem).offset().top;
+    var elemBottom = elemTop + $(elem).height();
+
+    return ((elemBottom <= docViewBottom) && (elemTop >= docViewTop));
+  }
+
+  function isInViewport(elem) {
+    var top_of_element = $(elem).offset().top;
+    var bottom_of_element = $(elem).offset().top + $(elem).outerHeight();
+    var bottom_of_screen = $(window).scrollTop() + $(window).innerHeight();
+    var top_of_screen = $(window).scrollTop();
+
+    return (bottom_of_screen > top_of_element) && (top_of_screen < bottom_of_element) ? true : false;
+  }
+  $(window).scroll(function () {
+    $('.anamate').each(function() {
+      if (isInViewport(this) === true) {
+        $(this).addClass( "anamate--visible" );
+      }
+    })
+    $('.unanimated-arrow').each(function () {
+      
+        if (isScrolledIntoView(this) === true) {
+          setTimeout(function() {
+            $('.animate-1').addClass('arrow-animate');
+            $('.animate-1').removeClass('visually-hidden');
+          }, 100);          
+          setTimeout(function() {
+            $('.animate-2').addClass('arrow-animate');
+            $('.animate-2').removeClass('visually-hidden');
+          }, 500);
+          setTimeout(function() {
+            $('.animate-3').addClass('arrow-animate');
+            $('.animate-3').removeClass('visually-hidden');
+          }, 1000);
+          setTimeout(function() {
+            $('.animate-4').addClass('arrow-animate');
+            $('.animate-4').removeClass('visually-hidden');
+          }, 1500);          
+        }
+    });
+
+  });
+});
+</script>

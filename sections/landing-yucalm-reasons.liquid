@@ -1,0 +1,85 @@
+<div id="yucalm-reasons" class="section">
+  <div class="shell">
+    <div class="reasons-content">
+      <div class="reasons-title">
+        <h2>{{ section.settings.reasons_title }}</h2>
+      </div><!-- /.reasons-title -->
+      <ul class="reasons-bullets">
+        <li>{{ section.settings.bullet_1 }}</li>
+        <li>{{ section.settings.bullet_2 }}</li>
+        <li>{{ section.settings.bullet_3 }}</li>
+        <li>{{ section.settings.bullet_4 }}</li>
+      </ul><!-- /.reasons-bullets -->
+    </div><!-- /.reasons-content -->
+     <div class="signs-content">
+       <div class="signs-title">
+         <h2>{{ section.settings.signs_title }}</h2>
+       </div><!-- /.signs-title -->
+       <div class="signs-items">
+         {% for block in section.blocks %}
+           <div class="signs-item">
+             <img src="{{ block.settings.icon | img_url: '800x' }}" class="sign-icon">
+             <p>{{ block.settings.sign }}</p>
+           </div><!-- /.signs-item -->
+         {% endfor %}
+       </div><!-- /.signs-items -->
+    </div><!-- /.signs-content -->
+  </div><!-- /.shell -->
+</div><!-- /#yucalm-reasons -->
+
+
+{% schema %}
+  {
+    "name": "Section name",
+    "settings": [
+      {
+        "type": "text",
+        "id": "reasons_title",
+        "label": "Reasons Title"
+      },
+      {
+        "type": "text",
+        "id": "bullet_1",
+        "label": "Bullet Point 1"
+      },
+      {
+        "type": "text",
+        "id": "bullet_2",
+        "label": "Bullet Point 2"
+      },
+      {
+        "type": "text",
+        "id": "bullet_3",
+        "label": "Bullet Point 3"
+      },
+      {
+        "type": "text",
+        "id": "bullet_4",
+        "label": "Bullet Point 4"
+      },
+      {
+        "type": "text",
+        "id": "signs_title",
+        "label": "Signs Title"
+      }   
+    ],
+    "blocks": [
+      {
+      "type": "Sign",
+      "name": "Signs",
+      "settings": [
+          {
+            "type": "image_picker",
+            "id": "icon",
+            "label": "Sign Icon"
+          },
+          {
+            "type": "text",
+            "id": "sign",
+            "label": "Sign Text"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

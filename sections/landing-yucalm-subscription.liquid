@@ -1,0 +1,208 @@
+{%- assign _section = section.settings -%}
+{%- assign section_product = _section.product -%}
+{%- assign _product = all_products[section_product] -%}
+
+<div id="yucalm-subscription" class="section-landing-subscription">
+    <div class="shell">
+       <div class="section-body">
+          <div class="sl-product">
+              <div class="sl-product-image">
+                <a href="{{ _product.url | within: collection }}" class="product__link">
+					<img src="{{ section.settings.product_image | img_url: '500x' }}" alt="">
+				</a>
+              </div> 
+              <div class="sl-product-form">
+                 <div class="sl-product-info">
+                    <h1 class="sl-product-title sl-title">{{ _product.title }}</h1>
+                    <p class="sl-product-pretext">{{ section.settings.description }}</p>
+        
+                    <div class="sl-trustbox">
+                      {% include 'trustbox-widget-landing-subscription' %}
+          		    </div><!-- /.product__rate flex align-center justify-center -->
+                   
+                 </div> <!-- sl-product-title -->
+                 <div class="sl-product-links">
+                     <div class="sl-link">
+                        <h5 class="sl-link-title sl-title">{{ section.settings.one_time_title }}</h5>
+                        <p class="sl-link-text">{{ section.settings.one_time_subtitle }}</p>
+                        <p class="sl-link-price">From {{ _product.price | money }}</p>
+                        <p class="sl-free-shipping">{{ section.settings.free_shipping }}</p>
+                        <form action="{{ section.settings.buy_link }}">
+                          <button input="submit" class="sl-link-btn btn--orange btn">{{ section.settings.buy_button }}</button>
+                        </form>                  
+                     </div><!-- sl-link -->
+                     <div class="sl-link">
+                        <h5 class="sl-link-title sl-title">{{ section.settings.subscription_title }}</h5>
+                        <p class="sl-link-text">{{ section.settings.subscription_subtitle }}</p>
+                        <p class="sl-link-price">Just {{ section.settings.subscription_price }}</p>
+                        <p class="sl-free-shipping">{{ section.settings.free_shipping }}</p>
+                        
+                          <a class="sl-link-btn yucalm-landing-subscribe-btn btn--purple btn">{{ section.settings.subscribe_button }}</a>
+                       
+                     </div><!-- sl-link -->
+                 </div><!-- sl-product-links -->
+              </div><!-- sl-product-form -->
+          </div><!-- sl-product -->
+         
+         <hr class="sl-border">
+         
+          <div class="sl-info">
+             <h2 class="sl-info-title sl-title">{{ section.settings.info_title}}</h2>
+             <p class="sl-info-pretext">{{ section.settings.info_text }}</p>
+             <div class="sl-info-items">
+                 <div class="sl-item">
+                     <img src="{{ section.settings.icon_1 | img_url: '500x' }}" alt="" class="sl-icon">
+                     <p class="sl-item-text">{{ section.settings.icon_text_1 }}</p>
+                 </div><!-- sl-item -->
+                 <div class="sl-item">
+                     <img src="{{ section.settings.icon_2 | img_url: '500x' }}" alt="" class="sl-icon">
+                     <p class="sl-item-text">{{ section.settings.icon_text_2 }}</p>
+                 </div><!-- sl-item -->
+                 <div class="sl-item">
+                     <img src="{{ section.settings.icon_3 | img_url: '500x' }}" alt="" class="sl-icon">
+                     <p class="sl-item-text">{{ section.settings.icon_text_3 }}</p>
+                 </div><!-- sl-item -->
+                 <div class="sl-item">
+                     <img src="{{ section.settings.icon_4 | img_url: '500x' }}" alt="" class="sl-icon">
+                     <p class="sl-item-text">{{ section.settings.icon_text_4 }}</p>
+                 </div><!-- sl-item -->
+             </div><!--sl-info-items-->
+          </div><!-- sl-info -->
+       </div><!-- section-body -->
+    </div>
+</div><!-- section-landing-subscription -->
+
+<script>
+  $(document).ready(function(){
+    
+    $('.yucalm-landing-subscribe-btn').on('click', function(e) {
+      
+      window.document.location = '{{ section.settings.subscribe_link }}' + '?' + 'yucalm-landing';
+    });
+  });
+
+</script>
+
+{% schema %}
+{
+  "name": "Landing Subscription",
+  "settings": [
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Product"
+    },
+    {
+      "type": "image_picker",
+      "id": "product_image",
+      "label": "Product Image"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Product Subtext"
+    },
+    {
+      "type": "text",
+      "id": "info_title",
+      "label": "Information Title"
+    },
+    {
+      "type": "text",
+      "id": "info_text",
+      "label": "Information Text"
+    },
+    {
+      "type": "text",
+      "id": "free_shipping",
+      "label": "Free Shipping Text Text"
+    },
+    {
+      "type": "text",
+      "id": "one_time_title",
+      "label": "One Time Card Title"
+    },
+    {
+      "type": "text",
+      "id": "one_time_subtitle",
+      "label": "One Time Card Subtitle"
+    },
+    {
+      "type": "text",
+      "id": "buy_button",
+      "label": "Buy Button"
+    },
+    {
+      "type": "url",
+      "id": "buy_link",
+      "label": "Button Link"
+    },
+    {
+      "type": "text",
+      "id": "subscription_title",
+      "label": "Subscription Card Title"
+    },
+    {
+      "type": "text",
+      "id": "subscription_subtitle",
+      "label": "Subscription Card Subtitle"
+    },
+    {
+      "type": "text",
+      "id": "subscription_price",
+      "label": "Subscription Price"
+    },
+    {
+      "type": "text",
+      "id": "subscribe_button",
+      "label": "Subscription Button"
+    },
+    {
+      "type": "url",
+      "id": "subscribe_link",
+      "label": "Button Link"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_1",
+      "label": "Icon 1"
+    },
+    {
+      "type": "text",
+      "id": "icon_text_1",
+      "label": "Icon 1 Text"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_2",
+      "label": "Icon 2"
+    },
+    {
+      "type": "text",
+      "id": "icon_text_2",
+      "label": "Icon 2 Text"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_3",
+      "label": "Icon 3"
+    },
+    {
+      "type": "text",
+      "id": "icon_text_3",
+      "label": "Icon 3 Text"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_4",
+      "label": "Icon 4"
+    },
+    {
+      "type": "text",
+      "id": "icon_text_4",
+      "label": "Icon 4 Text"
+    }
+  ]
+}
+{% endschema %}
+

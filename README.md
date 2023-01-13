@@ -1,12 +1,12 @@
 ### Instructions to build JB customer theme from Scratch - Zero Files - Turbo Super Fast Theme ###
 ## {JB Custom Theme}
-
+Instructions link - https://tinyurl.com/JBX334 
 ### Dummy Products data
 import the CSV on this link https://github.com/shopifypartners/product-csvs
 
 ### Workflow Setup
 1. Do your CSS in SCSS Files under `Styles` folder and all JS work to be done under `Scripts`
-2. All CSS should be written in Styles Folder in various sub folders as per components
+2. Do not write CSS but write SCSS , it should be written in Styles Folder in various sub folders as per components
 3. All JS should be worked in Scripts folder, 
 4. All liquid work is to be done as we do normall in any shoipfy theme, in templates, snippets, sections etc. Àdd sections like, Banner, navigation, announcemnt bar, and many other sections as we see in themes.
 

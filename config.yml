@@ -1,7 +1,7 @@
 development:
-  password: shptka_978a973e7805f8c27e5c7a45936bf394
-  theme_id: "136417673449"
-  store: dev-yumove.myshopify.com
+  password: xx
+  theme_id: "x"
+  store: x.myshopify.com
   ignore_files:
   - config/settings_data.json
   - config/settings_schema.json

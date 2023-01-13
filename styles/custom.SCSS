@@ -1,5 +1,6 @@
 #bundle-product{
-    .bundle-content {
+    margin-top: 50px;
+    .bundle-container {
         display: -webkit-box;
         display: -ms-flexbox;
         display: flex;
@@ -24,6 +25,16 @@
         border: 0px solid #dbd9d9;
         background: #fff;
         padding: 25px;
+        gap: 15px;
+    }
+    .bundle-content {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+    .bundle-images {
+        display: flex;
+        align-items: center;
     }
     .bundle-info h4 {
         font: 700 20px/32px Foco;

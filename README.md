@@ -1,5 +1,5 @@
 ### Instructions to build JB customer theme from Scratch - Zero Files - Turbo Super Fast Theme ###
-## {JB Custom Theme}
+## {Read Instructions and Workflow Setup}
 Instructions link - https://tinyurl.com/JBX334 
 ### Dummy Products data
 import the CSV on this link https://github.com/shopifypartners/product-csvs

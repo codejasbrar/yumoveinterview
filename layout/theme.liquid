@@ -1,346 +1,417 @@
 <!DOCTYPE html>
 <html lang="{{ shop.locale }}">
-<head>  
-  <meta name="google-site-verification" content="5tgjMiZeKFBoMPuPsZfaVSTSD5MQ8Cs3TGuQwXROkWM" />
-  <!-- Google Tag Manager -->
-  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-  })(window,document,'script','dataLayer','GTM-PT4KCZX');</script>
-  <!-- End Google Tag Manager -->  
-	{%- include 'settings' -%}
+  <head>
+    <meta name="google-site-verification" content="5tgjMiZeKFBoMPuPsZfaVSTSD5MQ8Cs3TGuQwXROkWM" />
+    <!-- Google Tag Manager -->
+    <script>
+      (function(w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({'gtm.start': new Date().getTime(), event: 'gtm.js'});
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != 'dataLayer'
+            ? '&l=' + l
+            : '';
+        j.async = true;
+        j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, 'script', 'dataLayer', 'GTM-PT4KCZX');
+    </script>
+    <!-- End Google Tag Manager -->
+    {%- include 'settings' -%}
 
-	{%- include 'head' -%}
+    {%- include 'head' -%}
 
-   
 
-	<script src="https://smarteucookiebanner.upsell-apps.com/gdpr_adapter.js?shop=yumove-uk.myshopify.com" type="application/javascript"></script>
-  {% capture 'header_content' %}{{ content_for_header }}{% endcapture %}{{ header_content | replace: "trekkie.load(", "(window.deferTrekkie || trekkie.load)(" }}
-{% include 'cookie-body' %}
 
-  {%- if template contains 'collection' -%}
-    {% section 'filter-menu-settings' %}
-  {%- endif -%}
-<script>(function(n,t,i,r){var u,f;n[i]=n[i]||{},n[i].initial={accountCode:"LINTB11111",host:"LINTB11111.pcapredict.com"},n[i].on=n[i].on||function(){(n[i].onq=n[i].onq||[]).push(arguments)},u=t.createElement("script"),u.async=!0,u.src=r,f=t.getElementsByTagName("script")[0],f.parentNode.insertBefore(u,f)})(window,document,"pca","//LINTB11111.pcapredict.com/js/sensor.js")</script>
+    <script src="https://smarteucookiebanner.upsell-apps.com/gdpr_adapter.js?shop=yumove-uk.myshopify.com" type="application/javascript"></script>
+    {% capture 'header_content' %}
+      {{ content_for_header }}{% endcapture %}
+    {{ header_content | replace: "trekkie.load(", "(window.deferTrekkie || trekkie.load)(" }}
+    {% include 'cookie-body' %}
 
-<!-- Start of Littledata - Fix Google Analytics Script-->
-{% include 'LittledataLayer' %}
-<!-- End of Littledata - Fix Google Analytics Script -->
-  
-  <!-- BEGIN PRIVY WIDGET CODE -->
-<script type='text/javascript'> var _d_site = _d_site || '08CBA22FEFCD67FBACD95775'; </script>
-<script src='https://widget.privy.com/assets/widget.js'></script>
-<!-- END PRIVY WIDGET CODE -->
+    {%- if template contains 'collection' -%}
+      {% section 'filter-menu-settings' %}
+    {%- endif -%}
+    <script>
+      (function(n, t, i, r) {
+        var u,
+          f;
+        n[i] = n[i] || {},
+        n[i].initial = {
+          accountCode: "LINTB11111",
+          host: "LINTB11111.pcapredict.com"
+        },
+        n[i].on = n[i].on || function() {
+          (n[i].onq = n[i].onq || []).push(arguments)
+        },
+        u = t.createElement("script"),
+        u.async = !0,
+        u.src = r,
+        f = t.getElementsByTagName("script")[0],
+        f.parentNode.insertBefore(u, f)
+      })(window, document, "pca", "//LINTB11111.pcapredict.com/js/sensor.js")
+    </script>
 
-{% include 'shogun-head' %}
+    <!-- Start of Littledata - Fix Google Analytics Script-->
+    {% include 'LittledataLayer' %}
+    <!-- End of Littledata - Fix Google Analytics Script -->
 
-{% include 'booster-common' %}
+    <!-- BEGIN PRIVY WIDGET CODE -->
+      <script type='text/javascript'> var _d_site = _d_site || '08CBA22FEFCD67FBACD95775';
+    </script>
+    <script src='https://widget.privy.com/assets/widget.js'></script>
+    <!-- END PRIVY WIDGET CODE -->
 
-{% include 'dynamic_yield' %}
-| {{ 'JB-custom.css' | asset_url | | stylesheet_tag }}  
+    {% include 'shogun-head' %}
 
-<!-- Select2  -->
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
-<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" /> 
-<!-- End Select2 script -->
-{% render 'hulkapps-reorder-css' %}
-<style>
-  div#rc_login {
-    display: none !important;
-   }
-</style>
-</head>
+    {% include 'booster-common' %}
 
-<body class="{{ template_class }}{% unless template.name == 'index' or template.suffix == 'subscription' or template.suffix contains 'index' or template.name == 'password' or template.name == 'account' or template.name == 'addresses' or template.name == 'order' or template.suffix == 'landing' or template.name == null %} scrolled--fixed{% endunless %}">
-  <!-- Google Tag Manager (noscript) -->
-  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PT4KCZX"
-  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-  <!-- End Google Tag Manager (noscript) -->  
-<div class="wrapper">
-  <div class="wrapper__inner">
-   {%- unless template.name == 'password' or template.name == 'account' or template.name == 'addresses' or template.name == 'order' or template.name == null -%}
-      {%- include 'header' -%}
-      {%- include 'search-drawer' -%}
-      {%- unless template.name == 'cart' -%}
-        <div class="cart__outer flex justify-end">
-          <div class="cart__wrapper flex flex-column">
-            <div class="cart__wrapper-head">
-              <div class="flex justify-between align-center">
-                <h3>{{- 'cart.general.title' | t -}}</h3>
+    {% include 'dynamic_yield' %}
+    | {{ 'main.css' | asset_url | | stylesheet_tag }}
 
-                <a href="#" class="btn-close cart-trigger{% unless template.name == 'cart' %} cart-trigger-js{% endunless %} flex align-center" data-toggle-class="cart-expanded">
-                  {{ 'layout.customer.close' | t }} <i class="ico-circle ico-close"></i>
-                </a>
-              </div><!-- /.flex justify-between align-center -->
-            </div><!-- /.cart__wrapper-head -->
+    <!-- Select2  -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+    <!-- End Select2 script -->
+    {% render 'hulkapps-reorder-css' %}
+    <style>
+      div#rc_login {
+        display: none !important;
+      }
+    </style>
+  </head>
 
-            <div class="cart__wrapper-bar">
-              <div class="flex justify-center align-center">
-                {{settings.bar_content}}
-              </div><!-- /.flex -->
-            </div><!-- /.cart__wrapper-bar -->
+  <body class="{{ template_class }}{% unless template.name == 'index' or template.suffix == 'subscription' or template.suffix contains 'index' or template.name == 'password' or template.name == 'account' or template.name == 'addresses' or template.name == 'order' or template.suffix == 'landing' or template.name == null %} scrolled--fixed{% endunless %}">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+      <iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-PT4KCZX"
+        height="0"
+        width="0"
+        style="display:none;visibility:hidden"></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <div class="wrapper">
+      <div class="wrapper__inner">
+        {%- unless template.name == 'password' or template.name == 'account' or template.name == 'addresses' or template.name == 'order' or template.name == null -%}
+          {%- include 'header' -%}
+          {%- include 'search-drawer' -%}
+          {%- unless template.name == 'cart' -%}
+            <div class="cart__outer flex justify-end">
+              <div class="cart__wrapper flex flex-column">
+                <div class="cart__wrapper-head">
+                  <div class="flex justify-between align-center">
+                    <h3>{{- 'cart.general.title' | t -}}</h3>
 
-            <div class="cart__wrapper-body">
-              <div class="flex">
-                {%- include 'cart.form' -%}
-               
+                    <a
+                      href="#"
+                      class="btn-close cart-trigger{% unless template.name == 'cart' %} cart-trigger-js{% endunless %} flex align-center"
+                      data-toggle-class="cart-expanded">
+                      {{ 'layout.customer.close' | t }}
+                      <i class="ico-circle ico-close"></i>
+                    </a>
+                  </div>
+                  <!-- /.flex justify-between align-center -->
+                </div>
+                <!-- /.cart__wrapper-head -->
 
-              </div><!-- /.flex -->
-            </div><!-- /.cart__wrapper-body -->
-          </div><!-- /.cart__wrapper -->
-        </div><!-- /.cart__outer -->
-      {%- endunless -%}
-    {%- endunless -%}
+                <div class="cart__wrapper-bar">
+                  <div class="flex justify-center align-center">
+                    {{ settings.bar_content }}
+                  </div>
+                  <!-- /.flex -->
+                </div>
+                <!-- /.cart__wrapper-bar -->
 
-    <div class="main">
-      {{ content_for_layout }}
-    </div><!-- /.main shell clear -->
+                <div class="cart__wrapper-body">
+                  <div class="flex">
+                    {%- include 'cart.form' -%}
 
-    {%- unless template.name == 'password' or template.name == 'account' or template.name == 'addresses' or template.name == 'order' or template.name == null -%}
-      {%- include 'footer' -%}
-    {%- endunless -%}
-    
-   
-    {%- unless template.name == 'password' or template.name == 'account' or template.name == 'login' or template.name == 'addresses' or template.name == 'order' or template.name == null or page.url contains 'join-the-club' -%}
-      {%- include 'club-popup' -%}
-    {%- endunless -%}
-    
-    
-    
-    <div id="dy_evaluators" class="hidden">
-      {%- assign club_Member = false -%}
-      {%- assign active_subscriber = false -%}
-      {% for tag in customer.tags %}
-        {% if tag == "Club" %}
-          {%- assign club_Member = true -%}
-          <p class="club-tag">{{ tag }}</p>
-        {% elsif tag == 'Active Subscriber' %}
-          {%- assign active_subscriber = true -%} 
-        {% endif %}
-      {% endfor %}
+
+                  </div>
+                  <!-- /.flex -->
+                </div>
+                <!-- /.cart__wrapper-body -->
+              </div>
+              <!-- /.cart__wrapper -->
+            </div>
+            <!-- /.cart__outer -->
+          {%- endunless -%}
+        {%- endunless -%}
+
+        <div class="main">
+          {{ content_for_layout }}
+        </div>
+        <!-- /.main shell clear -->
+
+        {%- unless template.name == 'password' or template.name == 'account' or template.name == 'addresses' or template.name == 'order' or template.name == null -%}
+          {%- include 'footer' -%}
+        {%- endunless -%}
+
+
+        {%- unless template.name == 'password' or template.name == 'account' or template.name == 'login' or template.name == 'addresses' or template.name == 'order' or template.name == null or page.url contains 'join-the-club' -%}
+          {%- include 'club-popup' -%}
+        {%- endunless -%}
+
+
+
+        <div id="dy_evaluators" class="hidden">
+          {%- assign club_Member = false -%}
+          {%- assign active_subscriber = false -%}
+          {% for tag in customer.tags %}
+            {% if tag == "Club" %}
+              {%- assign club_Member = true -%}
+              <p class="club-tag">{{ tag }}</p>
+            {% elsif tag == 'Active Subscriber' %}
+              {%- assign active_subscriber = true -%}
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+      <!-- /.wrapper__inner -->
     </div>
-  </div><!-- /.wrapper__inner -->
-</div><!-- /.wrapper -->
-{%- include 'ie-modal' -%}
-  
+    <!-- /.wrapper -->
+    {%- include 'ie-modal' -%}
 
-{{ theme_scripts }}
-{% include 'subscription-theme-footer' %}
 
-{% comment %}<script async type="text/javascript" src="//static.klaviyo.com/onsite/js/klaviyo.js?company_id=KeiVFu"></script>{% endcomment %}
+    {{ theme_scripts }}
+    {% include 'subscription-theme-footer' %}
 
-{% include 'awin-master-tag' %}
-{% include 'booster-message' %}
+    {% comment %}<script async type="text/javascript" src="//static.klaviyo.com/onsite/js/klaviyo.js?company_id=KeiVFu"></script>{% endcomment %}
 
-{% include "loyaltylion" %}
-<script type="text/javascript">
-  (function(i,n,t,e,r,a,c){i['InteractPromotionObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=n.createElement(t),
-  c=n.getElementsByTagName(t)[0];a.async=1;a.src=e;c.parentNode.insertBefore(a,c)
-  })(window,document,'script','https://i.tryinteract.com/promotions/init.js','i_promo');
-  i_promo('init', 'E6_9BPvuE');
-</script>
-<!-- End of Interact Dog Walker Quiz - 19/03/20 -->
-  
-<!-- TrustBox script --> 
-  <script type="text/javascript" src="//widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js" async></script> 
-<!-- End TrustBox script -->
-  
+    {% include 'awin-master-tag' %}
+    {% include 'booster-message' %}
 
-  
-  <script>
-    var clubMember = {{ club_Member }}
-    DY.API( 'event',{name: 'clubMemberEvent', properties:{member: clubMember}});
-    
-    var activeSubscriber = {{ active_subscriber }}; 
-    DY.API( 'event',{name: 'activeSubscriberEvent', properties:{Active_Subscriber: activeSubscriber}}); 
-  </script>
-  <script src="https://a.klaviyo.com/media/js/onsite/onsite.js"></script>
-<script>
-    var klaviyo = klaviyo || [];
-    klaviyo.init({
-      account: "KDH5Jd",
-      platform: "shopify"
-    });
-    klaviyo.enable("backinstock",{ 
-    trigger: {
-      product_page_text: "Notify Me When Available",
-      product_page_class: "btn",
-      product_page_text_align: "center",
-      product_page_margin: "0px",
-      replace_anchor: true
-    },
-    modal: {
-     headline: "{product_name}",
-     body_content: "Register to receive a notification when this item comes back in stock.",
-     email_field_label: "Email",
-     button_label: "NOTIFY ME WHEN AVAILABLE",
-     subscription_success_label: "You're in! We'll let you know when it's back.",
-     footer_content: '',
-//      additional_styles: "@import url('https://fonts.googleapis.com/css?family=Helvetica+Neue');",
-     additional_styles: "@import url('{{ 'klaviyo.css' | asset_url }}');",
-     drop_background_color: "#000",
-     background_color: "#fff",
-     text_color: "#222",
-     button_text_color: "#fff",
-     button_background_color: "#f28b00",
-     close_button_color: "#ccc",
-     error_background_color: "#fcd6d7",
-     error_text_color: "#C72E2F",
-     success_background_color: "#d3efcd",
-     success_text_color: "#1B9500"
-    }
-  });
-</script>
-  <script>
-   function updateURLParameter(url, param, paramVal)
-{
-    var TheAnchor = null;
-    var newAdditionalURL = "";
-    var tempArray = url.split("?");
-    var baseURL = tempArray[0];
-    var additionalURL = tempArray[1];
-    var temp = "";
- 
-    if (additionalURL)
-    {
-        var tmpAnchor = additionalURL.split("#");
-        var TheParams = tmpAnchor[0];
-            TheAnchor = tmpAnchor[1];
-        if(TheAnchor)
-            additionalURL = TheParams;
- 
-        tempArray = additionalURL.split("&");
- 
-        for (var i=0; i<tempArray.length; i++)
-        {
-            if(tempArray[i].split('=')[0] != param)
-            {
-                newAdditionalURL += temp + tempArray[i];
-                temp = "&";
-            }
-        }       
-    }
-    else
-    {
-        var tmpAnchor = baseURL.split("#");
-        var TheParams = tmpAnchor[0];
-            TheAnchor  = tmpAnchor[1];
- 
-        if(TheParams)
-            baseURL = TheParams;
-    }
- 
-    if(TheAnchor)
-        paramVal += "#" + TheAnchor;
- 
-    var rows_txt = temp + "" + param + "=" + paramVal;
-    return baseURL + "?" + newAdditionalURL + rows_txt;
-}
- 
- 
-$('.klaviyo-{{ product.id }}').on('click change', function(e) {
-var a = e.target.nextSibling.nextElementSibling.firstElementChild.firstElementChild.firstChild.textContent.trim();
-var filtered = meta["product"]["variants"].filter(function(x) { return x["public_title"] == a; }); new_url = updateURLParameter(window.location.href, "variant", filtered[0].id);     
- history.pushState({}, null, new_url);
-});
- 
- 
-</script>
-| {{ 'main.js' | asset_url | script_tag }}  
-<script>
-  (function() {
-    var loadScript = function(url, callback){
-      var script = document.createElement('SCRIPT');
-      script.src = url;
-      script.type = 'text/javascript';
-      script.onload = function() { callback(window.jQuery) };
-      document.getElementsByTagName('head')[0].appendChild(script);
-    };
+    {% include "loyaltylion" %}
+    <script type="text/javascript">
+      (function(i,n,t,e,r,a,c){i['InteractPromotionObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=n.createElement(t),
+        c=n.getElementsByTagName(t)[0];a.async=1;a.src=e;c.parentNode.insertBefore(a,c)
+        })(window,document,'script','https://i.tryinteract.com/promotions/init.js','i_promo');
+        i_promo('init', 'E6_9BPvuE');
+    </script>
+    <!-- End of Interact Dog Walker Quiz - 19/03/20 -->
 
-    var loadRetentionEngine = function($){
-   function checkSubscriptionsPage() {
-    $(".rc_subscriptions__subscription__item").each(function() {
-    if ($(this).find(".rc_subscriptions__subscription__item__cancel > a").length) {
-     let oldHref = $(this).find(".rc_subscriptions__subscription__item__cancel > a")[0].href;
-     let subscriptionId = oldHref.match(new RegExp('subscriptions/' + "(.*)" + '/cancel'))[1];
-     $(this).find(".rc_subscriptions__subscription__item__cancel > a")[0].href = "https://app.bellwethr.com/offboard/experience/yumove-uk-4495510463?subscription_id=" + subscriptionId;
-   }})}
+    <!-- TrustBox script -->
+    <script
+      type="text/javascript"
+      src="//widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js"
+      async></script>
+    <!-- End TrustBox script -->
 
-   function checkEditPage() {
-    if ($("#rc_subscriptions__items__cancel > a").length) {
-     let oldHref = $("#rc_subscriptions__items__cancel > a")[0].href;
-     let subscriptionId = oldHref.match(new RegExp('subscriptions/' + "(.*)" + '/cancel'))[1];
-     $("#rc_subscriptions__items__cancel > a")[0].href = "https://app.bellwethr.com/offboard/experience/yumove-uk-4495510463?subscription_id=" + subscriptionId;
-    }}
 
-   function checkNovum() {
-    let cancelBtn = $('.rc_cancel-btn')[0];
-    cancelBtn.removeEventListener("click", cancelSubscriptionFlow);
-    let subscriptionId = $(cancelBtn).data('id');
-    let link = "https://app.bellwethr.com/offboard/experience/yumove-uk-4495510463?subscription_id=" + subscriptionId;
-    let linkHtml = `<a href=${link}></a>`;
-    $(cancelBtn).wrap(linkHtml);
-   }
 
-   function checkRechargePlusPage() {
-     let query = $('a').filter(function (index) {
-       return $(this).text().toUpperCase().trim() === 'Cancel My Subscription'.toUpperCase() ||
-         $(this).text().toUpperCase().trim() === 'Cancel Subscription'.toUpperCase();
-     });
-     if (query.length) {
-       const rechargeData = query.data('rcData');
-       let subscriptionId;
-       if (rechargeData) {
-         subscriptionId = rechargeData['subscription_id'];
-       } else {
-         let oldHref = query[0].href;
-         subscriptionId = oldHref.match(new RegExp('subscriptions/' + '(.*)' + '/cancel'))[1];
-       }
-       let newHref = "https://app.bellwethr.com/offboard/experience/yumove-uk-4495510463?subscription_id=" + subscriptionId;
-       query[0].href = newHref;
-       query.attr('data-rc-modal', 'disable');
-     }
-   }
-
-    checkSubscriptionsPage();
-    checkRechargePlusPage();
-    checkEditPage();
-    checkNovum();
-    }
-
-    if ((typeof jQuery === 'undefined') || (parseFloat(jQuery.fn.jquery) < 1.7)) {
-      loadScript('//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js', function(jq){
-        const jQueryInstance = jq.noConflict(true);
-        loadRetentionEngine(jQueryInstance);
+    <script>
+      var clubMember = {{ club_Member }}
+      DY.API('event', {
+        name: 'clubMemberEvent',
+        properties: {
+          member: clubMember
+        }
       });
-    } else {
-      loadRetentionEngine(jQuery);
-    }
 
-  })();
-</script>
+      var activeSubscriber = {{ active_subscriber }};
+      DY.API('event', {
+        name: 'activeSubscriberEvent',
+        properties: {
+          Active_Subscriber: activeSubscriber
+        }
+      });
+    </script>
+    <script src="https://a.klaviyo.com/media/js/onsite/onsite.js"></script>
+    <script>
+      var klaviyo = klaviyo || [];
+      klaviyo.init({account: "KDH5Jd", platform: "shopify"});
+      klaviyo.enable("backinstock", {
+        trigger: {
+          product_page_text: "Notify Me When Available",
+          product_page_class: "btn",
+          product_page_text_align: "center",
+          product_page_margin: "0px",
+          replace_anchor: true
+        },
+        modal: {
+          headline: "{product_name}",
+          body_content: "Register to receive a notification when this item comes back in stock.",
+          email_field_label: "Email",
+          button_label: "NOTIFY ME WHEN AVAILABLE",
+          subscription_success_label: "You're in! We'll let you know when it's back.",
+          footer_content: '',
 
-  <!--Gorgias Chat Widget Start-->
+//      additional_styles: "@import url('https://fonts.googleapis.com/css?family=Helvetica+Neue');",
+          additional_styles: "@import url(' {{ 'klaviyo.css' | asset_url }} ');",
+          drop_background_color: "#000",
+          background_color: "#fff",
+          text_color: "#222",
+          button_text_color: "#fff",
+          button_background_color: "#f28b00",
+          close_button_color: "#ccc",
+          error_background_color: "#fcd6d7",
+          error_text_color: "#C72E2F",
+          success_background_color: "#d3efcd",
+          success_text_color: "#1B9500"
+        }
+      });
+    </script>
+    <script>
+      function updateURLParameter(url, param, paramVal) {
+        var TheAnchor = null;
+        var newAdditionalURL = "";
+        var tempArray = url.split("?");
+        var baseURL = tempArray[0];
+        var additionalURL = tempArray[1];
+        var temp = "";
+
+        if (additionalURL) {
+          var tmpAnchor = additionalURL.split("#");
+          var TheParams = tmpAnchor[0];
+          TheAnchor = tmpAnchor[1];
+          if (TheAnchor) 
+            additionalURL = TheParams;
+          
+
+          tempArray = additionalURL.split("&");
+
+          for (var i = 0; i < tempArray.length; i++) {
+            if (tempArray[i].split('=')[0] != param) {
+              newAdditionalURL += temp + tempArray[i];
+              temp = "&";
+            }
+          }
+        } else {
+          var tmpAnchor = baseURL.split("#");
+          var TheParams = tmpAnchor[0];
+          TheAnchor = tmpAnchor[1];
+
+          if (TheParams) 
+            baseURL = TheParams;
+          
+        }
+
+        if (TheAnchor) 
+          paramVal += "#" + TheAnchor;
+        
+
+        var rows_txt = temp + "" + param + "=" + paramVal;
+        return baseURL + "?" + newAdditionalURL + rows_txt;
+      }
+
+
+      $('.klaviyo- {{ product.id }}').on('click change', function(e) {
+        var a = e
+          .target
+          .nextSibling
+          .nextElementSibling
+          .firstElementChild
+          .firstElementChild
+          .firstChild
+          .textContent
+          .trim();
+        var filtered = meta["product"]["variants"].filter(function(x) {
+          return x["public_title"] == a;
+        });
+        new_url = updateURLParameter(window.location.href, "variant", filtered[0].id);
+        history.pushState({}, null, new_url);
+      });
+    </script>
+    | {{ 'main.js' | asset_url | script_tag }}
+    <script>
+      (function() {
+        var loadScript = function(url, callback) {
+          var script = document.createElement('SCRIPT');
+          script.src = url;
+          script.type = 'text/javascript';
+          script.onload = function() {
+            callback(window.jQuery)
+          };
+          document.getElementsByTagName('head')[0].appendChild(script);
+        };
+
+        var loadRetentionEngine = function($) {
+          function checkSubscriptionsPage() {
+            $(".rc_subscriptions__subscription__item").each(function() {
+              if ($(this).find(".rc_subscriptions__subscription__item__cancel > a").length) {
+                let oldHref = $(this).find(".rc_subscriptions__subscription__item__cancel > a")[0].href;
+                let subscriptionId = oldHref.match(new RegExp('subscriptions/' + "(.*)" + '/cancel'))[1];
+                $(this).find(".rc_subscriptions__subscription__item__cancel > a")[0].href = "https://app.bellwethr.com/offboard/experience/yumove-uk-4495510463?subscription_id=" + subscriptionId;
+              }
+            })
+          }
+
+          function checkEditPage() {
+            if ($("#rc_subscriptions__items__cancel > a").length) {
+              let oldHref = $("#rc_subscriptions__items__cancel > a")[0].href;
+              let subscriptionId = oldHref.match(new RegExp('subscriptions/' + "(.*)" + '/cancel'))[1];
+              $("#rc_subscriptions__items__cancel > a")[0].href = "https://app.bellwethr.com/offboard/experience/yumove-uk-4495510463?subscription_id=" + subscriptionId;
+            }
+          }
+
+          function checkNovum() {
+            let cancelBtn = $('.rc_cancel-btn')[0];
+            cancelBtn.removeEventListener("click", cancelSubscriptionFlow);
+            let subscriptionId = $(cancelBtn).data('id');
+            let link = "https://app.bellwethr.com/offboard/experience/yumove-uk-4495510463?subscription_id=" + subscriptionId;
+            let linkHtml = `<a href=${link}></a>`;
+            $(cancelBtn).wrap(linkHtml);
+          }
+
+          function checkRechargePlusPage() {
+            let query = $('a').filter(function(index) {
+              return $(this).text().toUpperCase().trim() === 'Cancel My Subscription'.toUpperCase() || $(this).text().toUpperCase().trim() === 'Cancel Subscription'.toUpperCase();
+            });
+            if (query.length) {
+              const rechargeData = query.data('rcData');
+              let subscriptionId;
+              if (rechargeData) {
+                subscriptionId = rechargeData['subscription_id'];
+              } else {
+                let oldHref = query[0].href;
+                subscriptionId = oldHref.match(new RegExp('subscriptions/' + '(.*)' + '/cancel'))[1];
+              }
+              let newHref = "https://app.bellwethr.com/offboard/experience/yumove-uk-4495510463?subscription_id=" + subscriptionId;
+              query[0].href = newHref;
+              query.attr('data-rc-modal', 'disable');
+            }
+          }
+
+          checkSubscriptionsPage();
+          checkRechargePlusPage();
+          checkEditPage();
+          checkNovum();
+        }
+
+        if ((typeof jQuery === 'undefined') || (parseFloat(jQuery.fn.jquery) < 1.7)) {
+          loadScript('//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js', function(jq) {
+            const jQueryInstance = jq.noConflict(true);
+            loadRetentionEngine(jQueryInstance);
+          });
+        } else {
+          loadRetentionEngine(jQuery);
+        }
+
+      })();
+    </script>
+
+    <!--Gorgias Chat Widget Start-->
   <!--
   <script id="gorgias-chat-widget-install">
-    if (window.location.href.indexOf("contact") > -1 || window.location.href.indexOf("/faqs") > 1) {
-      
-     // show live chat
-      
-      !function(_){
-        _.GORGIAS_CHAT_APP_ID="5008",
-          _.GORGIAS_CHAT_BASE_URL="us-east1-898b.production.gorgias.chat",
-          _.GORGIAS_API_BASE_URL="config.gorgias.chat";
-        var e=new XMLHttpRequest;e.open("GET","https://config.gorgias.chat/applications/5008,!0"),
-          e.onload=function(t){if(4===e.readyState)if(200===e.status){var n=JSON.parse(e.responseText);
-                                                                      if(!n.application||!n.bundleVersion)throw new Error("Missing fields in the response body - https://config.gorgias.chat/applications/5008");
-                                                                      if(_.GORGIAS_CHAT_APP=n.application,_.GORGIAS_CHAT_BUNDLE_VERSION=n.bundleVersion,n&&n.texts&&(_.GORGIAS_CHAT_TEXTS=n.texts),n&&n.sspTexts&&(_.GORGIAS_CHAT_SELF_SERVICE_PORTAL_TEXTS=n.sspTexts),!document.getElementById("gorgias-chat-container")){var o=document.createElement("div");o.id="gorgias-chat-container",document.body.appendChild(o);var r=document.createElement("script");r.setAttribute("defer",!0),r.src="https://client-builds.production.gorgias.chat/{bundleVersion}/static/js/main.js".replace("{bundleVersion}",n.bundleVersion),document.body.appendChild(r)}}else console.error("Failed request GET - https://config.gorgias.chat/applications/5008")},e.onerror=function(_){console.error(_)},e.send()
-      }(window||{});
-    }
+  if (window.location.href.indexOf("contact") > -1 || window.location.href.indexOf("/faqs") > 1) {
+
+  // show live chat
+
+  !function(_){
+  _.GORGIAS_CHAT_APP_ID="5008",
+  _.GORGIAS_CHAT_BASE_URL="us-east1-898b.production.gorgias.chat",
+  _.GORGIAS_API_BASE_URL="config.gorgias.chat";
+  var e=new XMLHttpRequest;e.open("GET","https://config.gorgias.chat/applications/5008,!0"),
+  e.onload=function(t){if(4===e.readyState)if(200===e.status){var n=JSON.parse(e.responseText);
+  if(!n.application||!n.bundleVersion)throw new Error("Missing fields in the response body - https://config.gorgias.chat/applications/5008");
+  if(_.GORGIAS_CHAT_APP=n.application,_.GORGIAS_CHAT_BUNDLE_VERSION=n.bundleVersion,n&&n.texts&&(_.GORGIAS_CHAT_TEXTS=n.texts),n&&n.sspTexts&&(_.GORGIAS_CHAT_SELF_SERVICE_PORTAL_TEXTS=n.sspTexts),!document.getElementById("gorgias-chat-container")){var o=document.createElement("div");o.id="gorgias-chat-container",document.body.appendChild(o);var r=document.createElement("script");r.setAttribute("defer",!0),r.src="https://client-builds.production.gorgias.chat/{bundleVersion}/static/js/main.js".replace("{bundleVersion}",n.bundleVersion),document.body.appendChild(r)}}else console.error("Failed request GET - https://config.gorgias.chat/applications/5008")},e.onerror=function(_){console.error(_)},e.send()
+  }(window||{});
+  }
   </script>
--->
-<!--Gorgias Chat Widget End-->
-</body>
+  -->
+    <!--Gorgias Chat Widget End-->
+  </body>
 </html>

@@ -5,6 +5,7 @@
 3. All JS should be worked in Scripts folder, 
 4. All liquid work is to be done as we do normall in any shoipfy theme, in templates, snippets, sections etc. Àdd sections like, Banner, navigation, announcemnt bar, and many other sections as we see in themes.
 
+## we only need ot use main.css and main.js as these have all the code complied from Styles and Scripts
 `Task1` - sections>intro.liquid
 
 `Task-2`

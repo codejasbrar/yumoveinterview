@@ -93,4 +93,4 @@ function addAllItems(array){
   function addToCartOk(quantity){  
 	$('#cart-number').replaceWith('<a href="/cart" id="cart-number">View cart ("' + quantity + '") Items</a>');
 } 
-// Task 3 end
+// Task 3 end 

@@ -6,9 +6,9 @@ const uglify = require('gulp-uglify');
 const themekit = require('@shopify/themekit');
 
 //script paths
-var jsFiles = 'Scripts/**/*.js',
+var jsFiles = 'scripts/**/*.js',
     jsDest = './assets',
-    cssFiles = 'Styles/**/*.scss';
+    cssFiles = 'tyles/**/*.scss';
 
     gulp.task('minifyJs', function() {
         console.log('++++++++++++++++++++++');

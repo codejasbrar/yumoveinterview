@@ -1,11 +1,12 @@
-<div id="bundle-product">
+{% comment %} Task 3 Start {% endcomment %}
+<div id="bundle-product" class="section--gray">
   <div class="shell">
     <div class="bundle-container">
       <div class="bundle-products">
         <div class="bundle-content">
           <div class="bundle-info">
-            <h4>YuCALM & YuDERM bundle - £35.28</h4>
-            <p>For a healthy and happy cat, use YuCALM and YuDERM together.</p>
+            <h4>{{all_products[section.settings.product_1].title}} & {{all_products[section.settings.product_2].title}} bundle - {{all_products[section.settings.product_1].price | plus: all_products[section.settings.product_2].price | money}}</h4>
+            <p>For a healthy and happy cat, use {{all_products[section.settings.product_1].title}} and {{all_products[section.settings.product_2].title}} together.</p>
           </div><!--- /.bundle-info --->
           <div class="bundle-images">
             <img src="{{all_products[section.settings.product_1].featured_image | img_url:'.150x'}}">
@@ -27,10 +28,6 @@
   </div><!--- /.bundle-container --->
   </div><!--- /.shell --->
 </div><!--- /#product-bundle --->
-<script>
-
-
-</script>
 {% schema %}
     {
         "name":"bundle_product",
@@ -49,3 +46,4 @@
         ]
     }
 {% endschema %}
+{% comment %} Task 3 End {% endcomment %}

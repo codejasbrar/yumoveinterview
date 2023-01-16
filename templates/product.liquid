@@ -18,6 +18,13 @@
 {% if product.handle =="yumove-active-dog" %}
 {% section 'bundle-product' %}
 {% endif %}
+
+{% comment %} Task 3 start {% endcomment %}
+{% if product.handle =="yucalm-cat" %}
+{% section 'bundle-product' %}
+{% endif %}
+{% comment %} Task 3 end {% endcomment %}
+
 {%- include 'product.bundle' -%}
 {%- include 'product.cols' -%}
 {%- section 'features' -%}

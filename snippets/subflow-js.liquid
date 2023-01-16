@@ -398,12 +398,17 @@
             $('#tp_young_and_active').show();
           }
           else {
+            {% comment %} Task 2 Start {% endcomment %}
+
+            {% comment %} product = {{ young_and_active_m | json }}; {% endcomment %}
             {% comment %} console.log("ymact60_m_id=>{{ymact60_m_id}}"); {% endcomment %}
             {% comment %} console.log("ymact60_m_id_ar=>{{ymact60_m_id_ar}}"); {% endcomment %}
             product = {{ yumove_plus_m | json }};
-            {% comment %} product = {{ young_and_active_m | json }}; {% endcomment %}
             variantId = '{{ ymp60_m_id }}';
             {% comment %} variantId = '{{ ymact60_m_id }}'; {% endcomment %}
+
+            {% comment %} Task 2 End {% endcomment %}
+
             autoRenewVariantId = '{{ ymact60_m_id_ar }}';
             loadingVariantId = ymact60LoadingId;
             $('#tp_young_and_active').show();

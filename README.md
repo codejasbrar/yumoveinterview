@@ -1,8 +1,3 @@
-### Instructions to build JB customer theme from Scratch - Zero Files - Turbo Super Fast Theme ###
-## {Read Instructions and Workflow Setup}
-Instructions link - https://tinyurl.com/JBX334 
-### Dummy Products data
-import the CSV on this link https://github.com/shopifypartners/product-csvs
 
 ### Workflow Setup
 1. Do your CSS in SCSS Files under `Styles` folder and all JS work to be done under `Scripts`
@@ -10,9 +5,25 @@ import the CSV on this link https://github.com/shopifypartners/product-csvs
 3. All JS should be worked in Scripts folder, 
 4. All liquid work is to be done as we do normall in any shoipfy theme, in templates, snippets, sections etc. Àdd sections like, Banner, navigation, announcemnt bar, and many other sections as we see in themes.
 
+`Task1` - sections>intro.liquid
+
+`Task-2`
+Template > page.subscription.liquid
+Calling section {%- section 'section-subflow' -%}
+section -subflow , here I called snippet at line 201 [subflow-js]
+snippet> subflow-js
+
+`Task-3``
+Files
+
+template >> product.liquid
+
+styles>components>bundle.product-scss
+custom.scss {variables are defined here}
+scripts>bundle.product.js
+
 
 Default branch = `main`
-Theme Structure Branch = `Theme Skelton`
 
 ## Project Setup
 
